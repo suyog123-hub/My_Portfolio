@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suyog Khadka - Portfolio</title>
+    <meta name="description" content="Backend Developer Portfolio">
+    <meta name="keywords" content="portfolio, backend developer, node.js, python">
+
+    <!-- Bootstrap 5.3.7 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@400;500;600;700&family=Raleway:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/main1.css' %}">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body class="index-page">
+    <!-- Header -->
+    <header id="header" class="header d-flex align-items-center light-background fixed-top">
+        <div class="container position-relative d-flex align-items-center justify-content-between">
+            <!-- Logo -->
+            <a href="{% url 'home' %}" class="logo d-flex align-items-center me-auto me-xl-0" data-aos="fade-right"
+                data-aos-duration="800">
+                <h1 class="sitename">Suyog</h1>
+            </a>
+
+            <!-- Navigation -->
+            <nav id="navmenu" class="navmenu" data-aos="fade-down" data-aos-duration="800" data-aos-delay="200">
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'skills' %}">Skills</a></li>
+                    <li><a href="{% url 'project' %}">Project</a></li>
+                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                     <li><a href="#">Testinomial</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+
+            <!-- Social Links -->
+            <div class="header-social-links" data-aos="fade-left" data-aos-duration="800" data-aos-delay="400">
+                <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+        <div class="container">
+            <div class="row gy-4 align-items-center">
+                <div class="col-lg-6 order-2 order-lg-1">
+                    <div class="hero-content">
+                        <div class="greeting-container" data-aos="fade-up" data-aos-delay="50">
+                            <div class="greeting-text">
+                                <span class="wave-hand">👋</span> Hello, I'm
+                            </div>
+                        </div>
+
+                        <h1 data-aos="fade-up" data-aos-delay="100">
+                            <span class="name-gradient">Suyog <span class="highlight">Khadka</span></span>
+                        </h1>
+
+                        <h2 data-aos="fade-up" data-aos-delay="150" class="title-animated">
+                            <span class="static-text">Creative</span>
+                            <span class="rotating-words">
+                                <span class="word active"> Backend</span><span class="text-warning"> Developer</span></span>
+                                <!-- <span class="word">Node.js Expert</span>
+                                <span class="word">Python Developer</span>
+                                <span class="word">API Specialist</span> -->
+                            </span>
+                        </h2>
+
+                        <div class="description-container" data-aos="fade-up" data-aos-delay="200">
+                            <div class="description-border"></div>
+                            <p class="description-text">
+                                Passionate backend developer with <span class="highlight-text">5+ years</span> of
+                                experience building scalable server-side applications. Specialized in <span
+                                    class="highlight-text">RESTful APIs</span>, <span class="highlight-text">database
+                                    architecture</span>, and <span class="highlight-text">cloud solutions</span>.
+                                Transforming ideas into robust digital experiences.
+                            </p>
+                        </div>
+
+                        <div class="hero-actions" data-aos="fade-up" data-aos-delay="300">
+                            <a href="{% url 'project' %}" class="btn btn-primary">
+                                <i class="bi bi-folder2-open"></i>
+                                <span>View My Work</span>
+                                <div class="hover-effect"></div>
+                            </a>
+                            <a href="{% url 'contact' %}" class="btn btn-outline">
+                                <i class="bi bi-chat-dots"></i>
+                                <span>Get In Touch</span>
+                                <div class="hover-effect"></div>
+                            </a>
+                            <a href="#" class="btn btn-primary">
+                                <i class="bi bi-download"></i>
+                                <span>Download CV</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 order-1 order-lg-2">
+                    <div class="hero-image" data-aos="fade-left" data-aos-delay="300" data-aos-duration="1000">
+                        <div class="image-wrapper">
+                            <div class="profile-image-container">
+                                <img src="{% static 'images/suyog.jpg' %}" alt="Profile Image" class="profile-image"
+                                    data-aos="zoom-in" data-aos-delay="500">
+                            </div>
+                            <div class="floating-elements">
+                                <div class="floating-card design" data-aos="fade-down" data-aos-delay="700"
+                                    data-aos-duration="800">
+                                    <i class="bi bi-palette"></i>
+                                    <span>Design</span>
+                                </div>
+                                <div class="floating-card code" data-aos="fade-up" data-aos-delay="800"
+                                    data-aos-duration="800">
+                                    <i class="bi bi-code-slash"></i>
+                                    <span>Code</span>
+                                </div>
+                                <div class="floating-card creativity" data-aos="fade-right" data-aos-delay="900"
+                                    data-aos-duration="800">
+                                    <i class="bi bi-lightbulb"></i>
+                                    <span>Ideas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section section">
+        <div class="container">
+            <div class="section-title">
+                <h2>About</h2>
+                <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit. Sed ut
+                    perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem
+                    aperiam</p>
+            </div>
+
+            <div class="row align-items-center justify-content-between gy-5 mb-1">
+                <div class="col-lg-6 am">
+                    <h3 class="h2 fw-bold mb-4">Who am I?</h3>
+                    <p class="mb-4 about-text">
+                        I'm a passionate Full Stack Developer with over 5 years of experience creating modern web
+                        applications.
+                        I specialize in JavaScript ecosystems including React, Node.js, and modern CSS frameworks.
+                    </p>
+
+                    <div class="row mb-5">
+                        <div class="col-md-6 who">
+                            <h6 class="fw-semibold mb-2">Name: <span class="info-text">Suyog Khadka</span></h6>
+                            <a href="mail to:ksuyog697@gmail.com">
+                                <h6 class="fw-semibold mb-2">Email: <span class="info-text">ksuyog697@gmail.com</span>
+                                </h6>
+                            </a>
+                            <a href="tel:9766387873">
+                                <h6 class="fw-semibold mb-2">Phone: <span class="info-text">+977 9766387873</span></h6>
+                            </a>
+                        </div>
+                        <div class="col-md-6 who1 ">
+                            <h6 class="fw-semibold mb-2">Age: <span class="info-text">20</span></h6>
+                            <h6 class="fw-semibold mb-2">Experience: <span class="info-text">Looking for
+                                    internship</span></h6>
+                            <h6 class="fw-semibold mb-2">Location: <span class="info-text">lalitpur, imadol</span></h6>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <a href="#" class="btn btn-primary-custom dwl">Download CV</a>
+                        <a href="{% url 'contact' %}" class="btn btn-outline-custom ms-5 dwl1">Contact Me</a>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <figure class="profile-figure">
+                        <!-- Image container with proper sizing -->
+                        <div class="profile-photo" style="background: var(--surface-color); width: 100%;  height: 400px; display: flex; align-items: center; justify-content: center; overflow: hidden;border-radius: 18px; position: relative;">
+                            <img src="{% static 'images/suyog.jpg' %}" alt="Profile Photo" style="width: 100%;height: 100%;object-fit: cover;object-position: center center;">
+                        </div>
+                    </figure>
+                </div>
+
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience section">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up" data-aos-duration="800">
+                <h2>My <span class="gradient-text">Journey</span></h2>
+                <p>My professional path and educational background that shaped my expertise</p>
+            </div>
+
+            <div class="experience-content">
+                <div class="experience-column" data-aos="fade-right" data-aos-delay="200" data-aos-duration="800">
+                    <div class="column-header">
+                        <i class="fas fa-briefcase"></i>
+                        <h3>Experience</h3>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <h4 class="timeline-title">Backend Developer Intern</h4>
+                                    <span class="timeline-date">2023 - Present</span>
+                                </div>
+                                <p class="timeline-subtitle">Tech Solutions Inc.</p>
+                                <p class="timeline-description">Developing RESTful APIs and backend services using
+                                    Node.js and Express</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <h4 class="timeline-title">Web Developer</h4>
+                                    <span class="timeline-date">2022 - 2023</span>
+                                </div>
+                                <p class="timeline-subtitle">Digital Creations</p>
+                                <p class="timeline-description">Built responsive websites and implemented backend
+                                    functionality</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <h4 class="timeline-title">Web Developer</h4>
+                                    <span class="timeline-date">2022 - 2023</span>
+                                </div>
+                                <p class="timeline-subtitle">Digital Creations</p>
+                                <p class="timeline-description">Built responsive websites and implemented backend
+                                    functionality</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="education-column" data-aos="fade-left" data-aos-delay="200" data-aos-duration="800">
+                    <div class="column-header">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Education</h3>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <h4 class="timeline-title">BSc in Computer Science</h4>
+                                    <span class="timeline-date">2021 - 2025</span>
+                                </div>
+                                <p class="timeline-subtitle">Tribhuvan University</p>
+                                <p class="timeline-description">Focused on Web Technologies and Database Systems</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <h4 class="timeline-title">BSc in Computer Science</h4>
+                                    <span class="timeline-date">2021 - 2025</span>
+                                </div>
+                                <p class="timeline-subtitle">Tribhuvan University</p>
+                                <p class="timeline-description">Focused on Web Technologies and Database Systems</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <h4 class="timeline-title">Web Development Bootcamp</h4>
+                                    <span class="timeline-date">2022</span>
+                                </div>
+                                <p class="timeline-subtitle">Online Platform</p>
+                                <p class="timeline-description">Full stack web development with focus on backend
+                                    technologies</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section section dark-background">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up" data-aos-duration="800">
+                <h2>Skills</h2>
+                <p>Technical expertise and tools I've mastered over the years</p>
+            </div>
+
+            <div class="row g-4">
+                <ul class="portfolio-filters" data-aos="fade-up" data-aos-delay="100">
+                    <li data-filter="*" class="active">All</li>
+                    <li data-filter=".backend">Backend</li>
+                    <li data-filter=".api">Frontend</li>
+                    <li data-filter=".fullstack">Apis</li>
+                </ul>
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="skill-item">
+                        <i class="fab fa-node-js"></i>
+                        <h3>Node.js</h3>
+                        <p>Building scalable server-side applications</p>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>90%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 90%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="skill-item">
+                        <i class="fab fa-python"></i>
+                        <h3>Python</h3>
+                        <p>Developing robust web applications</p>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>85%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="skill-item">
+                        <i class="fas fa-database"></i>
+                        <h3>Database</h3>
+                        <p>MongoDB & PostgreSQL expertise</p>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>88%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 88%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="skill-item">
+                        <i class="fab fa-react"></i>
+                        <h3>React.js</h3>
+                        <p>Frontend development with React</p>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>80%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h3 class="h2 fw-bold text-center mb-5" data-aos="fade-up" data-aos-delay="100">Tools & <span
+                            class="gradient-text">Technologies</span></h3>
+
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="tech-icon">
+                                <i class="fab fa-git-alt git-icon"></i>
+                                <span>Git</span>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="tech-icon">
+                                <i class="fas fa-terminal vscode-icon"></i>
+                                <span>VS Code</span>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="400">
+                            <div class="tech-icon">
+                                <i class="fab fa-linux linux-icon"></i>
+                                <span>Linux</span>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="500">
+                            <div class="tech-icon">
+                                <i class="fab fa-docker docker-icon"></i>
+                                <span>Docker</span>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="600">
+                            <div class="tech-icon">
+                                <i class="fab fa-aws aws-icon"></i>
+                                <span>AWS</span>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="700">
+                            <div class="tech-icon">
+                                <i class="fab fa-figma figma-icon"></i>
+                                <span>Figma</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio section">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up" data-aos-duration="800">
+                <h2>Projects</h2>
+                <p>Showcasing my best work and technical projects</p>
+            </div>
+
+            <ul class="portfolio-filters" data-aos="fade-up" data-aos-delay="100">
+                <li data-filter="*" class="active">All</li>
+                <li data-filter=".backend">Backend</li>
+                <li data-filter=".api">APIs</li>
+                <li data-filter=".fullstack">Full Stack</li>
+            </ul>
+
+            <div class="row gy-4">
+                <div class="col-lg-4 col-md-6 portfolio-item backend" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-card">
+                        <div class="portfolio-img">
+                            <img src="{% static 'images/suyog.jpg' %}" alt="E-commerce API" class="img-fluid">
+                            <div class="portfolio-overlay">
+                                <a href="{% static 'images/suyog.jpg' %}" class="portfolio-lightbox">
+                                    <i class="bi bi-plus"></i>
+                                </a>
+                                <a href="#" class="portfolio-details">
+                                    <i class="bi bi-link"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <h4>E-commerce API</h4>
+                            <p>RESTful API with Node.js & Express</p>
+                            <div class="portfolio-tags">
+                                <span>Node.js</span>
+                                <span>MongoDB</span>
+                                <span>JWT</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 portfolio-item backend" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-card">
+                        <div class="portfolio-img">
+                            <img src="{% static 'images/suyog.jpg' %}" alt="E-commerce API" class="img-fluid">
+                            <div class="portfolio-overlay">
+                                <a href="{% static 'images/suyog.jpg' %}" class="portfolio-lightbox">
+                                    <i class="bi bi-plus"></i>
+                                </a>
+                                <a href="#" class="portfolio-details">
+                                    <i class="bi bi-link"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <h4>E-commerce API</h4>
+                            <p>RESTful API with Node.js & Express</p>
+                            <div class="portfolio-tags">
+                                <span>Node.js</span>
+                                <span>MongoDB</span>
+                                <span>JWT</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 portfolio-item backend" data-aos="fade-up" data-aos-delay="200">
+                    <div class="portfolio-card">
+                        <div class="portfolio-img">
+                            <img src="{% static 'images/suyog.jpg' %}" alt="E-commerce API" class="img-fluid">
+                            <div class="portfolio-overlay">
+                                <a href="{% static 'images/suyog.jpg' %}" class="portfolio-lightbox">
+                                    <i class="bi bi-plus"></i>
+                                </a>
+                                <a href="#" class="portfolio-details">
+                                    <i class="bi bi-link"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="portfolio-info">
+                            <h4>E-commerce API</h4>
+                            <p>RESTful API with Node.js & Express</p>
+                            <div class="portfolio-tags">
+                                <span>Node.js</span>
+                                <span>MongoDB</span>
+                                <span>JWT</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="500">
+                <a href="{% url 'project' %}" class="btn btn-primary">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+<!-- =================================================================
+ Testimonial Section 
+=====================================================================-->
+
+<section id="testimonial" class="testimonial section dark-background">
+    <div class="container">
+        <!-- Section Title -->
+        <div class="section-title" data-aos="fade-up">
+            <h2>Testimonials</h2>
+            <p>What people say about my work</p>
+        </div>
+
+        <!-- Testimonials Grid -->
+        <div class="row">
+            <!-- Testimonial 1 -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="testimonial-text">"Suyog delivered exceptional backend solutions for our e-commerce platform. His API designs were clean, scalable, and well-documented."</p>
+                    <div class="client-info">
+                        <img src="{% static 'images/suyog.jpg' %}" alt="John Anderson">
+                        <div>
+                            <h4>John Anderson</h4>
+                            <p>CTO, TechSolutions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-half"></i>
+                    </div>
+                    <p class="testimonial-text">"His expertise in Node.js helped us reduce API response time by 60%. A true backend specialist who understands performance."</p>
+                    <div class="client-info">
+                        <img src="{% static 'images/suyog.jpg' %}" alt="Sarah Mitchell">
+                        <div>
+                            <h4>Sarah Mitchell</h4>
+                            <p>Product Manager</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="testimonial-text">"His clean code, attention to detail, and problem-solving skills are impressive. Always delivers beyond expectations."</p>
+                    <div class="client-info">
+                        <img src="{% static 'images/suyog.jpg' %}" alt="Michael Chen">
+                        <div>
+                            <h4>Michael Chen</h4>
+                            <p>Senior Developer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Your Feedback -->
+        <div class="submit-feedback" data-aos="fade-up" data-aos-delay="400">
+            <div class="feedback-card">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h3>Worked with me?</h3>
+                        <p>Share your experience to help me improve</p>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+                            <i class="bi bi-chat-left-text"></i> Add Feedback
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Feedback Modal -->
+<div class="modal fade" id="feedbackModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4>Share Your Feedback</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form id="feedbackForm">
+                    {% csrf_token %}
+                    
+                    <!-- Name and Role -->
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label>Your Name *</label>
+                            <input type="text" class="form-control" placeholder="Full Name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Your Role</label>
+                            <input type="text" class="form-control" placeholder="Developer, Manager, etc.">
+                        </div>
+                    </div>
+
+                    <!-- Company and Email -->
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label>Company</label>
+                            <input type="text" class="form-control" placeholder="Company Name">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Email *</label>
+                            <input type="email" class="form-control" placeholder="email@example.com" required>
+                        </div>
+                    </div>
+
+                    <!-- Rating -->
+                    <div class="mb-3">
+                        <label>Rating *</label>
+                        <div class="rating-select">
+                            <input type="hidden" id="ratingValue" value="5">
+                            <div class="stars">
+                                <i class="bi bi-star-fill active" data-value="1"></i>
+                                <i class="bi bi-star-fill active" data-value="2"></i>
+                                <i class="bi bi-star-fill active" data-value="3"></i>
+                                <i class="bi bi-star-fill active" data-value="4"></i>
+                                <i class="bi bi-star-fill active" data-value="5"></i>
+                            </div>
+                            <span class="rating-score">5.0</span>
+                        </div>
+                    </div>
+
+                    <!-- Message -->
+                    <div class="mb-3">
+                        <label>Your Feedback *</label>
+                        <textarea class="form-control" rows="4" placeholder="Share your experience..." required></textarea>
+                    </div>
+
+                    <!-- Permission -->
+                    <div class="mb-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="permissionCheck" required>
+                            <label class="form-check-label" for="permissionCheck">
+                                I allow this feedback to be displayed on the website
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-send"></i> Submit Feedback
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up" data-aos-duration="800">
+                <h2>Contact</h2>
+                <p>Get in touch for collaborations or opportunities</p>
+            </div>
+
+            <div class="row g-5">
+                <div class="col-lg-5" data-aos="fade-right" data-aos-delay="100" data-aos-duration="800">
+                    <div class="info-box">
+                        <h3>Contact Info</h3>
+                        <p>Always available for freelance work or full-time opportunities</p>
+
+                        <div class="info-item" data-aos="fade-up" data-aos-delay="200">
+                            <div class="icon-box">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+                            <div class="content">
+                                <h4>Location</h4>
+                                <p>Lalitpur, Imadol</p>
+                                <p>Nepal</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="icon-box">
+                                <i class="bi bi-telephone"></i>
+                            </div>
+                            <div class="content">
+                                <h4>Phone</h4>
+                                <p>+977 9766387873</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="icon-box">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            <div class="content">
+                                <h4>Email</h4>
+                                <p>ksuyog697@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7" data-aos="fade-left" data-aos-delay="100" data-aos-duration="800">
+                    <div class="contact-form">
+                        <h3>Send Message</h3>
+                        <p>I'll get back to you as soon as possible</p>
+
+                        <form action="{% url 'contact' %}" method="post" class="php-email-form">
+                            {% csrf_token %}
+                            <div class="row gy-4">
+                                <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                                    <input type="text" name="name" class="form-control" placeholder="Your Name"
+                                        required>
+                                </div>
+
+                                <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+                                    <input type="email" class="form-control" name="email" placeholder="Your Email"
+                                        required>
+                                </div>
+
+                                <div class="col-12" data-aos="fade-up" data-aos-delay="400">
+                                    <input type="text" class="form-control" name="subject" placeholder="Subject"
+                                        required>
+                                </div>
+
+                                <div class="col-12" data-aos="fade-up" data-aos-delay="500">
+                                    <textarea class="form-control" name="message" rows="6" placeholder="Message"
+                                        required></textarea>
+                                </div>
+
+                                <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="600">
+                                    <button type="submit" class="btn btn-primary">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="social-links d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                <a href="https://github.com" target="_blank"><i class="bi bi-github"></i></a>
+                <a href="https://linkedin.com" target="_blank"><i class="bi bi-linkedin"></i></a>
+                <a href="https://twitter.com" target="_blank"><i class="bi bi-twitter-x"></i></a>
+                <a href="mailto:ksuyog697@gmail.com"><i class="bi bi-envelope"></i></a>
+            </div>
+
+            <div class="copyright text-center mt-4" data-aos="fade-up" data-aos-delay="200">
+                <p>© <span>2024</span> <strong class="px-1 sitename">Suyog Khadka</strong>. All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll Top Button -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            delay: 100,
+            mirror: false,
+            easing: 'ease-in-out',
+            disable: window.innerWidth < 768
+        });
+
+        // Scroll to top button
+        const scrollTop = document.getElementById('scroll-top');
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 300) {
+                scrollTop.classList.add('active');
+            } else {
+                scrollTop.classList.remove('active');
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+    
+</body>
+
+</html>

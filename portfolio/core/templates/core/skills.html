@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!-- Skills Section -->
+<section id="skills" class="skills-section section dark-background">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up" data-aos-duration="800">
+            <h2>Skills</h2>
+            <p>Technical expertise and tools I've mastered over the years</p>
+        </div>
+        <div class="row g-4">
+            {% for i in skills %}
+            <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                <div class="skill-item">
+                    <i class="{{ i.icon }}"></i>
+                    <div class="skill-overlay">
+                        {% if i.certificate %}
+
+                        <a href="{{ i.certificate.url }}" target="_blank" class="skill-details">
+                            <i class="bi bi-link"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                    <h3>{{ i.name }}</h3>
+                    <p>{{ i.desc }}</p>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>{{ i.percent }}%</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" style="width: {{ i.percent }}%"></div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- tools and technology  -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h3 class="h2 fw-bold text-center mb-5" data-aos="fade-up" data-aos-delay="100">Tools & <span
+                        class="gradient-text">Technologies</span></h3>
+
+                <!-- Skills/Tools Section -->
+                <div class="skills-container">
+                    <div class="skills-loop-wrapper">
+                        <!-- First set of items -->
+                        {% for i in skils_tools %}
+                        <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="tech-icon">
+                                <i class="{{ i.icon }}"></i>
+                                <span>{{ i.name }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                        <!-- Duplicate for seamless loop -->
+                        {% for i in skils_tools %}
+                        <div class="col-6 col-sm-4 col-md-3 col-lg-2" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="tech-icon">
+                                <i class="{{ i.icon }}"></i>
+                                <span>{{ i.name }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

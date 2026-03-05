@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+ 
+    <!-- About Section -->
+    <section id="about" class="about-section section">
+        <div class="container">
+            <div class="section-title">
+                <h2>About</h2>
+               <p>I'm a dedicated Django developer with hands-on experience in building web applications using Python's most popular web framework. My journey in backend development focuses on creating clean, efficient code and understanding the core principles of web architecture to deliver functional solutions.</p>
+            </div>
+
+            <div class="row align-items-center justify-content-between gy-5 mb-1">
+                <div class="col-lg-6 am">
+                    <h3 class="h2 fw-bold mb-4">Who am I?</h3>
+                   <p class="mb-4 about-text">
+    I'm a passionate Django developer with hands-on experience in building web applications using Python's Django framework. 
+    I specialize in backend development, database architecture with Django ORM, and creating RESTful APIs with Django REST Framework.
+</p>
+
+                    <div class="row mb-5">
+                        <div class="col-md-6 who">
+                            <h6 class="fw-semibold mb-2">Name: <span class="info-text">Suyog Khadka</span></h6>
+                            <a href="mailto:ksuyog697@gmail.com">
+                                <h6 class="fw-semibold mb-2">Email: <span class="info-text">ksuyog697@gmail.com</span>
+                                </h6>
+                            </a>
+                            <a href="tel:9766387873">
+                                <h6 class="fw-semibold mb-2">Phone: <span class="info-text">+977 9766387873</span></h6>
+                            </a>
+                        </div>
+                        <div class="col-md-6 who1 ">
+                            <h6 class="fw-semibold mb-2">Age: <span class="info-text">20</span></h6>
+                            <h6 class="fw-semibold mb-2">Experience: <span class="info-text">Looking for
+                                    internship</span></h6>
+                            <a href="https://maps.app.goo.gl/u6epmckBaSCj7B2WA"  target="_blank" ><h6  class="fw-semibold mb-2">Location: <span class="info-text">lalitpur, imadol</span></h6></a>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <a href="{% static 'images/resume.jpg' %}"  target="_blank" class="btn btn-primary-custom dwl">Download CV</a>
+                        <a href="{% url 'contact' %}" class="btn btn-outline-custom ms-5 dwl1">Contact Me</a>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <figure class="profile-figure">
+                        <!-- Image container with proper sizing -->
+                        <div class="profile-photo" style="background: var(--surface-color); width: 100%;  height: 400px; display: flex; align-items: center; justify-content: center; overflow: hidden;border-radius: 18px; position: relative;">
+                            <img src="{% static 'images/suyog.jpg' %}" alt="Profile Photo" style="width: 100%;height: 100%;object-fit: cover;object-position: center center;">
+                        </div>
+                    </figure>
+                </div>
+
+            </div>
+
+
+        </div>
+    </section>
+       <!-- Experience Section -->
+    <section id="experience" class="experience section">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up" data-aos-duration="800">
+                <h2>My <span class="gradient-text">Journey</span></h2>
+                <p>My professional path and educational background that shaped my expertise</p>
+            </div>
+
+            <div class="experience-content">
+                <div class="experience-column" data-aos="fade-right" data-aos-delay="200" data-aos-duration="800">
+                    <div class="column-header">
+                        <i class="fas fa-briefcase"></i>
+                        <h3>Experience</h3>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <h4 class="timeline-title"> Seeking Backend Developer Intern</h4>
+                                    <span class="timeline-date">2026 - Present</span>
+                                </div>
+                                <p class="timeline-subtitle">Sipalaya infotech</p>
+                                <p class="timeline-description">I have completed my training in python djnago in sipalaya infotech  and current i am seeking for the internship  to work in djnago framework where i can show my skill to build the full-stack real world project </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="education-column" data-aos="fade-left" data-aos-delay="200" data-aos-duration="800">
+                    <div class="column-header">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Education</h3>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <h4 class="timeline-title">BEIT(Engineering in Information Technology)</h4>
+                                    <span class="timeline-date">2024 - 2028</span>
+                                </div>
+                                <p class="timeline-subtitle">Pokhara University</p>
+                                <p class="timeline-description">Focused on gaining hte knowledge  in the engineering field</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <h4 class="timeline-title">(+2) Major science</h4>
+                                    <span class="timeline-date">2020 - 2022</span>
+                                </div>
+                                <p class="timeline-subtitle">Nobel Academy</p>
+                                <p class="timeline-description">3.57/4.0</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-card">
+                                <div class="timeline-header">
+                                    <h4 class="timeline-title">School</h4>
+                                    <span class="timeline-date">2020</span>
+                                </div>
+                                <p class="timeline-subtitle">Gaurishankar higher Seconday school </p>
+                                <p class="timeline-description">major O.math</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  
+{% endblock content %}

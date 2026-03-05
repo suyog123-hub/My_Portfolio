@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+      <!-- Testimonial Section -->
+    <section class="testimonial-section">
+        <div class="container">
+            <!-- Section Title -->
+            <div class="section-title" data-aos="fade-up">
+                <h2 class="mt-5" >What Clients Say</h2>
+                <p>Feedback from people I've worked with</p>
+            </div>
+
+            <!-- Testimonial Cards Row -->
+            <div class="row g-4">
+                <!-- Card 1 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-card">
+                        <div class="rating">
+                            <i class="bi bi-star-fill active"></i>
+                            <i class="bi bi-star-fill active"></i>
+                            <i class="bi bi-star-fill active"></i>
+                            <i class="bi bi-star-fill active"></i>
+                            <i class="bi bi-star-fill active"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "Suyog is an exceptional backend developer. He delivered our project ahead of schedule and the code quality is outstanding. Highly recommended!"
+                        </p>
+                        <div class="client-info">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client">
+                            <div>
+                                <h5>John Doe</h5>
+                                <small>CEO, TechCorp</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-card">
+                        <div class="rating">
+                            <i class="bi bi-star-fill active"></i>
+                            <i class="bi bi-star-fill active"></i>
+                            <i class="bi bi-star-fill active"></i>
+                            <i class="bi bi-star-fill active"></i>
+                            <i class="bi bi-star-fill active"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "Working with Suyog was a pleasure. He understood our requirements perfectly and built a robust e‑commerce backend. Will definitely hire again."
+                        </p>
+                        <div class="client-info">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client">
+                            <div>
+                                <h5>Jane Smith</h5>
+                                <small>Founder, StyleStore</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testimonial-card">
+                        <div class="rating">
+                            <i class="bi bi-star-fill active"></i>
+                            <i class="bi bi-star-fill active"></i>
+                            <i class="bi bi-star-fill active"></i>
+                            <i class="bi bi-star-fill active"></i>
+                            <i class="bi bi-star-fill"></i> <!-- 4 stars active, 1 inactive -->
+                        </div>
+                        <p class="testimonial-text">
+                            "Great communication and technical skills. Suyog helped us optimize our database queries and improved performance significantly."
+                        </p>
+                        <div class="client-info">
+                            <img src="https://randomuser.me/api/portraits/men/46.jpg" alt="Client">
+                            <div>
+                                <h5>Mike Johnson</h5>
+                                <small>CTO, InnovateLabs</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Feedback Card -->
+            <div class="submit-feedback" data-aos="fade-up">
+                <div class="feedback-card">
+                    <h3>Share Your Experience</h3>
+                    <p>Have you worked with me? I'd love to hear your feedback!</p>
+                    <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#feedbackModal">Submit Feedback</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Modal for feedback form -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Submit Your Feedback</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Rating</label>
+                        <div class="rating-select">
+                            <div class="stars">
+                                <i class="bi bi-star-fill" data-star="1"></i>
+                                <i class="bi bi-star-fill" data-star="2"></i>
+                                <i class="bi bi-star-fill" data-star="3"></i>
+                                <i class="bi bi-star-fill" data-star="4"></i>
+                                <i class="bi bi-star-fill" data-star="5"></i>
+                            </div>
+                            <span class="rating-score">0/5</span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Feedback</label>
+                        <textarea class="form-control" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+

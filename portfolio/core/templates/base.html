@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suyog Khadka - Portfolio</title>
+    <meta name="description" content="Backend Developer Portfolio">
+    <meta name="keywords" content="portfolio, backend developer, node.js, python">
+
+    <!-- Bootstrap 5.3.7 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@400;500;600;700&family=Raleway:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/main1.css' %}">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!--  alertify message CSS cdn  -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css" />
+</head>
+
+<body class="index-page">
+    <!-- Header -->
+    <header id="header" class="header d-flex align-items-center light-background fixed-top">
+        <div class="container position-relative d-flex align-items-center justify-content-between">
+            <!-- Logo -->
+            <a href="{% url 'home' %}" class="logo d-flex align-items-center me-auto me-xl-0" data-aos="fade-right"
+                data-aos-duration="800">
+                <h1 class="sitename">Suyog</h1>
+            </a>
+
+            <!-- Navigation -->
+<nav class="navbar navbar-expand-xl navbar-dark">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'skills' %}">Skills</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'project' %}">Project</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="{% url 'testinomial' %}">Feedback</a></li> -->
+            </ul>
+        </div>
+    </div>
+</nav>
+            <!-- Social Links -->
+            <div class="header-social-links"  data-aos="fade-left" data-aos-duration="800" data-aos-delay="400">
+                <a href="https://github.com//suyog123-hub" target="_blank" class="github"><i class="bi bi-github"></i></a>
+                <a href="https://www.tiktok.com/@suyogkhadka.py?_r=1&_t=ZS-94PhRNL1MfP" target="_blank" class="instagram"><i class="bi bi-tiktok" target="_blank"></i></a>
+                <a href="https://www.linkedin.com/in/suyog-khadka-018985323/" target="_blank" class="linkedin"><i
+                        class="bi bi-linkedin"></i></a>
+            </div>
+        </div>
+    </header>
+    </header>
+    {% block content %}
+
+    {% endblock content %}
+    <!-- Footer -->
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="social-links d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                <a href="https://github.com//suyog123-hub" target="_blank"><i class="bi bi-github"></i></a>
+                <a href="https://www.linkedin.com/in/suyog-khadka-018985323/" target="_blank" target="_blank"><i
+                        class="bi bi-linkedin"></i></a>
+                <a href="mailto:ksuyog697@gmail.com"><i class="bi bi-envelope"></i></a>
+            </div>
+
+            <div class="copyright text-center mt-4">
+                <p>© <span>2026</span> <strong class="px-1 sitename">Suyog Khadka</strong>. All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+     <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- alertify  JavaScript  cdn -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+   
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags == 'success' %}
+    <script>
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.success('{{message}}');
+    </script>
+    {% else %}
+    <script>
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.error('{{message}}');
+    </script>
+    {% endif %}
+
+    {% endfor %}
+
+    {% endif %}
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            delay: 100,
+            mirror: false,
+            easing: 'ease-in-out',
+            disable: window.innerWidth < 768
+        });
+    </script>
+
+</body>
+
+</html>

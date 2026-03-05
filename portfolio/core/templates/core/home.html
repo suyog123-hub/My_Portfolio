@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+ 
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+        <div class="container">
+            <div class="row gy-4 align-items-center">
+                <div class="col-lg-6 order-2 order-lg-1">
+                    <div class="hero-content">
+                        <div class="greeting-container" data-aos="fade-up" data-aos-delay="50">
+                            <div class="greeting-text">
+                                <span class="wave-hand">👋</span> Hello, I'm
+                            </div>
+                        </div>
+
+                        <h1 data-aos="fade-up" data-aos-delay="100">
+                            <span class="name-gradient">Suyog <span class="highlight">Khadka</span></span>
+                        </h1>
+
+                        <h2 data-aos="fade-up" data-aos-delay="150" class="title-animated">
+                            <span class="static-text">Backend</span>
+                            <span class="rotating-words">
+                                <span class="word active"></span><span class="text-warning">Architect</span></span>
+                                <!-- <span class="word">Node.js Expert</span>
+                                <span class="word">Python Developer</span>
+                                <span class="word">API Specialist</span> -->
+                            </span>
+                        </h2>
+
+                        <div class="description-container" data-aos="fade-up" data-aos-delay="200">
+                            <div class="description-border"></div>
+                           <p class="description-text">
+                                Aspiring Django developer with <span class="highlight-text">hands-on experience</span> 
+                                    in building web applications using Django's <span class="highlight-text">MVT architecture</span>. 
+                     Proficient in developing <span class="highlight-text">CRUD operations</span>, 
+                        <span class="highlight-text">Django REST Framework APIs</span>, and implementing 
+                        <span class="highlight-text">database models</span>. Currently expanding skills in 
+                        <span class="highlight-text">full-stack development</span> and 
+                        <span class="highlight-text">best practices</span> to create efficient digital solutions.
+                    </p>
+                        </div>
+
+                        <div class="hero-actions" data-aos="fade-up" data-aos-delay="300">
+                            <a href="{% url 'project' %}" class="btn btn-primary">
+                                <i class="bi bi-folder2-open"></i>
+                                <span>View My Work</span>
+                                <div class="hover-effect"></div>
+                            </a>
+                            <a href="{% url 'contact' %}" class="btn btn-outline">
+                                <i class="bi bi-chat-dots"></i>
+                                <span>Get In Touch</span>
+                                <div class="hover-effect"></div>
+                            </a>
+                            <a href="{% static 'images/resume.jpg' %}" class="btn btn-primary"target="_blank" >
+                                <i class="bi bi-download"></i>
+                                <span>Download CV</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 order-1 order-lg-2">
+                    <div class="hero-image" data-aos="fade-left" data-aos-delay="300" data-aos-duration="1000">
+                        <div class="image-wrapper">
+                            <div class="profile-image-container">
+                                <img src="{% static 'images/suyog.jpg' %}" alt="Profile Image" class="profile-image"
+                                    data-aos="zoom-in" data-aos-delay="500">
+                            </div>
+                            <div class="floating-elements">
+                                <div class="floating-card design" data-aos="fade-down" data-aos-delay="700"
+                                    data-aos-duration="800">
+                                    <i class="bi bi-palette"></i>
+                                    <span>Design</span>
+                                </div>
+                                <div class="floating-card code" data-aos="fade-up" data-aos-delay="800"
+                                    data-aos-duration="800">
+                                    <i class="bi bi-code-slash"></i>
+                                    <span>Code</span>
+                                </div>
+                                <div class="floating-card creativity" data-aos="fade-right" data-aos-delay="900"
+                                    data-aos-duration="800">
+                                    <i class="bi bi-lightbulb"></i>
+                                    <span>Ideas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

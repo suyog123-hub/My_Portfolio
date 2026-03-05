@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!-- Contact Section -->
+<section id="contact" class="contact section">
+    <div class="container">
+        <div class="section-title" data-aos="fade-up" data-aos-duration="800">
+            <h2>Contact</h2>
+            <p>Get in touch for collaborations or opportunities</p>
+        </div>
+
+        <div class="row g-5">
+            <div class="col-lg-5" data-aos="fade-right" data-aos-delay="100" data-aos-duration="800">
+                <div class="info-box">
+                    <h3>Contact Info</h3>
+                    <p>Always available for freelance work or full-time opportunities</p>
+
+                    <div class="info-item" target="_blank" data-aos="fade-up" data-aos-delay="200">
+                       <a href="https://maps.app.goo.gl/u6epmckBaSCj7B2WA"> <div  class="icon-box">
+                            <i class="bi bi-geo-alt"></i>
+                        </div></a>
+                        <div class="content">
+                            <h4>Location</h4>
+                            <p>Lalitpur, Imadol</p>
+                            <p>Nepal</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item" data-aos="fade-up" data-aos-delay="300">
+                        <div class="icon-box">
+                            <i class="bi bi-telephone"></i>
+                        </div>
+                        <div class="content">
+                            <a href="tel:9766387873"><h4>Phone</h4>
+                            <p>+977 9766387873</p></a>
+                        </div>
+                    </div>
+
+                    <div class="info-item" data-aos="fade-up" data-aos-delay="400">
+                        <div class="icon-box">
+                            <i class="bi bi-envelope"></i>
+                        </div>
+                        <div class="content">
+                                 <a href="mailto:ksuyog697@gmail.com"><h4>Email</h4>
+                      <p>ksuyog697@gmail.com</p></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-7" data-aos="fade-left" data-aos-delay="100" data-aos-duration="800">
+                <div class="contact-form">
+                    {% if messages %}
+    {% for message in  messages %}
+   <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>message:</strong> {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+      
+    {% endfor %}
+      
+    {% endif %}
+                    <h3>Send Message</h3>
+                    <p>I'll get back to you as soon as possible</p>
+
+                    <form action="{% url 'contact' %}" method="post" class="php-email-form">
+                        {% csrf_token %}
+                        <div class="row gy-4">
+                            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                            </div>
+
+                            <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+                                <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                            </div>
+
+                            <div class="col-6" data-aos="fade-up" data-aos-delay="400">
+                                <input type="number" class="form-control" name="phone" placeholder="Phonenumber" required>
+                            </div>
+                             <div class="col-6" data-aos="fade-up" data-aos-delay="400">
+                                <input type="text" class="form-control" name="address" placeholder="address" required>
+                            </div>
+
+                            <div class="col-12" data-aos="fade-up" data-aos-delay="400">
+                                <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                            </div>
+                             
+
+                            <div class="col-12" >
+                                <textarea class="form-control" name="message" rows="6" placeholder="Message"
+                                    required></textarea>
+                            </div>
+
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock content %}

@@ -16,7 +16,7 @@ This is a web application built using Django and deployed on PythonAnywhere.
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stacks
 
 - Python 3  
 - Django  

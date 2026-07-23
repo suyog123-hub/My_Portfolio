@@ -26,7 +26,11 @@ SECRET_KEY = 'django-insecure-8&59^$=dvls_!9l1n=ir0e+3lq+w-r@56k4^i)fa2qir!gu$!5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'suyogkhadak.onrender.com',
+    'localhost',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -131,3 +135,9 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'ksuyog697@gmail.com'
 EMAIL_HOST_PASSWORD = 'dnms gift pjpm yqva'
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://suyogkhadak.onrender.com',
+    'http://suyogkhadak.onrender.com',  # If you're using HTTP
+]

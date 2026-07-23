@@ -1,136 +1,182 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
- 
-    <!-- About Section -->
-    <section id="about" class="about-section section">
-        <div class="container">
-            <div class="section-title">
-                <h2>About</h2>
-               <p>I'm a dedicated Django developer with hands-on experience in building web applications using Python's most popular web framework. My journey in backend development focuses on creating clean, efficient code and understanding the core principles of web architecture to deliver functional solutions.</p>
-            </div>
 
-            <div class="row align-items-center justify-content-between gy-5 mb-1">
-                <div class="col-lg-6 am">
-                    <h3 class="h2 fw-bold mb-4">Who am I?</h3>
-                   <p class="mb-4 about-text">
-    I'm a passionate Django developer with hands-on experience in building web applications using Python's Django framework. 
-    I specialize in backend development, database architecture with Django ORM, and creating RESTful APIs with Django REST Framework.
-</p>
+<!-- About Section -->
+<section class="page-section">
+  <div class="container">
 
-                    <div class="row mb-5">
-                        <div class="col-md-6 who">
-                            <h6 class="fw-semibold mb-2">Name: <span class="info-text">Suyog Khadka</span></h6>
-                            <a href="mailto:ksuyog697@gmail.com">
-                                <h6 class="fw-semibold mb-2">Email: <span class="info-text">ksuyog697@gmail.com</span>
-                                </h6>
-                            </a>
-                            <a href="tel:9766387873">
-                                <h6 class="fw-semibold mb-2">Phone: <span class="info-text">+977 9766387873</span></h6>
-                            </a>
-                        </div>
-                        <div class="col-md-6 who1 ">
-                            <h6 class="fw-semibold mb-2">Age: <span class="info-text">20</span></h6>
-                            <h6 class="fw-semibold mb-2">Experience: <span class="info-text">Looking for
-                                    internship</span></h6>
-                            <a href="https://maps.app.goo.gl/u6epmckBaSCj7B2WA"  target="_blank" ><h6  class="fw-semibold mb-2">Location: <span class="info-text">lalitpur, imadol</span></h6></a>
-                        </div>
-                    </div>
+    <div class="section-label" data-aos="fade-up">
+      <span class="label-text gradient-text">$</span>
+      <span class="label-text" style="color:var(--text-secondary);">About</span>
+      <div class="label-line"></div>
+    </div>
+    <div class="section-prompt" data-aos="fade-up" data-aos-delay="100">
+      <span class="prompt">$</span>
+      <span>cat about.md</span>
+    </div>
 
-                    <div class="d-flex">
-                        <a href="{% static 'images/resume.jpg' %}"  target="_blank" class="btn btn-primary-custom dwl">Download CV</a>
-                        <a href="{% url 'contact' %}" class="btn btn-outline-custom ms-5 dwl1">Contact Me</a>
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <figure class="profile-figure">
-                        <!-- Image container with proper sizing -->
-                        <div class="profile-photo" style="background: var(--surface-color); width: 100%;  height: 400px; display: flex; align-items: center; justify-content: center; overflow: hidden;border-radius: 18px; position: relative;">
-                            <img src="{% static 'images/suyog.jpg' %}" alt="Profile Photo" style="width: 100%;height: 100%;object-fit: cover;object-position: center center;">
-                        </div>
-                    </figure>
-                </div>
+    <div class="row gy-5 align-items-start">
 
-            </div>
-
-
+      <!-- Left: Terminal Info -->
+      <div class="col-lg-7" data-aos="fade-right" data-aos-delay="200">
+        <div class="terminal-window">
+          <div class="terminal-bar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="terminal-label">about.py</span>
+          </div>
+          <div class="terminal-body" style="line-height:2.2;">
+            <div class="terminal-line"><span class="prompt">$</span><span class="cmd">cat bio.txt</span></div>
+            <div class="terminal-line output" style="padding-left:20px;white-space:pre-line;">I'm a passionate Django developer with hands-on experience in building web applications using Python's Django framework. I specialize in backend development, database architecture with Django ORM, and creating RESTful APIs with Django REST Framework.</div>
+            <div class="terminal-line"><span class="prompt">$</span><span class="cmd">cat info.json</span></div>
+            <div class="terminal-line output">{</div>
+            <div class="terminal-line output" style="padding-left:36px">"name": "Suyog Khadka",</div>
+            <div class="terminal-line output" style="padding-left:36px">"age": "{{ age }}",</div>
+            <div class="terminal-line output" style="padding-left:36px">"email": "ksuyog697@gmail.com",</div>
+            <div class="terminal-line output" style="padding-left:36px">"phone": "+977 9766387873",</div>
+            <div class="terminal-line output" style="padding-left:36px">"location": "Lalitpur, Imadol",</div>
+            <div class="terminal-line output" style="padding-left:36px">"status": "Seeking Internship"</div>
+            <div class="terminal-line output">}</div>
+            <div class="terminal-line"><span class="prompt">$</span><span style="color:var(--accent);animation:blink 1s step-end infinite;">_</span></div>
+          </div>
         </div>
-    </section>
-       <!-- Experience Section -->
-    <section id="experience" class="experience section">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up" data-aos-duration="800">
-                <h2>My <span class="gradient-text">Journey</span></h2>
-                <p>My professional path and educational background that shaped my expertise</p>
-            </div>
 
-            <div class="experience-content">
-                <div class="experience-column" data-aos="fade-right" data-aos-delay="200" data-aos-duration="800">
-                    <div class="column-header">
-                        <i class="fas fa-briefcase"></i>
-                        <h3>Experience</h3>
-                    </div>
-
-                    <div class="timeline">
-                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-card">
-                                <div class="timeline-header">
-                                    <h4 class="timeline-title"> Seeking Backend Developer Intern</h4>
-                                    <span class="timeline-date">2026 - Present</span>
-                                </div>
-                                <p class="timeline-subtitle">Sipalaya infotech</p>
-                                <p class="timeline-description">I have completed my training in python djnago in sipalaya infotech  and current i am seeking for the internship  to work in djnago framework where i can show my skill to build the full-stack real world project </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="education-column" data-aos="fade-left" data-aos-delay="200" data-aos-duration="800">
-                    <div class="column-header">
-                        <i class="fas fa-graduation-cap"></i>
-                        <h3>Education</h3>
-                    </div>
-
-                    <div class="timeline">
-                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-card">
-                                <div class="timeline-header">
-                                    <h4 class="timeline-title">BEIT(Engineering in Information Technology)</h4>
-                                    <span class="timeline-date">2024 - 2028</span>
-                                </div>
-                                <p class="timeline-subtitle">Pokhara University</p>
-                                <p class="timeline-description">Focused on gaining hte knowledge  in the engineering field</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-card">
-                                <div class="timeline-header">
-                                    <h4 class="timeline-title">(+2) Major science</h4>
-                                    <span class="timeline-date">2020 - 2022</span>
-                                </div>
-                                <p class="timeline-subtitle">Nobel Academy</p>
-                                <p class="timeline-description">3.57/4.0</p>
-                            </div>
-                        </div>
-
-                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-card">
-                                <div class="timeline-header">
-                                    <h4 class="timeline-title">School</h4>
-                                    <span class="timeline-date">2020</span>
-                                </div>
-                                <p class="timeline-subtitle">Gaurishankar higher Seconday school </p>
-                                <p class="timeline-description">major O.math</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;">
+          <a href="{% static 'images/resume.jpg' %}" target="_blank" class="btn-glow">
+            <i class="bi bi-download"></i>Download CV
+          </a>
+          <a href="{% url 'contact' %}" class="btn-ghost">
+            <i class="bi bi-chat-dots"></i>Contact Me
+          </a>
         </div>
-    </section>
-  
+      </div>
+
+      <!-- Right: Profile Image -->
+      <div class="col-lg-5" data-aos="fade-left" data-aos-delay="300">
+        <div style="position:relative;">
+          <div style="position:absolute;inset:-1px;border-radius:var(--radius-lg);background:var(--gradient);opacity:0.3;"></div>
+          <img src="{% static 'images/suyog.jpg' %}" alt="Suyog Khadka"
+            style="width:100%;height:420px;object-fit:cover;border-radius:var(--radius-lg);position:relative;border:1px solid var(--border);">
+          <div style="position:absolute;bottom:-20px;right:-20px;background:var(--gradient);border-radius:14px;padding:16px 20px;text-align:center;box-shadow:0 8px 24px rgba(61,99,255,0.4);">
+            <div style="font-size:24px;font-weight:800;color:#fff;">{{ age }}</div>
+            <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.8);">Years Old</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Experience & Education -->
+<section class="page-section" style="padding-top:40px;">
+  <div class="container">
+
+    <div class="section-label" data-aos="fade-up">
+      <span class="label-text gradient-text">$</span>
+      <span class="label-text" style="color:var(--text-secondary);">Timeline</span>
+      <div class="label-line"></div>
+    </div>
+    <div class="section-prompt" data-aos="fade-up" data-aos-delay="100">
+      <span class="prompt">$</span>
+      <span>ls experience/</span>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- Experience Column -->
+      <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+          <div style="width:44px;height:44px;border-radius:12px;background:rgba(61,99,255,0.1);border:1px solid rgba(61,99,255,0.2);display:flex;align-items:center;justify-content:center;">
+            <i class="bi bi-briefcase" style="font-size:18px;color:var(--accent);"></i>
+          </div>
+          <h3 style="font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--text);margin:0;">Experience</h3>
+        </div>
+
+        <!-- Timeline -->
+        <div style="position:relative;padding-left:32px;">
+          <div style="position:absolute;left:11px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),var(--purple));"></div>
+
+          <div style="position:relative;margin-bottom:28px;" data-aos="fade-up" data-aos-delay="300">
+            <div style="position:absolute;left:-27px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--gradient);box-shadow:0 0 10px rgba(61,99,255,0.5);"></div>
+            <div class="card-base">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+                <h4 style="font-size:16px;font-weight:700;color:var(--text);margin:0;">Seeking Django Developer Intern</h4>
+                <span style="background:rgba(61,99,255,0.1);color:var(--accent-light);padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;border:1px solid rgba(61,99,255,0.2);white-space:nowrap;">2026 - Present</span>
+              </div>
+              <p style="color:var(--accent-light);font-weight:500;margin-bottom:8px;font-size:14px;">Sipalaya Infotech</p>
+              <p style="color:var(--text-secondary);line-height:1.7;margin:0;font-size:13px;">
+                Completed training in Python Django. Seeking internship to work in Django framework where I can build full-stack real world projects.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education Column -->
+      <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+          <div style="width:44px;height:44px;border-radius:12px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);display:flex;align-items:center;justify-content:center;">
+            <i class="bi bi-mortarboard" style="font-size:18px;color:var(--purple);"></i>
+          </div>
+          <h3 style="font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--text);margin:0;">Education</h3>
+        </div>
+
+        <div style="position:relative;padding-left:32px;">
+          <div style="position:absolute;left:11px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--purple),var(--accent));"></div>
+
+          <div style="position:relative;margin-bottom:28px;" data-aos="fade-up" data-aos-delay="300">
+            <div style="position:absolute;left:-27px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--accent));box-shadow:0 0 10px rgba(168,85,247,0.5);"></div>
+            <div class="card-base">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+                <h4 style="font-size:16px;font-weight:700;color:var(--text);margin:0;">BEIT (Engineering in IT)</h4>
+                <span style="background:rgba(168,85,247,0.1);color:#c084fc;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;border:1px solid rgba(168,85,247,0.2);white-space:nowrap;">2024 - 2028</span>
+              </div>
+              <p style="color:#c084fc;font-weight:500;margin-bottom:8px;font-size:14px;">Pokhara University</p>
+              <p style="color:var(--text-secondary);line-height:1.7;margin:0;font-size:13px;">
+                Focused on gaining knowledge in the engineering field
+              </p>
+            </div>
+          </div>
+
+          <div style="position:relative;margin-bottom:28px;" data-aos="fade-up" data-aos-delay="350">
+            <div style="position:absolute;left:-27px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--accent));box-shadow:0 0 10px rgba(168,85,247,0.5);"></div>
+            <div class="card-base">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+                <h4 style="font-size:16px;font-weight:700;color:var(--text);margin:0;">(+2) Major Science</h4>
+                <span style="background:rgba(168,85,247,0.1);color:#c084fc;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;border:1px solid rgba(168,85,247,0.2);white-space:nowrap;">2020 - 2022</span>
+              </div>
+              <p style="color:#c084fc;font-weight:500;margin-bottom:8px;font-size:14px;">Nobel Academy</p>
+              <p style="color:var(--text-secondary);line-height:1.7;margin:0;font-size:13px;">
+                GPA: 3.57/4.0
+              </p>
+            </div>
+          </div>
+
+          <div style="position:relative;" data-aos="fade-up" data-aos-delay="400">
+            <div style="position:absolute;left:-27px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--accent));box-shadow:0 0 10px rgba(168,85,247,0.5);"></div>
+            <div class="card-base">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
+                <h4 style="font-size:16px;font-weight:700;color:var(--text);margin:0;">School</h4>
+                <span style="background:rgba(168,85,247,0.1);color:#c084fc;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;border:1px solid rgba(168,85,247,0.2);white-space:nowrap;">2020</span>
+              </div>
+              <p style="color:#c084fc;font-weight:500;margin-bottom:8px;font-size:14px;">Gaurishankar Higher Secondary School</p>
+              <p style="color:var(--text-secondary);line-height:1.7;margin:0;font-size:13px;">
+                Major: O.Math
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+@keyframes blink { 50%{opacity:0} }
+</style>
+
 {% endblock content %}

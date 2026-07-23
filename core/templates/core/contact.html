@@ -3,206 +3,160 @@
 {% block content %}
 
 <!-- Contact Section -->
-<section id="contact" class="contact section">
+<section class="page-section">
+  <div class="container">
 
-    <!-- Decorative background blobs -->
-    <div style="position:absolute;top:10%;left:5%;width:350px;height:350px;background:radial-gradient(circle,rgba(249,115,22,0.07) 0%,transparent 70%);pointer-events:none;border-radius:50%;"></div>
-    <div style="position:absolute;bottom:10%;right:5%;width:300px;height:300px;background:radial-gradient(circle,rgba(251,146,60,0.05) 0%,transparent 70%);pointer-events:none;border-radius:50%;"></div>
-
-    <div class="container" style="position:relative;z-index:1;">
-
-        <!-- Section Title -->
-        <div class="section-title" data-aos="fade-up" data-aos-duration="800">
-            <h2>Get In <span class="gradient-text">Touch</span></h2>
-            <p>Have a project in mind or want to collaborate? I'd love to hear from you.</p>
-        </div>
-
-        <!-- Alert Messages -->
-        {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-dismissible fade show mx-auto mb-4" role="alert"
-                style="max-width:700px;background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.3);color:#f5f5f5;border-radius:12px;">
-                <i class="bi bi-info-circle me-2" style="color:var(--accent-color);"></i>
-                <strong>{{ message }}</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            {% endfor %}
-        {% endif %}
-
-        <div class="row g-5">
-
-            <!-- ====== Left: Contact Info ====== -->
-            <div class="col-lg-5" data-aos="fade-right" data-aos-delay="100" data-aos-duration="800">
-                <div class="info-box" style="position:relative;overflow:hidden;">
-
-                    <!-- Subtle corner accent -->
-                    <div style="position:absolute;top:-40px;right:-40px;width:150px;height:150px;background:radial-gradient(circle,rgba(249,115,22,0.12) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
-
-                    <div class="mb-4">
-                        <span style="display:inline-block;background:rgba(249,115,22,0.12);border:1px solid rgba(249,115,22,0.25);color:var(--accent-color);padding:6px 16px;border-radius:50px;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">
-                            <i class="bi bi-telephone-fill me-1"></i> Contact Info
-                        </span>
-                        <h3 style="font-size:1.8rem;font-weight:800;color:#fff;margin-bottom:10px;">Let's Work Together</h3>
-                        <p style="color:rgba(245,245,245,0.65);line-height:1.7;margin:0;">Always open to freelance projects, full-time opportunities, and exciting collaborations.</p>
-                    </div>
-
-                    <!-- Divider -->
-                    <div style="height:1px;background:linear-gradient(90deg,var(--accent-color),transparent);margin-bottom:2rem;opacity:0.3;"></div>
-
-                    <!-- Location -->
-                    <div class="info-item" data-aos="fade-up" data-aos-delay="200">
-                        <a href="https://maps.app.goo.gl/u6epmckBaSCj7B2WA" target="_blank" style="text-decoration:none;">
-                            <div class="icon-box">
-                                <i class="bi bi-geo-alt-fill"></i>
-                            </div>
-                        </a>
-                        <div class="content">
-                            <h4>Location</h4>
-                            <p>Lalitpur, Imadol</p>
-                            <p>Nepal</p>
-                        </div>
-                    </div>
-
-                    <!-- Phone -->
-                    <div class="info-item" data-aos="fade-up" data-aos-delay="300">
-                        <a href="tel:9766387873" style="text-decoration:none;">
-                            <div class="icon-box">
-                                <i class="bi bi-telephone-fill"></i>
-                            </div>
-                        </a>
-                        <div class="content">
-                            <h4>Phone</h4>
-                            <a href="tel:9766387873" style="color:rgba(245,245,245,0.7);text-decoration:none;transition:0.3s;"
-                               onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='rgba(245,245,245,0.7)'">
-                                <p style="margin:0;">+977 9766387873</p>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Email -->
-                    <div class="info-item" data-aos="fade-up" data-aos-delay="400">
-                        <a href="mailto:ksuyog697@gmail.com" style="text-decoration:none;">
-                            <div class="icon-box">
-                                <i class="bi bi-envelope-fill"></i>
-                            </div>
-                        </a>
-                        <div class="content">
-                            <h4>Email</h4>
-                            <a href="mailto:ksuyog697@gmail.com" style="color:rgba(245,245,245,0.7);text-decoration:none;transition:0.3s;"
-                               onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='rgba(245,245,245,0.7)'">
-                                <p style="margin:0;">ksuyog697@gmail.com</p>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Availability badge -->
-                    <div style="margin-top:2rem;padding:16px 20px;background:rgba(249,115,22,0.08);border:1px solid rgba(249,115,22,0.2);border-radius:12px;display:flex;align-items:center;gap:12px;">
-                        <span style="width:10px;height:10px;background:#22c55e;border-radius:50%;display:inline-block;box-shadow:0 0 8px rgba(34,197,94,0.7);flex-shrink:0;animation:pulse-dot 2s infinite;"></span>
-                        <p style="margin:0;color:rgba(245,245,245,0.8);font-size:14px;font-weight:500;">Currently available for new projects</p>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- ====== Right: Contact Form ====== -->
-            <div class="col-lg-7" data-aos="fade-left" data-aos-delay="100" data-aos-duration="800">
-                <div class="contact-form">
-
-                    <div class="mb-4">
-                        <span style="display:inline-block;background:rgba(249,115,22,0.12);border:1px solid rgba(249,115,22,0.25);color:var(--accent-color);padding:6px 16px;border-radius:50px;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">
-                            <i class="bi bi-send-fill me-1"></i> Send Message
-                        </span>
-                        <h3 style="font-size:1.8rem;font-weight:800;color:#fff;margin-bottom:8px;">Drop Me a Line</h3>
-                        <p style="color:rgba(245,245,245,0.65);margin:0;">I'll get back to you within 24 hours.</p>
-                    </div>
-
-                    <!-- Divider -->
-                    <div style="height:1px;background:linear-gradient(90deg,var(--accent-color),transparent);margin-bottom:2rem;opacity:0.3;"></div>
-
-                    <form action="{% url 'contact' %}" method="post" class="php-email-form">
-                        {% csrf_token %}
-                        <div class="row gy-4">
-
-                            <!-- Name -->
-                            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-                                <div style="position:relative;">
-                                    <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--accent-color);font-size:1rem;pointer-events:none;">
-                                        <i class="bi bi-person-fill"></i>
-                                    </span>
-                                    <input type="text" name="name" class="form-control" placeholder="Your Name" required style="padding-left:44px;">
-                                </div>
-                            </div>
-
-                            <!-- Email -->
-                            <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
-                                <div style="position:relative;">
-                                    <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--accent-color);font-size:1rem;pointer-events:none;">
-                                        <i class="bi bi-envelope-fill"></i>
-                                    </span>
-                                    <input type="email" name="email" class="form-control" placeholder="Your Email" required style="padding-left:44px;">
-                                </div>
-                            </div>
-
-                            <!-- Phone -->
-                            <div class="col-md-6" data-aos="fade-up" data-aos-delay="350">
-                                <div style="position:relative;">
-                                    <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--accent-color);font-size:1rem;pointer-events:none;">
-                                        <i class="bi bi-telephone-fill"></i>
-                                    </span>
-                                    <input type="number" name="phone" class="form-control" placeholder="Phone Number" required style="padding-left:44px;">
-                                </div>
-                            </div>
-
-                            <!-- Address -->
-                            <div class="col-md-6" data-aos="fade-up" data-aos-delay="370">
-                                <div style="position:relative;">
-                                    <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--accent-color);font-size:1rem;pointer-events:none;">
-                                        <i class="bi bi-geo-alt-fill"></i>
-                                    </span>
-                                    <input type="text" name="address" class="form-control" placeholder="Your Address" required style="padding-left:44px;">
-                                </div>
-                            </div>
-
-                            <!-- Subject -->
-                            <div class="col-12" data-aos="fade-up" data-aos-delay="400">
-                                <div style="position:relative;">
-                                    <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--accent-color);font-size:1rem;pointer-events:none;">
-                                        <i class="bi bi-chat-square-text-fill"></i>
-                                    </span>
-                                    <input type="text" name="subject" class="form-control" placeholder="Subject" required style="padding-left:44px;">
-                                </div>
-                            </div>
-
-                            <!-- Message -->
-                            <div class="col-12" data-aos="fade-up" data-aos-delay="450">
-                                <div style="position:relative;">
-                                    <span style="position:absolute;left:16px;top:18px;color:var(--accent-color);font-size:1rem;pointer-events:none;">
-                                        <i class="bi bi-pencil-fill"></i>
-                                    </span>
-                                    <textarea name="message" class="form-control" rows="6" placeholder="Your Message..." required style="padding-left:44px;resize:none;"></textarea>
-                                </div>
-                            </div>
-
-                            <!-- Submit -->
-                            <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="500">
-                                <button type="submit" class="btn" style="min-width:220px;">
-                                    <i class="bi bi-send-fill me-2"></i> Send Message
-                                </button>
-                            </div>
-
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-        </div>
+    <div class="section-label" data-aos="fade-up">
+      <span class="label-text gradient-text">$</span>
+      <span class="label-text" style="color:var(--text-secondary);">Contact</span>
+      <div class="label-line"></div>
     </div>
+    <div class="section-prompt" data-aos="fade-up" data-aos-delay="100">
+      <span class="prompt">$</span>
+      <span>python send_message.py</span>
+    </div>
+
+    <div class="row g-5">
+
+      <!-- Left: Info -->
+      <div class="col-lg-5" data-aos="fade-right" data-aos-delay="200">
+        <div class="terminal-window" style="height:100%;">
+          <div class="terminal-bar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="terminal-label">contact.py</span>
+          </div>
+          <div class="terminal-body" style="padding:28px;">
+            <div style="margin-bottom:24px;">
+              <span style="display:inline-block;background:rgba(61,99,255,0.1);border:1px solid rgba(61,99,255,0.2);color:var(--accent-light);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">
+                <i class="bi bi-telephone-fill me-1"></i> Contact Info
+              </span>
+              <h3 style="font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--text);margin-bottom:8px;">Let's Work Together</h3>
+              <p style="color:var(--text-secondary);line-height:1.7;margin:0;font-size:14px;">Always open to freelance projects, full-time opportunities, and exciting collaborations.</p>
+            </div>
+
+            <div style="height:1px;background:linear-gradient(90deg,var(--accent),transparent);margin-bottom:2rem;opacity:0.3;"></div>
+
+            <!-- Location -->
+            <div style="display:flex;gap:16px;margin-bottom:24px;" data-aos="fade-up" data-aos-delay="300">
+              <div style="width:50px;height:50px;border-radius:12px;background:rgba(61,99,255,0.1);border:1px solid rgba(61,99,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i class="bi bi-geo-alt-fill" style="color:var(--accent);"></i>
+              </div>
+              <div>
+                <h4 style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;">Location</h4>
+                <p style="color:var(--text-secondary);margin:0;font-size:14px;">Lalitpur, Imadol<br>Nepal</p>
+              </div>
+            </div>
+
+            <!-- Phone -->
+            <div style="display:flex;gap:16px;margin-bottom:24px;" data-aos="fade-up" data-aos-delay="350">
+              <div style="width:50px;height:50px;border-radius:12px;background:rgba(61,99,255,0.1);border:1px solid rgba(61,99,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i class="bi bi-telephone-fill" style="color:var(--accent);"></i>
+              </div>
+              <div>
+                <h4 style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;">Phone</h4>
+                <a href="tel:9766387873" style="color:var(--text-secondary);text-decoration:none;font-size:14px;">+977 9766387873</a>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div style="display:flex;gap:16px;margin-bottom:24px;" data-aos="fade-up" data-aos-delay="400">
+              <div style="width:50px;height:50px;border-radius:12px;background:rgba(61,99,255,0.1);border:1px solid rgba(61,99,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <i class="bi bi-envelope-fill" style="color:var(--accent);"></i>
+              </div>
+              <div>
+                <h4 style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;">Email</h4>
+                <a href="mailto:ksuyog697@gmail.com" style="color:var(--text-secondary);text-decoration:none;font-size:14px;">ksuyog697@gmail.com</a>
+              </div>
+            </div>
+
+            <!-- Availability -->
+            <div style="padding:14px 18px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:12px;display:flex;align-items:center;gap:12px;">
+              <span style="width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 8px rgba(34,197,94,0.7);flex-shrink:0;animation:availPulse 2s infinite;"></span>
+              <p style="margin:0;color:var(--text-secondary);font-size:14px;font-weight:500;">Currently available for new projects</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="col-lg-7" data-aos="fade-left" data-aos-delay="200">
+        <div class="terminal-window" style="height:100%;">
+          <div class="terminal-bar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="terminal-label">send_message.py</span>
+          </div>
+          <div style="padding:28px;">
+            <div style="margin-bottom:24px;">
+              <span style="display:inline-block;background:rgba(61,99,255,0.1);border:1px solid rgba(61,99,255,0.2);color:var(--accent-light);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">
+                <i class="bi bi-send-fill me-1"></i> Send Message
+              </span>
+              <h3 style="font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--text);margin-bottom:8px;">Drop Me a Line</h3>
+              <p style="color:var(--text-secondary);margin:0;font-size:14px;">I'll get back to you within 24 hours.</p>
+            </div>
+
+            <div style="height:1px;background:linear-gradient(90deg,var(--accent),transparent);margin-bottom:2rem;opacity:0.3;"></div>
+
+            <form action="{% url 'contact' %}" method="post">
+              {% csrf_token %}
+              <div class="row gy-4">
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+                  <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Name</label>
+                  <input type="text" name="name" required placeholder="Your Name"
+                    style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-body);font-size:14px;transition:all var(--t);outline:none;">
+                </div>
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="350">
+                  <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Email</label>
+                  <input type="email" name="email" required placeholder="your@email.com"
+                    style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-body);font-size:14px;transition:all var(--t);outline:none;">
+                </div>
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+                  <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Phone</label>
+                  <input type="number" name="phone" required placeholder="+977 XXXXXXXXXX"
+                    style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-body);font-size:14px;transition:all var(--t);outline:none;">
+                </div>
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="420">
+                  <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Address</label>
+                  <input type="text" name="address" required placeholder="Your Address"
+                    style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-body);font-size:14px;transition:all var(--t);outline:none;">
+                </div>
+                <div class="col-12" data-aos="fade-up" data-aos-delay="450">
+                  <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Subject</label>
+                  <input type="text" name="subject" required placeholder="Project Inquiry"
+                    style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-body);font-size:14px;transition:all var(--t);outline:none;">
+                </div>
+                <div class="col-12" data-aos="fade-up" data-aos-delay="480">
+                  <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Message</label>
+                  <textarea name="message" required rows="5" placeholder="Your message..."
+                    style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-body);font-size:14px;transition:all var(--t);outline:none;resize:none;"></textarea>
+                </div>
+                <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="500">
+                  <button type="submit" class="btn-glow" style="min-width:220px;justify-content:center;">
+                    <i class="bi bi-send-fill"></i> Send Message
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
 
 <style>
-@keyframes pulse-dot {
-    0%, 100% { box-shadow: 0 0 8px rgba(34,197,94,0.7); }
-    50%       { box-shadow: 0 0 18px rgba(34,197,94,1); }
+@keyframes availPulse {
+  0%,100% { box-shadow: 0 0 8px rgba(34,197,94,0.7); }
+  50% { box-shadow: 0 0 18px rgba(34,197,94,1); }
+}
+input:focus, textarea:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(61,99,255,0.15) !important;
+  background: rgba(255,255,255,0.05) !important;
 }
 </style>
 

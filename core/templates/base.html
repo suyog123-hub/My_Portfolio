@@ -1,124 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Suyog Khadka — Backend Developer</title>
-  <meta name="description" content="Backend Developer Portfolio">
-  <meta name="keywords" content="portfolio, backend developer, python, django">
+  <title>Suyog Khadka — Django Developer</title>
+  <meta name="description" content="Django Developer Portfolio - Suyog Khadka">
+  <meta name="keywords" content="portfolio, django developer, python, backend">
 
-  <!-- CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@400;500;600;700&family=Raleway:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css"/>
-  <link rel="stylesheet" href="{% static 'css/main1.css' %}">
 
   <style>
-    /* ===== Page Loader ===== */
+    :root {
+      --bg: #050507;
+      --bg-mid: #0a0a12;
+      --surface: rgba(15, 15, 25, 0.8);
+      --surface-solid: #0f0f19;
+      --border: rgba(255, 255, 255, 0.06);
+      --border-light: rgba(255, 255, 255, 0.1);
+      --text: #f0f0f5;
+      --text-secondary: #a0a0b8;
+      --text-muted: #555568;
+      --text-eyebrow: #44445a;
+      --accent: #3d63ff;
+      --accent-light: #9fb4ff;
+      --green: #22c55e;
+      --purple: #a855f7;
+      --gradient: linear-gradient(135deg, #3d63ff, #a855f7);
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --radius: 12px;
+      --radius-lg: 16px;
+      --t: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+    body {
+      color: var(--text-secondary);
+      background: var(--bg);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
+
+    a { color: var(--accent-light); text-decoration: none; transition: var(--t); }
+    a:hover { color: var(--accent); }
+
+    /* Loader */
     #loader {
       position: fixed; inset: 0; z-index: 99999;
-      background: #121212;
+      background: var(--bg);
       display: flex; align-items: center; justify-content: center;
       flex-direction: column; gap: 16px;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
     }
-    #loader.hide { opacity: 0; pointer-events: none; }
+    #loader.hide { opacity: 0; visibility: hidden; pointer-events: none; }
     .loader-name {
-      font-family: 'Raleway', sans-serif;
-      font-size: 32px; font-weight: 800;
-      background: linear-gradient(90deg, #f97316, #fb923c);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      font-family: var(--font-display);
+      font-size: 32px; font-weight: 700; color: var(--text);
     }
+    .loader-name .bracket { color: var(--accent); }
     .loader-bar {
-      width: 180px; height: 3px;
-      background: rgba(249,115,22,0.2); border-radius: 2px; overflow: hidden;
+      width: 180px; height: 2px;
+      background: var(--border); border-radius: 2px; overflow: hidden;
     }
     .loader-bar-fill {
       height: 100%; width: 0;
-      background: linear-gradient(90deg, #f97316, #fb923c);
-      border-radius: 2px;
+      background: var(--gradient); border-radius: 2px;
       animation: loadBar 1s ease forwards;
     }
     @keyframes loadBar { 0%{width:0} 100%{width:100%} }
 
-    /* ===== Header ===== */
+    /* Scanlines */
+    .scanlines {
+      position: fixed; inset: 0; z-index: 5; pointer-events: none;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+      opacity: 0.4;
+    }
+
+    /* Header */
     .header {
-      background: rgba(18,18,18,0.92) !important;
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(249,115,22,0.15);
-      padding: 14px 0;
-      transition: all 0.4s ease;
+      background: rgba(5, 5, 7, 0.85) !important;
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      transition: all 0.5s ease;
       z-index: 997;
     }
     .header.scrolled {
-      padding: 10px 0;
+      padding: 12px 0;
       box-shadow: 0 4px 30px rgba(0,0,0,0.4);
-      border-bottom-color: rgba(249,115,22,0.3);
+      border-bottom-color: rgba(61,99,255,0.15);
     }
-    .header .sitename {
-      font-family: 'Raleway', sans-serif;
-      font-size: 28px; font-weight: 800; margin: 0;
-      background: linear-gradient(90deg, #f97316, #fb923c);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    .header .logo-text {
+      font-family: var(--font-display);
+      font-size: 1.1rem; font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
       letter-spacing: -0.5px;
     }
+    .header .logo-text .bracket { color: var(--accent); }
     .header .logo { text-decoration: none; }
 
-    /* ===== Navbar ===== */
+    /* Navbar */
     .navbar { padding: 0; background: transparent !important; }
     .navbar-nav .nav-link {
-      color: rgba(245,245,245,0.8) !important;
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px; font-weight: 500;
-      padding: 8px 16px !important;
+      color: var(--text-secondary) !important;
+      font-family: var(--font-body);
+      font-size: 0.875rem; font-weight: 500;
+      padding: 8px 14px !important;
       border-radius: 8px;
-      transition: all 0.2s ease;
-      position: relative;
+      transition: all var(--t);
     }
     .navbar-nav .nav-link:hover,
     .navbar-nav .nav-link.active {
-      color: #f97316 !important;
-      background: rgba(249,115,22,0.08);
+      color: var(--text) !important;
+      background: rgba(255,255,255,0.03);
     }
-    .navbar-nav .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: 4px; left: 50%; right: 50%;
-      height: 2px;
-      background: linear-gradient(90deg, #f97316, #fb923c);
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-    .navbar-nav .nav-link:hover::after,
-    .navbar-nav .nav-link.active::after {
-      left: 16px; right: 16px;
+    .nav-link.active-page {
+      color: var(--text) !important;
+      background: rgba(255,255,255,0.05) !important;
     }
 
-    /* ===== Navbar Toggler ===== */
     .navbar-toggler {
-      border: 1px solid rgba(249,115,22,0.4) !important;
+      border: 1px solid var(--border-light) !important;
       padding: 8px 10px !important;
       border-radius: 10px !important;
-      transition: all 0.2s;
+      transition: all var(--t);
     }
-    .navbar-toggler:focus { box-shadow: 0 0 0 2px rgba(249,115,22,0.3) !important; outline: none !important; }
+    .navbar-toggler:focus {
+      box-shadow: 0 0 0 2px rgba(61,99,255,0.3) !important;
+      outline: none !important;
+    }
     .navbar-toggler-icon {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(249,115,22,0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(61,99,255,0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
     }
 
-    /* ===== Mobile Nav ===== */
     @media (max-width: 1199px) {
-      .navbar-collapse.show,
-      .navbar-collapse.collapsing {
-        background: rgba(31,31,31,0.97);
+      .navbar-collapse.show, .navbar-collapse.collapsing {
+        background: rgba(15,15,25,0.97);
         backdrop-filter: blur(16px);
-        border: 1px solid rgba(249,115,22,0.15);
-        border-radius: 14px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
         padding: 16px;
         margin-top: 10px;
       }
@@ -131,120 +162,228 @@
       }
     }
 
-    /* ===== Social Links ===== */
-    .header-social-links { display: flex; gap: 10px; }
+    /* Social Links */
+    .header-social-links { display: flex; gap: 8px; }
     .header-social-links a {
-      width: 46px; height: 46px; border-radius: 10px;
-      background: rgba(255,255,255,0.05);
-      border: 2px solid rgba(255,255,255,0.1);
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center;
-      color: rgba(245,245,245,0.7); font-size: 10px;
-      text-decoration: none; transition: all 0.3s ease;
+      color: var(--text-muted); font-size: 1rem;
+      text-decoration: none; transition: all var(--t);
     }
     .header-social-links a:hover {
-      background: linear-gradient(135deg, #020202, #070707);
-      border-color: transparent; color: #121212;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(249,115,22,0.35);
+      color: var(--accent-light);
+      border-color: var(--accent);
+      background: rgba(61,99,255,0.08);
+      transform: translateY(-2px);
     }
 
-    /* ===== Footer ===== */
+    /* Section Label */
+    .section-label {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 8px;
+    }
+    .label-text {
+      font-family: var(--font-display); font-size: 0.85rem;
+      font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em;
+    }
+    .gradient-text {
+      background: var(--gradient);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .label-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, rgba(61,99,255,0.3), transparent);
+    }
+    .section-prompt {
+      font-family: var(--font-mono); font-size: 0.85rem;
+      color: var(--text-secondary); margin-bottom: 32px;
+      display: flex; gap: 8px; align-items: center;
+    }
+    .prompt { color: var(--accent); font-weight: 600; }
+
+    /* Terminal */
+    .terminal-window {
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .terminal-bar {
+      display: flex; align-items: center; gap: 6px;
+      padding: 14px 18px; border-bottom: 1px solid var(--border);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.red { background: #ef4444; }
+    .dot.yellow { background: #eab308; }
+    .dot.green { background: #22c55e; }
+    .terminal-label {
+      margin-left: auto; font-family: var(--font-mono);
+      font-size: 0.7rem; color: var(--text-muted);
+    }
+    .terminal-body {
+      padding: 20px; font-family: var(--font-mono); font-size: 0.8rem;
+      line-height: 2; color: var(--text-secondary);
+    }
+    .terminal-line { display: flex; gap: 8px; align-items: center; }
+    .terminal-line .cmd { color: var(--text); }
+    .terminal-line.output {
+      padding-left: 20px; color: var(--accent-light); font-size: 0.78rem;
+    }
+
+    /* Cards */
+    .card-base {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: all var(--t);
+    }
+    .card-base:hover {
+      border-color: rgba(61,99,255,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    /* Buttons */
+    .btn-glow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; background: var(--accent);
+      color: #fff; font-weight: 600; font-size: 0.9rem;
+      border-radius: var(--radius); border: none; cursor: pointer;
+      transition: all var(--t); text-decoration: none;
+    }
+    .btn-glow:hover {
+      color: #fff;
+      box-shadow: 0 0 24px rgba(61,99,255,0.4);
+      transform: translateY(-2px);
+    }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; background: transparent;
+      color: var(--text); font-weight: 600; font-size: 0.9rem;
+      border-radius: var(--radius); border: 1px solid var(--border);
+      cursor: pointer; transition: all var(--t); text-decoration: none;
+    }
+    .btn-ghost:hover {
+      color: var(--accent-light); border-color: var(--accent);
+      background: rgba(61,99,255,0.08);
+    }
+
+    /* Skill Tags */
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-tags span {
+      padding: 4px 10px; border-radius: 6px;
+      background: rgba(255,255,255,0.03);
+      color: var(--text-muted); font-family: var(--font-mono);
+      font-size: 0.7rem; border: 1px solid var(--border);
+    }
+
+    /* Footer */
     .footer {
-      background: #121212;
-      border-top: 1px solid rgba(249,115,22,0.15);
+      background: var(--bg);
+      border-top: 1px solid var(--border);
       padding: 48px 0 28px;
       position: relative;
-      margin-top: 100px;
     }
     .footer::before {
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, #f97316, transparent);
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
     }
-    .footer .sitename {
-      font-family: 'Raleway', sans-serif;
-      font-size: 24px; font-weight: 800;
-      background: linear-gradient(90deg, #f97316, #fb923c);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.1rem; font-weight: 600;
+      text-decoration: none; display: inline-block; margin-bottom: 6px;
     }
+    .footer-logo .bracket { color: var(--accent); }
     .footer-tagline {
-      font-size: 14px; color: rgba(245,245,245,0.5);
-      margin: 8px 0 24px;
-    }
-    .footer .social-links { display: flex; gap: 10px; justify-content: center; }
-    .footer .social-links a {
-      width: 40px; height: 40px; border-radius: 10px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      display: flex; align-items: center; justify-content: center;
-      color: rgba(245,245,245,0.7); font-size: 17px;
-      text-decoration: none; transition: all 0.3s ease;
-    }
-    .footer .social-links a:hover {
-      background: linear-gradient(135deg, #f97316, #fb923c);
-      border-color: transparent; color: #121212;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(249,115,22,0.3);
+      font-size: 0.85rem; color: var(--text-muted); margin: 0 0 24px;
     }
     .footer-nav {
       display: flex; gap: 24px; justify-content: center;
       flex-wrap: wrap; margin-bottom: 24px;
     }
     .footer-nav a {
-      color: rgba(245,245,245,0.55); font-size: 14px;
-      text-decoration: none; transition: color 0.2s;
+      color: var(--text-muted); font-size: 0.85rem;
+      text-decoration: none; transition: color var(--t);
     }
-    .footer-nav a:hover { color: #f97316; }
+    .footer-nav a:hover { color: var(--accent-light); }
+    .footer .social-links { display: flex; gap: 8px; justify-content: center; }
+    .footer .social-links a {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); font-size: 1rem;
+      text-decoration: none; transition: all var(--t);
+    }
+    .footer .social-links a:hover {
+      background: var(--gradient);
+      border-color: transparent; color: #fff;
+      transform: translateY(-3px);
+    }
     .footer-divider {
-      height: 1px;
-      background: rgba(255,255,255,0.06);
-      margin: 24px 0;
+      height: 1px; background: var(--border); margin: 24px 0;
     }
     .footer .copyright {
-      font-size: 13px; color: rgba(245,245,245,0.4);
+      font-size: 0.8rem; color: var(--text-muted);
     }
-    .footer .copyright strong { color: rgba(245,245,245,0.7); }
+    .footer .copyright strong { color: var(--text-secondary); }
 
-    /* ===== Back to Top ===== */
+    /* Back to Top */
     .btt {
       position: fixed; bottom: 20px; right: 20px; z-index: 999;
-      width: 42px; height: 42px; border-radius: 12px;
-      background: linear-gradient(135deg, #f97316, #fb923c);
-      border: none; color: #121212; font-size: 18px;
+      width: 44px; height: 44px; border-radius: var(--radius);
+      background: var(--surface-solid); border: 1px solid var(--border);
+      color: var(--text); font-size: 1rem;
       display: none; align-items: center; justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 16px rgba(249,115,22,0.4);
-      transition: all 0.3s;
+      cursor: pointer; transition: all var(--t);
     }
-    .btt:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(249,115,22,0.5); }
+    .btt:hover { border-color: var(--accent); color: var(--accent); }
     .btt.show { display: flex; }
 
-    /* ===== Active nav highlight ===== */
-    .nav-link.active-page {
-      color: #f97316 !important;
-      background: rgba(249,115,22,0.08) !important;
+    /* Section Spacing */
+    .page-section {
+      padding: 140px 0 80px;
+      position: relative;
     }
+
+    /* Flash Messages */
+    .flash-msg {
+      position: fixed; top: 90px; right: 20px; z-index: 9999;
+      max-width: 400px;
+      background: var(--surface-solid);
+      border: 1px solid var(--green);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      color: var(--green);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      box-shadow: 0 10px 30px rgba(34,197,94,0.15);
+      animation: slideIn 0.3s ease, fadeOut 0.3s ease 4s forwards;
+    }
+    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+    @keyframes fadeOut { to { opacity: 0; transform: translateY(-10px); } }
   </style>
 </head>
 
 <body class="index-page">
+  <div class="scanlines"></div>
 
-  <!-- Page Loader -->
+  <!-- Loader -->
   <div id="loader">
-    <div class="loader-name">Suyog</div>
+    <div class="loader-name"><span class="bracket">&lt;</span>Suyog<span class="bracket">/&gt;</span></div>
     <div class="loader-bar"><div class="loader-bar-fill"></div></div>
   </div>
 
   <!-- Header -->
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container position-relative d-flex align-items-center justify-content-between">
-
-      <!-- Logo -->
       <a href="{% url 'home' %}" class="logo d-flex align-items-center" data-aos="fade-right" data-aos-duration="800">
-        <h1 class="sitename">Suyog<span style="color:rgba(249,115,22,0.4);">.</span></h1>
+        <span class="logo-text"><span class="bracket">&lt;</span>Suyog<span class="bracket">/&gt;</span></span>
       </a>
 
-      <!-- Nav -->
       <nav class="navbar navbar-expand-xl">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -252,59 +391,35 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto gap-1">
-            <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">
-              <i class="bi bi-house me-1"></i>Home
-            </a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">
-              <i class="bi bi-person me-1"></i>About
-            </a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'skills' %}">
-              <i class="bi bi-code-slash me-1"></i>Skills
-            </a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'project' %}">
-              <i class="bi bi-folder me-1"></i>Projects
-            </a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">
-              <i class="bi bi-envelope me-1"></i>Contact
-            </a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'home' %}"><i class="bi bi-house me-1"></i>Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'about' %}"><i class="bi bi-person me-1"></i>About</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'skills' %}"><i class="bi bi-code-slash me-1"></i>Skills</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'project' %}"><i class="bi bi-folder me-1"></i>Projects</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'testinomial' %}"><i class="bi bi-chat-quote me-1"></i>Testimonials</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}"><i class="bi bi-envelope me-1"></i>Contact</a></li>
           </ul>
         </div>
       </nav>
 
-      <!-- Social Links -->
-      <div class="header-social-links " data-aos="fade-left" data-aos-duration="800" data-aos-delay="400">
-        <a href="https://github.com/suyog123-hub" target="_blank" title="GitHub">
-          <i class="bi bi-github"></i>
-        </a>
-        <a href="https://www.tiktok.com/@suyogkhadka.py"  target="_blank" title="TikTok">
-          <i class="bi bi-tiktok" ></i>
-        </a>
-        <a href="https://www.linkedin.com/in/suyog-khadka-018985323/" target="_blank" title="LinkedIn">
-          <i class="bi bi-linkedin"></i>
-        </a>
-        <a href="mailto:ksuyog697@gmail.com" title="Email">
-          <i class="bi bi-envelope"></i>
-        </a>
+      <div class="header-social-links d-none d-xl-flex" data-aos="fade-left" data-aos-duration="800" data-aos-delay="400">
+        <a href="https://github.com/suyog123-hub" target="_blank" title="GitHub"><i class="bi bi-github"></i></a>
+        <a href="https://www.linkedin.com/in/suyog-khadka-018985323/" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="mailto:ksuyog697@gmail.com" title="Email"><i class="bi bi-envelope"></i></a>
       </div>
-
     </div>
   </header>
 
-  {% block content %}
-  {% endblock content %}
+  {% block content %}{% endblock content %}
 
   <!-- Footer -->
   <footer id="footer" class="footer">
     <div class="container">
-
       <div class="text-center mb-4" data-aos="fade-up">
         <a href="{% url 'home' %}" class="text-decoration-none">
-          <span class="sitename">Suyog Khadka</span>
+          <span class="footer-logo"><span class="bracket">&lt;</span>Suyog Khadka<span class="bracket">/&gt;</span></span>
         </a>
-        <p class="footer-tagline">Backend Developer — Building things that work.</p>
+        <p class="footer-tagline">Django developer building things that work.</p>
       </div>
-
-      <!-- Footer Nav -->
       <div class="footer-nav" data-aos="fade-up" data-aos-delay="100">
         <a href="{% url 'home' %}">Home</a>
         <a href="{% url 'about' %}">About</a>
@@ -312,78 +427,49 @@
         <a href="{% url 'project' %}">Projects</a>
         <a href="{% url 'contact' %}">Contact</a>
       </div>
-
-      <!-- Social -->
       <div class="social-links" data-aos="fade-up" data-aos-delay="150">
         <a href="https://github.com/suyog123-hub" target="_blank" title="GitHub"><i class="bi bi-github"></i></a>
         <a href="https://www.linkedin.com/in/suyog-khadka-018985323/" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
         <a href="mailto:ksuyog697@gmail.com" title="Email"><i class="bi bi-envelope"></i></a>
-        <a href="https://www.tiktok.com/@suyogkhadka.py" target="_blank" title="TikTok"><i class="bi bi-tiktok"></i></a>
       </div>
-
       <div class="footer-divider"></div>
-
       <div class="copyright text-center" data-aos="fade-up" data-aos-delay="200">
-        <p>© 2026 <strong>Suyog Khadka</strong> — All Rights Reserved</p>
-        <p style="font-size:12px; color:rgba(245,245,245,0.25); margin-top:4px;">
-          Built with <i class="bi bi-heart-fill" style="color:#f97316; font-size:10px;"></i> using Django & Bootstrap
+        <p>&copy; 2026 <strong>Suyog Khadka</strong> &mdash; All Rights Reserved</p>
+        <p style="font-size:0.7rem;color:var(--text-muted);margin-top:4px;">
+          Built with <i class="bi bi-heart-fill" style="color:var(--accent);font-size:10px;"></i> using Django &amp; Bootstrap
         </p>
       </div>
-
     </div>
   </footer>
 
-  <!-- Back to Top -->
-  <button class="btt" id="bttBtn">
-    <i class="bi bi-arrow-up"></i>
-  </button>
+  <button class="btt" id="bttBtn"><i class="bi bi-arrow-up"></i></button>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
-
   <script>
-    // AOS Init
-    AOS.init({
-      duration: 800, offset: 100,
-      easing: 'ease-in-out', once: true,
-      disable: window.innerWidth < 768
-    });
+    AOS.init({ duration: 800, offset: 100, easing: 'ease-in-out', once: true, disable: window.innerWidth < 768 });
 
-    // Page Loader
     window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.getElementById('loader').classList.add('hide');
-      }, 900);
+      setTimeout(() => document.getElementById('loader').classList.add('hide'), 900);
     });
 
-    // Header scroll effect
     window.addEventListener('scroll', () => {
       document.getElementById('header').classList.toggle('scrolled', window.scrollY > 60);
     });
 
-    // Back to top
     const bttBtn = document.getElementById('bttBtn');
     window.addEventListener('scroll', () => bttBtn.classList.toggle('show', window.scrollY > 400));
     bttBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // Active nav link
     const currentPath = window.location.pathname;
     document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
-      if (link.getAttribute('href') === currentPath) {
-        link.classList.add('active-page');
-      }
+      if (link.getAttribute('href') === currentPath) link.classList.add('active-page');
     });
   </script>
 
   {% if messages %}
     {% for message in messages %}
-      {% if message.tags == 'success' %}
-      <script>alertify.set('notifier','position','top-right'); alertify.success('{{message}}');</script>
-      {% else %}
-      <script>alertify.set('notifier','position','top-right'); alertify.error('{{message}}');</script>
-      {% endif %}
+    <div class="flash-msg"><i class="bi bi-check-circle me-2"></i>{{ message }}</div>
     {% endfor %}
   {% endif %}
 

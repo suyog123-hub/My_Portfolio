@@ -1,134 +1,140 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-      <!-- Testimonial Section -->
-    <section class="testimonial-section">
-        <div class="container">
-            <!-- Section Title -->
-            <div class="section-title" data-aos="fade-up">
-                <h2 class="mt-5" >What Clients Say</h2>
-                <p>Feedback from people I've worked with</p>
-            </div>
 
-            <!-- Testimonial Cards Row -->
-            <div class="row g-4">
-                <!-- Card 1 -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="testimonial-card">
-                        <div class="rating">
-                            <i class="bi bi-star-fill active"></i>
-                            <i class="bi bi-star-fill active"></i>
-                            <i class="bi bi-star-fill active"></i>
-                            <i class="bi bi-star-fill active"></i>
-                            <i class="bi bi-star-fill active"></i>
-                        </div>
-                        <p class="testimonial-text">
-                            "Suyog is an exceptional backend developer. He delivered our project ahead of schedule and the code quality is outstanding. Highly recommended!"
-                        </p>
-                        <div class="client-info">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client">
-                            <div>
-                                <h5>John Doe</h5>
-                                <small>CEO, TechCorp</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- Testimonials Section -->
+<section class="page-section">
+  <div class="container">
 
-                <!-- Card 2 -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="testimonial-card">
-                        <div class="rating">
-                            <i class="bi bi-star-fill active"></i>
-                            <i class="bi bi-star-fill active"></i>
-                            <i class="bi bi-star-fill active"></i>
-                            <i class="bi bi-star-fill active"></i>
-                            <i class="bi bi-star-fill active"></i>
-                        </div>
-                        <p class="testimonial-text">
-                            "Working with Suyog was a pleasure. He understood our requirements perfectly and built a robust e‑commerce backend. Will definitely hire again."
-                        </p>
-                        <div class="client-info">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client">
-                            <div>
-                                <h5>Jane Smith</h5>
-                                <small>Founder, StyleStore</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="testimonial-card">
-                        <div class="rating">
-                            <i class="bi bi-star-fill active"></i>
-                            <i class="bi bi-star-fill active"></i>
-                            <i class="bi bi-star-fill active"></i>
-                            <i class="bi bi-star-fill active"></i>
-                            <i class="bi bi-star-fill"></i> <!-- 4 stars active, 1 inactive -->
-                        </div>
-                        <p class="testimonial-text">
-                            "Great communication and technical skills. Suyog helped us optimize our database queries and improved performance significantly."
-                        </p>
-                        <div class="client-info">
-                            <img src="https://randomuser.me/api/portraits/men/46.jpg" alt="Client">
-                            <div>
-                                <h5>Mike Johnson</h5>
-                                <small>CTO, InnovateLabs</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Submit Feedback Card -->
-            <div class="submit-feedback" data-aos="fade-up">
-                <div class="feedback-card">
-                    <h3>Share Your Experience</h3>
-                    <p>Have you worked with me? I'd love to hear your feedback!</p>
-                    <a href="#" class="btn" data-bs-toggle="modal" data-bs-target="#feedbackModal">Submit Feedback</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-   <!-- Modal for feedback form -->
-<div class="modal fade" id="feedbackModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Submit Your Feedback</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="mb-3">
-                        <label class="form-label">Rating</label>
-                        <div class="rating-select">
-                            <div class="stars">
-                                <i class="bi bi-star-fill" data-star="1"></i>
-                                <i class="bi bi-star-fill" data-star="2"></i>
-                                <i class="bi bi-star-fill" data-star="3"></i>
-                                <i class="bi bi-star-fill" data-star="4"></i>
-                                <i class="bi bi-star-fill" data-star="5"></i>
-                            </div>
-                            <span class="rating-score">0/5</span>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Feedback</label>
-                        <textarea class="form-control" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Submit</button>
-                </form>
-            </div>
-        </div>
+    <div class="section-label" data-aos="fade-up">
+      <span class="label-text gradient-text">$</span>
+      <span class="label-text" style="color:var(--text-secondary);">Testimonials</span>
+      <div class="label-line"></div>
     </div>
-</div>
-{% endblock content %}
+    <div class="section-prompt" data-aos="fade-up" data-aos-delay="100">
+      <span class="prompt">$</span>
+      <span>cat feedback.log</span>
+    </div>
 
+    <!-- Testimonial Cards -->
+    <div class="row g-4">
+      {% for i in testinomial_items %}
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+        <div class="card-base" style="height:100%;display:flex;flex-direction:column;">
+
+          <!-- Rating -->
+          <div style="margin-bottom:16px;">
+            {% for star in "12345" %}
+            <i class="bi bi-star-fill" style="color:var(--accent);font-size:16px;margin-right:2px;"></i>
+            {% endfor %}
+          </div>
+
+          <!-- Feedback -->
+          <p style="font-size:15px;color:var(--text-secondary);line-height:1.7;margin-bottom:20px;flex:1;font-style:italic;">
+            "{{ i.feedback }}"
+          </p>
+
+          <!-- Author -->
+          <div style="display:flex;align-items:center;gap:14px;padding-top:16px;border-top:1px solid var(--border);">
+            {% if i.image %}
+            <img src="{{ i.image.url }}" alt="{{ i.name }}" style="width:50px;height:50px;border-radius:50%;object-fit:cover;border:2px solid rgba(61,99,255,0.2);">
+            {% else %}
+            <div style="width:50px;height:50px;border-radius:50%;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;flex-shrink:0;">
+              {{ i.name|first }}
+            </div>
+            {% endif %}
+            <div>
+              <h5 style="font-size:15px;font-weight:700;color:var(--text);margin:0;">{{ i.name }}</h5>
+              <small style="color:var(--text-muted);font-size:13px;">{{ i.role }}{% if i.company %}, {{ i.company }}{% endif %}</small>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12" data-aos="fade-up" data-aos-delay="200">
+        <div style="text-align:center;padding:60px 20px;background:var(--surface);border:2px dashed rgba(61,99,255,0.15);border-radius:20px;">
+          <div style="width:80px;height:80px;border-radius:20px;background:rgba(61,99,255,0.1);border:1px solid rgba(61,99,255,0.15);display:flex;align-items:center;justify-content:center;font-size:36px;color:var(--accent);margin:0 auto 20px;">
+            <i class="bi bi-chat-quote"></i>
+          </div>
+          <h4 style="font-size:22px;font-weight:700;color:var(--text);margin-bottom:8px;">No Testimonials Yet</h4>
+          <p style="font-size:15px;color:var(--text-muted);margin:0;">Be the first to share your experience!</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Submit Feedback CTA -->
+    <div style="margin-top:48px;text-align:center;" data-aos="fade-up">
+      <div style="background:var(--surface);border:2px dashed rgba(61,99,255,0.15);border-radius:20px;padding:32px;transition:all 0.3s;">
+        <h3 style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--text);margin-bottom:8px;">Share Your Experience</h3>
+        <p style="color:var(--text-secondary);margin-bottom:20px;font-size:15px;">Have you worked with me? I'd love to hear your feedback!</p>
+        <button class="btn-glow" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+          <i class="bi bi-pencil-square"></i> Submit Feedback
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Feedback Modal -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background:var(--surface-solid);border:1px solid var(--border);border-radius:var(--radius-lg);color:var(--text);">
+      <div class="modal-header" style="border-bottom:1px solid var(--border);padding:20px 24px;">
+        <h5 class="modal-title" style="font-family:var(--font-display);font-weight:700;font-size:18px;">Submit Feedback</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div style="padding:24px;">
+        <form action="{% url 'testinomial' %}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Name</label>
+            <input type="text" name="name" required placeholder="Your Name"
+              style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-body);font-size:14px;outline:none;">
+          </div>
+          <div class="row gy-3">
+            <div class="col-md-6">
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Role</label>
+              <input type="text" name="role" placeholder="e.g. CEO"
+                style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-body);font-size:14px;outline:none;">
+            </div>
+            <div class="col-md-6">
+              <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Company</label>
+              <input type="text" name="company" placeholder="Company Name"
+                style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-body);font-size:14px;outline:none;">
+            </div>
+          </div>
+          <div style="margin-top:16px;margin-bottom:16px;">
+            <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Email</label>
+            <input type="email" name="email" placeholder="your@email.com"
+              style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-body);font-size:14px;outline:none;">
+          </div>
+          <div style="margin-bottom:16px;">
+            <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Image</label>
+            <input type="file" name="images" accept="image/*"
+              style="width:100%;padding:10px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;outline:none;">
+          </div>
+          <div style="margin-bottom:20px;">
+            <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Feedback</label>
+            <textarea name="feedback" required rows="4" placeholder="Your feedback..."
+              style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-body);font-size:14px;outline:none;resize:none;"></textarea>
+          </div>
+          <button type="submit" class="btn-glow" style="width:100%;justify-content:center;">
+            <i class="bi bi-send-fill"></i> Submit Feedback
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.modal-body input:focus, .modal-body textarea:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(61,99,255,0.15) !important;
+}
+</style>
+
+{% endblock content %}

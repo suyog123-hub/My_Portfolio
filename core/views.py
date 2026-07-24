@@ -6,7 +6,7 @@ from django.core.mail import send_mail
 from .models import *
 from datetime import date
 from django.shortcuts import render
-
+from threading import Thread
 def about(request):
     birth_date = date(2005, 4, 16) 
     today = date.today()
@@ -32,7 +32,14 @@ def contact(request):
         message="Thanks for leaving your contact we will contact you soon"
         from_email='ksuyog697@gmail.com'
         recipient_list=[email,'suyog697@gmail.com']
-        send_mail(subject=subject,message=message,from_email=from_email,recipient_list=recipient_list,fail_silently=False)
+        thread = Thread(target=send_mail,kwargs={
+            "subject":subject,
+            "message": message,
+            "from_email": from_email,
+            "recipient_list": recipient_list,
+            "fail_silently": False ,
+        },daemon=True) # it is used to make work fast 
+        thread.start()
         messages.success(request,f'hi {name} your form is submitted please check your email')
 
 

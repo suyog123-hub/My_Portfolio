@@ -73,7 +73,6 @@ def skills(request):
 def main(request):
     return render(request,'core/main.html')
 
-
 def testinomial(request):
     testinomial_items=Testinomial.objects.filter(is_active=True)
     

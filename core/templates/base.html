@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
   <style>
     :root {
@@ -60,7 +61,7 @@
       background: var(--bg);
       display: flex; align-items: center; justify-content: center;
       flex-direction: column; gap: 16px;
-      transition: opacity 0.5s ease, visibility 0.5s ease;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
     }
     #loader.hide { opacity: 0; visibility: hidden; pointer-events: none; }
     .loader-name {
@@ -75,7 +76,7 @@
     .loader-bar-fill {
       height: 100%; width: 0;
       background: var(--gradient); border-radius: 2px;
-      animation: loadBar 1s ease forwards;
+      animation: loadBar 0.35s ease forwards;
     }
     @keyframes loadBar { 0%{width:0} 100%{width:100%} }
 
@@ -86,97 +87,484 @@
       opacity: 0.4;
     }
 
-    /* Header */
-    .header {
-      background: rgba(5, 5, 7, 0.85) !important;
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
+    body > section, body > footer, body > .nx-btt { position: relative; z-index: 1; }
+
+    /* ================================================================
+       PREMIUM NAVBAR — Apple + Vercel + Linear + Framer
+       ================================================================ */
+
+    /* --- Container --- */
+    .nx-header {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 900;
       padding: 16px 0;
-      transition: all 0.5s ease;
-      z-index: 997;
+      transition: padding 0.3s cubic-bezier(0.4,0,0.2,1),
+                  transform 0.4s cubic-bezier(0.16,1,0.3,1);
     }
-    .header.scrolled {
-      padding: 12px 0;
-      box-shadow: 0 4px 30px rgba(0,0,0,0.4);
-      border-bottom-color: rgba(61,99,255,0.15);
+    .nx-header.scrolled {
+      padding: 10px 0;
     }
-    .header .logo-text {
-      font-family: var(--font-display);
-      font-size: 1.1rem; font-weight: 600;
-      color: var(--text);
+    .nx-header.hidden {
+      transform: translateY(-110%);
+    }
+    .nx-header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 10px 20px;
+      border-radius: 18px;
+      background: rgba(10,10,20,0.75);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4),
+                  0 0 30px rgba(79,125,255,0.08);
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.3s, border-color 0.3s;
+    }
+    .nx-header.scrolled .nx-header-inner {
+      background: rgba(10,10,20,0.82);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 14px 50px rgba(0,0,0,0.5),
+                  0 0 40px rgba(79,125,255,0.1);
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    /* Animated background gradient inside navbar */
+    .nx-header-inner::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0%,
+        rgba(79,125,255,0.04) 10%,
+        transparent 20%,
+        rgba(139,92,246,0.03) 30%,
+        transparent 40%,
+        rgba(79,125,255,0.02) 50%,
+        transparent 60%
+      );
+      animation: nxGradientSpin 25s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes nxGradientSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .nx-header-inner > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* --- Logo --- */
+    .nx-logo {
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .nx-logo-text {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
       letter-spacing: -0.5px;
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
     }
-    .header .logo-text .bracket { color: var(--accent); }
-    .header .logo { text-decoration: none; }
+    .nx-logo:hover .nx-logo-text {
+      letter-spacing: 1px;
+    }
+    .nx-bracket {
+      color: var(--accent);
+      transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .nx-logo:hover .nx-bracket {
+      text-shadow: 0 0 12px rgba(79,125,255,0.6);
+    }
+    .nx-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      background: var(--accent);
+      margin-left: 2px;
+      border-radius: 1px;
+      animation: nxCursorBlink 1s step-end infinite;
+      vertical-align: middle;
+      opacity: 0.8;
+    }
+    @keyframes nxCursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
 
-    /* Navbar */
-    .navbar { padding: 0; background: transparent !important; }
-    .navbar-nav .nav-link {
-      color: var(--text-secondary) !important;
+    /* --- Desktop Nav --- */
+    .nx-nav {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+    .nx-nav-list {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin: 0;
+      padding: 0;
+    }
+    .nx-nav-item {
+      position: relative;
+    }
+    .nx-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
       font-family: var(--font-body);
-      font-size: 0.875rem; font-weight: 500;
-      padding: 8px 14px !important;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary) !important;
+      text-decoration: none;
+      border-radius: 10px;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .nx-link i {
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+    /* Underline grows from center */
+    .nx-link::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+      transform: translateX(-50%);
+      transition: width 0.3s cubic-bezier(0.16,1,0.3,1);
+      box-shadow: 0 0 8px rgba(79,125,255,0.4);
+    }
+    .nx-link:hover {
+      color: var(--text) !important;
+      transform: translateY(-3px);
+      text-shadow: 0 0 20px rgba(79,125,255,0.3);
+    }
+    .nx-link:hover::after {
+      width: 60%;
+    }
+    .nx-link:hover i {
+      color: var(--accent);
+    }
+
+    /* Active link — gradient pill */
+    .nx-link.active {
+      color: #fff !important;
+      background: linear-gradient(135deg, rgba(79,125,255,0.18), rgba(139,92,246,0.12));
+      border: 1px solid rgba(79,125,255,0.25);
+      box-shadow: 0 0 16px rgba(79,125,255,0.15),
+                  inset 0 0 12px rgba(79,125,255,0.05);
+    }
+    .nx-link.active::after {
+      width: 50%;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+    }
+    .nx-link.active i {
+      color: var(--accent);
+    }
+
+    /* Hover indicator — slides under links like Linear */
+    .nx-hover-indicator {
+      position: absolute;
+      height: 32px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      pointer-events: none;
+      transition: left 0.35s cubic-bezier(0.16,1,0.3,1),
+                  width 0.35s cubic-bezier(0.16,1,0.3,1),
+                  opacity 0.25s;
+      opacity: 0;
+      z-index: 0;
+    }
+    .nx-hover-indicator.visible {
+      opacity: 1;
+    }
+
+    /* --- Social Icons --- */
+    .nx-socials {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .nx-social {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+      position: relative;
+      overflow: hidden;
+    }
+    .nx-social::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--accent), var(--purple), var(--accent));
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 0;
+    }
+    .nx-social::after {
+      content: '';
+      position: absolute;
+      inset: 1.5px;
+      border-radius: 50%;
+      background: rgba(10,10,20,0.9);
+      z-index: 1;
+    }
+    .nx-social i {
+      position: relative;
+      z-index: 2;
+    }
+    .nx-social:hover {
+      transform: translateY(-4px) rotate(12deg) scale(1.1);
+      box-shadow: 0 8px 24px rgba(79,125,255,0.25);
+      color: var(--accent);
+    }
+    .nx-social:hover::before {
+      opacity: 1;
+    }
+    /* Ripple on click */
+    .nx-social:active {
+      transform: translateY(-2px) scale(0.95);
+    }
+
+    /* --- Hamburger (Mobile) --- */
+    .nx-hamburger {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      cursor: pointer;
+      position: relative;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+      z-index: 1001;
+      padding: 0;
+    }
+    .nx-hamburger:hover {
+      transform: scale(1.06) rotate(5deg);
+      border-color: rgba(79,125,255,0.3);
+      box-shadow: 0 0 20px rgba(79,125,255,0.15);
+    }
+    .nx-hamburger:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .nx-hamburger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+      transform-origin: center;
+    }
+    /* Animated X */
+    .nx-hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .nx-hamburger.open span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .nx-hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* --- Mobile Menu --- */
+    .nx-mobile {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s, visibility 0.35s;
+    }
+    .nx-mobile.open {
+      pointer-events: all;
+      opacity: 1;
+      visibility: visible;
+    }
+    .nx-mobile-bg {
+      position: absolute;
+      inset: 0;
+      background: rgba(5,5,10,0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+    .nx-mobile.open .nx-mobile-bg {
+      opacity: 1;
+    }
+    .nx-mobile-panel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 100px 32px 48px;
+      background: rgba(10,10,20,0.92);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transform: translateY(-100%) scale(0.96);
+      opacity: 0;
+      transition: all 0.45s cubic-bezier(0.16,1,0.3,1);
+    }
+    .nx-mobile.open .nx-mobile-panel {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    .nx-mobile-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .nx-mobile-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 20px;
+      border-radius: 16px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      font-weight: 500;
+      border: 1px solid transparent;
+      transition: all 0.3s;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .nx-mobile.open .nx-mobile-link {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Stagger delays */
+    .nx-mobile.open .nx-mobile-link:nth-child(1) { transition-delay: 0.1s; }
+    .nx-mobile.open .nx-mobile-link:nth-child(2) { transition-delay: 0.15s; }
+    .nx-mobile.open .nx-mobile-link:nth-child(3) { transition-delay: 0.2s; }
+    .nx-mobile.open .nx-mobile-link:nth-child(4) { transition-delay: 0.25s; }
+    .nx-mobile.open .nx-mobile-link:nth-child(5) { transition-delay: 0.3s; }
+    .nx-mobile.open .nx-mobile-link:nth-child(6) { transition-delay: 0.35s; }
+
+    .nx-mobile-link i {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(79,125,255,0.1);
+      border: 1px solid rgba(79,125,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+    .nx-mobile-link:hover {
+      background: rgba(79,125,255,0.06);
+      border-color: rgba(79,125,255,0.15);
+      color: var(--text);
+    }
+    .nx-mobile-link:hover i {
+      background: rgba(79,125,255,0.18);
+      box-shadow: 0 0 16px rgba(79,125,255,0.2);
+    }
+    .nx-mobile-link.active {
+      background: linear-gradient(135deg, rgba(79,125,255,0.12), rgba(139,92,246,0.08));
+      border-color: rgba(79,125,255,0.2);
+      color: var(--text);
+    }
+    .nx-mobile-socials {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .nx-mobile-socials a {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .nx-mobile-socials a:hover {
+      color: var(--accent);
+      transform: translateY(-4px) rotate(8deg);
+      border-color: rgba(79,125,255,0.3);
+      box-shadow: 0 8px 24px rgba(79,125,255,0.15);
+    }
+
+    /* --- Body scroll lock --- */
+    body.nx-menu-open {
+      overflow: hidden;
+    }
+
+    /* --- Focus visible --- */
+    .nx-link:focus-visible,
+    .nx-social:focus-visible,
+    .nx-logo:focus-visible,
+    .nx-mobile-link:focus-visible,
+    .nx-mobile-socials a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
       border-radius: 8px;
-      transition: all var(--t);
-    }
-    .navbar-nav .nav-link:hover,
-    .navbar-nav .nav-link.active {
-      color: var(--text) !important;
-      background: rgba(255,255,255,0.03);
-    }
-    .nav-link.active-page {
-      color: var(--text) !important;
-      background: rgba(255,255,255,0.05) !important;
     }
 
-    .navbar-toggler {
-      border: 1px solid var(--border-light) !important;
-      padding: 8px 10px !important;
-      border-radius: 10px !important;
-      transition: all var(--t);
-    }
-    .navbar-toggler:focus {
-      box-shadow: 0 0 0 2px rgba(61,99,255,0.3) !important;
-      outline: none !important;
-    }
-    .navbar-toggler-icon {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(61,99,255,0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-    }
-
-    @media (max-width: 1199px) {
-      .navbar-collapse.show, .navbar-collapse.collapsing {
-        background: rgba(15,15,25,0.97);
-        backdrop-filter: blur(16px);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        padding: 16px;
-        margin-top: 10px;
-      }
-      .navbar-collapse.show .navbar-nav {
-        display: flex; flex-direction: column; gap: 4px;
-      }
-      .navbar-collapse.show .nav-link {
-        padding: 12px 16px !important;
-        border-radius: 10px !important;
-      }
-    }
-
-    /* Social Links */
-    .header-social-links { display: flex; gap: 8px; }
-    .header-social-links a {
-      width: 36px; height: 36px; border-radius: 8px;
-      background: var(--surface-solid);
-      border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--text-muted); font-size: 1rem;
-      text-decoration: none; transition: all var(--t);
-    }
-    .header-social-links a:hover {
-      color: var(--accent-light);
-      border-color: var(--accent);
-      background: rgba(61,99,255,0.08);
-      transform: translateY(-2px);
+    /* --- Responsive --- */
+    @media (max-width: 950px) {
+      .nx-nav { display: none; }
+      .nx-socials { display: none; }
+      .nx-hamburger { display: flex; }
     }
 
     /* Section Label */
@@ -279,75 +667,505 @@
       font-size: 0.7rem; border: 1px solid var(--border);
     }
 
-    /* Footer */
-    .footer {
-      background: var(--bg);
-      border-top: 1px solid var(--border);
-      padding: 48px 0 28px;
+    /* ================================================================
+       PREMIUM FOOTER — Apple + Vercel + Linear + Framer
+       ================================================================ */
+
+    .nx-footer {
+      position: relative;
+      background: #050510;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 80px 0 0;
+      overflow: hidden;
+    }
+    .nx-footer::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, #4F7DFF, #8B5CF6, transparent);
+    }
+
+    /* Floating particles canvas behind footer */
+    #footerParticles {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .nx-footer > * { position: relative; z-index: 1; }
+
+    .nx-footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      text-align: center;
+    }
+
+    /* --- Logo --- */
+    .nx-footer-logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      margin-bottom: 20px;
+    }
+    .nx-footer-logo-text {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #f0f0f5;
+      letter-spacing: -0.5px;
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .nx-footer-logo:hover .nx-footer-logo-text {
+      letter-spacing: 2px;
+      text-shadow: 0 0 24px rgba(79,125,255,0.5);
+      transform: scale(1.04);
+    }
+    .nx-footer-bracket {
+      color: #4F7DFF;
+      transition: all 0.3s;
+    }
+    .nx-footer-logo:hover .nx-footer-bracket {
+      text-shadow: 0 0 16px rgba(79,125,255,0.6);
+    }
+    .nx-footer-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      background: #4F7DFF;
+      margin-left: 2px;
+      border-radius: 1px;
+      animation: nxFootBlink 1s step-end infinite;
+      vertical-align: middle;
+      opacity: 0.8;
+    }
+    @keyframes nxFootBlink {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    /* Floating glow around logo */
+    .nx-footer-logo-glow {
+      position: absolute;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(79,125,255,0.12) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      animation: nxFootGlowPulse 4s ease-in-out infinite;
+    }
+    @keyframes nxFootGlowPulse {
+      0%,100% { opacity: 0.5; transform: translate(-50%,-50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%,-50%) scale(1.2); }
+    }
+    .nx-footer-logo { position: relative; }
+
+    /* --- Subtitle --- */
+    .nx-footer-subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #555568;
+      margin-bottom: 12px;
+      letter-spacing: 0.08em;
+    }
+    .nx-footer-subtitle span {
+      color: #4F7DFF;
+    }
+
+    /* --- Description --- */
+    .nx-footer-desc {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: #8888a0;
+      line-height: 1.75;
+      max-width: 520px;
+      margin: 0 auto 40px;
+    }
+    .nx-footer-desc strong {
+      color: #a0a0b8;
+      font-weight: 500;
+    }
+
+    /* --- Social Icons --- */
+    .nx-footer-socials {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+    .nx-footer-social {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8888a0;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+      position: relative;
+      overflow: hidden;
+    }
+    /* Gradient border on hover */
+    .nx-footer-social::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, #4F7DFF, #8B5CF6, #4F7DFF);
+      opacity: 0;
+      transition: opacity 0.35s;
+      z-index: 0;
+    }
+    .nx-footer-social::after {
+      content: '';
+      position: absolute;
+      inset: 1.5px;
+      border-radius: 50%;
+      background: #0a0a14;
+      z-index: 1;
+    }
+    .nx-footer-social i {
+      position: relative;
+      z-index: 2;
+      transition: all 0.3s;
+    }
+    .nx-footer-social:hover {
+      transform: translateY(-6px) rotate(8deg);
+      box-shadow: 0 12px 28px rgba(79,125,255,0.2);
+      color: #4F7DFF;
+    }
+    .nx-footer-social:hover::before { opacity: 1; }
+    /* Bounce on click */
+    .nx-footer-social:active {
+      transform: translateY(-2px) scale(0.92);
+      transition-duration: 0.1s;
+    }
+    /* Icon pulse occasionally */
+    .nx-footer-social {
+      animation: nxIconPulse 6s ease-in-out infinite;
+    }
+    .nx-footer-social:nth-child(2) { animation-delay: -1s; }
+    .nx-footer-social:nth-child(3) { animation-delay: -2s; }
+    .nx-footer-social:nth-child(4) { animation-delay: -3s; }
+    .nx-footer-social:nth-child(5) { animation-delay: -4s; }
+    @keyframes nxIconPulse {
+      0%,85%,100% { box-shadow: none; }
+      90% { box-shadow: 0 0 16px rgba(79,125,255,0.15); }
+    }
+    /* Ripple */
+    .nx-footer-social .nx-ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(79,125,255,0.3);
+      transform: scale(0);
+      animation: nxFootRipple 0.6s ease-out;
+      pointer-events: none;
+      z-index: 3;
+    }
+    @keyframes nxFootRipple {
+      to { transform: scale(4); opacity: 0; }
+    }
+
+    /* --- Quick Links --- */
+    .nx-footer-links {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .nx-footer-link {
+      color: #8888a0;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
       position: relative;
     }
-    .footer::before {
+    .nx-footer-link::after {
       content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, #4F7DFF, #8B5CF6);
+      border-radius: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
     }
-    .footer-logo {
-      font-family: var(--font-display);
-      font-size: 1.1rem; font-weight: 600;
-      text-decoration: none; display: inline-block; margin-bottom: 6px;
+    .nx-footer-link .nx-link-arrow {
+      display: inline-block;
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+      font-size: 0.8rem;
+      opacity: 0;
     }
-    .footer-logo .bracket { color: var(--accent); }
-    .footer-tagline {
-      font-size: 0.85rem; color: var(--text-muted); margin: 0 0 24px;
+    .nx-footer-link:hover {
+      color: #f0f0f5;
     }
-    .footer-nav {
-      display: flex; gap: 24px; justify-content: center;
-      flex-wrap: wrap; margin-bottom: 24px;
+    .nx-footer-link:hover::after {
+      transform: scaleX(1);
     }
-    .footer-nav a {
-      color: var(--text-muted); font-size: 0.85rem;
-      text-decoration: none; transition: color var(--t);
+    .nx-footer-link:hover .nx-link-arrow {
+      opacity: 1;
+      transform: translateX(4px);
     }
-    .footer-nav a:hover { color: var(--accent-light); }
-    .footer .social-links { display: flex; gap: 8px; justify-content: center; }
-    .footer .social-links a {
-      width: 40px; height: 40px; border-radius: 10px;
-      background: var(--surface-solid);
-      border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--text-muted); font-size: 1rem;
-      text-decoration: none; transition: all var(--t);
-    }
-    .footer .social-links a:hover {
-      background: var(--gradient);
-      border-color: transparent; color: #fff;
-      transform: translateY(-3px);
-    }
-    .footer-divider {
-      height: 1px; background: var(--border); margin: 24px 0;
-    }
-    .footer .copyright {
-      font-size: 0.8rem; color: var(--text-muted);
-    }
-    .footer .copyright strong { color: var(--text-secondary); }
 
-    /* Back to Top */
-    .btt {
-      position: fixed; bottom: 20px; right: 20px; z-index: 999;
-      width: 44px; height: 44px; border-radius: var(--radius);
-      background: var(--surface-solid); border: 1px solid var(--border);
-      color: var(--text); font-size: 1rem;
-      display: none; align-items: center; justify-content: center;
-      cursor: pointer; transition: all var(--t);
+    /* --- Animated Gradient Divider --- */
+    .nx-footer-divider {
+      position: relative;
+      height: 1px;
+      margin: 0 auto 32px;
+      max-width: 600px;
+      background: rgba(255,255,255,0.06);
+      overflow: visible;
     }
-    .btt:hover { border-color: var(--accent); color: var(--accent); }
-    .btt.show { display: flex; }
+    .nx-footer-divider::before {
+      content: '';
+      position: absolute;
+      top: -1.5px;
+      width: 60px; height: 4px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #4F7DFF, #8B5CF6);
+      box-shadow: 0 0 12px rgba(79,125,255,0.5);
+      animation: nxDividerMove 4s ease-in-out infinite;
+    }
+    @keyframes nxDividerMove {
+      0% { left: -60px; }
+      50% { left: calc(100% + 0px); }
+      100% { left: -60px; }
+    }
+
+    /* --- Copyright --- */
+    .nx-footer-copyright {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: #555568;
+      padding-bottom: 32px;
+    }
+    .nx-footer-copyright strong {
+      color: #8888a0;
+      font-weight: 600;
+    }
+    .nx-footer-heart {
+      display: inline-block;
+      color: #4F7DFF;
+      animation: nxHeartPulse 2s ease-in-out infinite;
+    }
+    @keyframes nxHeartPulse {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+    .nx-footer-copyright .nx-tech {
+      display: block;
+      margin-top: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: #44445a;
+    }
+
+    /* --- Scroll Reveal --- */
+    .nx-footer [data-nx-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1),
+                  transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+    .nx-footer [data-nx-reveal].revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .nx-footer [data-nx-reveal]:nth-child(1) { transition-delay: 0s; }
+    .nx-footer [data-nx-reveal]:nth-child(2) { transition-delay: 0.08s; }
+    .nx-footer [data-nx-reveal]:nth-child(3) { transition-delay: 0.16s; }
+    .nx-footer [data-nx-reveal]:nth-child(4) { transition-delay: 0.24s; }
+    .nx-footer [data-nx-reveal]:nth-child(5) { transition-delay: 0.32s; }
+    .nx-footer [data-nx-reveal]:nth-child(6) { transition-delay: 0.4s; }
+
+    /* --- Back To Top (Progress Ring) --- */
+    .nx-btt {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      z-index: 999;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: rgba(10,10,20,0.8);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .nx-btt.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .nx-btt:hover {
+      border-color: rgba(79,125,255,0.3);
+      box-shadow: 0 0 24px rgba(79,125,255,0.2);
+      transform: translateY(-4px) scale(1.08);
+    }
+    .nx-btt:active {
+      transform: translateY(-1px) scale(0.96);
+    }
+    .nx-btt svg {
+      position: absolute;
+      top: -1px; left: -1px;
+      width: 54px; height: 54px;
+      transform: rotate(-90deg);
+    }
+    .nx-btt-track {
+      fill: none;
+      stroke: rgba(255,255,255,0.06);
+      stroke-width: 2;
+    }
+    .nx-btt-progress {
+      fill: none;
+      stroke: url(#bttGrad);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-dasharray: 150.8;
+      stroke-dashoffset: 150.8;
+      transition: stroke-dashoffset 0.15s;
+    }
+    .nx-btt-arrow {
+      color: #a0a0b8;
+      font-size: 1rem;
+      transition: all 0.3s;
+      z-index: 1;
+    }
+    .nx-btt:hover .nx-btt-arrow {
+      color: #4F7DFF;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+      .nx-footer { padding: 60px 0 0; }
+      .nx-footer-logo-text { font-size: 1.3rem; }
+      .nx-footer-subtitle { font-size: 0.75rem; }
+      .nx-footer-desc { font-size: 0.88rem; padding: 0 16px; }
+      .nx-footer-socials { gap: 10px; }
+      .nx-footer-social { width: 44px; height: 44px; font-size: 1rem; }
+      .nx-footer-links { gap: 20px; }
+      .nx-footer-link { font-size: 0.85rem; }
+      .nx-btt { bottom: 20px; right: 20px; width: 46px; height: 46px; }
+      .nx-btt svg { width: 48px; height: 48px; }
+    }
+    @media (max-width: 480px) {
+      .nx-footer-links { gap: 16px; }
+      .nx-footer-link { font-size: 0.82rem; }
+      .nx-footer-socials { gap: 8px; }
+      .nx-footer-social { width: 40px; height: 40px; font-size: 0.95rem; }
+    }
 
     /* Section Spacing */
     .page-section {
       padding: 140px 0 80px;
       position: relative;
     }
+
+    /* Ambient Background Blobs */
+    #ambient-bg {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .blob {
+      position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.07;
+      animation: blobFloat 20s ease-in-out infinite alternate;
+      --px: 0; --py: 0;
+      transform: translate(var(--px), var(--py));
+    }
+    .blob-1 {
+      width: 600px; height: 600px; top: -10%; left: -5%;
+      background: radial-gradient(circle, #3d63ff, transparent 70%);
+      animation-duration: 22s;
+    }
+    .blob-2 {
+      width: 500px; height: 500px; top: 40%; right: -10%;
+      background: radial-gradient(circle, #a855f7, transparent 70%);
+      animation-duration: 26s; animation-delay: -5s;
+    }
+    .blob-3 {
+      width: 450px; height: 450px; bottom: -5%; left: 30%;
+      background: radial-gradient(circle, #22c55e, transparent 70%);
+      animation-duration: 24s; animation-delay: -10s;
+    }
+    .blob-4 {
+      width: 550px; height: 550px; top: 20%; left: 50%;
+      background: radial-gradient(circle, #9fb4ff, transparent 70%);
+      animation-duration: 28s; animation-delay: -15s; opacity: 0.04;
+    }
+    @keyframes blobFloat {
+      0%   { margin-left: 0; margin-top: 0; }
+      33%  { margin-left: 60px; margin-top: -40px; }
+      66%  { margin-left: -40px; margin-top: 50px; }
+      100% { margin-left: 30px; margin-top: -20px; }
+    }
+
+    /* Custom Cursor */
+    * { cursor: none !important; }
+    #cursor-dot {
+      position: fixed; top: 0; left: 0; z-index: 999999;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #fff; pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: width 0.15s, height 0.15s, background 0.15s;
+      mix-blend-mode: difference;
+    }
+    #cursor-ring {
+      position: fixed; top: 0; left: 0; z-index: 999998;
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.5); pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: width 0.25s cubic-bezier(0.16,1,0.3,1), height 0.25s cubic-bezier(0.16,1,0.3,1),
+                  border-color 0.25s, background 0.25s;
+    }
+    #cursor-ring.hover {
+      width: 64px; height: 64px;
+      border-color: var(--accent);
+      background: rgba(61,99,255,0.08);
+    }
+    #cursor-dot.hover {
+      width: 4px; height: 4px;
+      background: var(--accent);
+    }
+    @media (max-width: 1024px) {
+      #cursor-dot, #cursor-ring, #cursor-glow { display: none !important; }
+      * { cursor: auto !important; }
+    }
+
+    /* Cursor Glow */
+    #cursor-glow {
+      position: fixed; top: 0; left: 0; z-index: 0;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(160,165,180,0.10) 0%, rgba(120,130,160,0.05) 35%, transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.4s;
+      opacity: 0;
+    }
+    #cursor-glow.accent {
+      background: radial-gradient(circle, rgba(168,130,255,0.08) 0%, rgba(61,99,255,0.04) 35%, transparent 70%);
+    }
+    #cursor-glow.active { opacity: 1; }
 
     /* Flash Messages */
     .flash-msg {
@@ -365,11 +1183,41 @@
     }
     @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     @keyframes fadeOut { to { opacity: 0; transform: translateY(-10px); } }
+
+    /* Page Transition Overlay */
+    #pageTransition {
+      position: fixed; inset: 0; z-index: 99998;
+      background: var(--bg);
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity 0.15s ease, visibility 0.15s ease;
+    }
+    #pageTransition.active { opacity: 1; visibility: visible; pointer-events: all; }
   </style>
 </head>
 
 <body class="index-page">
   <div class="scanlines"></div>
+
+  <!-- Custom Cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+  <div id="cursor-glow"></div>
+
+  <!-- Ambient Background Blobs -->
+  <div id="ambient-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+  </div>
+
+  <!-- 3D Background Canvas -->
+  <canvas id="bg3d" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+
+  <!-- Three.js Particle Canvas -->
+  <canvas id="three-particles" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+
+  <div id="pageTransition"></div>
 
   <!-- Loader -->
   <div id="loader">
@@ -378,93 +1226,705 @@
   </div>
 
   <!-- Header -->
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container position-relative d-flex align-items-center justify-content-between">
-      <a href="{% url 'home' %}" class="logo d-flex align-items-center" data-aos="fade-right" data-aos-duration="800">
-        <span class="logo-text"><span class="bracket">&lt;</span>Suyog<span class="bracket">/&gt;</span></span>
+  <header id="header" class="nx-header" role="banner">
+    <div class="nx-header-inner">
+      <!-- Logo -->
+      <a href="{% url 'home' %}" class="nx-logo" aria-label="Home — Suyog Khadka">
+        <span class="nx-logo-text">
+          <span class="nx-bracket">&lt;</span>Suyog<span class="nx-bracket">/&gt;</span>
+          <span class="nx-cursor" aria-hidden="true"></span>
+        </span>
       </a>
 
-      <nav class="navbar navbar-expand-xl">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto gap-1">
-            <li class="nav-item"><a class="nav-link" href="{% url 'home' %}"><i class="bi bi-house me-1"></i>Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'about' %}"><i class="bi bi-person me-1"></i>About</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'skills' %}"><i class="bi bi-code-slash me-1"></i>Skills</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'project' %}"><i class="bi bi-folder me-1"></i>Projects</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'testinomial' %}"><i class="bi bi-chat-quote me-1"></i>Testimonials</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}"><i class="bi bi-envelope me-1"></i>Contact</a></li>
-          </ul>
-        </div>
+      <!-- Desktop Nav -->
+      <nav class="nx-nav" role="navigation" aria-label="Main navigation">
+        <ul class="nx-nav-list">
+          <li class="nx-nav-item">
+            <a href="{% url 'home' %}" class="nx-link">
+              <i class="bi bi-house" aria-hidden="true"></i><span>Home</span>
+            </a>
+          </li>
+          <li class="nx-nav-item">
+            <a href="{% url 'about' %}" class="nx-link">
+              <i class="bi bi-person" aria-hidden="true"></i><span>About</span>
+            </a>
+          </li>
+          <li class="nx-nav-item">
+            <a href="{% url 'skills' %}" class="nx-link">
+              <i class="bi bi-code-slash" aria-hidden="true"></i><span>Skills</span>
+            </a>
+          </li>
+          <li class="nx-nav-item">
+            <a href="{% url 'project' %}" class="nx-link">
+              <i class="bi bi-folder" aria-hidden="true"></i><span>Projects</span>
+            </a>
+          </li>
+          <li class="nx-nav-item">
+            <a href="{% url 'testinomial' %}" class="nx-link">
+              <i class="bi bi-chat-quote" aria-hidden="true"></i><span>Testimonials</span>
+            </a>
+          </li>
+          <li class="nx-nav-item">
+            <a href="{% url 'contact' %}" class="nx-link">
+              <i class="bi bi-envelope" aria-hidden="true"></i><span>Contact</span>
+            </a>
+          </li>
+        </ul>
+        <div class="nx-hover-indicator" aria-hidden="true"></div>
       </nav>
 
-      <div class="header-social-links d-none d-xl-flex" data-aos="fade-left" data-aos-duration="800" data-aos-delay="400">
-        <a href="https://github.com/suyog123-hub" target="_blank" title="GitHub"><i class="bi bi-github"></i></a>
-        <a href="https://www.linkedin.com/in/suyog-khadka-018985323/" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
-        <a href="mailto:ksuyog697@gmail.com" title="Email"><i class="bi bi-envelope"></i></a>
+      <!-- Social Icons -->
+      <div class="nx-socials" aria-label="Social links">
+        <a href="https://github.com/suyog123-hub" target="_blank" rel="noopener" class="nx-social" title="GitHub" aria-label="GitHub profile">
+          <i class="bi bi-github" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/suyog-khadka-018985323/" target="_blank" rel="noopener" class="nx-social" title="LinkedIn" aria-label="LinkedIn profile">
+          <i class="bi bi-linkedin" aria-hidden="true"></i>
+        </a>
+        <a href="mailto:ksuyog697@gmail.com" class="nx-social" title="Email" aria-label="Send email">
+          <i class="bi bi-envelope" aria-hidden="true"></i>
+        </a>
       </div>
+
+      <!-- Hamburger (mobile) -->
+      <button class="nx-hamburger" id="nxHamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nxMobile">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="nx-mobile" id="nxMobile" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <div class="nx-mobile-bg" id="nxMobileBg"></div>
+    <div class="nx-mobile-panel">
+      <nav class="nx-mobile-links" aria-label="Mobile navigation">
+        <a href="{% url 'home' %}" class="nx-mobile-link">
+          <i class="bi bi-house" aria-hidden="true"></i><span>Home</span>
+        </a>
+        <a href="{% url 'about' %}" class="nx-mobile-link">
+          <i class="bi bi-person" aria-hidden="true"></i><span>About</span>
+        </a>
+        <a href="{% url 'skills' %}" class="nx-mobile-link">
+          <i class="bi bi-code-slash" aria-hidden="true"></i><span>Skills</span>
+        </a>
+        <a href="{% url 'project' %}" class="nx-mobile-link">
+          <i class="bi bi-folder" aria-hidden="true"></i><span>Projects</span>
+        </a>
+        <a href="{% url 'testinomial' %}" class="nx-mobile-link">
+          <i class="bi bi-chat-quote" aria-hidden="true"></i><span>Testimonials</span>
+        </a>
+        <a href="{% url 'contact' %}" class="nx-mobile-link">
+          <i class="bi bi-envelope" aria-hidden="true"></i><span>Contact</span>
+        </a>
+      </nav>
+      <div class="nx-mobile-socials">
+        <a href="https://github.com/suyog123-hub" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+          <i class="bi bi-github" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/suyog-khadka-018985323/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+          <i class="bi bi-linkedin" aria-hidden="true"></i>
+        </a>
+        <a href="mailto:ksuyog697@gmail.com" aria-label="Email" title="Email">
+          <i class="bi bi-envelope" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </div>
 
   {% block content %}{% endblock content %}
 
   <!-- Footer -->
-  <footer id="footer" class="footer">
-    <div class="container">
-      <div class="text-center mb-4" data-aos="fade-up">
-        <a href="{% url 'home' %}" class="text-decoration-none">
-          <span class="footer-logo"><span class="bracket">&lt;</span>Suyog Khadka<span class="bracket">/&gt;</span></span>
+  <footer id="footer" class="nx-footer" role="contentinfo">
+    <canvas id="footerParticles"></canvas>
+    <div class="nx-footer-inner">
+
+      <!-- Logo -->
+      <div data-nx-reveal>
+        <a href="{% url 'home' %}" class="nx-footer-logo" aria-label="Back to top">
+          <div class="nx-footer-logo-glow" aria-hidden="true"></div>
+          <span class="nx-footer-logo-text">
+            <span class="nx-footer-bracket">&lt;</span>Suyog<span class="nx-footer-bracket">/&gt;</span>
+            <span class="nx-footer-cursor" aria-hidden="true"></span>
+          </span>
         </a>
-        <p class="footer-tagline">Django developer building things that work.</p>
       </div>
-      <div class="footer-nav" data-aos="fade-up" data-aos-delay="100">
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'about' %}">About</a>
-        <a href="{% url 'skills' %}">Skills</a>
-        <a href="{% url 'project' %}">Projects</a>
-        <a href="{% url 'contact' %}">Contact</a>
+
+      <!-- Subtitle -->
+      <p class="nx-footer-subtitle" data-nx-reveal>
+        Backend Developer <span>&bull;</span> Django <span>&bull;</span> DRF <span>&bull;</span> APIs
+      </p>
+
+      <!-- Description -->
+      <p class="nx-footer-desc" data-nx-reveal>
+        Building scalable backend systems,<br>
+        REST APIs, authentication,<br>
+        and modern web applications.<br><br>
+        <strong>Always learning. Always building.</strong>
+      </p>
+
+      <!-- Social Icons -->
+      <div class="nx-footer-socials" data-nx-reveal>
+        <a href="https://github.com/suyog123-hub" target="_blank" rel="noopener" class="nx-footer-social" title="GitHub" aria-label="GitHub profile">
+          <i class="bi bi-github" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/suyog-khadka-018985323/" target="_blank" rel="noopener" class="nx-footer-social" title="LinkedIn" aria-label="LinkedIn profile">
+          <i class="bi bi-linkedin" aria-hidden="true"></i>
+        </a>
+        <a href="mailto:ksuyog697@gmail.com" class="nx-footer-social" title="Email" aria-label="Send email">
+          <i class="bi bi-envelope" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="nx-footer-social" title="Instagram" aria-label="Instagram profile">
+          <i class="bi bi-instagram" aria-hidden="true"></i>
+        </a>
+        <a href="https://x.com/" target="_blank" rel="noopener" class="nx-footer-social" title="X / Twitter" aria-label="X profile">
+          <i class="bi bi-twitter-x" aria-hidden="true"></i>
+        </a>
       </div>
-      <div class="social-links" data-aos="fade-up" data-aos-delay="150">
-        <a href="https://github.com/suyog123-hub" target="_blank" title="GitHub"><i class="bi bi-github"></i></a>
-        <a href="https://www.linkedin.com/in/suyog-khadka-018985323/" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
-        <a href="mailto:ksuyog697@gmail.com" title="Email"><i class="bi bi-envelope"></i></a>
+
+      <!-- Quick Links -->
+      <nav class="nx-footer-links" data-nx-reveal aria-label="Footer navigation">
+        <a href="{% url 'home' %}" class="nx-footer-link">Home <span class="nx-link-arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="{% url 'about' %}" class="nx-footer-link">About <span class="nx-link-arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="{% url 'skills' %}" class="nx-footer-link">Skills <span class="nx-link-arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="{% url 'project' %}" class="nx-footer-link">Projects <span class="nx-link-arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="{% url 'testinomial' %}" class="nx-footer-link">Testimonials <span class="nx-link-arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="{% url 'contact' %}" class="nx-footer-link">Contact <span class="nx-link-arrow" aria-hidden="true">&rarr;</span></a>
+      </nav>
+
+      <!-- Animated Divider -->
+      <div class="nx-footer-divider" data-nx-reveal aria-hidden="true"></div>
+
+      <!-- Copyright -->
+      <div class="nx-footer-copyright" data-nx-reveal>
+        <p>&copy; 2026 <strong>Suyog Khadka</strong></p>
+        <p>Designed &amp; Developed with <span class="nx-footer-heart" aria-label="love">&hearts;</span></p>
+        <span class="nx-tech">Django + DRF + JavaScript</span>
       </div>
-      <div class="footer-divider"></div>
-      <div class="copyright text-center" data-aos="fade-up" data-aos-delay="200">
-        <p>&copy; 2026 <strong>Suyog Khadka</strong> &mdash; All Rights Reserved</p>
-        <p style="font-size:0.7rem;color:var(--text-muted);margin-top:4px;">
-          Built with <i class="bi bi-heart-fill" style="color:var(--accent);font-size:10px;"></i> using Django &amp; Bootstrap
-        </p>
-      </div>
+
     </div>
   </footer>
 
-  <button class="btt" id="bttBtn"><i class="bi bi-arrow-up"></i></button>
+  <!-- Back To Top (Progress Ring) -->
+  <button class="nx-btt" id="nxBtt" aria-label="Back to top">
+    <svg viewBox="0 0 52 52" aria-hidden="true">
+      <defs>
+        <linearGradient id="bttGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#4F7DFF"/>
+          <stop offset="100%" stop-color="#8B5CF6"/>
+        </linearGradient>
+      </defs>
+      <circle class="nx-btt-track" cx="26" cy="26" r="24"/>
+      <circle class="nx-btt-progress" id="nxBttProgress" cx="26" cy="26" r="24"/>
+    </svg>
+    <i class="bi bi-arrow-up nx-btt-arrow" aria-hidden="true"></i>
+  </button>
+
+  <!-- Three.js Particle System (all pages) -->
+  <script>
+  (function(){
+    if(typeof THREE === 'undefined') return;
+    const canvas = document.getElementById('three-particles');
+    if(!canvas) return;
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+
+    const COUNT = 200;
+    const geo = new THREE.BufferGeometry();
+    const pos = new Float32Array(COUNT * 3);
+    const cols = new Float32Array(COUNT * 3);
+    const palette = [[0.424,0.388,1],[0.659,0.333,0.969],[0.937,0.451,0.6],[0.6,0.6,0.7]];
+    for(let i=0;i<COUNT;i++){
+      pos[i*3]=(Math.random()-0.5)*18;
+      pos[i*3+1]=(Math.random()-0.5)*18;
+      pos[i*3+2]=(Math.random()-0.5)*10;
+      const c=palette[Math.floor(Math.random()*palette.length)];
+      cols[i*3]=c[0];cols[i*3+1]=c[1];cols[i*3+2]=c[2];
+    }
+    geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+    geo.setAttribute('color',new THREE.BufferAttribute(cols,3));
+    const mat=new THREE.PointsMaterial({size:0.035,vertexColors:true,transparent:true,opacity:0.45,blending:THREE.AdditiveBlending,depthWrite:false});
+    const pts=new THREE.Points(geo,mat);
+    scene.add(pts);
+
+    // Connected sphere nodes
+    const sph=new THREE.Group();
+    const nc=30,rad=2.0,nps=[];
+    const ng=new THREE.SphereGeometry(0.03,8,8);
+    for(let i=0;i<nc;i++){
+      const phi=Math.acos(2*Math.random()-1),theta=2*Math.PI*Math.random();
+      const r=rad*Math.cbrt(Math.random());
+      const x=r*Math.sin(phi)*Math.cos(theta),y=r*Math.sin(phi)*Math.sin(theta),z=r*Math.cos(phi);
+      nps.push([x,y,z]);
+      const m=new THREE.Mesh(ng,new THREE.MeshBasicMaterial({color:0x6c63ff,transparent:true,opacity:0.6}));
+      m.position.set(x,y,z);m.material.color.setHSL(0.7+Math.random()*0.1,0.65,0.55);
+      sph.add(m);
+    }
+    const lm=new THREE.LineBasicMaterial({color:0x6c63ff,transparent:true,opacity:0.08});
+    for(let i=0;i<nc;i++)for(let j=i+1;j<nc;j++){
+      const d=Math.sqrt((nps[i][0]-nps[j][0])**2+(nps[i][1]-nps[j][1])**2+(nps[i][2]-nps[j][2])**2);
+      if(d<1.1){sph.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(...nps[i]),new THREE.Vector3(...nps[j])]),lm.clone()));}
+    }
+    scene.add(sph);
+
+    let mx=0,my=0,t=0;
+    document.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-0.5)*2;my=(e.clientY/window.innerHeight-0.5)*2;});
+    function animate(){
+      requestAnimationFrame(animate);t+=0.002;
+      const p=pts.geometry.attributes.position.array;
+      for(let i=0;i<COUNT;i++){p[i*3+1]+=Math.sin(t+i*0.1)*0.0008;p[i*3]+=Math.cos(t+i*0.05)*0.0004;}
+      pts.geometry.attributes.position.needsUpdate=true;
+      pts.rotation.y=t*0.08;pts.rotation.x=my*0.04;
+      sph.rotation.y=t*0.25+mx*0.2;sph.rotation.x=t*0.15+my*0.15;
+      camera.position.x+=(mx*0.2-camera.position.x)*0.015;
+      camera.position.y+=(-my*0.2-camera.position.y)*0.015;
+      camera.lookAt(0,0,0);
+      renderer.render(scene,camera);
+    }
+    animate();
+    window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight);});
+  })();
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+    /* 3D Particle Background */
+    (function(){
+      const canvas = document.getElementById('bg3d');
+      const ctx = canvas.getContext('2d');
+      let w, h, particles = [], mouse = {x: null, y: null};
+      const PARTICLE_COUNT = 50;
+      const CONNECTION_DIST = 180;
+      const MOUSE_RADIUS = 250;
+
+      function resize(){
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+      document.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+
+      class Particle {
+        constructor(){
+          this.x = Math.random() * w;
+          this.y = Math.random() * h;
+          this.z = Math.random() * 40 + 10;
+          this.vx = (Math.random() - 0.5) * 1.2;
+          this.vy = (Math.random() - 0.5) * 1.2;
+          this.vz = (Math.random() - 0.5) * 0.6;
+          this.r = Math.random() * 4 + 2.5;
+        }
+        update(){
+          this.x += this.vx;
+          this.y += this.vy;
+          this.z += this.vz;
+          if(this.x < 0 || this.x > w) this.vx *= -1;
+          if(this.y < 0 || this.y > h) this.vy *= -1;
+          if(this.z < 5 || this.z > 50) this.vz *= -1;
+
+          if(mouse.x !== null){
+            const dx = mouse.x - this.x, dy = mouse.y - this.y;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if(dist < MOUSE_RADIUS){
+              const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * 0.08;
+              this.vx -= dx * force * 0.015;
+              this.vy -= dy * force * 0.015;
+            }
+          }
+
+          this.vx *= 0.995;
+          this.vy *= 0.995;
+        }
+        draw(){
+          const opacity = 0.15 + (this.z / 50) * 0.35;
+          const size = this.r * (0.6 + this.z / 60);
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(200,205,215,${opacity})`;
+          ctx.fill();
+        }
+      }
+
+      for(let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+
+      function connectParticles(){
+        for(let i = 0; i < particles.length; i++){
+          for(let j = i + 1; j < particles.length; j++){
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dz = Math.abs(particles[i].z - particles[j].z);
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if(dist < CONNECTION_DIST){
+              const opacity = (1 - dist / CONNECTION_DIST) * 0.12 * (1 - dz / 60);
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = `rgba(200,205,215,${opacity})`;
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        }
+      }
+
+      function animate(){
+        ctx.clearRect(0, 0, w, h);
+        particles.forEach(p => { p.update(); p.draw(); });
+        connectParticles();
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+
     AOS.init({ duration: 800, offset: 100, easing: 'ease-in-out', once: true, disable: window.innerWidth < 768 });
 
     window.addEventListener('load', () => {
-      setTimeout(() => document.getElementById('loader').classList.add('hide'), 900);
+      setTimeout(() => document.getElementById('loader').classList.add('hide'), 300);
     });
 
-    window.addEventListener('scroll', () => {
-      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 60);
-    });
+    /* Smooth page transitions on nav clicks */
+    (function(){
+      const overlay = document.getElementById('pageTransition');
+      document.querySelectorAll('a[href]').forEach(link => {
+        link.addEventListener('click', function(e){
+          const href = this.getAttribute('href');
+          if(!href || href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:') || href.startsWith('http') || this.target === '_blank') return;
+          if(href === window.location.pathname) return;
+          e.preventDefault();
+          overlay.classList.add('active');
+          setTimeout(() => { window.location.href = href; }, 160);
+        });
+      });
+    })();
 
-    const bttBtn = document.getElementById('bttBtn');
-    window.addEventListener('scroll', () => bttBtn.classList.toggle('show', window.scrollY > 400));
-    bttBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    /* ================================================================
+       PREMIUM NAVBAR — Scroll / Sticky / Hide-Show
+       ================================================================ */
+    (function(){
+      const header = document.getElementById('header');
+      let lastScroll = 0;
+      const UP_THRESHOLD = 10;
+      const DOWN_THRESHOLD = 10;
 
-    const currentPath = window.location.pathname;
-    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
-      if (link.getAttribute('href') === currentPath) link.classList.add('active-page');
-    });
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        header.classList.toggle('scrolled', y > 60);
+
+        if(y < 80) {
+          header.classList.remove('hidden');
+          lastScroll = y;
+          return;
+        }
+        if(y - lastScroll > DOWN_THRESHOLD) {
+          header.classList.add('hidden');
+        } else if(lastScroll - y > UP_THRESHOLD) {
+          header.classList.remove('hidden');
+        }
+        lastScroll = y;
+      }, { passive: true });
+    })();
+
+    /* --- Active link detection --- */
+    (function(){
+      const currentPath = window.location.pathname;
+      document.querySelectorAll('.nx-link, .nx-mobile-link').forEach(link => {
+        if(link.getAttribute('href') === currentPath) link.classList.add('active');
+      });
+    })();
+
+    /* --- Hover indicator for desktop nav --- */
+    (function(){
+      const nav = document.querySelector('.nx-nav');
+      const indicator = document.querySelector('.nx-hover-indicator');
+      const links = document.querySelectorAll('.nx-link');
+      if(!nav || !indicator || !links.length) return;
+
+      function moveIndicator(el) {
+        const navRect = nav.getBoundingClientRect();
+        const elRect = el.getBoundingClientRect();
+        indicator.style.left = (elRect.left - navRect.left) + 'px';
+        indicator.style.width = elRect.width + 'px';
+        indicator.classList.add('visible');
+      }
+      function hideIndicator() {
+        indicator.classList.remove('visible');
+      }
+
+      links.forEach(link => {
+        link.addEventListener('mouseenter', () => moveIndicator(link));
+        link.addEventListener('focus', () => moveIndicator(link));
+      });
+      nav.addEventListener('mouseleave', hideIndicator);
+    })();
+
+    /* --- Magnetic effect on desktop nav links --- */
+    (function(){
+      if(window.innerWidth < 950) return;
+      document.querySelectorAll('.nx-link').forEach(el => {
+        el.addEventListener('mousemove', e => {
+          const r = el.getBoundingClientRect();
+          const x = e.clientX - r.left - r.width / 2;
+          const y = e.clientY - r.top - r.height / 2;
+          el.style.transform = `translate(${x * 0.15}px, ${y * 0.15 - 3}px)`;
+        });
+        el.addEventListener('mouseleave', () => {
+          el.style.transform = '';
+        });
+      });
+      document.querySelectorAll('.nx-social').forEach(el => {
+        el.addEventListener('mousemove', e => {
+          const r = el.getBoundingClientRect();
+          const x = e.clientX - r.left - r.width / 2;
+          const y = e.clientY - r.top - r.height / 2;
+          el.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+        });
+        el.addEventListener('mouseleave', () => {
+          el.style.transform = '';
+        });
+      });
+    })();
+
+    /* --- Subtle navbar tilt on mouse --- */
+    (function(){
+      if(window.innerWidth < 950) return;
+      const inner = document.querySelector('.nx-header-inner');
+      if(!inner) return;
+      document.addEventListener('mousemove', e => {
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight / 2;
+        const rotY = ((e.clientX - cx) / cx) * 0.3;
+        const rotX = ((e.clientY - cy) / cy) * -0.15;
+        inner.style.transform = `perspective(1200px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+      });
+      document.addEventListener('mouseleave', () => {
+        inner.style.transform = '';
+      });
+    })();
+
+    /* --- Mobile Menu Toggle --- */
+    (function(){
+      const hamburger = document.getElementById('nxHamburger');
+      const mobile = document.getElementById('nxMobile');
+      const bg = document.getElementById('nxMobileBg');
+      if(!hamburger || !mobile) return;
+
+      function openMenu() {
+        hamburger.classList.add('open');
+        hamburger.setAttribute('aria-expanded', 'true');
+        hamburger.setAttribute('aria-label', 'Close menu');
+        mobile.classList.add('open');
+        document.body.classList.add('nx-menu-open');
+        /* trap focus */
+        const firstLink = mobile.querySelector('.nx-mobile-link');
+        if(firstLink) setTimeout(() => firstLink.focus(), 350);
+      }
+      function closeMenu() {
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'Open menu');
+        mobile.classList.remove('open');
+        document.body.classList.remove('nx-menu-open');
+        hamburger.focus();
+      }
+
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.contains('open') ? closeMenu() : openMenu();
+      });
+      bg.addEventListener('click', closeMenu);
+
+      /* Close on Escape */
+      document.addEventListener('keydown', e => {
+        if(e.key === 'Escape' && mobile.classList.contains('open')) closeMenu();
+      });
+
+      /* Close on resize to desktop */
+      window.addEventListener('resize', () => {
+        if(window.innerWidth > 950 && mobile.classList.contains('open')) closeMenu();
+      });
+    })();
+
+    /* ================================================================
+       BACK TO TOP
+       ================================================================ */
+    /* ================================================================
+       BACK TO TOP — Progress Ring
+       ================================================================ */
+    (function(){
+      const btn = document.getElementById('nxBtt');
+      const prog = document.getElementById('nxBttProgress');
+      const circumference = 2 * Math.PI * 24; // r=24
+
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        const docH = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = Math.min(y / docH, 1);
+        const offset = circumference - (pct * circumference);
+        prog.style.strokeDashoffset = offset;
+        btn.classList.toggle('show', y > 400);
+      }, { passive: true });
+
+      btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    })();
+
+    /* ================================================================
+       FOOTER — Scroll Reveal
+       ================================================================ */
+    (function(){
+      const items = document.querySelectorAll('.nx-footer [data-nx-reveal]');
+      if(!items.length) return;
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } });
+      }, { threshold: 0.15 });
+      items.forEach(el => obs.observe(el));
+    })();
+
+    /* ================================================================
+       FOOTER — Mouse Parallax / Tilt
+       ================================================================ */
+    (function(){
+      const footer = document.querySelector('.nx-footer');
+      if(!footer) return;
+      footer.addEventListener('mousemove', e => {
+        const r = footer.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        footer.style.setProperty('--mx', x + 'deg');
+        footer.style.setProperty('--my', y + 'deg');
+      });
+      footer.addEventListener('mouseleave', () => {
+        footer.style.setProperty('--mx', '0deg');
+        footer.style.setProperty('--my', '0deg');
+      });
+    })();
+
+    /* ================================================================
+       FOOTER — Social Icon Ripple
+       ================================================================ */
+    (function(){
+      document.querySelectorAll('.nx-footer-social').forEach(btn => {
+        btn.addEventListener('click', function(e){
+          const r = this.getBoundingClientRect();
+          const rip = document.createElement('span');
+          rip.className = 'nx-ripple';
+          const size = Math.max(r.width, r.height);
+          rip.style.width = rip.style.height = size + 'px';
+          rip.style.left = (e.clientX - r.left - size / 2) + 'px';
+          rip.style.top = (e.clientY - r.top - size / 2) + 'px';
+          this.appendChild(rip);
+          setTimeout(() => rip.remove(), 600);
+        });
+      });
+    })();
+
+    /* ================================================================
+       FOOTER — Floating Particles
+       ================================================================ */
+    (function(){
+      const canvas = document.getElementById('footerParticles');
+      if(!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w, h;
+      const particles = [];
+      const COUNT = 35;
+
+      function resize(){
+        const footer = canvas.parentElement;
+        w = canvas.width = footer.offsetWidth;
+        h = canvas.height = footer.offsetHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      class P {
+        constructor(){
+          this.x = Math.random() * w;
+          this.y = Math.random() * h;
+          this.r = Math.random() * 2 + 0.5;
+          this.vx = (Math.random() - 0.5) * 0.3;
+          this.vy = (Math.random() - 0.5) * 0.3;
+          this.alpha = Math.random() * 0.25 + 0.05;
+          this.color = Math.random() > 0.5 ? '79,125,255' : '139,92,246';
+        }
+        update(){
+          this.x += this.vx;
+          this.y += this.vy;
+          if(this.x < 0) this.x = w;
+          if(this.x > w) this.x = 0;
+          if(this.y < 0) this.y = h;
+          if(this.y > h) this.y = 0;
+        }
+        draw(){
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${this.color},${this.alpha})`;
+          ctx.fill();
+        }
+      }
+      for(let i = 0; i < COUNT; i++) particles.push(new P());
+
+      function loop(){
+        ctx.clearRect(0, 0, w, h);
+        particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(loop);
+      }
+      loop();
+    })();
+
+    /* Custom Cursor */
+    (function(){
+      if(window.innerWidth < 1024) return;
+      const dot = document.getElementById('cursor-dot');
+      const ring = document.getElementById('cursor-ring');
+      const glow = document.getElementById('cursor-glow');
+      let mx = 0, my = 0, rx = 0, ry = 0, gx = 0, gy = 0;
+
+      document.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        glow.classList.add('active');
+      });
+      document.addEventListener('mouseleave', () => glow.classList.remove('active'));
+
+      function animate(){
+        rx += (mx - rx) * 0.15;
+        ry += (my - ry) * 0.15;
+        gx += (mx - gx) * 0.06;
+        gy += (my - gy) * 0.06;
+        dot.style.left = mx + 'px';
+        dot.style.top = my + 'px';
+        ring.style.left = rx + 'px';
+        ring.style.top = ry + 'px';
+        glow.style.left = gx + 'px';
+        glow.style.top = gy + 'px';
+        requestAnimationFrame(animate);
+      }
+      animate();
+
+      document.querySelectorAll('a, button, .card-base, .btn-glow, .btn-ghost, .nx-link, .nx-social, .nx-hamburger, .nx-footer-social, .nx-footer-link, .nx-btt').forEach(el => {
+        el.addEventListener('mouseenter', () => { dot.classList.add('hover'); ring.classList.add('hover'); glow.classList.add('accent'); });
+        el.addEventListener('mouseleave', () => { dot.classList.remove('hover'); ring.classList.remove('hover'); glow.classList.remove('accent'); });
+      });
+
+      /* Blob parallax on mouse */
+      const blobs = document.querySelectorAll('.blob');
+      document.addEventListener('mousemove', e => {
+        const cx = (e.clientX / window.innerWidth - 0.5) * 2;
+        const cy = (e.clientY / window.innerHeight - 0.5) * 2;
+        blobs.forEach((b, i) => {
+          const depth = (i + 1) * 12;
+          b.style.transform = `translate(${cx * depth}px, ${cy * depth}px)`;
+        });
+      });
+    })();
   </script>
 
   {% if messages %}

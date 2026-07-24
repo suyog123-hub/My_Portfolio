@@ -2,145 +2,166 @@
 {% load static %}
 {% block content %}
 
-<!-- Contact Section -->
-<section class="page-section">
-  <div class="container">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <div class="section-label" data-aos="fade-up">
-      <span class="label-text gradient-text">$</span>
-      <span class="label-text" style="color:var(--text-secondary);">Contact</span>
-      <div class="label-line"></div>
+<canvas id="contactBg"></canvas>
+
+<div class="cst-cursor-dot" id="cstDot"></div>
+<div class="cst-cursor-ring" id="cstRing"></div>
+<div class="cst-cursor-glow" id="cstGlow"></div>
+
+<div class="cst-orb cst-orb-1"></div>
+<div class="cst-orb cst-orb-2"></div>
+<div class="cst-orb cst-orb-3"></div>
+
+<div class="cst-grid"></div>
+
+<section class="cst" id="contactSection">
+  <div class="cst-wrap">
+
+    <div class="cst-hero">
+      <div class="cst-hero-badge" data-cst-a="fade">
+        <span class="cst-hero-badge-dot"></span>
+        <span class="cst-hero-badge-num">06</span>
+        <span class="cst-hero-badge-text">Contact</span>
+        <span class="cst-hero-badge-line"></span>
+      </div>
+      <h1 class="cst-hero-title" id="cstTitle">
+        <span class="cst-hero-title-inner">Get In Touch</span>
+      </h1>
+      <div class="cst-hero-underline" id="cstUnderline"></div>
+      <p class="cst-hero-sub" data-cst-a="fade">
+        Have a project in mind? Let's build something extraordinary together.
+      </p>
     </div>
-    <div class="section-prompt" data-aos="fade-up" data-aos-delay="100">
-      <span class="prompt">$</span>
-      <span>python send_message.py</span>
-    </div>
 
-    <div class="row g-5">
+    <div class="cst-grid-2">
 
-      <!-- Left: Info -->
-      <div class="col-lg-5" data-aos="fade-right" data-aos-delay="200">
-        <div class="terminal-window" style="height:100%;">
-          <div class="terminal-bar">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-            <span class="terminal-label">contact.py</span>
+      <!-- LEFT: Info Card -->
+      <div class="cst-card cst-card-info" data-cst-a="slide-left">
+        <div class="cst-card-glow"></div>
+        <div class="cst-card-inner">
+          <div class="cst-info-header">
+            <span class="cst-info-badge">
+              <i class="fa-solid fa-paper-plane"></i>
+              Contact Info
+            </span>
+            <h2 class="cst-info-title">Let's Work Together</h2>
+            <p class="cst-info-desc">Always open to freelance projects, full-time opportunities, and exciting collaborations.</p>
           </div>
-          <div class="terminal-body" style="padding:28px;">
-            <div style="margin-bottom:24px;">
-              <span style="display:inline-block;background:rgba(61,99,255,0.1);border:1px solid rgba(61,99,255,0.2);color:var(--accent-light);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">
-                <i class="bi bi-telephone-fill me-1"></i> Contact Info
-              </span>
-              <h3 style="font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--text);margin-bottom:8px;">Let's Work Together</h3>
-              <p style="color:var(--text-secondary);line-height:1.7;margin:0;font-size:14px;">Always open to freelance projects, full-time opportunities, and exciting collaborations.</p>
-            </div>
 
-            <div style="height:1px;background:linear-gradient(90deg,var(--accent),transparent);margin-bottom:2rem;opacity:0.3;"></div>
+          <div class="cst-info-divider"></div>
 
-            <!-- Location -->
-            <div style="display:flex;gap:16px;margin-bottom:24px;" data-aos="fade-up" data-aos-delay="300">
-              <div style="width:50px;height:50px;border-radius:12px;background:rgba(61,99,255,0.1);border:1px solid rgba(61,99,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                <i class="bi bi-geo-alt-fill" style="color:var(--accent);"></i>
-              </div>
+          <div class="cst-info-items">
+            <a href="mailto:ksuyog697@gmail.com" class="cst-info-item">
+              <div class="cst-info-icon"><i class="fa-solid fa-envelope"></i></div>
               <div>
-                <h4 style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;">Location</h4>
-                <p style="color:var(--text-secondary);margin:0;font-size:14px;">Lalitpur, Imadol<br>Nepal</p>
+                <span class="cst-info-label">Email</span>
+                <span class="cst-info-value">ksuyog697@gmail.com</span>
               </div>
-            </div>
-
-            <!-- Phone -->
-            <div style="display:flex;gap:16px;margin-bottom:24px;" data-aos="fade-up" data-aos-delay="350">
-              <div style="width:50px;height:50px;border-radius:12px;background:rgba(61,99,255,0.1);border:1px solid rgba(61,99,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                <i class="bi bi-telephone-fill" style="color:var(--accent);"></i>
-              </div>
+            </a>
+            <a href="tel:9766387873" class="cst-info-item">
+              <div class="cst-info-icon"><i class="fa-solid fa-phone"></i></div>
               <div>
-                <h4 style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;">Phone</h4>
-                <a href="tel:9766387873" style="color:var(--text-secondary);text-decoration:none;font-size:14px;">+977 9766387873</a>
+                <span class="cst-info-label">Phone</span>
+                <span class="cst-info-value">+977 9766387873</span>
               </div>
-            </div>
-
-            <!-- Email -->
-            <div style="display:flex;gap:16px;margin-bottom:24px;" data-aos="fade-up" data-aos-delay="400">
-              <div style="width:50px;height:50px;border-radius:12px;background:rgba(61,99,255,0.1);border:1px solid rgba(61,99,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                <i class="bi bi-envelope-fill" style="color:var(--accent);"></i>
-              </div>
+            </a>
+            <div class="cst-info-item">
+              <div class="cst-info-icon"><i class="fa-solid fa-location-dot"></i></div>
               <div>
-                <h4 style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;">Email</h4>
-                <a href="mailto:ksuyog697@gmail.com" style="color:var(--text-secondary);text-decoration:none;font-size:14px;">ksuyog697@gmail.com</a>
+                <span class="cst-info-label">Location</span>
+                <span class="cst-info-value">Lalitpur, Imadol, Nepal</span>
               </div>
             </div>
+          </div>
 
-            <!-- Availability -->
-            <div style="padding:14px 18px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:12px;display:flex;align-items:center;gap:12px;">
-              <span style="width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 8px rgba(34,197,94,0.7);flex-shrink:0;animation:availPulse 2s infinite;"></span>
-              <p style="margin:0;color:var(--text-secondary);font-size:14px;font-weight:500;">Currently available for new projects</p>
-            </div>
+          <div class="cst-availability">
+            <span class="cst-avail-dot"></span>
+            <span class="cst-avail-text">Available for new projects</span>
+          </div>
+
+          <div class="cst-socials">
+            <a href="https://github.com/suyog123-hub" target="_blank" class="cst-social magnetic"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/suyog-khadka-018985323/" target="_blank" class="cst-social magnetic"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="mailto:ksuyog697@gmail.com" class="cst-social magnetic"><i class="fa-solid fa-envelope"></i></a>
           </div>
         </div>
       </div>
 
-      <!-- Right: Form -->
-      <div class="col-lg-7" data-aos="fade-left" data-aos-delay="200">
-        <div class="terminal-window" style="height:100%;">
-          <div class="terminal-bar">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-            <span class="terminal-label">send_message.py</span>
+      <!-- RIGHT: Form Card -->
+      <div class="cst-card cst-card-form" data-cst-a="slide-right">
+        <div class="cst-card-glow"></div>
+        <div class="cst-card-inner">
+          <div class="cst-form-header">
+            <span class="cst-form-badge">
+              <i class="fa-solid fa-pen-nib"></i>
+              Send Message
+            </span>
+            <h2 class="cst-form-title">Drop Me a Line</h2>
+            <p class="cst-form-sub">I'll get back to you within 24 hours.</p>
           </div>
-          <div style="padding:28px;">
-            <div style="margin-bottom:24px;">
-              <span style="display:inline-block;background:rgba(61,99,255,0.1);border:1px solid rgba(61,99,255,0.2);color:var(--accent-light);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;">
-                <i class="bi bi-send-fill me-1"></i> Send Message
-              </span>
-              <h3 style="font-family:var(--font-display);font-size:1.6rem;font-weight:800;color:var(--text);margin-bottom:8px;">Drop Me a Line</h3>
-              <p style="color:var(--text-secondary);margin:0;font-size:14px;">I'll get back to you within 24 hours.</p>
-            </div>
 
-            <div style="height:1px;background:linear-gradient(90deg,var(--accent),transparent);margin-bottom:2rem;opacity:0.3;"></div>
-
-            <form action="{% url 'contact' %}" method="post">
-              {% csrf_token %}
-              <div class="row gy-4">
-                <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
-                  <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Name</label>
-                  <input type="text" name="name" required placeholder="Your Name"
-                    style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-body);font-size:14px;transition:all var(--t);outline:none;">
-                </div>
-                <div class="col-md-6" data-aos="fade-up" data-aos-delay="350">
-                  <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Email</label>
-                  <input type="email" name="email" required placeholder="your@email.com"
-                    style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-body);font-size:14px;transition:all var(--t);outline:none;">
-                </div>
-                <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
-                  <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Phone</label>
-                  <input type="number" name="phone" required placeholder="+977 XXXXXXXXXX"
-                    style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-body);font-size:14px;transition:all var(--t);outline:none;">
-                </div>
-                <div class="col-md-6" data-aos="fade-up" data-aos-delay="420">
-                  <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Address</label>
-                  <input type="text" name="address" required placeholder="Your Address"
-                    style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-body);font-size:14px;transition:all var(--t);outline:none;">
-                </div>
-                <div class="col-12" data-aos="fade-up" data-aos-delay="450">
-                  <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Subject</label>
-                  <input type="text" name="subject" required placeholder="Project Inquiry"
-                    style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-body);font-size:14px;transition:all var(--t);outline:none;">
-                </div>
-                <div class="col-12" data-aos="fade-up" data-aos-delay="480">
-                  <label style="display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;">Message</label>
-                  <textarea name="message" required rows="5" placeholder="Your message..."
-                    style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:var(--font-body);font-size:14px;transition:all var(--t);outline:none;resize:none;"></textarea>
-                </div>
-                <div class="col-12 text-center" data-aos="fade-up" data-aos-delay="500">
-                  <button type="submit" class="btn-glow" style="min-width:220px;justify-content:center;">
-                    <i class="bi bi-send-fill"></i> Send Message
-                  </button>
+          <form action="{% url 'contact' %}" method="post" id="cstForm" class="cst-form">
+            {% csrf_token %}
+            <div class="cst-form-row">
+              <div class="cst-field" data-cst-a="field">
+                <label>Name</label>
+                <div class="cst-input-wrap">
+                  <i class="fa-solid fa-user"></i>
+                  <input type="text" name="name" required placeholder="John Doe">
                 </div>
               </div>
-            </form>
-          </div>
+              <div class="cst-field" data-cst-a="field">
+                <label>Email</label>
+                <div class="cst-input-wrap">
+                  <i class="fa-solid fa-envelope"></i>
+                  <input type="email" name="email" required placeholder="john@example.com">
+                </div>
+              </div>
+            </div>
+
+            <div class="cst-field" data-cst-a="field">
+              <label>Subject</label>
+              <div class="cst-input-wrap">
+                <i class="fa-solid fa-tag"></i>
+                <input type="text" name="subject" required placeholder="Project Inquiry">
+              </div>
+            </div>
+
+            <div class="cst-field" data-cst-a="field">
+              <label>Message</label>
+              <div class="cst-input-wrap cst-textarea-wrap">
+                <i class="fa-solid fa-comment"></i>
+                <textarea name="message" required rows="4" placeholder="Tell me about your project..."></textarea>
+              </div>
+            </div>
+
+            <input type="hidden" name="phone" value="">
+            <input type="hidden" name="address" value="">
+
+            <button type="submit" class="cst-submit magnetic" id="cstSubmitBtn">
+              <span class="cst-submit-ripple"></span>
+              <span class="cst-submit-content" id="cstSubmitContent">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span>Send Message</span>
+              </span>
+              <span class="cst-submit-loading" id="cstSubmitLoading">
+                <span class="cst-spinner"></span>
+                <span>Sending...</span>
+              </span>
+              <span class="cst-submit-success" id="cstSubmitSuccess">
+                <svg class="cst-checkmark" viewBox="0 0 52 52">
+                  <circle class="cst-checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                  <path class="cst-checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+                <span>Sent!</span>
+              </span>
+            </button>
+          </form>
         </div>
       </div>
 
@@ -149,15 +170,753 @@
 </section>
 
 <style>
-@keyframes availPulse {
-  0%,100% { box-shadow: 0 0 8px rgba(34,197,94,0.7); }
-  50% { box-shadow: 0 0 18px rgba(34,197,94,1); }
+/* ================================================================
+   CONTACT — CYBERPUNK PREMIUM DESIGN
+   ================================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ================================================================
+   CANVAS
+   ================================================================ */
+#contactBg {
+  position: fixed; top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 0; pointer-events: none;
 }
-input:focus, textarea:focus {
-  border-color: var(--accent) !important;
-  box-shadow: 0 0 0 3px rgba(61,99,255,0.15) !important;
-  background: rgba(255,255,255,0.05) !important;
+
+/* ================================================================
+   CURSOR
+   ================================================================ */
+.cst-cursor-dot {
+  position: fixed; top: 0; left: 0;
+  width: 6px; height: 6px;
+  background: #fff; border-radius: 50%;
+  pointer-events: none; z-index: 100000;
+  transform: translate(-50%,-50%);
+  transition: width 0.3s, height 0.3s, background 0.3s;
+  mix-blend-mode: difference;
+}
+.cst-cursor-dot.hover { width: 10px; height: 10px; background: #4F7DFF; }
+.cst-cursor-ring {
+  position: fixed; top: 0; left: 0;
+  width: 40px; height: 40px;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  border-radius: 50%;
+  pointer-events: none; z-index: 99999;
+  transform: translate(-50%,-50%);
+  transition: width 0.4s cubic-bezier(0.16,1,0.3,1), height 0.4s cubic-bezier(0.16,1,0.3,1), border-color 0.3s, background 0.3s;
+}
+.cst-cursor-ring.hover { width: 60px; height: 60px; border-color: rgba(79,125,255,0.4); background: rgba(79,125,255,0.04); }
+.cst-cursor-glow {
+  position: fixed; top: 0; left: 0;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(79,125,255,0.05) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none; z-index: 0;
+  transform: translate(-50%,-50%);
+}
+.cst-cursor-glow.hover { background: radial-gradient(circle, rgba(79,125,255,0.1) 0%, transparent 70%); }
+@media (max-width:1024px) { .cst-cursor-dot,.cst-cursor-ring,.cst-cursor-glow { display:none!important; } }
+
+/* ================================================================
+   FLOATING ORBS
+   ================================================================ */
+.cst-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+}
+.cst-orb-1 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(79,125,255,0.3), transparent);
+  top: 10%; left: -5%;
+  animation: cstOrbFloat1 12s ease-in-out infinite;
+}
+.cst-orb-2 {
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, rgba(139,92,246,0.25), transparent);
+  bottom: 10%; right: -5%;
+  animation: cstOrbFloat2 14s ease-in-out infinite;
+}
+.cst-orb-3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(79,125,255,0.15), transparent);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  animation: cstOrbFloat3 10s ease-in-out infinite;
+}
+@keyframes cstOrbFloat1 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(30px,20px); } }
+@keyframes cstOrbFloat2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-25px,-15px); } }
+@keyframes cstOrbFloat3 { 0%,100% { transform: translate(-50%,-50%) scale(1); } 50% { transform: translate(-50%,-50%) scale(1.15); } }
+
+/* ================================================================
+   GRID OVERLAY
+   ================================================================ */
+.cst-grid {
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(79,125,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,125,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
+
+/* ================================================================
+   SECTION
+   ================================================================ */
+.cst {
+  position: relative; z-index: 1;
+  padding: 120px 0 100px;
+  min-height: 100vh;
+  color: #e8e8f0;
+}
+.cst-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ================================================================
+   HERO
+   ================================================================ */
+.cst-hero {
+  text-align: center;
+  margin-bottom: 72px;
+}
+.cst-hero-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-bottom: 20px;
+  padding: 6px 16px 6px 12px;
+  background: rgba(79,125,255,0.08);
+  border: 1px solid rgba(79,125,255,0.15);
+  border-radius: 100px;
+  font-size: 12px;
+}
+.cst-hero-badge-dot {
+  width: 6px; height: 6px;
+  background: #4F7DFF; border-radius: 50%;
+  animation: cstPulseDot 2s ease-in-out infinite;
+}
+@keyframes cstPulseDot {
+  0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(79,125,255,0.4); }
+  50% { opacity:0.7; box-shadow: 0 0 0 6px rgba(79,125,255,0); }
+}
+.cst-hero-badge-num {
+  font-family: 'SF Mono','Fira Code','Courier New',monospace;
+  font-weight: 700; color: #6B8FFF !important; font-size: 11px;
+}
+.cst-hero-badge-text {
+  font-family: 'Inter','Segoe UI',system-ui,sans-serif;
+  font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: #a0a0b8 !important;
+}
+.cst-hero-badge-line {
+  width: 40px; height: 1px;
+  background: linear-gradient(90deg, rgba(79,125,255,0.4), transparent);
+}
+.cst-hero-title {
+  font-family: 'Inter','Segoe UI',system-ui,sans-serif;
+  font-size: clamp(2.5rem,7vw,4.5rem);
+  font-weight: 800; letter-spacing: -2px; line-height: 1.05;
+  margin-bottom: 4px;
+}
+.cst-hero-title-inner {
+  background: linear-gradient(135deg, #ffffff 0%, #c8c8e0 50%, #9090a8 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.cst-hero-underline {
+  width: 0; height: 3px;
+  background: linear-gradient(90deg, #4F7DFF, #8B5CF6, #4F7DFF);
+  background-size: 200% 100%;
+  animation: cstGradShift 3s ease-in-out infinite;
+  border-radius: 3px; margin: 12px auto 20px;
+  transition: width 1.4s cubic-bezier(0.16,1,0.3,1);
+}
+.cst-hero-underline.grown { width: 120px; }
+@keyframes cstGradShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+.cst-hero-sub {
+  font-family: 'Inter','Segoe UI',system-ui,sans-serif;
+  font-size: 1.1rem; color: #9898b0 !important;
+  max-width: 480px; margin: 0 auto; line-height: 1.7;
+}
+
+/* ================================================================
+   2-COLUMN GRID
+   ================================================================ */
+.cst-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .cst-grid-2 { grid-template-columns: 1fr; }
+}
+
+/* ================================================================
+   GLASS CARD
+   ================================================================ */
+.cst-card {
+  position: relative;
+  border-radius: 24px;
+}
+.cst-card-glow {
+  position: absolute; inset: -1px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, rgba(79,125,255,0.25), rgba(139,92,246,0.12), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.5s;
+  z-index: 0;
+}
+.cst-card:hover .cst-card-glow { opacity: 1; }
+.cst-card-inner {
+  position: relative;
+  border-radius: 24px;
+  background: rgba(12,12,22,0.75);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  padding: 36px;
+  z-index: 1;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4), 0 0 40px rgba(79,125,255,0.06);
+}
+.cst-card:hover .cst-card-inner {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 50px rgba(0,0,0,0.5), 0 0 50px rgba(79,125,255,0.1);
+}
+
+/* ================================================================
+   LEFT: INFO CARD
+   ================================================================ */
+.cst-info-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px;
+  background: rgba(79,125,255,0.12) !important;
+  border: 1px solid rgba(79,125,255,0.2) !important;
+  border-radius: 100px;
+  font-family: 'Inter','Segoe UI',system-ui,sans-serif;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: #6B8FFF !important;
+  margin-bottom: 20px;
+}
+.cst-info-title {
+  font-family: 'Inter','Segoe UI',system-ui,sans-serif;
+  font-size: 38px !important; font-weight: 700 !important;
+  color: #ffffff !important;
+  margin-bottom: 12px;
+  line-height: 1.15;
+}
+.cst-info-desc {
+  font-family: 'Inter','Segoe UI',system-ui,sans-serif;
+  font-size: 15px !important; color: #9CA3AF !important;
+  line-height: 1.7;
+}
+.cst-info-divider {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(79,125,255,0.3), transparent);
+  margin: 32px 0;
+  opacity: 0.5;
+}
+.cst-info-items {
+  display: flex; flex-direction: column; gap: 24px;
+  margin-bottom: 32px;
+}
+.cst-info-item {
+  display: flex; align-items: center; gap: 16px;
+  text-decoration: none !important;
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.02) !important;
+  border: 1px solid rgba(255,255,255,0.04) !important;
+  transition: all 0.3s;
+}
+.cst-info-item:hover {
+  background: rgba(79,125,255,0.06) !important;
+  border-color: rgba(79,125,255,0.15) !important;
+  transform: translateY(-2px);
+}
+.cst-info-icon {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  background: rgba(79,125,255,0.12) !important;
+  border: 1px solid rgba(79,125,255,0.18) !important;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: #4F7DFF !important;
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+.cst-info-item:hover .cst-info-icon {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(79,125,255,0.2);
+}
+.cst-info-label {
+  display: block;
+  font-family: 'Inter','Segoe UI',system-ui,sans-serif;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: #9CA3AF !important;
+  margin-bottom: 4px;
+}
+.cst-info-value {
+  display: block;
+  font-family: 'Inter','Segoe UI',system-ui,sans-serif;
+  font-size: 14px; font-weight: 600;
+  color: #F8FAFC !important;
+}
+
+.cst-availability {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 18px;
+  background: rgba(34,197,94,0.12) !important;
+  border: 1px solid rgba(34,197,94,0.3) !important;
+  border-radius: 999px;
+  margin-bottom: 28px;
+}
+.cst-avail-dot {
+  width: 9px; height: 9px;
+  background: #4ADE80 !important; border-radius: 50%;
+  box-shadow: 0 0 8px rgba(34,197,94,0.6);
+  animation: cstAvailPulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes cstAvailPulse {
+  0%,100% { box-shadow: 0 0 8px rgba(34,197,94,0.6); }
+  50% { box-shadow: 0 0 18px rgba(74,222,128,0.9); }
+}
+.cst-avail-text {
+  font-family: 'Inter','Segoe UI',system-ui,sans-serif;
+  font-size: 13px; font-weight: 600;
+  color: #4ADE80 !important;
+}
+
+.cst-socials {
+  display: flex; gap: 12px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.cst-social {
+  width: 46px; height: 46px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  display: flex; align-items: center; justify-content: center;
+  color: #9CA3AF !important;
+  text-decoration: none !important;
+  font-size: 18px;
+  transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.cst-social:hover {
+  background: rgba(79,125,255,0.1) !important;
+  border-color: rgba(79,125,255,0.3) !important;
+  color: #6B8FFF !important;
+  transform: translateY(-4px) rotate(3deg) scale(1.08);
+  box-shadow: 0 8px 24px rgba(79,125,255,0.15);
+}
+
+/* ================================================================
+   RIGHT: FORM CARD
+   ================================================================ */
+.cst-form-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 14px;
+  background: rgba(79,125,255,0.1);
+  border: 1px solid rgba(79,125,255,0.18);
+  border-radius: 100px;
+  font-family: 'Inter','Segoe UI',system-ui,sans-serif;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: #6B8FFF !important;
+  margin-bottom: 16px;
+}
+.cst-form-title {
+  font-family: 'Inter','Segoe UI',system-ui,sans-serif;
+  font-size: 1.5rem; font-weight: 800; color: #ffffff !important;
+  margin-bottom: 4px;
+}
+.cst-form-sub {
+  font-family: 'Inter','Segoe UI',system-ui,sans-serif;
+  font-size: 0.85rem; color: #9090a8 !important;
+  margin-bottom: 28px;
+}
+
+.cst-form-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+@media (max-width: 480px) { .cst-form-row { grid-template-columns: 1fr; } }
+
+.cst-field {
+  margin-bottom: 18px;
+}
+.cst-field label {
+  display: block;
+  font-family: 'Inter','Segoe UI',system-ui,sans-serif;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: #707090 !important;
+  margin-bottom: 6px;
+}
+.cst-input-wrap {
+  position: relative;
+  display: flex; align-items: center;
+}
+.cst-input-wrap i {
+  position: absolute; left: 14px;
+  font-size: 13px;
+  color: #606080 !important;
+  transition: color 0.3s;
+  pointer-events: none;
+  z-index: 1;
+}
+.cst-input-wrap input,
+.cst-input-wrap textarea {
+  width: 100%;
+  padding: 12px 14px 12px 40px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  color: #e0e0f0;
+  font-family: 'Inter','Segoe UI',system-ui,sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.cst-input-wrap textarea { resize: none; min-height: 100px; }
+.cst-input-wrap input::placeholder,
+.cst-input-wrap textarea::placeholder {
+  color: rgba(255,255,255,0.35);
+}
+.cst-input-wrap:focus-within i { color: #4F7DFF; }
+.cst-input-wrap input:focus,
+.cst-input-wrap textarea:focus {
+  border-color: #4F7DFF;
+  box-shadow: 0 0 20px rgba(79,125,255,0.15);
+  background: rgba(255,255,255,0.05);
+}
+.cst-textarea-wrap { align-items: flex-start; }
+.cst-textarea-wrap i { top: 14px; }
+
+/* ================================================================
+   SUBMIT BUTTON
+   ================================================================ */
+.cst-submit {
+  position: relative;
+  width: 100%;
+  padding: 14px 28px;
+  border-radius: 14px;
+  border: none;
+  font-family: 'Inter','Segoe UI',system-ui,sans-serif;
+  font-size: 14px; font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+  background: linear-gradient(135deg, #4F7DFF, #6B5FFF, #8B5CF6);
+  background-size: 200% 200%;
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(79,125,255,0.3);
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+  margin-top: 8px;
+}
+.cst-submit:hover {
+  background-position: 100% 0;
+  box-shadow: 0 8px 32px rgba(79,125,255,0.45);
+  transform: translateY(-2px);
+}
+.cst-submit-ripple {
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at var(--rx,50%) var(--ry,50%), rgba(255,255,255,0.3) 0%, transparent 60%);
+  opacity: 0; transition: opacity 0.4s;
+  pointer-events: none;
+}
+.cst-submit:active .cst-submit-ripple { opacity: 1; }
+
+/* Shine sweep */
+.cst-submit::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.15) 48%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.15) 52%, transparent 65%);
+  transform: translateX(-150%);
+  transition: transform 0.7s;
+}
+.cst-submit:hover::before { transform: translateX(150%); }
+
+.cst-submit-content,
+.cst-submit-loading,
+.cst-submit-success {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.cst-submit-loading,
+.cst-submit-success {
+  display: none;
+}
+.cst-submit.loading .cst-submit-content { display: none; }
+.cst-submit.loading .cst-submit-loading { display: flex; }
+.cst-submit.success .cst-submit-content { display: none; }
+.cst-submit.success .cst-submit-success { display: flex; }
+.cst-submit.success {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  box-shadow: 0 4px 20px rgba(34,197,94,0.3);
+}
+
+/* Spinner */
+.cst-spinner {
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: cstSpin 0.6s linear infinite;
+}
+@keyframes cstSpin { to { transform: rotate(360deg); } }
+
+/* Checkmark */
+.cst-checkmark {
+  width: 22px; height: 22px;
+}
+.cst-checkmark-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke: #fff;
+  animation: cstCheckStroke 0.6s cubic-bezier(0.65,0,0.45,1) forwards;
+}
+.cst-checkmark-check {
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  stroke-width: 3;
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: cstCheckStroke 0.3s cubic-bezier(0.65,0,0.45,1) 0.4s forwards;
+}
+@keyframes cstCheckStroke { to { stroke-dashoffset: 0; } }
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 768px) {
+  .cst { padding: 80px 0 60px; }
+  .cst-wrap { padding: 0 16px; }
+  .cst-hero { margin-bottom: 48px; }
+  .cst-hero-title { letter-spacing: -1px; }
+  .cst-card-inner { padding: 28px 24px; }
+  .cst-grid-2 { gap: 20px; }
+  .cst-orb-1, .cst-orb-2, .cst-orb-3 { opacity: 0.2; }
 }
 </style>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ================================================================
+     THREE.JS — PARTICLES + LINES
+     ================================================================ */
+  const canvas = document.getElementById('contactBg');
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth/window.innerHeight, 0.1, 1000);
+  camera.position.z = 5;
+
+  // Particles
+  const N = 180;
+  const geo = new THREE.BufferGeometry();
+  const pos = new Float32Array(N*3);
+  const col = new Float32Array(N*3);
+  const palette = [[0.31,0.49,1],[0.55,0.36,0.96],[0.35,0.55,0.9],[0.25,0.45,0.85]];
+  for(let i=0;i<N;i++){
+    pos[i*3]=(Math.random()-.5)*20;
+    pos[i*3+1]=(Math.random()-.5)*20;
+    pos[i*3+2]=(Math.random()-.5)*10;
+    const c=palette[~~(Math.random()*palette.length)];
+    col[i*3]=c[0];col[i*3+1]=c[1];col[i*3+2]=c[2];
+  }
+  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  geo.setAttribute('color',new THREE.BufferAttribute(col,3));
+  const mat=new THREE.PointsMaterial({size:.028,vertexColors:true,transparent:true,opacity:.45,blending:THREE.AdditiveBlending,depthWrite:false});
+  const pts=new THREE.Points(geo,mat);
+  scene.add(pts);
+
+  // Connecting lines
+  const lineGroup = new THREE.Group();
+  const lineMat = new THREE.LineBasicMaterial({color:0x4F7DFF,transparent:true,opacity:0.04});
+  scene.add(lineGroup);
+
+  function updateLines(){
+    while(lineGroup.children.length>0) lineGroup.remove(lineGroup.children[0]);
+    const p=pts.geometry.attributes.position.array;
+    for(let i=0;i<N;i++){
+      for(let j=i+1;j<N;j++){
+        const dx=p[i*3]-p[j*3],dy=p[i*3+1]-p[j*3+1],dz=p[i*3+2]-p[j*3+2];
+        if(Math.sqrt(dx*dx+dy*dy+dz*dz)<1.8){
+          const g=new THREE.BufferGeometry().setFromPoints([
+            new THREE.Vector3(p[i*3],p[i*3+1],p[i*3+2]),
+            new THREE.Vector3(p[j*3],p[j*3+1],p[j*3+2])
+          ]);
+          lineGroup.add(new THREE.Line(g,lineMat.clone()));
+        }
+      }
+    }
+  }
+  updateLines();
+
+  // Lights
+  const pl1=new THREE.PointLight(0x4F7DFF,1.5,15);
+  pl1.position.set(-3,2,3);
+  scene.add(pl1);
+  const pl2=new THREE.PointLight(0x8B5CF6,1.2,12);
+  pl2.position.set(3,-2,2);
+  scene.add(pl2);
+
+  let mx=0,my=0,tmx=0,tmy=0;
+  document.addEventListener('mousemove',e=>{tmx=(e.clientX/innerWidth-.5)*2;tmy=(e.clientY/innerHeight-.5)*2;});
+
+  let time=0, lineFrame=0;
+  function anim(){
+    requestAnimationFrame(anim);
+    time+=0.003;
+    mx+=(tmx-mx)*0.03;
+    my+=(tmy-my)*0.03;
+
+    const p=pts.geometry.attributes.position.array;
+    for(let i=0;i<N;i++){
+      p[i*3+1]+=Math.sin(time+i*.1)*.0003;
+      p[i*3]+=Math.cos(time*.7+i*.05)*.0002;
+    }
+    pts.geometry.attributes.position.needsUpdate=true;
+    pts.rotation.y=time*.04;
+    pts.rotation.x=my*.015;
+
+    lineFrame++;
+    if(lineFrame%60===0) updateLines();
+
+    camera.position.x+=(mx*.15-camera.position.x)*.01;
+    camera.position.y+=(-my*.15-camera.position.y)*.01;
+    camera.lookAt(0,0,0);
+
+    pl1.position.x=-3+mx;pl1.position.y=2+my;
+    pl2.position.x=3-mx;pl2.position.y=-2-my;
+
+    renderer.render(scene,camera);
+  }
+  anim();
+
+  window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+
+  /* ================================================================
+     CURSOR
+     ================================================================ */
+  const dot=document.getElementById('cstDot');
+  const ring=document.getElementById('cstRing');
+  const glow=document.getElementById('cstGlow');
+  let cx=0,cy=0,rx=0,ry=0,gx=0,gy=0;
+  if(innerWidth>1024){
+    document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;});
+    function animC(){
+      dot.style.left=cx+'px';dot.style.top=cy+'px';
+      rx+=(cx-rx)*.12;ry+=(cy-ry)*.12;
+      ring.style.left=rx+'px';ring.style.top=ry+'px';
+      gx+=(cx-gx)*.06;gy+=(cy-gy)*.06;
+      glow.style.left=gx+'px';glow.style.top=gy+'px';
+      requestAnimationFrame(animC);
+    }
+    animC();
+    document.querySelectorAll('a,button,.cst-card,[data-cst-tilt]').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{dot.classList.add('hover');ring.classList.add('hover');glow.classList.add('hover');});
+      el.addEventListener('mouseleave',()=>{dot.classList.remove('hover');ring.classList.remove('hover');glow.classList.remove('hover');});
+    });
+  }
+
+  /* ================================================================
+     MAGNETIC BUTTONS
+     ================================================================ */
+  document.querySelectorAll('.magnetic').forEach(btn=>{
+    btn.addEventListener('mousemove',e=>{
+      const r=btn.getBoundingClientRect();
+      btn.style.transform='translate('+(e.clientX-r.left-r.width/2)*.15+'px,'+(e.clientY-r.top-r.height/2)*.15+'px)';
+    });
+    btn.addEventListener('mouseleave',()=>{btn.style.transform='translate(0,0)';});
+  });
+
+  /* ================================================================
+     GSAP ANIMATIONS
+     ================================================================ */
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Title letter reveal
+  const titleInner = document.querySelector('.cst-hero-title-inner');
+  if(titleInner){
+    const text=titleInner.textContent;
+    titleInner.innerHTML='';
+    [...text].forEach((ch,i)=>{
+      const span=document.createElement('span');
+      span.textContent=ch===' '?'\u00a0':ch;
+      span.style.cssText='display:inline-block;opacity:0;filter:blur(12px);transform:translateY(24px) rotateX(20deg);transition:all 0.6s cubic-bezier(0.16,1,0.3,1);transition-delay:'+(i*35)+'ms;';
+      titleInner.appendChild(span);
+    });
+    setTimeout(()=>{
+      titleInner.querySelectorAll('span').forEach(s=>{s.style.opacity='1';s.style.filter='blur(0)';s.style.transform='translateY(0) rotateX(0)';});
+      setTimeout(()=>{document.getElementById('cstUnderline').classList.add('grown');},text.length*35+400);
+    },500);
+  }
+
+  gsap.from('.cst-hero-badge',{y:20,opacity:0,duration:0.8,delay:0.2,ease:'power3.out'});
+  gsap.from('.cst-hero-sub',{y:20,opacity:0,duration:0.8,delay:0.6,ease:'power3.out'});
+
+  // Cards slide in — no ScrollTrigger, fires on load
+  gsap.from('.cst-card-info',{
+    x:-80,opacity:0,duration:0.9,delay:0.4,ease:'power3.out'
+  });
+  gsap.from('.cst-card-form',{
+    x:80,opacity:0,duration:0.9,delay:0.6,ease:'power3.out'
+  });
+
+  // Staggered field animations
+  gsap.from('.cst-field',{
+    y:20,opacity:0,duration:0.5,stagger:0.08,delay:1,ease:'power2.out'
+  });
+
+  /* ================================================================
+     RIPPLE
+     ================================================================ */
+  document.querySelector('.cst-submit').addEventListener('mousedown',function(e){
+    const r=this.getBoundingClientRect();
+    const rip=this.querySelector('.cst-submit-ripple');
+    if(rip){rip.style.setProperty('--rx',((e.clientX-r.left)/r.width*100)+'%');rip.style.setProperty('--ry',((e.clientY-r.top)/r.height*100)+'%');}
+  });
+
+  /* ================================================================
+     FORM SUBMIT — LOADING + SUCCESS
+     ================================================================ */
+  document.getElementById('cstForm').addEventListener('submit',function(e){
+    const btn=document.getElementById('cstSubmitBtn');
+    btn.classList.add('loading');
+    btn.disabled=true;
+
+    const fd=new FormData(this);
+    fetch(this.action,{
+      method:'POST',
+      body:fd,
+      headers:{'X-Requested-With':'XMLHttpRequest'}
+    }).then(()=>{
+      btn.classList.remove('loading');
+      btn.classList.add('success');
+      setTimeout(()=>{btn.classList.remove('success');btn.disabled=false;},3000);
+    }).catch(()=>{
+      btn.classList.remove('loading');
+      btn.disabled=false;
+    });
+  });
+
+})();
+</script>
 
 {% endblock content %}

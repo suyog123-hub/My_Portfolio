@@ -2,101 +2,1394 @@
 {% load static %}
 {% block content %}
 
-<!-- Projects Section -->
-<section class="page-section">
-  <div class="container">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <div class="section-label" data-aos="fade-up">
-      <span class="label-text gradient-text">$</span>
-      <span class="label-text" style="color:var(--text-secondary);">Projects</span>
-      <div class="label-line"></div>
-    </div>
-    <div class="section-prompt" data-aos="fade-up" data-aos-delay="100">
-      <span class="prompt">$</span>
-      <span>ls projects/</span>
-    </div>
+<canvas id="projBg"></canvas>
 
-    <!-- Filters -->
-    <div style="text-align:center;margin-bottom:32px;" data-aos="fade-up" data-aos-delay="150">
-      <div style="display:inline-flex;flex-wrap:wrap;gap:10px;justify-content:center;">
-        <a href="{% url 'project' %}" style="text-decoration:none;">
-          <span style="padding:10px 22px;border-radius:25px;font-size:14px;font-weight:600;color:{% if not request.GET.category %}#fff{% else %}var(--text-secondary){% endif %};background:{% if not request.GET.category %}var(--gradient){% else %}var(--surface){% endif %};border:1px solid {% if not request.GET.category %}transparent{% else %}var(--border){% endif %};cursor:pointer;transition:all 0.3s;display:inline-flex;align-items:center;gap:6px;">
-            <i class="bi bi-grid"></i>All
-          </span>
-        </a>
-        {% for i in project_headings %}
-        <a href="?category={{ i.id }}" style="text-decoration:none;">
-          <span style="padding:10px 22px;border-radius:25px;font-size:14px;font-weight:600;color:{% if request.GET.category == i.id|stringformat:'s' %}#fff{% else %}var(--text-secondary){% endif %};background:{% if request.GET.category == i.id|stringformat:'s' %}var(--gradient){% else %}var(--surface){% endif %};border:1px solid {% if request.GET.category == i.id|stringformat:'s' %}transparent{% else %}var(--border){% endif %};cursor:pointer;transition:all 0.3s;display:inline-flex;align-items:center;">
-            {{ i.title }}
-          </span>
-        </a>
-        {% endfor %}
+<div id="projCursor" class="proj-cursor-dot"></div>
+<div id="projCursorRing" class="proj-cursor-ring"></div>
+<div id="projCursorGlow" class="proj-cursor-glow"></div>
+
+<section class="proj" id="projSection">
+
+  <div class="proj-wrap">
+
+    <div class="proj-hero">
+      <div class="proj-hero-badge" data-proj-a="fade">
+        <span class="proj-hero-badge-dot"></span>
+        <span class="proj-hero-badge-num">04</span>
+        <span class="proj-hero-badge-text">Portfolio</span>
+        <span class="proj-hero-badge-line"></span>
       </div>
+      <h1 class="proj-hero-title" id="projHeroTitle" data-proj-a="fade">
+        <span class="proj-hero-title-inner">FEATURED PROJECTS</span>
+      </h1>
+      <div class="proj-hero-underline" id="projHeroUnderline"></div>
+      <p class="proj-hero-sub" data-proj-a="fade">
+        Crafting scalable backend systems, REST APIs, and full-stack applications.
+      </p>
     </div>
 
-    <!-- Projects Grid -->
-    <div class="row gy-4">
-      {% for i in item %}
-      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-        <div class="card-base" style="padding:0;overflow:hidden;height:100%;display:flex;flex-direction:column;">
-
-          <!-- Image -->
-          <div style="position:relative;height:220px;overflow:hidden;">
-            <img src="{{ i.image.url }}" alt="{{ i.heading }}" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;">
-            <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(61,99,255,0.85),rgba(168,85,247,0.85));display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease;">
-              <a href="{{ i.url }}" target="_blank" style="width:52px;height:52px;border-radius:50%;background:rgba(5,5,7,0.9);display:flex;align-items:center;justify-content:center;color:var(--accent-light);font-size:22px;text-decoration:none;transition:all 0.3s;">
-                <i class="bi bi-arrow-up-right"></i>
-              </a>
-            </div>
-            <div style="position:absolute;top:14px;left:14px;background:rgba(5,5,7,0.85);border:1px solid rgba(61,99,255,0.25);border-radius:10px;padding:5px 12px;font-size:11px;font-weight:600;color:var(--accent-light);backdrop-filter:blur(8px);display:flex;align-items:center;gap:6px;">
-              <i class="bi bi-folder2"></i>{{ i.category }}
-            </div>
-          </div>
-
-          <!-- Content -->
-          <div style="padding:22px;flex:1;display:flex;flex-direction:column;">
-            <h4 style="font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px;">{{ i.heading }}</h4>
-            <p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:14px;flex:1;">{{ i.desc|truncatechars:120 }}</p>
-
-            <!-- Tags -->
-            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;">
-              {% for tag in i.language_used.split %}
-              <span style="font-size:11px;font-weight:600;padding:4px 12px;border-radius:12px;background:rgba(61,99,255,0.08);color:var(--accent-light);border:1px solid rgba(61,99,255,0.15);">{{ tag }}</span>
-              {% endfor %}
-            </div>
-
-            <!-- Footer -->
-            <div style="display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--border);">
-              <a href="{{ i.url }}" target="_blank" style="display:inline-flex;align-items:center;font-size:13px;font-weight:600;color:var(--accent-light);text-decoration:none;gap:4px;transition:gap 0.2s;">
-                View Project <i class="bi bi-arrow-right"></i>
-              </a>
-              <div style="display:flex;gap:5px;">
-                <span style="width:7px;height:7px;border-radius:50%;background:var(--accent);"></span>
-                <span style="width:7px;height:7px;border-radius:50%;background:rgba(61,99,255,0.3);"></span>
-                <span style="width:7px;height:7px;border-radius:50%;background:rgba(61,99,255,0.3);"></span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-      {% empty %}
-      <div class="col-12" data-aos="fade-up" data-aos-delay="200">
-        <div style="text-align:center;padding:60px 20px;background:var(--surface);border:2px dashed rgba(61,99,255,0.15);border-radius:20px;">
-          <div style="width:80px;height:80px;border-radius:20px;background:rgba(61,99,255,0.1);border:1px solid rgba(61,99,255,0.15);display:flex;align-items:center;justify-content:center;font-size:36px;color:var(--accent);margin:0 auto 20px;">
-            <i class="bi bi-folder2-open"></i>
-          </div>
-          <h4 style="font-size:22px;font-weight:700;color:var(--text);margin-bottom:8px;">Projects Coming Soon</h4>
-          <p style="font-size:15px;color:var(--text-muted);margin:0;">Stay tuned for upcoming projects.</p>
-          <a href="{% url 'contact' %}" class="btn-glow" style="margin-top:24px;">
-            <i class="bi bi-chat-dots"></i>Get In Touch
-          </a>
-        </div>
-      </div>
+    <div class="proj-filters" id="projFilters" data-proj-a="fade">
+      <button class="proj-filter active" data-filter="all">
+        <span class="proj-filter-glow"></span>
+        <span class="proj-filter-fill"></span>
+        <span class="proj-filter-text">All Projects</span>
+      </button>
+      {% for h in project_headings %}
+      <button class="proj-filter" data-filter="{{ h.id }}">
+        <span class="proj-filter-glow"></span>
+        <span class="proj-filter-fill"></span>
+        <span class="proj-filter-text">{{ h.title }}</span>
+      </button>
       {% endfor %}
     </div>
 
+    <div class="proj-grid" id="projGrid">
+      {% for i in item %}
+      <div class="proj-card" data-category="{{ i.category_id }}" data-proj-a="card" data-delay="{{ forloop.counter0 }}">
+        <div class="proj-card-3d" data-tilt>
+          <div class="proj-card-glow-border"></div>
+          <div class="proj-card-glass">
+
+            <div class="proj-card-img-wrap">
+              <div class="proj-card-browser">
+                <div class="proj-card-browser-bar">
+                  <div class="proj-card-browser-dots">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <div class="proj-card-browser-text">project-preview</div>
+                </div>
+                <img class="proj-card-img" src="{{ i.image.url }}" alt="{{ i.heading }}" loading="lazy">
+              </div>
+              <div class="proj-card-shine"></div>
+              <div class="proj-card-hover-overlay">
+                <div class="proj-card-hover-icon">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="proj-card-content">
+              <span class="proj-card-category">{{ i.category }}</span>
+              <h3 class="proj-card-title">{{ i.heading }}</h3>
+              <p class="proj-card-desc">{{ i.desc|truncatechars:150 }}</p>
+
+              <div class="proj-card-tags">
+                {% for tag in i.language_used.split %}
+                <span class="proj-card-tag">{{ tag }}</span>
+                {% endfor %}
+              </div>
+
+              <div class="proj-card-btns">
+                <button class="proj-btn proj-btn-primary magnetic" data-index="{{ forloop.counter0 }}" onclick="projOpenModal(this)">
+                  <span class="proj-btn-ripple"></span>
+                  <span class="proj-btn-text">View Details</span>
+                  <i class="fa-solid fa-arrow-right proj-btn-arrow"></i>
+                </button>
+                <a href="{{ i.url }}" target="_blank" class="proj-btn proj-btn-ghost magnetic">
+                  <span class="proj-btn-ripple"></span>
+                  <span class="proj-btn-text">Live Demo</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square proj-btn-arrow"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="proj-empty" data-proj-a="fade">
+        <div class="proj-empty-icon"><i class="fa-regular fa-folder-open"></i></div>
+        <h3>Projects Coming Soon</h3>
+        <p>Stay tuned for upcoming projects.</p>
+      </div>
+      {% endfor %}
+    </div>
   </div>
+
+  <div class="proj-modal" id="projModal">
+    <div class="proj-modal-bg" onclick="projCloseModal()"></div>
+    <div class="proj-modal-card" id="projModalCard">
+      <button class="proj-modal-close magnetic" onclick="projCloseModal()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="proj-modal-img" id="projModalImg"></div>
+      <div class="proj-modal-body" id="projModalBody"></div>
+    </div>
+  </div>
+
 </section>
+
+<style>
+/* ================================================================
+   PROJECTS PAGE — AWWWARDS-INSPIRED ULTRA-MODERN DESIGN
+   No Bootstrap. No Tailwind. No jQuery. Pure CSS.
+   ================================================================ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ================================================================
+   CANVAS BACKGROUND
+   ================================================================ */
+#projBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ================================================================
+   CUSTOM CURSOR
+   ================================================================ */
+.proj-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 100000;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s, height 0.3s, background 0.3s;
+  mix-blend-mode: difference;
+}
+.proj-cursor-dot.hovering {
+  width: 10px;
+  height: 10px;
+  background: #a78bfa;
+}
+.proj-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s cubic-bezier(0.16,1,0.3,1),
+              height 0.4s cubic-bezier(0.16,1,0.3,1),
+              border-color 0.3s,
+              background 0.3s;
+}
+.proj-cursor-ring.hovering {
+  width: 60px;
+  height: 60px;
+  border-color: rgba(167,139,250,0.4);
+  background: rgba(167,139,250,0.05);
+}
+.proj-cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(108,99,255,0.07) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  transition: background 0.5s;
+}
+.proj-cursor-glow.hovering {
+  background: radial-gradient(circle, rgba(167,139,250,0.12) 0%, transparent 70%);
+}
+@media (max-width: 1024px) {
+  .proj-cursor-dot, .proj-cursor-ring, .proj-cursor-glow { display: none !important; }
+}
+
+/* ================================================================
+   SECTION
+   ================================================================ */
+.proj {
+  position: relative;
+  z-index: 1;
+  padding: 120px 0 100px;
+  min-height: 100vh;
+  color: #e8e8f0;
+}
+.proj-wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ================================================================
+   HERO / INTRO
+   ================================================================ */
+.proj-hero {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.proj-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 6px 16px 6px 12px;
+  background: rgba(108,99,255,0.08);
+  border: 1px solid rgba(108,99,255,0.15);
+  border-radius: 100px;
+  font-size: 12px;
+}
+.proj-hero-badge-dot {
+  width: 6px;
+  height: 6px;
+  background: #6c63ff;
+  border-radius: 50%;
+  animation: projPulseDot 2s ease-in-out infinite;
+}
+@keyframes projPulseDot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(108,99,255,0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(108,99,255,0); }
+}
+.proj-hero-badge-num {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
+  font-weight: 700;
+  color: #7c73ff;
+  font-size: 11px;
+}
+.proj-hero-badge-text {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #a0a0b8;
+}
+.proj-hero-badge-line {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(108,99,255,0.4), transparent);
+}
+
+.proj-hero-title {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1.05;
+  margin-bottom: 4px;
+}
+.proj-hero-title-inner {
+  background: linear-gradient(135deg, #ffffff 0%, #c8c8e0 50%, #a0a0b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.proj-hero-underline {
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #6c63ff, #a855f7, #ec4899, #f97316);
+  background-size: 200% 100%;
+  animation: projGradientShift 3s ease-in-out infinite;
+  border-radius: 3px;
+  margin: 12px auto 20px;
+  transition: width 1.4s cubic-bezier(0.16,1,0.3,1);
+}
+.proj-hero-underline.grown {
+  width: 120px;
+}
+@keyframes projGradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.proj-hero-sub {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 1.1rem;
+  color: #9090a8;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ================================================================
+   FILTERS
+   ================================================================ */
+.proj-filters {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 56px;
+  flex-wrap: wrap;
+}
+.proj-filter {
+  position: relative;
+  padding: 10px 24px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(12,12,20,0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: #8888a0;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+  z-index: 1;
+}
+.proj-filter:hover {
+  border-color: rgba(108,99,255,0.25);
+  color: #d0d0e8;
+}
+.proj-filter.active {
+  border-color: transparent;
+  color: #ffffff;
+}
+.proj-filter-glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, #6c63ff, #a855f7);
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: -2;
+  filter: blur(8px);
+}
+.proj-filter.active .proj-filter-glow { opacity: 0.4; }
+.proj-filter-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: 100px;
+  background: linear-gradient(135deg, #6c63ff, #a855f7);
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: -1;
+}
+.proj-filter.active .proj-filter-fill { opacity: 1; }
+.proj-filter-text {
+  position: relative;
+  z-index: 1;
+}
+
+/* ================================================================
+   GRID
+   ================================================================ */
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+@media (max-width: 1024px) { .proj-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; } }
+@media (max-width: 640px) { .proj-grid { grid-template-columns: 1fr; gap: 20px; } }
+
+/* ================================================================
+   3D CARD
+   ================================================================ */
+.proj-card {
+  opacity: 0;
+  transform: translateY(40px);
+}
+.proj-card-3d {
+  position: relative;
+  border-radius: 24px;
+  transition: transform 0.1s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.proj-card-glow-border {
+  position: absolute;
+  inset: -1px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, rgba(108,99,255,0.3), rgba(168,85,247,0.15), rgba(236,72,153,0.1), transparent 50%);
+  opacity: 0;
+  transition: opacity 0.5s;
+  z-index: 0;
+}
+.proj-card-3d:hover .proj-card-glow-border {
+  opacity: 1;
+}
+.proj-card-glass {
+  position: relative;
+  border-radius: 24px;
+  background: rgba(12,12,22,0.8);
+  border: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
+  z-index: 1;
+  transition: border-color 0.4s, box-shadow 0.4s;
+}
+.proj-card-3d:hover .proj-card-glass {
+  border-color: rgba(108,99,255,0.15);
+  box-shadow: 0 25px 80px rgba(108,99,255,0.08), 0 0 0 1px rgba(108,99,255,0.06);
+}
+
+/* Floating animation */
+.proj-card {
+  animation: projCardFloat 7s ease-in-out infinite;
+}
+.proj-card:nth-child(2) { animation-delay: -1.5s; }
+.proj-card:nth-child(3) { animation-delay: -3s; }
+.proj-card:nth-child(4) { animation-delay: -0.8s; }
+.proj-card:nth-child(5) { animation-delay: -2.2s; }
+.proj-card:nth-child(6) { animation-delay: -4s; }
+@keyframes projCardFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.proj-card-3d:hover {
+  animation-play-state: paused;
+}
+
+/* ================================================================
+   CARD IMAGE
+   ================================================================ */
+.proj-card-img-wrap {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  background: #080810;
+}
+.proj-card-browser {
+  position: absolute;
+  inset: 12px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0a0a14;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.proj-card-browser-bar {
+  height: 32px;
+  background: rgba(15,15,25,0.95);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 8px;
+}
+.proj-card-browser-dots {
+  display: flex;
+  gap: 5px;
+}
+.proj-card-browser-dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.proj-card-browser-dots span:nth-child(1) { background: #ff5f57; }
+.proj-card-browser-dots span:nth-child(2) { background: #ffbd2e; }
+.proj-card-browser-dots span:nth-child(3) { background: #28c840; }
+.proj-card-browser-text {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 9px;
+  color: #555568;
+  margin-left: 4px;
+}
+
+.proj-card-img {
+  width: 100%;
+  height: calc(100% - 32px);
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.proj-card-3d:hover .proj-card-img {
+  transform: scale(1.1);
+}
+
+.proj-card-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255,255,255,0.03) 42%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0.03) 58%,
+    transparent 65%
+  );
+  transform: translateX(-150%);
+  transition: transform 0.8s cubic-bezier(0.16,1,0.3,1);
+  pointer-events: none;
+  z-index: 2;
+}
+.proj-card-3d:hover .proj-card-shine {
+  transform: translateX(150%);
+}
+
+.proj-card-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(108,99,255,0.8), rgba(168,85,247,0.8));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: 3;
+}
+.proj-card-3d:hover .proj-card-hover-overlay {
+  opacity: 1;
+}
+.proj-card-hover-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(5,5,10,0.7);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c0b0ff;
+  font-size: 18px;
+  transform: scale(0.6);
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.proj-card-3d:hover .proj-card-hover-icon {
+  transform: scale(1);
+}
+
+/* ================================================================
+   CARD CONTENT
+   ================================================================ */
+.proj-card-content {
+  padding: 24px 24px 28px;
+}
+.proj-card-category {
+  display: inline-block;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #b0a0ff;
+  background: rgba(108,99,255,0.12);
+  border: 1px solid rgba(108,99,255,0.2);
+  padding: 4px 12px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+}
+.proj-card-title {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.proj-card-desc {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: #8888a0;
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+
+/* Tags */
+.proj-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+.proj-card-tag {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(108,99,255,0.08);
+  border: 1px solid rgba(108,99,255,0.12);
+  color: #a090e0;
+  transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+  cursor: default;
+}
+.proj-card-tag:hover {
+  background: rgba(108,99,255,0.18);
+  border-color: rgba(108,99,255,0.35);
+  color: #d0c0ff;
+  transform: translateY(-3px) rotate(1.5deg) scale(1.05);
+  box-shadow: 0 6px 16px rgba(108,99,255,0.2);
+}
+
+/* Buttons */
+.proj-card-btns {
+  display: flex;
+  gap: 10px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.proj-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.proj-btn-arrow {
+  font-size: 10px;
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.proj-btn:hover .proj-btn-arrow {
+  transform: translateX(3px);
+}
+.proj-btn-ripple {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--ripple-x, 50%) var(--ripple-y, 50%), rgba(255,255,255,0.25) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+.proj-btn:active .proj-btn-ripple {
+  opacity: 1;
+}
+
+.proj-btn-primary {
+  background: linear-gradient(135deg, #6c63ff, #8b5cf6, #a855f7);
+  background-size: 200% 200%;
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(108,99,255,0.25);
+}
+.proj-btn-primary:hover {
+  background-position: 100% 0;
+  box-shadow: 0 8px 32px rgba(108,99,255,0.4);
+  transform: translateY(-2px);
+}
+.proj-btn-ghost {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #b0b0c8;
+}
+.proj-btn-ghost:hover {
+  border-color: rgba(108,99,255,0.3);
+  color: #d0c0ff;
+  background: rgba(108,99,255,0.08);
+  transform: translateY(-2px);
+}
+
+/* ================================================================
+   EMPTY STATE
+   ================================================================ */
+.proj-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 80px 32px;
+  background: rgba(12,12,22,0.6);
+  border: 1px dashed rgba(108,99,255,0.2);
+  border-radius: 24px;
+}
+.proj-empty-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  background: rgba(108,99,255,0.1);
+  border: 1px solid rgba(108,99,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: #6c63ff;
+  margin: 0 auto 20px;
+}
+.proj-empty h3 {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+.proj-empty p {
+  font-size: 14px;
+  color: #777790;
+}
+
+/* ================================================================
+   MODAL
+   ================================================================ */
+.proj-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s;
+}
+.proj-modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+.proj-modal-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(2,2,6,0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.proj-modal-card {
+  position: relative;
+  width: 92%;
+  max-width: 860px;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: #0a0a14;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 28px;
+  transform: scale(0.88) translateY(30px);
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(108,99,255,0.2) transparent;
+}
+.proj-modal.open .proj-modal-card {
+  transform: scale(1) translateY(0);
+}
+.proj-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #b0b0c8;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: all 0.3s;
+}
+.proj-modal-close:hover {
+  background: rgba(255,255,255,0.12);
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+.proj-modal-img {
+  width: 100%;
+  height: 340px;
+  overflow: hidden;
+  border-radius: 28px 28px 0 0;
+  background: #080810;
+}
+.proj-modal-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.proj-modal-body {
+  padding: 36px;
+}
+.proj-modal-body h2 {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+.proj-modal-body .proj-modal-category {
+  display: inline-block;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #b0a0ff;
+  background: rgba(108,99,255,0.12);
+  border: 1px solid rgba(108,99,255,0.2);
+  padding: 4px 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+.proj-modal-body p {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 0.9rem;
+  color: #9090a8;
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+.proj-modal-techs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.proj-modal-section {
+  margin-bottom: 24px;
+}
+.proj-modal-section h4 {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.proj-modal-section h4::before {
+  content: '';
+  width: 4px;
+  height: 16px;
+  background: linear-gradient(180deg, #6c63ff, #a855f7);
+  border-radius: 4px;
+}
+.proj-modal-section p,
+.proj-modal-section li {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: #9090a8;
+  line-height: 1.75;
+}
+.proj-modal-section ul {
+  list-style: none;
+  padding: 0;
+}
+.proj-modal-section li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 6px;
+}
+.proj-modal-section li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #6c63ff;
+}
+.proj-modal-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 768px) {
+  .proj { padding: 80px 0 60px; }
+  .proj-wrap { padding: 0 16px; }
+  .proj-hero { margin-bottom: 40px; }
+  .proj-hero-title { letter-spacing: -1px; }
+  .proj-hero-sub { font-size: 0.95rem; }
+  .proj-filters { gap: 6px; margin-bottom: 32px; }
+  .proj-filter { padding: 8px 16px; font-size: 12px; }
+  .proj-card-img-wrap { height: 180px; }
+  .proj-card-content { padding: 18px 18px 22px; }
+  .proj-card-btns { flex-direction: column; }
+  .proj-modal-card { width: 96%; border-radius: 20px; }
+  .proj-modal-img { height: 220px; border-radius: 20px 20px 0 0; }
+  .proj-modal-body { padding: 24px; }
+}
+</style>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ================================================================
+     THREE.JS — PREMIUM 3D BACKGROUND
+     ================================================================ */
+  const canvas = document.getElementById('projBg');
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 5;
+
+  // Floating particles
+  const particleCount = 300;
+  const particleGeo = new THREE.BufferGeometry();
+  const particlePos = new Float32Array(particleCount * 3);
+  const particleColors = new Float32Array(particleCount * 3);
+  const palette = [
+    [0.42, 0.39, 1.0],
+    [0.66, 0.33, 0.97],
+    [0.94, 0.45, 0.60],
+    [0.55, 0.55, 0.70],
+    [0.30, 0.60, 1.0]
+  ];
+  for (let i = 0; i < particleCount; i++) {
+    particlePos[i*3]   = (Math.random() - 0.5) * 24;
+    particlePos[i*3+1] = (Math.random() - 0.5) * 24;
+    particlePos[i*3+2] = (Math.random() - 0.5) * 12;
+    const c = palette[~~(Math.random() * palette.length)];
+    particleColors[i*3]   = c[0];
+    particleColors[i*3+1] = c[1];
+    particleColors[i*3+2] = c[2];
+  }
+  particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePos, 3));
+  particleGeo.setAttribute('color', new THREE.BufferAttribute(particleColors, 3));
+  const particleMat = new THREE.PointsMaterial({
+    size: 0.04,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.5,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+  const particles = new THREE.Points(particleGeo, particleMat);
+  scene.add(particles);
+
+  // 3D Stars
+  const starCount = 500;
+  const starGeo = new THREE.BufferGeometry();
+  const starPos = new Float32Array(starCount * 3);
+  for (let i = 0; i < starCount; i++) {
+    starPos[i*3]   = (Math.random() - 0.5) * 30;
+    starPos[i*3+1] = (Math.random() - 0.5) * 30;
+    starPos[i*3+2] = (Math.random() - 0.5) * 20 - 5;
+  }
+  starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+  const starMat = new THREE.PointsMaterial({
+    size: 0.015,
+    color: 0xffffff,
+    transparent: true,
+    opacity: 0.35,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+  const stars = new THREE.Points(starGeo, starMat);
+  scene.add(stars);
+
+  // Connected nodes
+  const nodeGroup = new THREE.Group();
+  const nodeCount = 40;
+  const nodeRadius = 2.8;
+  const nodePositions = [];
+  const nodeGeo = new THREE.SphereGeometry(0.03, 8, 8);
+  for (let i = 0; i < nodeCount; i++) {
+    const phi = Math.acos(2 * Math.random() - 1);
+    const theta = 2 * Math.PI * Math.random();
+    const r = nodeRadius * Math.cbrt(Math.random());
+    const x = r * Math.sin(phi) * Math.cos(theta);
+    const y = r * Math.sin(phi) * Math.sin(theta);
+    const z = r * Math.cos(phi);
+    nodePositions.push([x, y, z]);
+    const mesh = new THREE.Mesh(nodeGeo, new THREE.MeshBasicMaterial({
+      color: 0x6c63ff,
+      transparent: true,
+      opacity: 0.5
+    }));
+    mesh.position.set(x, y, z);
+    mesh.material.color.setHSL(0.7 + Math.random() * 0.12, 0.6, 0.55);
+    nodeGroup.add(mesh);
+  }
+  const lineMat = new THREE.LineBasicMaterial({
+    color: 0x6c63ff,
+    transparent: true,
+    opacity: 0.06
+  });
+  for (let i = 0; i < nodeCount; i++) {
+    for (let j = i + 1; j < nodeCount; j++) {
+      const dx = nodePositions[i][0] - nodePositions[j][0];
+      const dy = nodePositions[i][1] - nodePositions[j][1];
+      const dz = nodePositions[i][2] - nodePositions[j][2];
+      if (Math.sqrt(dx*dx + dy*dy + dz*dz) < 1.1) {
+        const lineGeo = new THREE.BufferGeometry().setFromPoints([
+          new THREE.Vector3(...nodePositions[i]),
+          new THREE.Vector3(...nodePositions[j])
+        ]);
+        nodeGroup.add(new THREE.Line(lineGeo, lineMat.clone()));
+      }
+    }
+  }
+  scene.add(nodeGroup);
+
+  // Floating geometric shapes
+  const shapes = [];
+  const shapeGeos = [
+    new THREE.OctahedronGeometry(0.15, 0),
+    new THREE.TetrahedronGeometry(0.12, 0),
+    new THREE.IcosahedronGeometry(0.1, 0),
+    new THREE.BoxGeometry(0.14, 0.14, 0.14)
+  ];
+  for (let i = 0; i < 8; i++) {
+    const geo = shapeGeos[~~(Math.random() * shapeGeos.length)];
+    const mat = new THREE.MeshBasicMaterial({
+      color: new THREE.Color().setHSL(0.7 + Math.random() * 0.1, 0.5, 0.4),
+      wireframe: true,
+      transparent: true,
+      opacity: 0.25
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(
+      (Math.random() - 0.5) * 8,
+      (Math.random() - 0.5) * 8,
+      (Math.random() - 0.5) * 4 - 2
+    );
+    mesh.userData = {
+      rotSpeed: { x: 0.002 + Math.random() * 0.005, y: 0.003 + Math.random() * 0.006 },
+      floatSpeed: 0.3 + Math.random() * 0.5,
+      floatAmp: 0.3 + Math.random() * 0.5,
+      baseY: mesh.position.y
+    };
+    shapes.push(mesh);
+    scene.add(mesh);
+  }
+
+  // Purple/blue glow lights
+  const ambientLight = new THREE.AmbientLight(0x222244, 0.3);
+  scene.add(ambientLight);
+  const pointLight1 = new THREE.PointLight(0x6c63ff, 1.5, 15);
+  pointLight1.position.set(-3, 2, 3);
+  scene.add(pointLight1);
+  const pointLight2 = new THREE.PointLight(0xa855f7, 1.2, 12);
+  pointLight2.position.set(3, -2, 2);
+  scene.add(pointLight2);
+
+  // Mouse parallax
+  let mouseX = 0, mouseY = 0, targetMX = 0, targetMY = 0;
+  document.addEventListener('mousemove', e => {
+    targetMX = (e.clientX / window.innerWidth - 0.5) * 2;
+    targetMY = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
+
+  // Animation loop
+  let time = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    time += 0.003;
+
+    mouseX += (targetMX - mouseX) * 0.03;
+    mouseY += (targetMY - mouseY) * 0.03;
+
+    // Particles drift
+    const pPos = particles.geometry.attributes.position.array;
+    for (let i = 0; i < particleCount; i++) {
+      pPos[i*3+1] += Math.sin(time + i * 0.1) * 0.0005;
+      pPos[i*3]   += Math.cos(time * 0.7 + i * 0.05) * 0.0003;
+    }
+    particles.geometry.attributes.position.needsUpdate = true;
+    particles.rotation.y = time * 0.06;
+    particles.rotation.x = mouseY * 0.02;
+
+    // Stars subtle drift
+    stars.rotation.y = time * 0.02;
+    stars.rotation.x = mouseY * 0.01;
+
+    // Nodes rotation
+    nodeGroup.rotation.y = time * 0.15 + mouseX * 0.12;
+    nodeGroup.rotation.x = time * 0.08 + mouseY * 0.1;
+
+    // Shapes
+    shapes.forEach(s => {
+      s.rotation.x += s.userData.rotSpeed.x;
+      s.rotation.y += s.userData.rotSpeed.y;
+      s.position.y = s.userData.baseY + Math.sin(time * s.userData.floatSpeed) * s.userData.floatAmp;
+    });
+
+    // Camera parallax
+    camera.position.x += (mouseX * 0.25 - camera.position.x) * 0.015;
+    camera.position.y += (-mouseY * 0.25 - camera.position.y) * 0.015;
+    camera.lookAt(0, 0, 0);
+
+    // Lights follow mouse
+    pointLight1.position.x = -3 + mouseX * 1.5;
+    pointLight1.position.y = 2 + mouseY * 1.5;
+    pointLight2.position.x = 3 - mouseX * 1.5;
+    pointLight2.position.y = -2 - mouseY * 1.5;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  /* ================================================================
+     CUSTOM CURSOR
+     ================================================================ */
+  const cursorDot = document.getElementById('projCursor');
+  const cursorRing = document.getElementById('projCursorRing');
+  const cursorGlow = document.getElementById('projCursorGlow');
+  let cx = 0, cy = 0, rx = 0, ry = 0, gx = 0, gy = 0;
+
+  if (window.innerWidth > 1024) {
+    document.addEventListener('mousemove', e => {
+      cx = e.clientX;
+      cy = e.clientY;
+    });
+    function animCursor() {
+      cursorDot.style.left = cx + 'px';
+      cursorDot.style.top = cy + 'px';
+      rx += (cx - rx) * 0.12;
+      ry += (cy - ry) * 0.12;
+      cursorRing.style.left = rx + 'px';
+      cursorRing.style.top = ry + 'px';
+      gx += (cx - gx) * 0.06;
+      gy += (cy - gy) * 0.06;
+      cursorGlow.style.left = gx + 'px';
+      cursorGlow.style.top = gy + 'px';
+      requestAnimationFrame(animCursor);
+    }
+    animCursor();
+
+    const hoverEls = document.querySelectorAll('a, button, .proj-card-3d, [data-tilt]');
+    hoverEls.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursorDot.classList.add('hovering');
+        cursorRing.classList.add('hovering');
+        cursorGlow.classList.add('hovering');
+      });
+      el.addEventListener('mouseleave', () => {
+        cursorDot.classList.remove('hovering');
+        cursorRing.classList.remove('hovering');
+        cursorGlow.classList.remove('hovering');
+      });
+    });
+  }
+
+  /* ================================================================
+     MAGNETIC BUTTONS
+     ================================================================ */
+  document.querySelectorAll('.magnetic').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate(0, 0)';
+    });
+  });
+
+  /* ================================================================
+     RIPPLE EFFECT
+     ================================================================ */
+  document.querySelectorAll('.proj-btn').forEach(btn => {
+    btn.addEventListener('mousedown', e => {
+      const rect = btn.getBoundingClientRect();
+      const ripple = btn.querySelector('.proj-btn-ripple');
+      if (ripple) {
+        ripple.style.setProperty('--ripple-x', ((e.clientX - rect.left) / rect.width * 100) + '%');
+        ripple.style.setProperty('--ripple-y', ((e.clientY - rect.top) / rect.height * 100) + '%');
+      }
+    });
+  });
+
+  /* ================================================================
+     GSAP — SCROLL ANIMATIONS
+     ================================================================ */
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Title letter-by-letter reveal
+  const titleInner = document.querySelector('.proj-hero-title-inner');
+  if (titleInner) {
+    const text = titleInner.textContent;
+    titleInner.innerHTML = '';
+    [...text].forEach((ch, i) => {
+      const span = document.createElement('span');
+      span.textContent = ch === ' ' ? '\u00a0' : ch;
+      span.style.cssText = `
+        display:inline-block;
+        opacity:0;
+        filter:blur(12px);
+        transform:translateY(24px) rotateX(20deg);
+        transition: all 0.6s cubic-bezier(0.16,1,0.3,1);
+        transition-delay: ${i * 30}ms;
+      `;
+      titleInner.appendChild(span);
+    });
+    setTimeout(() => {
+      titleInner.querySelectorAll('span').forEach(s => {
+        s.style.opacity = '1';
+        s.style.filter = 'blur(0)';
+        s.style.transform = 'translateY(0) rotateX(0)';
+      });
+      // Grow underline after title finishes
+      setTimeout(() => {
+        document.getElementById('projHeroUnderline').classList.add('grown');
+      }, text.length * 30 + 400);
+    }, 500);
+  }
+
+  // Badge fade in
+  gsap.from('.proj-hero-badge', {
+    y: 20, opacity: 0, duration: 0.8, delay: 0.2,
+    ease: 'power3.out'
+  });
+
+  // Subtitle fade in
+  gsap.from('.proj-hero-sub', {
+    y: 20, opacity: 0, duration: 0.8, delay: 0.6,
+    ease: 'power3.out'
+  });
+
+  // Filters fade in
+  gsap.from('.proj-filters', {
+    y: 20, opacity: 0, duration: 0.7, delay: 0.8,
+    ease: 'power3.out'
+  });
+
+  // Cards scroll-triggered entrance
+  const cards = document.querySelectorAll('.proj-card');
+  cards.forEach((card, i) => {
+    gsap.to(card, {
+      scrollTrigger: {
+        trigger: card,
+        start: 'top 88%',
+        toggleActions: 'play none none none'
+      },
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      delay: i * 0.08,
+      ease: 'power3.out'
+    });
+  });
+
+  /* ================================================================
+     3D CARD TILT
+     ================================================================ */
+  document.querySelectorAll('[data-tilt]').forEach(el => {
+    el.addEventListener('mousemove', e => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -8;
+      const rotateY = ((x - centerX) / centerX) * 8;
+      el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03,1.03,1.03)`;
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale3d(1,1,1)';
+      el.style.transition = 'transform 0.6s cubic-bezier(0.16,1,0.3,1)';
+      setTimeout(() => { el.style.transition = ''; }, 600);
+    });
+    el.addEventListener('mouseenter', () => {
+      el.style.transition = 'none';
+    });
+  });
+
+  /* ================================================================
+     FILTER SYSTEM
+     ================================================================ */
+  document.querySelectorAll('.proj-filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.proj-filter').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      const allCards = document.querySelectorAll('.proj-card');
+      allCards.forEach((card, i) => {
+        const show = filter === 'all' || card.dataset.category === filter;
+        gsap.to(card, {
+          opacity: show ? 1 : 0,
+          scale: show ? 1 : 0.85,
+          y: show ? 0 : 20,
+          duration: 0.4,
+          delay: show ? i * 0.04 : 0,
+          ease: 'power2.out',
+          onComplete: () => {
+            card.style.pointerEvents = show ? 'auto' : 'none';
+            card.style.position = show ? '' : 'absolute';
+            card.style.visibility = show ? '' : 'hidden';
+          }
+        });
+      });
+    });
+  });
+
+  /* ================================================================
+     MODAL
+     ================================================================ */
+  window._projProjects = [
+    {% for i in item %}
+    {
+      image: '{{ i.image.url }}',
+      title: '{{ i.heading }}',
+      desc: `{{ i.desc|escapejs }}`,
+      category: '{{ i.category }}',
+      url: '{{ i.url }}',
+      tags: '{{ i.language_used }}'.split(' ')
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ];
+
+  window.projOpenModal = function(btn) {
+    const idx = parseInt(btn.dataset.index);
+    const p = window._projProjects[idx];
+    const modal = document.getElementById('projModal');
+    document.getElementById('projModalImg').innerHTML = '<img src="' + p.image + '" alt="' + p.title + '">';
+    document.getElementById('projModalBody').innerHTML =
+      '<span class="proj-modal-category">' + p.category + '</span>' +
+      '<h2>' + p.title + '</h2>' +
+      '<p>' + p.desc + '</p>' +
+      '<div class="proj-modal-techs">' + p.tags.map(t => '<span class="proj-card-tag">' + t + '</span>').join('') + '</div>' +
+      '<div class="proj-modal-section"><h4>Overview</h4><p>' + p.desc + '</p></div>' +
+      '<div class="proj-modal-section"><h4>Key Features</h4><ul>' +
+      '<li>Clean architecture and scalable design</li>' +
+      '<li>RESTful API integration</li>' +
+      '<li>Responsive and modern UI</li>' +
+      '<li>Production-ready deployment</li>' +
+      '</ul></div>' +
+      '<div class="proj-modal-section"><h4>Challenges & Solutions</h4><ul>' +
+      '<li>Optimized database queries for performance</li>' +
+      '<li>Implemented robust error handling</li>' +
+      '<li>CI/CD pipeline for seamless deployments</li>' +
+      '</ul></div>' +
+      '<div class="proj-modal-links">' +
+      '<a href="' + p.url + '" target="_blank" class="proj-btn proj-btn-primary magnetic">' +
+      '<span class="proj-btn-ripple"></span>' +
+      '<span class="proj-btn-text">Live Demo</span>' +
+      '<i class="fa-solid fa-arrow-up-right-from-square proj-btn-arrow"></i></a>' +
+      '</div>';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    // Re-attach magnetic to modal buttons
+    modal.querySelectorAll('.magnetic').forEach(b => {
+      b.addEventListener('mousemove', e => {
+        const rect = b.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        b.style.transform = 'translate(' + (x*0.2) + 'px,' + (y*0.2) + 'px)';
+      });
+      b.addEventListener('mouseleave', () => { b.style.transform = 'translate(0,0)'; });
+    });
+  };
+
+  window.projCloseModal = function() {
+    document.getElementById('projModal').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') window.projCloseModal();
+  });
+
+})();
+</script>
 
 {% endblock content %}

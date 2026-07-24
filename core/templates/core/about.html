@@ -3,347 +3,1175 @@
 {% block content %}
 
 <!-- About Section -->
-<section class="page-section" style="padding-bottom:0;">
-  <div class="container">
+<section class="about-cyber" id="aboutSection">
 
-    <div class="section-label" data-aos="fade-up">
-      <span class="label-text gradient-text">About</span>
-      <div class="label-line"></div>
-    </div>
-    <div class="section-prompt" data-aos="fade-up" data-aos-delay="100">
-      <span class="prompt">$</span>
-      <span>cat about.md</span>
-    </div>
+  <!-- Ambient Glow Orbs -->
+  <div class="about-orb about-orb-1"></div>
+  <div class="about-orb about-orb-2"></div>
+  <div class="about-orb about-orb-3"></div>
 
-    <h2 style="font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:var(--text);line-height:1.2;margin-bottom:3rem;" data-aos="fade-up" data-aos-delay="150">
-      The person behind the production decisions.
-    </h2>
+  <div class="about-container">
 
-    <div class="row gy-5 align-items-start">
-
-      <!-- Left: Terminal Card -->
-      <div class="col-lg-5" data-aos="fade-right" data-aos-delay="200">
-        <div class="terminal-window" style="height:100%;">
-          <div class="terminal-bar">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-            <span class="terminal-label">about.py</span>
-          </div>
-          <div class="terminal-body" style="line-height:2.2;">
-            <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">whoami</span></div>
-            <div class="terminal-line output" style="padding-left:0;">django · python · backend</div>
-            <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">ls projects/</span></div>
-            <div class="terminal-line output" style="padding-left:0;">portfolio/ ecommerce/ api/ automation/</div>
-            <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">cat status.txt</span></div>
-            <div class="terminal-line output" style="padding-left:0;">Django developer building things that work</div>
-            <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">cat info.json</span></div>
-            <div class="terminal-line output" style="padding-left:0;">{</div>
-            <div class="terminal-line output" style="padding-left:20px;">"name": "Suyog Khadka",</div>
-            <div class="terminal-line output" style="padding-left:20px;">"age": "{{ age }}",</div>
-            <div class="terminal-line output" style="padding-left:20px;">"email": "ksuyog697@gmail.com",</div>
-            <div class="terminal-line output" style="padding-left:20px;">"phone": "+977 9766387873",</div>
-            <div class="terminal-line output" style="padding-left:20px;">"location": "Lalitpur, Imadol",</div>
-            <div class="terminal-line output" style="padding-left:20px;">"status": "Seeking Internship"</div>
-            <div class="terminal-line output" style="padding-left:0;">}</div>
-            <div class="terminal-line"><span class="prompt">$</span> <span style="color:var(--accent);animation:blink 1s step-end infinite;">_</span></div>
-          </div>
-        </div>
+    <!-- Section Header -->
+    <div class="about-header" data-anim="fade-up">
+      <div class="about-header-label">
+        <span class="about-header-tag">01</span>
+        <span class="about-header-text">About</span>
+        <div class="about-header-line"></div>
       </div>
-
-      <!-- Right: Bio Text -->
-      <div class="col-lg-7" data-aos="fade-left" data-aos-delay="300">
-        <div style="padding:16px 0;">
-          <p style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">About</p>
-          <h3 style="font-family:var(--font-display);font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:600;color:var(--text);line-height:1.4;margin-bottom:1.5rem;">
-            I build and ship Django applications that survive real users, real servers, and real deadlines.
-          </h3>
-          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;">
-            <li style="display:flex;gap:12px;align-items:flex-start;">
-              <span style="color:var(--accent);font-weight:700;margin-top:2px;">›</span>
-              <span style="font-size:0.95rem;color:var(--text-secondary);line-height:1.6;">I own the full delivery lifecycle — from database schema design to production deployment — including the server infrastructure underneath.</span>
-            </li>
-            <li style="display:flex;gap:12px;align-items:flex-start;">
-              <span style="color:var(--accent);font-weight:700;margin-top:2px;">›</span>
-              <span style="font-size:0.95rem;color:var(--text-secondary);line-height:1.6;">I work with Django, Django REST Framework, and PostgreSQL, building robust backend systems and RESTful APIs.</span>
-            </li>
-            <li style="display:flex;gap:12px;align-items:flex-start;">
-              <span style="color:var(--accent);font-weight:700;margin-top:2px;">›</span>
-              <span style="font-size:0.95rem;color:var(--text-secondary);line-height:1.6;">I handle deployment, SSL configuration, and server management so the code actually stays running.</span>
-            </li>
-          </ul>
-
-          <div style="display:flex;gap:12px;margin-top:2rem;flex-wrap:wrap;">
-            <a href="{% static 'images/resume.pdf' %}" target="_blank" class="btn-glow">
-              <i class="bi bi-download"></i> Download CV
-            </a>
-            <a href="{% url 'contact' %}" class="btn-ghost">
-              <i class="bi bi-chat-dots"></i> Contact Me
-            </a>
-          </div>
-        </div>
+      <div class="about-header-prompt">
+        <span class="about-prompt-dollar">$</span>
+        <span class="about-prompt-cmd">cat about.py</span>
       </div>
     </div>
 
-    <!-- Badges / Stats Row -->
-    <div style="margin-top:3rem;" data-aos="fade-up" data-aos-delay="200">
-      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;">
-        <div style="display:inline-flex;align-items:center;gap:12px;padding:14px 20px;border-radius:var(--radius-lg);background:var(--surface);border:1px solid var(--border);position:relative;overflow:hidden;">
-          <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(61,99,255,0.06),transparent);pointer-events:none;"></div>
-          <div style="position:relative;display:flex;align-items:baseline;gap:6px;">
-            <span style="font-family:var(--font-display);font-weight:800;font-size:1.4rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">1</span>
-            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Year Training</span>
+    <!-- Split Screen -->
+    <div class="about-split">
+
+      <!-- LEFT: Terminal -->
+      <div class="about-terminal-wrap" data-anim="fade-right" data-delay="0.2">
+        <div class="about-terminal" id="aboutTerminal">
+          <!-- Glass border -->
+          <div class="about-terminal-glow"></div>
+          <!-- Title bar -->
+          <div class="about-terminal-bar">
+            <div class="about-terminal-dots">
+              <span class="about-dot about-dot-red"></span>
+              <span class="about-dot about-dot-yellow"></span>
+              <span class="about-dot about-dot-green"></span>
+            </div>
+            <span class="about-terminal-label">about.py</span>
+            <div class="about-terminal-actions">
+              <i class="bi bi-dash"></i>
+              <i class="bi bi-square"></i>
+              <i class="bi bi-x"></i>
+            </div>
           </div>
+          <!-- Terminal body -->
+          <div class="about-terminal-body" id="terminalBody">
+            <!-- Lines will be injected by JS -->
+          </div>
+          <!-- Scanline overlay -->
+          <div class="about-terminal-scanlines"></div>
         </div>
-        <span style="color:var(--border);font-size:1.2rem;">·</span>
-        <span style="padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:rgba(15,15,25,0.5);font-family:var(--font-mono);font-size:0.75rem;color:var(--text-secondary);transition:all 0.3s;">Django Developer</span>
-        <span style="padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:rgba(15,15,25,0.5);font-family:var(--font-mono);font-size:0.75rem;color:var(--text-secondary);transition:all 0.3s;">Python Backend</span>
-        <span style="padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:rgba(15,15,25,0.5);font-family:var(--font-mono);font-size:0.75rem;color:var(--text-secondary);transition:all 0.3s;">REST APIs</span>
       </div>
-    </div>
 
-  </div>
-  <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(61,99,255,0.3),transparent);margin:3rem 24px;"></div>
-</section>
+      <!-- RIGHT: Bio Content -->
+      <div class="about-bio" data-anim="fade-left" data-delay="0.4">
 
-<!-- Process / Philosophy Section -->
-<section class="page-section" style="padding-top:40px;padding-bottom:0;">
-  <div class="container">
+        <!-- Label -->
+        <div class="about-bio-label">About</div>
 
-    <div class="section-label" data-aos="fade-up">
-      <span class="label-text gradient-text">Process</span>
-      <div class="label-line"></div>
-    </div>
-    <div class="section-prompt" data-aos="fade-up" data-aos-delay="100">
-      <span class="prompt">$</span>
-      <span>cat philosophy.sh</span>
-    </div>
-    <h2 style="font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:var(--text);margin-bottom:0.5rem;" data-aos="fade-up" data-aos-delay="150">Philosophy</h2>
-    <p style="font-size:1rem;color:var(--text-secondary);margin-bottom:3rem;" data-aos="fade-up" data-aos-delay="180">How I approach every project.</p>
+        <!-- Heading -->
+        <h2 class="about-bio-heading" data-anim="fade-up" data-delay="0.5">
+          I build and ship Django applications that survive real users, real servers, and real deadlines.
+        </h2>
 
-    <!-- Horizontal Timeline -->
-    <div style="position:relative;" data-aos="fade-up" data-aos-delay="200">
-      <!-- Connecting line (desktop) -->
-      <div style="display:none;position:absolute;top:52px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(61,99,255,0.2),transparent);" class="d-lg-block"></div>
+        <!-- Bullet Points -->
+        <ul class="about-bio-list">
+          <li class="about-bio-item" data-anim="fade-up" data-delay="0.6">
+            <span class="about-bio-arrow">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 5l6 5-6 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>I own the full delivery lifecycle — from database schema design to production deployment — including the server infrastructure underneath.</span>
+          </li>
+          <li class="about-bio-item" data-anim="fade-up" data-delay="0.7">
+            <span class="about-bio-arrow">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 5l6 5-6 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>I work with Django, Django REST Framework, and PostgreSQL — building robust backend systems and RESTful APIs.</span>
+          </li>
+          <li class="about-bio-item" data-anim="fade-up" data-delay="0.8">
+            <span class="about-bio-arrow">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 5l6 5-6 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>I handle deployment, SSL configuration, and server management so the code actually stays running.</span>
+          </li>
+        </ul>
 
-      <div class="row" style="gap:12px;">
-        <!-- Step 1 -->
-        <div class="col-6 col-md-4 col-lg" style="padding:6px;" data-aos="fade-up" data-aos-delay="250">
-          <div class="card-base" style="padding:20px 16px;text-align:center;transition:all 0.3s;cursor:default;position:relative;overflow:hidden;height:100%;">
-            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(61,99,255,0.04),transparent);opacity:0;transition:opacity 0.3s;pointer-events:none;" class="card-hover-bg"></div>
-            <div style="width:44px;height:44px;border-radius:12px;background:rgba(61,99,255,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
-              <i class="bi bi-lightbulb" style="font-size:18px;color:var(--accent-light);"></i>
-            </div>
-            <h4 style="font-family:var(--font-display);font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:4px;">Plan</h4>
-            <p style="font-size:0.75rem;color:var(--text-muted);margin:0;">Requirement gathering and domain modeling</p>
+        <!-- Stats Badges -->
+        <div class="about-bio-stats" data-anim="fade-up" data-delay="0.9">
+          <div class="about-stat-card">
+            <div class="about-stat-value">1<span class="about-stat-plus">+</span></div>
+            <div class="about-stat-label">Year Training</div>
           </div>
+          <span class="about-stat-dot">·</span>
+          <span class="about-stat-pill">Django Developer</span>
+          <span class="about-stat-pill">Python Backend</span>
+          <span class="about-stat-pill">REST APIs</span>
         </div>
 
-        <!-- Step 2 -->
-        <div class="col-6 col-md-4 col-lg" style="padding:6px;" data-aos="fade-up" data-aos-delay="300">
-          <div class="card-base" style="padding:20px 16px;text-align:center;transition:all 0.3s;cursor:default;position:relative;overflow:hidden;height:100%;">
-            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(61,99,255,0.04),transparent);opacity:0;transition:opacity 0.3s;pointer-events:none;" class="card-hover-bg"></div>
-            <div style="width:44px;height:44px;border-radius:12px;background:rgba(61,99,255,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
-              <i class="bi bi-diagram-3" style="font-size:18px;color:var(--accent-light);"></i>
-            </div>
-            <h4 style="font-family:var(--font-display);font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:4px;">Architect</h4>
-            <p style="font-size:0.75rem;color:var(--text-muted);margin:0;">Scalable schemas and system design</p>
-          </div>
+        <!-- Buttons -->
+        <div class="about-bio-actions" data-anim="fade-up" data-delay="1.0">
+          <a href="{% static 'images/resume.png' %}" target="_blank" class="about-btn about-btn-primary">
+            <span class="about-btn-glow"></span>
+            <i class="bi bi-download"></i>
+            <span>Download CV</span>
+          </a>
+          <a href="{% url 'contact' %}" class="about-btn about-btn-ghost">
+            <i class="bi bi-chat-dots"></i>
+            <span>Contact Me</span>
+          </a>
         </div>
 
-        <!-- Step 3 -->
-        <div class="col-6 col-md-4 col-lg" style="padding:6px;" data-aos="fade-up" data-aos-delay="350">
-          <div class="card-base" style="padding:20px 16px;text-align:center;transition:all 0.3s;cursor:default;position:relative;overflow:hidden;height:100%;">
-            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(61,99,255,0.04),transparent);opacity:0;transition:opacity 0.3s;pointer-events:none;" class="card-hover-bg"></div>
-            <div style="width:44px;height:44px;border-radius:12px;background:rgba(61,99,255,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
-              <i class="bi bi-code-slash" style="font-size:18px;color:var(--accent-light);"></i>
-            </div>
-            <h4 style="font-family:var(--font-display);font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:4px;">Implement</h4>
-            <p style="font-size:0.75rem;color:var(--text-muted);margin:0;">Clean code with industry patterns</p>
-          </div>
-        </div>
-
-        <!-- Step 4 -->
-        <div class="col-6 col-md-4 col-lg" style="padding:6px;" data-aos="fade-up" data-aos-delay="400">
-          <div class="card-base" style="padding:20px 16px;text-align:center;transition:all 0.3s;cursor:default;position:relative;overflow:hidden;height:100%;">
-            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(61,99,255,0.04),transparent);opacity:0;transition:opacity 0.3s;pointer-events:none;" class="card-hover-bg"></div>
-            <div style="width:44px;height:44px;border-radius:12px;background:rgba(61,99,255,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
-              <i class="bi bi-bug" style="font-size:18px;color:var(--accent-light);"></i>
-            </div>
-            <h4 style="font-family:var(--font-display);font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:4px;">Test</h4>
-            <p style="font-size:0.75rem;color:var(--text-muted);margin:0;">Automated testing for stability</p>
-          </div>
-        </div>
-
-        <!-- Step 5 -->
-        <div class="col-6 col-md-4 col-lg" style="padding:6px;" data-aos="fade-up" data-aos-delay="450">
-          <div class="card-base" style="padding:20px 16px;text-align:center;transition:all 0.3s;cursor:default;position:relative;overflow:hidden;height:100%;">
-            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(61,99,255,0.04),transparent);opacity:0;transition:opacity 0.3s;pointer-events:none;" class="card-hover-bg"></div>
-            <div style="width:44px;height:44px;border-radius:12px;background:rgba(61,99,255,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
-              <i class="bi bi-tools" style="font-size:18px;color:var(--accent-light);"></i>
-            </div>
-            <h4 style="font-family:var(--font-display);font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:4px;">Maintain</h4>
-            <p style="font-size:0.75rem;color:var(--text-muted);margin:0;">Monitoring and optimization</p>
-          </div>
-        </div>
       </div>
     </div>
   </div>
-  <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(61,99,255,0.3),transparent);margin:3rem 24px;"></div>
 </section>
 
-<!-- Experience & Education Timeline -->
-<section class="page-section" style="padding-top:40px;">
-  <div class="container">
+<!-- ===== PHILOSOPHY SECTION ===== -->
+<section class="about-philosophy">
+  <div class="about-container">
 
-    <div class="section-label" data-aos="fade-up">
-      <span class="label-text gradient-text">Experience</span>
-      <div class="label-line"></div>
+    <div class="about-header" data-anim="fade-up">
+      <div class="about-header-label">
+        <span class="about-header-tag">02</span>
+        <span class="about-header-text">Process</span>
+        <div class="about-header-line"></div>
+      </div>
+      <div class="about-header-prompt">
+        <span class="about-prompt-dollar">$</span>
+        <span class="about-prompt-cmd">cat philosophy.sh</span>
+      </div>
     </div>
-    <h2 style="font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:var(--text);margin-bottom:0.5rem;" data-aos="fade-up" data-aos-delay="100">The Timeline</h2>
-    <p style="font-size:1rem;color:var(--text-secondary);margin-bottom:3rem;" data-aos="fade-up" data-aos-delay="150">Where the learning happened and the skills were built.</p>
+
+    <h2 class="about-section-title" data-anim="fade-up" data-delay="0.15">Philosophy</h2>
+    <p class="about-section-subtitle" data-anim="fade-up" data-delay="0.25">How I approach every project.</p>
+
+    <!-- Process Steps -->
+    <div class="philosophy-grid" data-anim="fade-up" data-delay="0.35">
+
+      <div class="philosophy-card" data-tilt-mini>
+        <div class="philosophy-card-glow"></div>
+        <div class="philosophy-card-icon"><i class="bi bi-lightbulb"></i></div>
+        <div class="philosophy-card-num">01</div>
+        <h4>Plan</h4>
+        <p>Requirement gathering and domain modeling</p>
+      </div>
+
+      <div class="philosophy-card" data-tilt-mini>
+        <div class="philosophy-card-glow"></div>
+        <div class="philosophy-card-icon"><i class="bi bi-diagram-3"></i></div>
+        <div class="philosophy-card-num">02</div>
+        <h4>Architect</h4>
+        <p>Scalable schemas and system design</p>
+      </div>
+
+      <div class="philosophy-card" data-tilt-mini>
+        <div class="philosophy-card-glow"></div>
+        <div class="philosophy-card-icon"><i class="bi bi-code-slash"></i></div>
+        <div class="philosophy-card-num">03</div>
+        <h4>Implement</h4>
+        <p>Clean code with industry patterns</p>
+      </div>
+
+      <div class="philosophy-card" data-tilt-mini>
+        <div class="philosophy-card-glow"></div>
+        <div class="philosophy-card-icon"><i class="bi bi-bug"></i></div>
+        <div class="philosophy-card-num">04</div>
+        <h4>Test</h4>
+        <p>Automated testing for stability</p>
+      </div>
+
+      <div class="philosophy-card" data-tilt-mini>
+        <div class="philosophy-card-glow"></div>
+        <div class="philosophy-card-icon"><i class="bi bi-tools"></i></div>
+        <div class="philosophy-card-num">05</div>
+        <h4>Maintain</h4>
+        <p>Monitoring and optimization</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="about-divider"></div>
+</section>
+
+<!-- ===== TIMELINE SECTION ===== -->
+<section class="about-timeline-section">
+  <div class="about-container">
+
+    <div class="about-header" data-anim="fade-up">
+      <div class="about-header-label">
+        <span class="about-header-tag">03</span>
+        <span class="about-header-text">Experience</span>
+        <div class="about-header-line"></div>
+      </div>
+      <div class="about-header-prompt">
+        <span class="about-prompt-dollar">$</span>
+        <span class="about-prompt-cmd">ls experience/</span>
+      </div>
+    </div>
+
+    <h2 class="about-section-title" data-anim="fade-up" data-delay="0.15">The Timeline</h2>
+    <p class="about-section-subtitle" data-anim="fade-up" data-delay="0.25">Where the learning happened and the skills were built.</p>
 
     <!-- Vertical Timeline -->
-    <div style="position:relative;">
-      <!-- Vertical line -->
-      <div style="position:absolute;left:20px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,rgba(61,99,255,0.3),var(--border),var(--border));" class="d-md-none"></div>
-      <div style="position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,rgba(61,99,255,0.3),var(--border),var(--border));transform:translateX(-1px);" class="d-none d-md-block"></div>
+    <div class="timeline-wrap">
 
-      <!-- Entry 1: Seeking Internship (right side) -->
-      <div style="position:relative;margin-bottom:3rem;padding-left:48px;" class="d-md-none" data-aos="fade-up" data-aos-delay="200">
-        <div style="position:absolute;left:14px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(61,99,255,0.3);z-index:2;"></div>
-        <div class="card-base" style="padding:24px;transition:all 0.3s;position:relative;overflow:hidden;">
-          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);opacity:0.2;"></div>
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
-            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">2026 - Present</span>
-            <span style="color:var(--text-muted);opacity:0.3;">|</span>
-            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">Sipalaya Infotech</span>
+      <!-- Center line -->
+      <div class="timeline-line"></div>
+
+      <!-- Entry 1 — Right (blue) -->
+      <div class="timeline-entry timeline-right" data-anim="fade-left" data-delay="0.3">
+        <div class="timeline-node timeline-node-blue"></div>
+        <div class="timeline-card" data-tilt-mini>
+          <div class="timeline-card-glow" style="--glow:#6c63ff;"></div>
+          <div class="timeline-card-accent" style="background:#6c63ff;"></div>
+          <div class="timeline-card-meta">
+            <span class="timeline-card-date"><i class="bi bi-calendar3"></i> 2026 - Present</span>
+            <span class="timeline-card-sep">|</span>
+            <span class="timeline-card-loc"><i class="bi bi-geo-alt"></i> Sipalaya Infotech</span>
           </div>
-          <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:6px;">Seeking Django Developer Intern</h3>
-          <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-light);margin-bottom:10px;">Sipalaya Infotech</p>
-          <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin:0;">Completed training in Python Django. Seeking internship to work in Django framework where I can build full-stack real world projects.</p>
+          <h3 class="timeline-card-title">Seeking Django Developer Intern</h3>
+          <p class="timeline-card-company" style="color:#6c63ff;">Sipalaya Infotech</p>
+          <p class="timeline-card-desc">Completed training in Python Django. Seeking internship to work in Django framework where I can build full-stack real world projects.</p>
         </div>
       </div>
 
-      <!-- Desktop: Entry 1 (right side) -->
-      <div style="position:relative;margin-bottom:3rem;padding-right:calc(50% + 2rem);display:none;" class="d-md-block" data-aos="fade-up" data-aos-delay="200">
-        <div style="position:absolute;left:50%;top:20px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(61,99,255,0.3);transform:translateX(-7px);z-index:2;"></div>
-        <div class="card-base" style="padding:24px;transition:all 0.3s;position:relative;overflow:hidden;">
-          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);opacity:0.2;"></div>
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
-            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">2026 - Present</span>
-            <span style="color:var(--text-muted);opacity:0.3;">|</span>
-            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">Sipalaya Infotech</span>
+      <!-- Entry 2 — Left (green) -->
+      <div class="timeline-entry timeline-left" data-anim="fade-right" data-delay="0.4">
+        <div class="timeline-node timeline-node-green"></div>
+        <div class="timeline-card" data-tilt-mini>
+          <div class="timeline-card-glow" style="--glow:#22c55e;"></div>
+          <div class="timeline-card-accent" style="background:#22c55e;"></div>
+          <div class="timeline-card-meta">
+            <span class="timeline-card-date"><i class="bi bi-calendar3"></i> 2024 - 2028</span>
+            <span class="timeline-card-sep">|</span>
+            <span class="timeline-card-loc"><i class="bi bi-geo-alt"></i> Pokhara University</span>
           </div>
-          <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:6px;">Seeking Django Developer Intern</h3>
-          <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-light);margin-bottom:10px;">Sipalaya Infotech</p>
-          <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin:0;">Completed training in Python Django. Seeking internship to work in Django framework where I can build full-stack real world projects.</p>
+          <h3 class="timeline-card-title">BEIT (Engineering in IT)</h3>
+          <p class="timeline-card-company" style="color:#22c55e;">Pokhara University</p>
+          <p class="timeline-card-desc">Focused on gaining knowledge in the engineering field</p>
         </div>
       </div>
 
-      <!-- Entry 2: BEIT (left side, green) -->
-      <div style="position:relative;margin-bottom:3rem;padding-left:48px;" class="d-md-none" data-aos="fade-up" data-aos-delay="300">
-        <div style="position:absolute;left:14px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--green);box-shadow:0 0 12px rgba(34,197,94,0.3);z-index:2;"></div>
-        <div class="card-base" style="padding:24px;transition:all 0.3s;position:relative;overflow:hidden;">
-          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--green);opacity:0.2;"></div>
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
-            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">2024 - 2028</span>
-            <span style="color:var(--text-muted);opacity:0.3;">|</span>
-            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">Pokhara University</span>
+      <!-- Entry 3 — Right (purple) -->
+      <div class="timeline-entry timeline-right" data-anim="fade-left" data-delay="0.5">
+        <div class="timeline-node timeline-node-purple"></div>
+        <div class="timeline-card" data-tilt-mini>
+          <div class="timeline-card-glow" style="--glow:#a855f7;"></div>
+          <div class="timeline-card-accent" style="background:#a855f7;"></div>
+          <div class="timeline-card-meta">
+            <span class="timeline-card-date"><i class="bi bi-calendar3"></i> 2020 - 2022</span>
+            <span class="timeline-card-sep">|</span>
+            <span class="timeline-card-loc"><i class="bi bi-geo-alt"></i> Nobel Academy</span>
           </div>
-          <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:6px;">BEIT (Engineering in IT)</h3>
-          <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--green);margin-bottom:10px;">Pokhara University</p>
-          <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin:0;">Focused on gaining knowledge in the engineering field</p>
+          <h3 class="timeline-card-title">(+2) Major Science</h3>
+          <p class="timeline-card-company" style="color:#a855f7;">Nobel Academy</p>
+          <p class="timeline-card-desc">GPA: 3.57/4.0</p>
         </div>
       </div>
 
-      <!-- Desktop: Entry 2 (left side, green) -->
-      <div style="position:relative;margin-bottom:3rem;padding-left:calc(50% + 2rem);display:none;" class="d-md-block" data-aos="fade-left" data-aos-delay="300">
-        <div style="position:absolute;left:50%;top:20px;width:14px;height:14px;border-radius:50%;background:var(--green);box-shadow:0 0 12px rgba(34,197,94,0.3);transform:translateX(-7px);z-index:2;"></div>
-        <div class="card-base" style="padding:24px;transition:all 0.3s;position:relative;overflow:hidden;">
-          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--green);opacity:0.2;"></div>
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
-            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">2024 - 2028</span>
-            <span style="color:var(--text-muted);opacity:0.3;">|</span>
-            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">Pokhara University</span>
+      <!-- Entry 4 — Left (blue) -->
+      <div class="timeline-entry timeline-left" data-anim="fade-right" data-delay="0.6">
+        <div class="timeline-node timeline-node-blue"></div>
+        <div class="timeline-card" data-tilt-mini>
+          <div class="timeline-card-glow" style="--glow:#6c63ff;"></div>
+          <div class="timeline-card-accent" style="background:#6c63ff;"></div>
+          <div class="timeline-card-meta">
+            <span class="timeline-card-date"><i class="bi bi-calendar3"></i> 2020</span>
+            <span class="timeline-card-sep">|</span>
+            <span class="timeline-card-loc"><i class="bi bi-geo-alt"></i> Gaurishankar H.S.S.</span>
           </div>
-          <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:6px;">BEIT (Engineering in IT)</h3>
-          <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--green);margin-bottom:10px;">Pokhara University</p>
-          <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin:0;">Focused on gaining knowledge in the engineering field</p>
+          <h3 class="timeline-card-title">School</h3>
+          <p class="timeline-card-company" style="color:#6c63ff;">Gaurishankar Higher Secondary School</p>
+          <p class="timeline-card-desc">Major: O.Math</p>
         </div>
       </div>
 
-      <!-- Entry 3: +2 Science (right side, purple) -->
-      <div style="position:relative;margin-bottom:3rem;padding-left:48px;" class="d-md-none" data-aos="fade-up" data-aos-delay="400">
-        <div style="position:absolute;left:14px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--purple);box-shadow:0 0 12px rgba(168,85,247,0.3);z-index:2;"></div>
-        <div class="card-base" style="padding:24px;transition:all 0.3s;position:relative;overflow:hidden;">
-          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--purple);opacity:0.2;"></div>
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
-            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">2020 - 2022</span>
-            <span style="color:var(--text-muted);opacity:0.3;">|</span>
-            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">Nobel Academy</span>
-          </div>
-          <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:6px;">(+2) Major Science</h3>
-          <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--purple);margin-bottom:10px;">Nobel Academy</p>
-          <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin:0;">GPA: 3.57/4.0</p>
-        </div>
-      </div>
-
-      <!-- Desktop: Entry 3 (right side, purple) -->
-      <div style="position:relative;margin-bottom:3rem;padding-right:calc(50% + 2rem);display:none;" class="d-md-block" data-aos="fade-up" data-aos-delay="400">
-        <div style="position:absolute;left:50%;top:20px;width:14px;height:14px;border-radius:50%;background:var(--purple);box-shadow:0 0 12px rgba(168,85,247,0.3);transform:translateX(-7px);z-index:2;"></div>
-        <div class="card-base" style="padding:24px;transition:all 0.3s;position:relative;overflow:hidden;">
-          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--purple);opacity:0.2;"></div>
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
-            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">2020 - 2022</span>
-            <span style="color:var(--text-muted);opacity:0.3;">|</span>
-            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">Nobel Academy</span>
-          </div>
-          <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:6px;">(+2) Major Science</h3>
-          <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--purple);margin-bottom:10px;">Nobel Academy</p>
-          <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin:0;">GPA: 3.57/4.0</p>
-        </div>
-      </div>
-
-      <!-- Entry 4: School (left side) -->
-      <div style="position:relative;margin-bottom:3rem;padding-left:48px;" class="d-md-none" data-aos="fade-up" data-aos-delay="500">
-        <div style="position:absolute;left:14px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(61,99,255,0.3);z-index:2;"></div>
-        <div class="card-base" style="padding:24px;transition:all 0.3s;position:relative;overflow:hidden;">
-          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);opacity:0.2;"></div>
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
-            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">2020</span>
-            <span style="color:var(--text-muted);opacity:0.3;">|</span>
-            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">Gaurishankar Higher Secondary School</span>
-          </div>
-          <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:6px;">School</h3>
-          <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-light);margin-bottom:10px;">Gaurishankar Higher Secondary School</p>
-          <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin:0;">Major: O.Math</p>
-        </div>
-      </div>
-
-      <!-- Desktop: Entry 4 (left side) -->
-      <div style="position:relative;padding-left:calc(50% + 2rem);display:none;" class="d-md-block" data-aos="fade-left" data-aos-delay="500">
-        <div style="position:absolute;left:50%;top:20px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(61,99,255,0.3);transform:translateX(-7px);z-index:2;"></div>
-        <div class="card-base" style="padding:24px;transition:all 0.3s;position:relative;overflow:hidden;">
-          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);opacity:0.2;"></div>
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
-            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">2020</span>
-            <span style="color:var(--text-muted);opacity:0.3;">|</span>
-            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">Gaurishankar Higher Secondary School</span>
-          </div>
-          <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:6px;">School</h3>
-          <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-light);margin-bottom:10px;">Gaurishankar Higher Secondary School</p>
-          <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin:0;">Major: O.Math</p>
-        </div>
-      </div>
     </div>
-
   </div>
 </section>
 
 <style>
-@keyframes blink { 50%{opacity:0} }
-.card-base:hover .card-hover-bg { opacity:1 !important; }
+/* ============================================================
+   ABOUT SECTION — CYBERPUNK GLASS STYLE
+   ============================================================ */
+
+.about-cyber {
+  position: relative;
+  padding: 100px 0 80px;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+/* === AMBIENT ORBS === */
+.about-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  opacity: 0.06;
+  animation: aboutOrbFloat 20s ease-in-out infinite alternate;
+}
+.about-orb-1 {
+  width: 500px; height: 500px;
+  top: -10%; left: -8%;
+  background: radial-gradient(circle, #6c63ff, transparent 70%);
+}
+.about-orb-2 {
+  width: 400px; height: 400px;
+  bottom: 0; right: -5%;
+  background: radial-gradient(circle, #a855f7, transparent 70%);
+  animation-delay: -7s;
+}
+.about-orb-3 {
+  width: 350px; height: 350px;
+  top: 50%; left: 40%;
+  background: radial-gradient(circle, #22c55e, transparent 70%);
+  animation-delay: -14s;
+  opacity: 0.03;
+}
+@keyframes aboutOrbFloat {
+  0% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(40px,-30px) scale(1.1); }
+  100% { transform: translate(-20px,20px) scale(0.95); }
+}
+
+/* === CONTAINER === */
+.about-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* === HEADER === */
+.about-header {
+  margin-bottom: 48px;
+}
+.about-header-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+.about-header-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: #6c63ff;
+  background: rgba(108,99,255,0.1);
+  border: 1px solid rgba(108,99,255,0.2);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+.about-header-text {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+}
+.about-header-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(108,99,255,0.3), transparent);
+}
+.about-header-prompt {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.about-prompt-dollar {
+  color: #6c63ff;
+  font-weight: 700;
+}
+
+/* === SPLIT LAYOUT === */
+.about-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .about-split { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   TERMINAL
+   ============================================================ */
+.about-terminal-wrap {
+  position: relative;
+  perspective: 1000px;
+}
+.about-terminal {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(15,15,25,0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.about-terminal:hover {
+  border-color: rgba(108,99,255,0.25);
+  box-shadow: 0 0 40px rgba(108,99,255,0.08), 0 20px 50px rgba(0,0,0,0.3);
+  transform: translateY(-4px);
+}
+.about-terminal-glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(108,99,255,0.15), transparent 40%, rgba(168,85,247,0.1));
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+  z-index: 0;
+}
+.about-terminal:hover .about-terminal-glow { opacity: 1; }
+
+/* Title bar */
+.about-terminal-bar {
+  display: flex;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: rgba(10,10,15,0.5);
+  position: relative;
+  z-index: 2;
+}
+.about-terminal-dots {
+  display: flex;
+  gap: 7px;
+}
+.about-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+.about-dot-red { background: #ef4444; box-shadow: 0 0 6px rgba(239,68,68,0.4); }
+.about-dot-yellow { background: #eab308; box-shadow: 0 0 6px rgba(234,179,8,0.4); }
+.about-dot-green { background: #22c55e; box-shadow: 0 0 6px rgba(34,197,94,0.4); }
+.about-terminal:hover .about-dot-red { box-shadow: 0 0 10px rgba(239,68,68,0.6); }
+.about-terminal:hover .about-dot-yellow { box-shadow: 0 0 10px rgba(234,179,8,0.6); }
+.about-terminal:hover .about-dot-green { box-shadow: 0 0 10px rgba(34,197,94,0.6); }
+
+.about-terminal-label {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+.about-terminal-actions {
+  margin-left: 16px;
+  display: flex;
+  gap: 10px;
+  color: var(--text-muted);
+  font-size: 12px;
+  opacity: 0.4;
+}
+
+/* Terminal body */
+.about-terminal-body {
+  padding: 24px;
+  font-family: 'JetBrains Mono', 'Fira Code', var(--font-mono);
+  font-size: 13px;
+  line-height: 2;
+  color: #a0a0b8;
+  min-height: 380px;
+  position: relative;
+  z-index: 2;
+}
+.about-terminal-line {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: all 0.3s ease;
+}
+.about-terminal-line.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.about-terminal-prompt {
+  color: #6c63ff;
+  font-weight: 700;
+  user-select: none;
+}
+.about-terminal-cmd {
+  color: #ffffff;
+}
+.about-terminal-output {
+  padding-left: 0;
+  color: #a78bfa;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.about-terminal-output.visible { opacity: 1; }
+.about-terminal-output.dim {
+  color: var(--text-muted);
+}
+
+/* JSON output */
+.about-json-key { color: #a78bfa; }
+.about-json-str { color: #22c55e; }
+.about-json-brace { color: var(--text-muted); }
+
+/* Blinking cursor */
+.about-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 18px;
+  background: #6c63ff;
+  margin-left: 4px;
+  animation: aboutBlink 1s step-end infinite;
+  vertical-align: middle;
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(108,99,255,0.5);
+}
+@keyframes aboutBlink {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Scanlines */
+.about-terminal-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent, transparent 2px,
+    rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.5;
+}
+
+/* ============================================================
+   BIO CONTENT
+   ============================================================ */
+.about-bio {
+  padding: 8px 0;
+}
+.about-bio-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  position: relative;
+  display: inline-block;
+}
+.about-bio-label::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #6c63ff, #a855f7);
+  border-radius: 1px;
+}
+
+.about-bio-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 28px;
+  background: linear-gradient(135deg, #ffffff 0%, #a0a0b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Bullet list */
+.about-bio-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.about-bio-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.4s ease;
+}
+.about-bio-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.about-bio-arrow {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(108,99,255,0.1);
+  border: 1px solid rgba(108,99,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c63ff;
+  margin-top: 2px;
+  transition: all 0.3s;
+}
+.about-bio-item:hover .about-bio-arrow {
+  background: rgba(108,99,255,0.2);
+  border-color: rgba(108,99,255,0.3);
+  transform: translateX(3px);
+}
+
+/* Stats */
+.about-bio-stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+.about-stat-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border-radius: 14px;
+  background: rgba(15,15,25,0.6);
+  border: 1px solid rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+}
+.about-stat-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(108,99,255,0.06), transparent);
+  pointer-events: none;
+}
+.about-stat-value {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #6c63ff, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+.about-stat-plus {
+  font-size: 1rem;
+}
+.about-stat-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.about-stat-dot {
+  color: rgba(255,255,255,0.1);
+  font-size: 1.2rem;
+}
+.about-stat-pill {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(15,15,25,0.5);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all 0.25s;
+}
+.about-stat-pill:hover {
+  border-color: rgba(108,99,255,0.25);
+  color: #a78bfa;
+  background: rgba(108,99,255,0.06);
+}
+
+/* Buttons */
+.about-bio-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.about-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+  overflow: hidden;
+}
+.about-btn-primary {
+  background: linear-gradient(135deg, #6c63ff, #a855f7);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 20px rgba(108,99,255,0.3);
+}
+.about-btn-primary:hover {
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(108,99,255,0.4);
+}
+.about-btn-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.about-btn-primary:hover .about-btn-glow { opacity: 1; }
+
+.about-btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.about-btn-ghost:hover {
+  color: #a78bfa;
+  border-color: rgba(108,99,255,0.3);
+  background: rgba(108,99,255,0.06);
+  transform: translateY(-3px);
+}
+
+/* === Responsive === */
+@media (max-width: 900px) {
+  .about-cyber { padding: 60px 0 40px; min-height: auto; }
+  .about-terminal-body { min-height: 320px; font-size: 12px; }
+}
+
+/* ============================================================
+   PHILOSOPHY SECTION
+   ============================================================ */
+.about-philosophy {
+  position: relative;
+  padding: 40px 0 0;
+}
+.about-section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem,4vw,2.8rem);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.about-section-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+}
+.about-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(108,99,255,0.25), transparent);
+  margin: 50px 0 0;
+}
+
+/* Philosophy Grid */
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+@media (max-width: 900px) {
+  .philosophy-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 500px) {
+  .philosophy-grid { grid-template-columns: 1fr; }
+}
+
+.philosophy-card {
+  position: relative;
+  background: rgba(15,15,25,0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 28px 20px;
+  text-align: center;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+  transform-style: preserve-3d;
+}
+.philosophy-card:hover {
+  border-color: rgba(108,99,255,0.25);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(108,99,255,0.1);
+}
+.philosophy-card-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(108,99,255,0.08), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+.philosophy-card:hover .philosophy-card-glow { opacity: 1; }
+
+.philosophy-card-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  background: rgba(108,99,255,0.1);
+  border: 1px solid rgba(108,99,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  font-size: 22px;
+  color: #a78bfa;
+  transition: all 0.35s;
+}
+.philosophy-card:hover .philosophy-card-icon {
+  transform: translateZ(15px) scale(1.08);
+  box-shadow: 0 0 20px rgba(108,99,255,0.2);
+  background: rgba(108,99,255,0.18);
+}
+
+.philosophy-card-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(108,99,255,0.4);
+  margin-bottom: 8px;
+}
+.philosophy-card h4 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.philosophy-card p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   TIMELINE SECTION
+   ============================================================ */
+.about-timeline-section {
+  position: relative;
+  padding: 50px 0 80px;
+}
+
+.timeline-wrap {
+  position: relative;
+  padding: 20px 0;
+}
+.timeline-line {
+  position: absolute;
+  left: 24px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, rgba(108,99,255,0.3), rgba(168,85,247,0.15), transparent);
+}
+@media (min-width: 768px) {
+  .timeline-line {
+    left: 50%;
+    transform: translateX(-1px);
+  }
+}
+
+/* Entry */
+.timeline-entry {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 56px;
+}
+@media (min-width: 768px) {
+  .timeline-entry { padding-left: 0; }
+  .timeline-right { padding-right: calc(50% + 28px); text-align: right; }
+  .timeline-left { padding-left: calc(50% + 28px); text-align: left; }
+}
+
+/* Node dot */
+.timeline-node {
+  position: absolute;
+  left: 18px;
+  top: 22px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 0 0 12px currentColor;
+}
+@media (min-width: 768px) {
+  .timeline-node {
+    left: 50%;
+    transform: translateX(-7px);
+  }
+}
+.timeline-node-blue { background: #6c63ff; color: rgba(108,99,255,0.5); }
+.timeline-node-green { background: #22c55e; color: rgba(34,197,94,0.5); }
+.timeline-node-purple { background: #a855f7; color: rgba(168,85,247,0.5); }
+
+/* Card */
+.timeline-card {
+  position: relative;
+  background: rgba(15,15,25,0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 24px;
+  overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.timeline-card:hover {
+  border-color: rgba(108,99,255,0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+.timeline-card-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--glow) 10%, transparent), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+}
+.timeline-card:hover .timeline-card-glow { opacity: 1; }
+.timeline-card-accent {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  opacity: 0.25;
+}
+.timeline-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+@media (min-width: 768px) {
+  .timeline-right .timeline-card-meta { justify-content: flex-end; }
+}
+.timeline-card-date, .timeline-card-loc {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.timeline-card-sep {
+  color: rgba(255,255,255,0.1);
+  font-size: 11px;
+}
+.timeline-card-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.timeline-card-company {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.timeline-card-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
 </style>
+
+<script>
+/* ============================================================
+   TERMINAL TYPEWRITER EFFECT
+   ============================================================ */
+(function(){
+  const terminalBody = document.getElementById('terminalBody');
+  if(!terminalBody) return;
+
+  const lines = [
+    { type: 'cmd',    prompt: '$', text: 'whoami' },
+    { type: 'output', text: 'django-developer · python · backend', delay: 100 },
+    { type: 'cmd',    prompt: '$', text: 'ls projects/' },
+    { type: 'output', text: 'portfolio/  ecommerce/  api/  automation/', delay: 100 },
+    { type: 'cmd',    prompt: '$', text: 'cat status.txt' },
+    { type: 'output', text: 'Building things that work.', delay: 100 },
+    { type: 'cmd',    prompt: '$', text: 'cat info.json' },
+    { type: 'json-open' },
+    { type: 'json', key: 'name',     val: '"Suyog Khadka"' },
+    { type: 'json', key: 'age',      val: '{{ age }}' },
+    { type: 'json', key: 'email',    val: '"ksuyog697@gmail.com"' },
+    { type: 'json', key: 'phone',    val: '"+977 9766387873"' },
+    { type: 'json', key: 'location', val: '"Lalitpur, Imadol"' },
+    { type: 'json', key: 'status',   val: '"Seeking Internship"' },
+    { type: 'json-close' },
+    { type: 'cmd', prompt: '$', cursor: true },
+  ];
+
+  function typeText(el, text, speed, callback){
+    let i = 0;
+    const interval = setInterval(() => {
+      el.textContent += text[i];
+      i++;
+      if(i >= text.length){ clearInterval(interval); if(callback) callback(); }
+    }, speed);
+  }
+
+  function renderLine(line, callback){
+    const div = document.createElement('div');
+    div.className = 'about-terminal-line';
+
+    if(line.type === 'cmd'){
+      const prompt = document.createElement('span');
+      prompt.className = 'about-terminal-prompt';
+      prompt.textContent = line.prompt + ' ';
+      div.appendChild(prompt);
+
+      const cmd = document.createElement('span');
+      cmd.className = 'about-terminal-cmd';
+      div.appendChild(cmd);
+
+      terminalBody.appendChild(div);
+
+      // Check if cursor line
+      if(line.cursor){
+        setTimeout(() => {
+          div.classList.add('visible');
+          typeText(cmd, line.text, 50, () => {
+            const cursor = document.createElement('span');
+            cursor.className = 'about-cursor';
+            div.appendChild(cursor);
+          });
+        }, 80);
+        return;
+      }
+
+      setTimeout(() => {
+        div.classList.add('visible');
+        typeText(cmd, line.text, 40, callback);
+      }, 80);
+
+    } else if(line.type === 'output'){
+      div.className = 'about-terminal-line about-terminal-output';
+      div.textContent = line.text;
+      terminalBody.appendChild(div);
+      setTimeout(() => { div.classList.add('visible'); }, 50);
+      setTimeout(callback, line.delay || 80);
+
+    } else if(line.type === 'json-open'){
+      const out = document.createElement('div');
+      out.className = 'about-terminal-line about-terminal-output about-terminal-output visible';
+      out.innerHTML = '<span class="about-json-brace">{</span>';
+      terminalBody.appendChild(out);
+      setTimeout(callback, 40);
+
+    } else if(line.type === 'json'){
+      const out = document.createElement('div');
+      out.className = 'about-terminal-line about-terminal-output';
+      out.innerHTML = '&nbsp;&nbsp;<span class="about-json-key">"' + line.key + '"</span>: <span class="about-json-str">' + line.val + '</span>';
+      terminalBody.appendChild(out);
+      setTimeout(() => { div.classList.add('visible'); out.classList.add('visible'); }, 30);
+      setTimeout(callback, 60);
+
+    } else if(line.type === 'json-close'){
+      const out = document.createElement('div');
+      out.className = 'about-terminal-line about-terminal-output about-terminal-output visible';
+      out.innerHTML = '<span class="about-json-brace">}</span>';
+      terminalBody.appendChild(out);
+      setTimeout(callback, 40);
+    }
+  }
+
+  /* Run typewriter when terminal scrolls into view */
+  let started = false;
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting && !started){
+        started = true;
+        let idx = 0;
+        function next(){
+          if(idx >= lines.length) return;
+          renderLine(lines[idx], () => { idx++; next(); });
+        }
+        setTimeout(next, 600);
+      }
+    });
+  }, { threshold: 0.3 });
+  observer.observe(document.getElementById('aboutTerminal'));
+})();
+
+/* ============================================================
+   SCROLL ANIMATIONS
+   ============================================================ */
+(function(){
+  /* Fade-up / fade-left / fade-right elements */
+  const animEls = document.querySelectorAll('[data-anim]');
+  const animObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const el = entry.target;
+        const anim = el.dataset.anim;
+        const delay = parseFloat(el.dataset.delay) || 0;
+        setTimeout(() => {
+          el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+          if(anim === 'fade-up') el.style.transform = 'translateY(0)';
+          if(anim === 'fade-left') el.style.transform = 'translateX(0)';
+          if(anim === 'fade-right') el.style.transform = 'translateX(0)';
+        }, delay * 1000);
+        animObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  animEls.forEach(el => {
+    const anim = el.dataset.anim;
+    el.style.opacity = '0';
+    if(anim === 'fade-up') el.style.transform = 'translateY(30px)';
+    if(anim === 'fade-left') el.style.transform = 'translateX(-30px)';
+    if(anim === 'fade-right') el.style.transform = 'translateX(30px)';
+    animObserver.observe(el);
+  });
+
+  /* Bio items */
+  const bioItems = document.querySelectorAll('.about-bio-item');
+  const bioObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        bioObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  bioItems.forEach((item, i) => {
+    item.style.transitionDelay = (i * 0.15) + 's';
+    bioObserver.observe(item);
+  });
+})();
+</script>
 
 {% endblock content %}

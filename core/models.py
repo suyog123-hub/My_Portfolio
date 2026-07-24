@@ -6,8 +6,8 @@ class Contact(models.Model):
     email=models.EmailField(null=True)
     subject=models.CharField(max_length=200,null=True)
     message=models.TextField(null=True)
-    phone=models.IntegerField(null=True)
-    address=models.CharField(max_length=200,null=True)
+    phone=models.CharField(max_length=20,null=True,blank=True)
+    address=models.CharField(max_length=200,null=True,blank=True)
 
 class Project_title(models.Model):
     title=models.CharField(max_length=50,null=True)

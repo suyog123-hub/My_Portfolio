@@ -1,3 +1,4 @@
+import threading
 from urllib import request
 from django.shortcuts import render,redirect
 from .models import Contact
@@ -28,14 +29,21 @@ def contact(request):
         address=request.POST.get('address')
         user=Contact(name=name,email=email,subject=subject,message=message,phone=phone,address=address)
         user.save()
-        subject="Message from suyog"
-        message="Thanks for leaving your contact we will contact you soon"
-        from_email='ksuyog697@gmail.com'
-        recipient_list=[email,'suyog697@gmail.com']
-        send_mail(subject=subject,message=message,from_email=from_email,recipient_list=recipient_list,fail_silently=False)
+
+        def send_email_async():
+            try:
+                send_mail(
+                    subject="Message from suyog",
+                    message="Thanks for leaving your contact we will contact you soon",
+                    from_email=None,
+                    recipient_list=[email, 'suyog697@gmail.com'],
+                    fail_silently=True,
+                )
+            except Exception:
+                pass
+
+        threading.Thread(target=send_email_async, daemon=True).start()
         messages.success(request,f'hi {name} your form is submitted please check your email')
-
-
         return redirect('contact')
     return render(request,'core/contact.html')
 def home(request):

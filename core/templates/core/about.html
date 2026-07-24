@@ -3,12 +3,11 @@
 {% block content %}
 
 <!-- About Section -->
-<section class="page-section">
+<section class="page-section" style="padding-bottom:0;">
   <div class="container">
 
     <div class="section-label" data-aos="fade-up">
-      <span class="label-text gradient-text">$</span>
-      <span class="label-text" style="color:var(--text-secondary);">About</span>
+      <span class="label-text gradient-text">About</span>
       <div class="label-line"></div>
     </div>
     <div class="section-prompt" data-aos="fade-up" data-aos-delay="100">
@@ -16,11 +15,15 @@
       <span>cat about.md</span>
     </div>
 
+    <h2 style="font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:var(--text);line-height:1.2;margin-bottom:3rem;" data-aos="fade-up" data-aos-delay="150">
+      The person behind the production decisions.
+    </h2>
+
     <div class="row gy-5 align-items-start">
 
-      <!-- Left: Terminal Info -->
-      <div class="col-lg-7" data-aos="fade-right" data-aos-delay="200">
-        <div class="terminal-window">
+      <!-- Left: Terminal Card -->
+      <div class="col-lg-5" data-aos="fade-right" data-aos-delay="200">
+        <div class="terminal-window" style="height:100%;">
           <div class="terminal-bar">
             <span class="dot red"></span>
             <span class="dot yellow"></span>
@@ -28,155 +31,319 @@
             <span class="terminal-label">about.py</span>
           </div>
           <div class="terminal-body" style="line-height:2.2;">
-            <div class="terminal-line"><span class="prompt">$</span><span class="cmd">cat bio.txt</span></div>
-            <div class="terminal-line output" style="padding-left:20px;white-space:pre-line;">I'm a passionate Django developer with hands-on experience in building web applications using Python's Django framework. I specialize in backend development, database architecture with Django ORM, and creating RESTful APIs with Django REST Framework.</div>
-            <div class="terminal-line"><span class="prompt">$</span><span class="cmd">cat info.json</span></div>
-            <div class="terminal-line output">{</div>
-            <div class="terminal-line output" style="padding-left:36px">"name": "Suyog Khadka",</div>
-            <div class="terminal-line output" style="padding-left:36px">"age": "{{ age }}",</div>
-            <div class="terminal-line output" style="padding-left:36px">"email": "ksuyog697@gmail.com",</div>
-            <div class="terminal-line output" style="padding-left:36px">"phone": "+977 9766387873",</div>
-            <div class="terminal-line output" style="padding-left:36px">"location": "Lalitpur, Imadol",</div>
-            <div class="terminal-line output" style="padding-left:36px">"status": "Seeking Internship"</div>
-            <div class="terminal-line output">}</div>
-            <div class="terminal-line"><span class="prompt">$</span><span style="color:var(--accent);animation:blink 1s step-end infinite;">_</span></div>
+            <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">whoami</span></div>
+            <div class="terminal-line output" style="padding-left:0;">django · python · backend</div>
+            <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">ls projects/</span></div>
+            <div class="terminal-line output" style="padding-left:0;">portfolio/ ecommerce/ api/ automation/</div>
+            <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">cat status.txt</span></div>
+            <div class="terminal-line output" style="padding-left:0;">Django developer building things that work</div>
+            <div class="terminal-line"><span class="prompt">$</span> <span class="cmd">cat info.json</span></div>
+            <div class="terminal-line output" style="padding-left:0;">{</div>
+            <div class="terminal-line output" style="padding-left:20px;">"name": "Suyog Khadka",</div>
+            <div class="terminal-line output" style="padding-left:20px;">"age": "{{ age }}",</div>
+            <div class="terminal-line output" style="padding-left:20px;">"email": "ksuyog697@gmail.com",</div>
+            <div class="terminal-line output" style="padding-left:20px;">"phone": "+977 9766387873",</div>
+            <div class="terminal-line output" style="padding-left:20px;">"location": "Lalitpur, Imadol",</div>
+            <div class="terminal-line output" style="padding-left:20px;">"status": "Seeking Internship"</div>
+            <div class="terminal-line output" style="padding-left:0;">}</div>
+            <div class="terminal-line"><span class="prompt">$</span> <span style="color:var(--accent);animation:blink 1s step-end infinite;">_</span></div>
           </div>
-        </div>
-
-        <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;">
-          <a href="{% static 'images/resume.jpg' %}" target="_blank" class="btn-glow">
-            <i class="bi bi-download"></i>Download CV
-          </a>
-          <a href="{% url 'contact' %}" class="btn-ghost">
-            <i class="bi bi-chat-dots"></i>Contact Me
-          </a>
         </div>
       </div>
 
-      <!-- Right: Profile Image -->
-      <div class="col-lg-5" data-aos="fade-left" data-aos-delay="300">
-        <div style="position:relative;">
-          <div style="position:absolute;inset:-1px;border-radius:var(--radius-lg);background:var(--gradient);opacity:0.3;"></div>
-          <img src="{% static 'images/suyog.jpg' %}" alt="Suyog Khadka"
-            style="width:100%;height:420px;object-fit:cover;border-radius:var(--radius-lg);position:relative;border:1px solid var(--border);">
-          <div style="position:absolute;bottom:-20px;right:-20px;background:var(--gradient);border-radius:14px;padding:16px 20px;text-align:center;box-shadow:0 8px 24px rgba(61,99,255,0.4);">
-            <div style="font-size:24px;font-weight:800;color:#fff;">{{ age }}</div>
-            <div style="font-size:11px;font-weight:600;color:rgba(255,255,255,0.8);">Years Old</div>
+      <!-- Right: Bio Text -->
+      <div class="col-lg-7" data-aos="fade-left" data-aos-delay="300">
+        <div style="padding:16px 0;">
+          <p style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">About</p>
+          <h3 style="font-family:var(--font-display);font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:600;color:var(--text);line-height:1.4;margin-bottom:1.5rem;">
+            I build and ship Django applications that survive real users, real servers, and real deadlines.
+          </h3>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;">
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="color:var(--accent);font-weight:700;margin-top:2px;">›</span>
+              <span style="font-size:0.95rem;color:var(--text-secondary);line-height:1.6;">I own the full delivery lifecycle — from database schema design to production deployment — including the server infrastructure underneath.</span>
+            </li>
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="color:var(--accent);font-weight:700;margin-top:2px;">›</span>
+              <span style="font-size:0.95rem;color:var(--text-secondary);line-height:1.6;">I work with Django, Django REST Framework, and PostgreSQL, building robust backend systems and RESTful APIs.</span>
+            </li>
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <span style="color:var(--accent);font-weight:700;margin-top:2px;">›</span>
+              <span style="font-size:0.95rem;color:var(--text-secondary);line-height:1.6;">I handle deployment, SSL configuration, and server management so the code actually stays running.</span>
+            </li>
+          </ul>
+
+          <div style="display:flex;gap:12px;margin-top:2rem;flex-wrap:wrap;">
+            <a href="{% static 'images/resume.pdf' %}" target="_blank" class="btn-glow">
+              <i class="bi bi-download"></i> Download CV
+            </a>
+            <a href="{% url 'contact' %}" class="btn-ghost">
+              <i class="bi bi-chat-dots"></i> Contact Me
+            </a>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Badges / Stats Row -->
+    <div style="margin-top:3rem;" data-aos="fade-up" data-aos-delay="200">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px;">
+        <div style="display:inline-flex;align-items:center;gap:12px;padding:14px 20px;border-radius:var(--radius-lg);background:var(--surface);border:1px solid var(--border);position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(61,99,255,0.06),transparent);pointer-events:none;"></div>
+          <div style="position:relative;display:flex;align-items:baseline;gap:6px;">
+            <span style="font-family:var(--font-display);font-weight:800;font-size:1.4rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">1</span>
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Year Training</span>
+          </div>
+        </div>
+        <span style="color:var(--border);font-size:1.2rem;">·</span>
+        <span style="padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:rgba(15,15,25,0.5);font-family:var(--font-mono);font-size:0.75rem;color:var(--text-secondary);transition:all 0.3s;">Django Developer</span>
+        <span style="padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:rgba(15,15,25,0.5);font-family:var(--font-mono);font-size:0.75rem;color:var(--text-secondary);transition:all 0.3s;">Python Backend</span>
+        <span style="padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:rgba(15,15,25,0.5);font-family:var(--font-mono);font-size:0.75rem;color:var(--text-secondary);transition:all 0.3s;">REST APIs</span>
       </div>
     </div>
 
   </div>
+  <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(61,99,255,0.3),transparent);margin:3rem 24px;"></div>
 </section>
 
-<!-- Experience & Education -->
-<section class="page-section" style="padding-top:40px;">
+<!-- Process / Philosophy Section -->
+<section class="page-section" style="padding-top:40px;padding-bottom:0;">
   <div class="container">
 
     <div class="section-label" data-aos="fade-up">
-      <span class="label-text gradient-text">$</span>
-      <span class="label-text" style="color:var(--text-secondary);">Timeline</span>
+      <span class="label-text gradient-text">Process</span>
       <div class="label-line"></div>
     </div>
     <div class="section-prompt" data-aos="fade-up" data-aos-delay="100">
       <span class="prompt">$</span>
-      <span>ls experience/</span>
+      <span>cat philosophy.sh</span>
     </div>
+    <h2 style="font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:var(--text);margin-bottom:0.5rem;" data-aos="fade-up" data-aos-delay="150">Philosophy</h2>
+    <p style="font-size:1rem;color:var(--text-secondary);margin-bottom:3rem;" data-aos="fade-up" data-aos-delay="180">How I approach every project.</p>
 
-    <div class="row g-4">
+    <!-- Horizontal Timeline -->
+    <div style="position:relative;" data-aos="fade-up" data-aos-delay="200">
+      <!-- Connecting line (desktop) -->
+      <div style="display:none;position:absolute;top:52px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(61,99,255,0.2),transparent);" class="d-lg-block"></div>
 
-      <!-- Experience Column -->
-      <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
-          <div style="width:44px;height:44px;border-radius:12px;background:rgba(61,99,255,0.1);border:1px solid rgba(61,99,255,0.2);display:flex;align-items:center;justify-content:center;">
-            <i class="bi bi-briefcase" style="font-size:18px;color:var(--accent);"></i>
+      <div class="row" style="gap:12px;">
+        <!-- Step 1 -->
+        <div class="col-6 col-md-4 col-lg" style="padding:6px;" data-aos="fade-up" data-aos-delay="250">
+          <div class="card-base" style="padding:20px 16px;text-align:center;transition:all 0.3s;cursor:default;position:relative;overflow:hidden;height:100%;">
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(61,99,255,0.04),transparent);opacity:0;transition:opacity 0.3s;pointer-events:none;" class="card-hover-bg"></div>
+            <div style="width:44px;height:44px;border-radius:12px;background:rgba(61,99,255,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+              <i class="bi bi-lightbulb" style="font-size:18px;color:var(--accent-light);"></i>
+            </div>
+            <h4 style="font-family:var(--font-display);font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:4px;">Plan</h4>
+            <p style="font-size:0.75rem;color:var(--text-muted);margin:0;">Requirement gathering and domain modeling</p>
           </div>
-          <h3 style="font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--text);margin:0;">Experience</h3>
         </div>
 
-        <!-- Timeline -->
-        <div style="position:relative;padding-left:32px;">
-          <div style="position:absolute;left:11px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent),var(--purple));"></div>
-
-          <div style="position:relative;margin-bottom:28px;" data-aos="fade-up" data-aos-delay="300">
-            <div style="position:absolute;left:-27px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--gradient);box-shadow:0 0 10px rgba(61,99,255,0.5);"></div>
-            <div class="card-base">
-              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
-                <h4 style="font-size:16px;font-weight:700;color:var(--text);margin:0;">Seeking Django Developer Intern</h4>
-                <span style="background:rgba(61,99,255,0.1);color:var(--accent-light);padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;border:1px solid rgba(61,99,255,0.2);white-space:nowrap;">2026 - Present</span>
-              </div>
-              <p style="color:var(--accent-light);font-weight:500;margin-bottom:8px;font-size:14px;">Sipalaya Infotech</p>
-              <p style="color:var(--text-secondary);line-height:1.7;margin:0;font-size:13px;">
-                Completed training in Python Django. Seeking internship to work in Django framework where I can build full-stack real world projects.
-              </p>
+        <!-- Step 2 -->
+        <div class="col-6 col-md-4 col-lg" style="padding:6px;" data-aos="fade-up" data-aos-delay="300">
+          <div class="card-base" style="padding:20px 16px;text-align:center;transition:all 0.3s;cursor:default;position:relative;overflow:hidden;height:100%;">
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(61,99,255,0.04),transparent);opacity:0;transition:opacity 0.3s;pointer-events:none;" class="card-hover-bg"></div>
+            <div style="width:44px;height:44px;border-radius:12px;background:rgba(61,99,255,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+              <i class="bi bi-diagram-3" style="font-size:18px;color:var(--accent-light);"></i>
             </div>
+            <h4 style="font-family:var(--font-display);font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:4px;">Architect</h4>
+            <p style="font-size:0.75rem;color:var(--text-muted);margin:0;">Scalable schemas and system design</p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="col-6 col-md-4 col-lg" style="padding:6px;" data-aos="fade-up" data-aos-delay="350">
+          <div class="card-base" style="padding:20px 16px;text-align:center;transition:all 0.3s;cursor:default;position:relative;overflow:hidden;height:100%;">
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(61,99,255,0.04),transparent);opacity:0;transition:opacity 0.3s;pointer-events:none;" class="card-hover-bg"></div>
+            <div style="width:44px;height:44px;border-radius:12px;background:rgba(61,99,255,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+              <i class="bi bi-code-slash" style="font-size:18px;color:var(--accent-light);"></i>
+            </div>
+            <h4 style="font-family:var(--font-display);font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:4px;">Implement</h4>
+            <p style="font-size:0.75rem;color:var(--text-muted);margin:0;">Clean code with industry patterns</p>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="col-6 col-md-4 col-lg" style="padding:6px;" data-aos="fade-up" data-aos-delay="400">
+          <div class="card-base" style="padding:20px 16px;text-align:center;transition:all 0.3s;cursor:default;position:relative;overflow:hidden;height:100%;">
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(61,99,255,0.04),transparent);opacity:0;transition:opacity 0.3s;pointer-events:none;" class="card-hover-bg"></div>
+            <div style="width:44px;height:44px;border-radius:12px;background:rgba(61,99,255,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+              <i class="bi bi-bug" style="font-size:18px;color:var(--accent-light);"></i>
+            </div>
+            <h4 style="font-family:var(--font-display);font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:4px;">Test</h4>
+            <p style="font-size:0.75rem;color:var(--text-muted);margin:0;">Automated testing for stability</p>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="col-6 col-md-4 col-lg" style="padding:6px;" data-aos="fade-up" data-aos-delay="450">
+          <div class="card-base" style="padding:20px 16px;text-align:center;transition:all 0.3s;cursor:default;position:relative;overflow:hidden;height:100%;">
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(61,99,255,0.04),transparent);opacity:0;transition:opacity 0.3s;pointer-events:none;" class="card-hover-bg"></div>
+            <div style="width:44px;height:44px;border-radius:12px;background:rgba(61,99,255,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+              <i class="bi bi-tools" style="font-size:18px;color:var(--accent-light);"></i>
+            </div>
+            <h4 style="font-family:var(--font-display);font-size:0.95rem;font-weight:600;color:var(--text);margin-bottom:4px;">Maintain</h4>
+            <p style="font-size:0.75rem;color:var(--text-muted);margin:0;">Monitoring and optimization</p>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(61,99,255,0.3),transparent);margin:3rem 24px;"></div>
+</section>
 
-      <!-- Education Column -->
-      <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
-          <div style="width:44px;height:44px;border-radius:12px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);display:flex;align-items:center;justify-content:center;">
-            <i class="bi bi-mortarboard" style="font-size:18px;color:var(--purple);"></i>
+<!-- Experience & Education Timeline -->
+<section class="page-section" style="padding-top:40px;">
+  <div class="container">
+
+    <div class="section-label" data-aos="fade-up">
+      <span class="label-text gradient-text">Experience</span>
+      <div class="label-line"></div>
+    </div>
+    <h2 style="font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;color:var(--text);margin-bottom:0.5rem;" data-aos="fade-up" data-aos-delay="100">The Timeline</h2>
+    <p style="font-size:1rem;color:var(--text-secondary);margin-bottom:3rem;" data-aos="fade-up" data-aos-delay="150">Where the learning happened and the skills were built.</p>
+
+    <!-- Vertical Timeline -->
+    <div style="position:relative;">
+      <!-- Vertical line -->
+      <div style="position:absolute;left:20px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,rgba(61,99,255,0.3),var(--border),var(--border));" class="d-md-none"></div>
+      <div style="position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,rgba(61,99,255,0.3),var(--border),var(--border));transform:translateX(-1px);" class="d-none d-md-block"></div>
+
+      <!-- Entry 1: Seeking Internship (right side) -->
+      <div style="position:relative;margin-bottom:3rem;padding-left:48px;" class="d-md-none" data-aos="fade-up" data-aos-delay="200">
+        <div style="position:absolute;left:14px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(61,99,255,0.3);z-index:2;"></div>
+        <div class="card-base" style="padding:24px;transition:all 0.3s;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);opacity:0.2;"></div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">2026 - Present</span>
+            <span style="color:var(--text-muted);opacity:0.3;">|</span>
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">Sipalaya Infotech</span>
           </div>
-          <h3 style="font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--text);margin:0;">Education</h3>
-        </div>
-
-        <div style="position:relative;padding-left:32px;">
-          <div style="position:absolute;left:11px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--purple),var(--accent));"></div>
-
-          <div style="position:relative;margin-bottom:28px;" data-aos="fade-up" data-aos-delay="300">
-            <div style="position:absolute;left:-27px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--accent));box-shadow:0 0 10px rgba(168,85,247,0.5);"></div>
-            <div class="card-base">
-              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
-                <h4 style="font-size:16px;font-weight:700;color:var(--text);margin:0;">BEIT (Engineering in IT)</h4>
-                <span style="background:rgba(168,85,247,0.1);color:#c084fc;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;border:1px solid rgba(168,85,247,0.2);white-space:nowrap;">2024 - 2028</span>
-              </div>
-              <p style="color:#c084fc;font-weight:500;margin-bottom:8px;font-size:14px;">Pokhara University</p>
-              <p style="color:var(--text-secondary);line-height:1.7;margin:0;font-size:13px;">
-                Focused on gaining knowledge in the engineering field
-              </p>
-            </div>
-          </div>
-
-          <div style="position:relative;margin-bottom:28px;" data-aos="fade-up" data-aos-delay="350">
-            <div style="position:absolute;left:-27px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--accent));box-shadow:0 0 10px rgba(168,85,247,0.5);"></div>
-            <div class="card-base">
-              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
-                <h4 style="font-size:16px;font-weight:700;color:var(--text);margin:0;">(+2) Major Science</h4>
-                <span style="background:rgba(168,85,247,0.1);color:#c084fc;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;border:1px solid rgba(168,85,247,0.2);white-space:nowrap;">2020 - 2022</span>
-              </div>
-              <p style="color:#c084fc;font-weight:500;margin-bottom:8px;font-size:14px;">Nobel Academy</p>
-              <p style="color:var(--text-secondary);line-height:1.7;margin:0;font-size:13px;">
-                GPA: 3.57/4.0
-              </p>
-            </div>
-          </div>
-
-          <div style="position:relative;" data-aos="fade-up" data-aos-delay="400">
-            <div style="position:absolute;left:-27px;top:8px;width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--accent));box-shadow:0 0 10px rgba(168,85,247,0.5);"></div>
-            <div class="card-base">
-              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;flex-wrap:wrap;gap:8px;">
-                <h4 style="font-size:16px;font-weight:700;color:var(--text);margin:0;">School</h4>
-                <span style="background:rgba(168,85,247,0.1);color:#c084fc;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;border:1px solid rgba(168,85,247,0.2);white-space:nowrap;">2020</span>
-              </div>
-              <p style="color:#c084fc;font-weight:500;margin-bottom:8px;font-size:14px;">Gaurishankar Higher Secondary School</p>
-              <p style="color:var(--text-secondary);line-height:1.7;margin:0;font-size:13px;">
-                Major: O.Math
-              </p>
-            </div>
-          </div>
+          <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:6px;">Seeking Django Developer Intern</h3>
+          <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-light);margin-bottom:10px;">Sipalaya Infotech</p>
+          <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin:0;">Completed training in Python Django. Seeking internship to work in Django framework where I can build full-stack real world projects.</p>
         </div>
       </div>
 
+      <!-- Desktop: Entry 1 (right side) -->
+      <div style="position:relative;margin-bottom:3rem;padding-right:calc(50% + 2rem);display:none;" class="d-md-block" data-aos="fade-up" data-aos-delay="200">
+        <div style="position:absolute;left:50%;top:20px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(61,99,255,0.3);transform:translateX(-7px);z-index:2;"></div>
+        <div class="card-base" style="padding:24px;transition:all 0.3s;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);opacity:0.2;"></div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">2026 - Present</span>
+            <span style="color:var(--text-muted);opacity:0.3;">|</span>
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">Sipalaya Infotech</span>
+          </div>
+          <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:6px;">Seeking Django Developer Intern</h3>
+          <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-light);margin-bottom:10px;">Sipalaya Infotech</p>
+          <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin:0;">Completed training in Python Django. Seeking internship to work in Django framework where I can build full-stack real world projects.</p>
+        </div>
+      </div>
+
+      <!-- Entry 2: BEIT (left side, green) -->
+      <div style="position:relative;margin-bottom:3rem;padding-left:48px;" class="d-md-none" data-aos="fade-up" data-aos-delay="300">
+        <div style="position:absolute;left:14px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--green);box-shadow:0 0 12px rgba(34,197,94,0.3);z-index:2;"></div>
+        <div class="card-base" style="padding:24px;transition:all 0.3s;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--green);opacity:0.2;"></div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">2024 - 2028</span>
+            <span style="color:var(--text-muted);opacity:0.3;">|</span>
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">Pokhara University</span>
+          </div>
+          <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:6px;">BEIT (Engineering in IT)</h3>
+          <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--green);margin-bottom:10px;">Pokhara University</p>
+          <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin:0;">Focused on gaining knowledge in the engineering field</p>
+        </div>
+      </div>
+
+      <!-- Desktop: Entry 2 (left side, green) -->
+      <div style="position:relative;margin-bottom:3rem;padding-left:calc(50% + 2rem);display:none;" class="d-md-block" data-aos="fade-left" data-aos-delay="300">
+        <div style="position:absolute;left:50%;top:20px;width:14px;height:14px;border-radius:50%;background:var(--green);box-shadow:0 0 12px rgba(34,197,94,0.3);transform:translateX(-7px);z-index:2;"></div>
+        <div class="card-base" style="padding:24px;transition:all 0.3s;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--green);opacity:0.2;"></div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">2024 - 2028</span>
+            <span style="color:var(--text-muted);opacity:0.3;">|</span>
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">Pokhara University</span>
+          </div>
+          <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:6px;">BEIT (Engineering in IT)</h3>
+          <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--green);margin-bottom:10px;">Pokhara University</p>
+          <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin:0;">Focused on gaining knowledge in the engineering field</p>
+        </div>
+      </div>
+
+      <!-- Entry 3: +2 Science (right side, purple) -->
+      <div style="position:relative;margin-bottom:3rem;padding-left:48px;" class="d-md-none" data-aos="fade-up" data-aos-delay="400">
+        <div style="position:absolute;left:14px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--purple);box-shadow:0 0 12px rgba(168,85,247,0.3);z-index:2;"></div>
+        <div class="card-base" style="padding:24px;transition:all 0.3s;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--purple);opacity:0.2;"></div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">2020 - 2022</span>
+            <span style="color:var(--text-muted);opacity:0.3;">|</span>
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">Nobel Academy</span>
+          </div>
+          <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:6px;">(+2) Major Science</h3>
+          <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--purple);margin-bottom:10px;">Nobel Academy</p>
+          <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin:0;">GPA: 3.57/4.0</p>
+        </div>
+      </div>
+
+      <!-- Desktop: Entry 3 (right side, purple) -->
+      <div style="position:relative;margin-bottom:3rem;padding-right:calc(50% + 2rem);display:none;" class="d-md-block" data-aos="fade-up" data-aos-delay="400">
+        <div style="position:absolute;left:50%;top:20px;width:14px;height:14px;border-radius:50%;background:var(--purple);box-shadow:0 0 12px rgba(168,85,247,0.3);transform:translateX(-7px);z-index:2;"></div>
+        <div class="card-base" style="padding:24px;transition:all 0.3s;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--purple);opacity:0.2;"></div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">2020 - 2022</span>
+            <span style="color:var(--text-muted);opacity:0.3;">|</span>
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">Nobel Academy</span>
+          </div>
+          <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:6px;">(+2) Major Science</h3>
+          <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--purple);margin-bottom:10px;">Nobel Academy</p>
+          <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin:0;">GPA: 3.57/4.0</p>
+        </div>
+      </div>
+
+      <!-- Entry 4: School (left side) -->
+      <div style="position:relative;margin-bottom:3rem;padding-left:48px;" class="d-md-none" data-aos="fade-up" data-aos-delay="500">
+        <div style="position:absolute;left:14px;top:20px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(61,99,255,0.3);z-index:2;"></div>
+        <div class="card-base" style="padding:24px;transition:all 0.3s;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);opacity:0.2;"></div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">2020</span>
+            <span style="color:var(--text-muted);opacity:0.3;">|</span>
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">Gaurishankar Higher Secondary School</span>
+          </div>
+          <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:6px;">School</h3>
+          <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-light);margin-bottom:10px;">Gaurishankar Higher Secondary School</p>
+          <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin:0;">Major: O.Math</p>
+        </div>
+      </div>
+
+      <!-- Desktop: Entry 4 (left side) -->
+      <div style="position:relative;padding-left:calc(50% + 2rem);display:none;" class="d-md-block" data-aos="fade-left" data-aos-delay="500">
+        <div style="position:absolute;left:50%;top:20px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(61,99,255,0.3);transform:translateX(-7px);z-index:2;"></div>
+        <div class="card-base" style="padding:24px;transition:all 0.3s;position:relative;overflow:hidden;">
+          <div style="position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);opacity:0.2;"></div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">2020</span>
+            <span style="color:var(--text-muted);opacity:0.3;">|</span>
+            <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-muted);">Gaurishankar Higher Secondary School</span>
+          </div>
+          <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:6px;">School</h3>
+          <p style="font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-light);margin-bottom:10px;">Gaurishankar Higher Secondary School</p>
+          <p style="font-size:0.85rem;color:var(--text-secondary);line-height:1.6;margin:0;">Major: O.Math</p>
+        </div>
+      </div>
     </div>
+
   </div>
 </section>
 
 <style>
 @keyframes blink { 50%{opacity:0} }
+.card-base:hover .card-hover-bg { opacity:1 !important; }
 </style>
 
 {% endblock content %}

@@ -50,7 +50,7 @@ class Testinomial(models.Model):
     email=models.EmailField(null=True)
     feedback=models.TextField(null=True)
     image=models.ImageField(upload_to="testinomial_image",null=True)
-    is_active=models.BooleanField(default=True)
+    is_active=models.BooleanField(default=False)
 
 
 class Skill(models.Model):

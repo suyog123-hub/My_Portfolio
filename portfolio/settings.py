@@ -24,13 +24,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8&59^$=dvls_!9l1n=ir0e+3lq+w-r@56k4^i)fa2qir!gu$!5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'suyogkhadak.onrender.com',
     'localhost',
     '127.0.0.1',
 ]
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -121,15 +123,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
+STATIC_URL = 'static/'
+MEDIA_ROOT=BASE_DIR/'media'
+MEDIA_URl='/media/'
 
-
-# ✅ Static files
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static'
-
-# ✅ Media files (user-uploaded)
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 
 
 import os

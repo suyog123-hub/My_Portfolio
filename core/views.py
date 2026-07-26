@@ -98,7 +98,7 @@ def project(request):
             'desc': 'A weather forecasting application that provides real-time weather data, forecasts, and visualizations. Built with clean UI design and API integration for accurate weather information.',
             'category': 'Full Stack',
             'language_used': 'Python Django HTML CSS API',
-            'url': '#',
+            'url': 'https://suyogapi.pythonanywhere.com/',
             'image_url': '/static/images/weather.png',
             'is_default': True,
         },

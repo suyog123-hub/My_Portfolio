@@ -39,122 +39,137 @@
         <span class="proj-filter-fill"></span>
         <span class="proj-filter-text">All Projects</span>
       </button>
-      <button class="proj-filter" data-filter="fullstack">
+      {% for h in project_headings %}
+      <button class="proj-filter" data-filter="{{ h.id }}">
         <span class="proj-filter-glow"></span>
         <span class="proj-filter-fill"></span>
-        <span class="proj-filter-text">Full Stack</span>
+        <span class="proj-filter-text">{{ h.title }}</span>
       </button>
-      <button class="proj-filter" data-filter="backend">
-        <span class="proj-filter-glow"></span>
-        <span class="proj-filter-fill"></span>
-        <span class="proj-filter-text">Backend</span>
-      </button>
+      {% endfor %}
     </div>
 
     <div class="proj-grid" id="projGrid">
-
-      <div class="proj-card" data-category="fullstack" data-proj-a="card" data-delay="0">
+      {% for i in item %}
+      <div class="proj-card" data-category="{{ i.category_id }}" data-proj-a="card" data-delay="{{ forloop.counter0 }}">
         <div class="proj-card-3d" data-tilt>
           <div class="proj-card-glow-border"></div>
           <div class="proj-card-glass">
+
             <div class="proj-card-img-wrap">
               <div class="proj-card-browser">
                 <div class="proj-card-browser-bar">
-                  <div class="proj-card-browser-dots"><span></span><span></span><span></span></div>
+                  <div class="proj-card-browser-dots">
+                    <span></span><span></span><span></span>
+                  </div>
                   <div class="proj-card-browser-text">project-preview</div>
                 </div>
-                <img class="proj-card-img" src="{% static 'images/portfolio.png' %}" alt="Portfolio Website" loading="lazy">
+                {% if i.image %}
+                <img class="proj-card-img" src="{{ i.image.url }}" alt="{{ i.heading }}" loading="lazy">
+                {% else %}
+                <img class="proj-card-img" src="{% static 'images/portfolio.png' %}" alt="{{ i.heading }}" loading="lazy">
+                {% endif %}
               </div>
               <div class="proj-card-shine"></div>
-              <div class="proj-card-hover-overlay"><div class="proj-card-hover-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></div></div>
-            </div>
-            <div class="proj-card-content">
-              <span class="proj-card-category">Full Stack</span>
-              <h3 class="proj-card-title">Portfolio Website</h3>
-              <p class="proj-card-desc">A modern, responsive portfolio website built with Django and custom CSS. Features 3D animations, smooth scroll effects, and an integrated contact form with email notifications.</p>
-              <div class="proj-card-tags">
-                <span class="proj-card-tag">Django</span>
-                <span class="proj-card-tag">HTML</span>
-                <span class="proj-card-tag">CSS</span>
-                <span class="proj-card-tag">JavaScript</span>
+              <div class="proj-card-hover-overlay">
+                <div class="proj-card-hover-icon">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </div>
               </div>
+            </div>
+
+            <div class="proj-card-content">
+              <span class="proj-card-category">{{ i.category }}</span>
+              <h3 class="proj-card-title">{{ i.heading }}</h3>
+              <p class="proj-card-desc">{{ i.desc|truncatechars:150 }}</p>
+
+              <div class="proj-card-tags">
+                {% for tag in i.language_used.split %}
+                <span class="proj-card-tag">{{ tag }}</span>
+                {% endfor %}
+              </div>
+
               <div class="proj-card-btns">
-                <button class="proj-btn proj-btn-primary magnetic" onclick="projOpenModal(0)"><span class="proj-btn-ripple"></span><span class="proj-btn-text">View Details</span><i class="fa-solid fa-arrow-right proj-btn-arrow"></i></button>
-                <a href="https://suyogkhadak.onrender.com" target="_blank" class="proj-btn proj-btn-ghost magnetic"><span class="proj-btn-ripple"></span><span class="proj-btn-text">Live Demo</span><i class="fa-solid fa-arrow-up-right-from-square proj-btn-arrow"></i></a>
+                <button class="proj-btn proj-btn-primary magnetic" data-index="{{ forloop.counter0 }}" data-source="db" onclick="projOpenModal(this)">
+                  <span class="proj-btn-ripple"></span>
+                  <span class="proj-btn-text">View Details</span>
+                  <i class="fa-solid fa-arrow-right proj-btn-arrow"></i>
+                </button>
+                <a href="{{ i.url }}" target="_blank" class="proj-btn proj-btn-ghost magnetic">
+                  <span class="proj-btn-ripple"></span>
+                  <span class="proj-btn-text">Live Demo</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square proj-btn-arrow"></i>
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
+      {% endfor %}
 
-      <div class="proj-card" data-category="fullstack" data-proj-a="card" data-delay="1">
+      {% for d in default_projects %}
+      <div class="proj-card" data-category="default" data-proj-a="card" data-delay="{{ forloop.counter0 }}">
         <div class="proj-card-3d" data-tilt>
           <div class="proj-card-glow-border"></div>
           <div class="proj-card-glass">
+
             <div class="proj-card-img-wrap">
               <div class="proj-card-browser">
                 <div class="proj-card-browser-bar">
-                  <div class="proj-card-browser-dots"><span></span><span></span><span></span></div>
+                  <div class="proj-card-browser-dots">
+                    <span></span><span></span><span></span>
+                  </div>
                   <div class="proj-card-browser-text">project-preview</div>
                 </div>
-                <img class="proj-card-img" src="{% static 'images/bphotel.png' %}" alt="BP Hotel Management" loading="lazy">
+                {% if d.image_url %}
+                <img class="proj-card-img" src="{{ d.image_url }}" alt="{{ d.heading }}" loading="lazy">
+                {% else %}
+                <img class="proj-card-img" src="{% static 'images/portfolio.png' %}" alt="{{ d.heading }}" loading="lazy">
+                {% endif %}
               </div>
               <div class="proj-card-shine"></div>
-              <div class="proj-card-hover-overlay"><div class="proj-card-hover-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></div></div>
-            </div>
-            <div class="proj-card-content">
-              <span class="proj-card-category">Full Stack</span>
-              <h3 class="proj-card-title">BP Hotel Management</h3>
-              <p class="proj-card-desc">A complete hotel management system with room booking, guest management, payment processing, and admin dashboard. Built with Python and deployed on PythonAnywhere.</p>
-              <div class="proj-card-tags">
-                <span class="proj-card-tag">Python</span>
-                <span class="proj-card-tag">Django</span>
-                <span class="proj-card-tag">HTML</span>
-                <span class="proj-card-tag">CSS</span>
+              <div class="proj-card-hover-overlay">
+                <div class="proj-card-hover-icon">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </div>
               </div>
+            </div>
+
+            <div class="proj-card-content">
+              <span class="proj-card-category">{{ d.category }}</span>
+              <h3 class="proj-card-title">{{ d.heading }}</h3>
+              <p class="proj-card-desc">{{ d.desc|truncatechars:150 }}</p>
+
+              <div class="proj-card-tags">
+                {% for tag in d.language_used.split %}
+                <span class="proj-card-tag">{{ tag }}</span>
+                {% endfor %}
+              </div>
+
               <div class="proj-card-btns">
-                <button class="proj-btn proj-btn-primary magnetic" onclick="projOpenModal(1)"><span class="proj-btn-ripple"></span><span class="proj-btn-text">View Details</span><i class="fa-solid fa-arrow-right proj-btn-arrow"></i></button>
-                <a href="https://bphotel.pythonanywhere.com" target="_blank" class="proj-btn proj-btn-ghost magnetic"><span class="proj-btn-ripple"></span><span class="proj-btn-text">Live Demo</span><i class="fa-solid fa-arrow-up-right-from-square proj-btn-arrow"></i></a>
+                <button class="proj-btn proj-btn-primary magnetic" data-index="{{ forloop.counter0 }}" data-source="default" onclick="projOpenModal(this)">
+                  <span class="proj-btn-ripple"></span>
+                  <span class="proj-btn-text">View Details</span>
+                  <i class="fa-solid fa-arrow-right proj-btn-arrow"></i>
+                </button>
+                <a href="{{ d.url }}" target="_blank" class="proj-btn proj-btn-ghost magnetic">
+                  <span class="proj-btn-ripple"></span>
+                  <span class="proj-btn-text">Live Demo</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square proj-btn-arrow"></i>
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
+      {% endfor %}
 
-      <div class="proj-card" data-category="fullstack" data-proj-a="card" data-delay="2">
-        <div class="proj-card-3d" data-tilt>
-          <div class="proj-card-glow-border"></div>
-          <div class="proj-card-glass">
-            <div class="proj-card-img-wrap">
-              <div class="proj-card-browser">
-                <div class="proj-card-browser-bar">
-                  <div class="proj-card-browser-dots"><span></span><span></span><span></span></div>
-                  <div class="proj-card-browser-text">project-preview</div>
-                </div>
-                <img class="proj-card-img" src="{% static 'images/weather.png' %}" alt="Weather Application" loading="lazy">
-              </div>
-              <div class="proj-card-shine"></div>
-              <div class="proj-card-hover-overlay"><div class="proj-card-hover-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></div></div>
-            </div>
-            <div class="proj-card-content">
-              <span class="proj-card-category">Full Stack</span>
-              <h3 class="proj-card-title">Weather Application</h3>
-              <p class="proj-card-desc">A weather forecasting application that provides real-time weather data, forecasts, and visualizations with clean UI design and API integration.</p>
-              <div class="proj-card-tags">
-                <span class="proj-card-tag">Python</span>
-                <span class="proj-card-tag">Django</span>
-                <span class="proj-card-tag">API</span>
-                <span class="proj-card-tag">CSS</span>
-              </div>
-              <div class="proj-card-btns">
-                <button class="proj-btn proj-btn-primary magnetic" onclick="projOpenModal(2)"><span class="proj-btn-ripple"></span><span class="proj-btn-text">View Details</span><i class="fa-solid fa-arrow-right proj-btn-arrow"></i></button>
-                <a href="#" target="_blank" class="proj-btn proj-btn-ghost magnetic"><span class="proj-btn-ripple"></span><span class="proj-btn-text">Live Demo</span><i class="fa-solid fa-arrow-up-right-from-square proj-btn-arrow"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
+      {% if not item %}
+      <div class="proj-empty" data-proj-a="fade">
+        <div class="proj-empty-icon"><i class="fa-regular fa-folder-open"></i></div>
+        <h3>Exciting Projects Coming Soon</h3>
+        <p>Stay tuned for upcoming projects.</p>
       </div>
-
+      {% endif %}
     </div>
   </div>
 
@@ -1372,35 +1387,37 @@
   /* ================================================================
      MODAL
      ================================================================ */
-  window._projProjects = [
+  window._projDB = [
+    {% for i in item %}
     {
-      image: '{% static "images/portfolio.png" %}',
-      title: 'Portfolio Website',
-      desc: 'A modern, responsive portfolio website built with Django and custom CSS. Features 3D animations, smooth scroll effects, dynamic project showcase, and an integrated contact form with email notifications.',
-      category: 'Full Stack',
-      url: 'https://suyogkhadak.onrender.com',
-      tags: ['Django', 'HTML', 'CSS', 'JavaScript']
-    },
-    {
-      image: '{% static "images/bphotel.png" %}',
-      title: 'BP Hotel Management',
-      desc: 'A complete hotel management system with room booking, guest management, payment processing, and admin dashboard. Built with Python and deployed on PythonAnywhere for reliable hosting.',
-      category: 'Full Stack',
-      url: 'https://bphotel.pythonanywhere.com',
-      tags: ['Python', 'Django', 'HTML', 'CSS']
-    },
-    {
-      image: '{% static "images/weather.png" %}',
-      title: 'Weather Application',
-      desc: 'A weather forecasting application that provides real-time weather data, forecasts, and visualizations. Built with clean UI design and API integration for accurate weather information.',
-      category: 'Full Stack',
-      url: '#',
-      tags: ['Python', 'Django', 'API', 'CSS']
-    }
+      image: '{% if i.image %}{{ i.image.url }}{% else %}{% static "images/portfolio.png" %}{% endif %}',
+      title: '{{ i.heading }}',
+      desc: `{{ i.desc|escapejs }}`,
+      category: '{{ i.category }}',
+      url: '{{ i.url }}',
+      tags: '{{ i.language_used }}'.split(' ')
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
   ];
 
-  window.projOpenModal = function(idx) {
-    const p = window._projProjects[idx];
+  window._projDefault = [
+    {% for d in default_projects %}
+    {
+      image: '{% if d.image_url %}{{ d.image_url }}{% else %}{% static "images/portfolio.png" %}{% endif %}',
+      title: '{{ d.heading }}',
+      desc: `{{ d.desc|escapejs }}`,
+      category: '{{ d.category }}',
+      url: '{{ d.url }}',
+      tags: '{{ d.language_used }}'.split(' ')
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ];
+
+  window.projOpenModal = function(btn) {
+    const idx = parseInt(btn.dataset.index);
+    const source = btn.dataset.source;
+    const projects = source === 'default' ? window._projDefault : window._projDB;
+    const p = projects[idx];
     if (!p) return;
     const modal = document.getElementById('projModal');
     document.getElementById('projModalImg').innerHTML = '<img src="' + p.image + '" alt="' + p.title + '">';
@@ -1430,6 +1447,7 @@
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
 
+    // Re-attach magnetic to modal buttons
     modal.querySelectorAll('.magnetic').forEach(b => {
       b.addEventListener('mousemove', e => {
         const rect = b.getBoundingClientRect();

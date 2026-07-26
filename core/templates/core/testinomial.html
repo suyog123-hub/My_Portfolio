@@ -37,91 +37,88 @@
     <!-- ===== CAROUSEL ===== -->
     <div class="tst-carousel" id="testCarousel" data-tst-a="fade">
       <div class="tst-carousel-track" id="testTrack">
-        {% for i in testinomial_items %}
-        <div class="tst-slide" data-index="{{ forloop.counter0 }}">
+
+        <div class="tst-slide" data-index="0">
           <div class="tst-card-3d">
             <div class="tst-card-glow-border"></div>
             <div class="tst-card-glass">
-
-              <div class="tst-card-quote">
-                <i class="fa-solid fa-quote-left"></i>
-              </div>
-
+              <div class="tst-card-quote"><i class="fa-solid fa-quote-left"></i></div>
               <div class="tst-card-stars">
-                {% for star in "12345" %}
-                <span class="tst-star">
-                  <i class="fa-solid fa-star"></i>
-                </span>
-                {% endfor %}
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
               </div>
-
-              <p class="tst-card-feedback">"{{ i.feedback }}"</p>
-
+              <p class="tst-card-feedback">"Suyog delivered an exceptional portfolio website that exceeded all expectations. His attention to detail, clean code, and creative design made our project stand out. Highly recommend his work!"</p>
               <div class="tst-card-author">
                 <div class="tst-card-avatar-wrap">
-                  {% if i.image %}
-                  <img class="tst-card-avatar" src="{{ i.image.url }}" alt="{{ i.name }}" loading="lazy">
-                  {% else %}
-                  <div class="tst-card-avatar tst-card-avatar-fallback">
-                    {{ i.name|first }}
-                  </div>
-                  {% endif %}
+                  <div class="tst-card-avatar tst-card-avatar-fallback">R</div>
                   <div class="tst-card-avatar-glow"></div>
                 </div>
                 <div class="tst-card-author-info">
-                  <h4 class="tst-card-name">{{ i.name }}</h4>
-                  <p class="tst-card-role">{{ i.role }}{% if i.company %}, {{ i.company }}{% endif %}</p>
+                  <h4 class="tst-card-name">Ram Sharma</h4>
+                  <p class="tst-card-role">Project Manager, TechCorp Nepal</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {% endfor %}
 
-        {% for d in default_testimonials %}
-        <div class="tst-slide" data-index="{{ forloop.counter0 }}">
+        <div class="tst-slide" data-index="1">
           <div class="tst-card-3d">
             <div class="tst-card-glow-border"></div>
             <div class="tst-card-glass">
-
-              <div class="tst-card-quote">
-                <i class="fa-solid fa-quote-left"></i>
-              </div>
-
+              <div class="tst-card-quote"><i class="fa-solid fa-quote-left"></i></div>
               <div class="tst-card-stars">
-                {% for star in "12345" %}
-                <span class="tst-star">
-                  <i class="fa-solid fa-star"></i>
-                </span>
-                {% endfor %}
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
               </div>
-
-              <p class="tst-card-feedback">"{{ d.feedback }}"</p>
-
+              <p class="tst-card-feedback">"Working with Suyog was a fantastic experience. He built a robust hotel management system that streamlined our operations. His backend skills and problem-solving abilities are top-notch."</p>
               <div class="tst-card-author">
                 <div class="tst-card-avatar-wrap">
-                  <div class="tst-card-avatar tst-card-avatar-fallback">
-                    {{ d.name|first }}
-                  </div>
+                  <div class="tst-card-avatar tst-card-avatar-fallback">S</div>
                   <div class="tst-card-avatar-glow"></div>
                 </div>
                 <div class="tst-card-author-info">
-                  <h4 class="tst-card-name">{{ d.name }}</h4>
-                  <p class="tst-card-role">{{ d.role }}{% if d.company %}, {{ d.company }}{% endif %}</p>
+                  <h4 class="tst-card-name">Sita Patel</h4>
+                  <p class="tst-card-role">CTO, StartupHub</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {% endfor %}
 
-        {% if not testinomial_items and not default_testimonials %}
-        <div class="tst-empty">
-          <div class="tst-empty-icon"><i class="fa-regular fa-comment-dots"></i></div>
-          <h3>No Testimonials Yet</h3>
-          <p>Be the first to share your experience!</p>
+        <div class="tst-slide" data-index="2">
+          <div class="tst-card-3d">
+            <div class="tst-card-glow-border"></div>
+            <div class="tst-card-glass">
+              <div class="tst-card-quote"><i class="fa-solid fa-quote-left"></i></div>
+              <div class="tst-card-stars">
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
+              </div>
+              <p class="tst-card-feedback">"Suyog is a talented developer who truly understands full-stack development. He delivered the project on time with clean, maintainable code. The REST API he built was well-structured and thoroughly documented."</p>
+              <div class="tst-card-author">
+                <div class="tst-card-avatar-wrap">
+                  <div class="tst-card-avatar tst-card-avatar-fallback">A</div>
+                  <div class="tst-card-avatar-glow"></div>
+                </div>
+                <div class="tst-card-author-info">
+                  <h4 class="tst-card-name">Anil Kumar</h4>
+                  <p class="tst-card-role">Client, Freelance Project</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        {% endif %}
+
       </div>
 
       <button class="tst-nav tst-nav-prev" id="testPrev" aria-label="Previous">

@@ -63,7 +63,11 @@
                   </div>
                   <div class="proj-card-browser-text">project-preview</div>
                 </div>
+                {% if i.image %}
                 <img class="proj-card-img" src="{{ i.image.url }}" alt="{{ i.heading }}" loading="lazy">
+                {% else %}
+                <img class="proj-card-img" src="{% static 'images/portfolio1.png' %}" alt="{{ i.heading }}" loading="lazy">
+                {% endif %}
               </div>
               <div class="proj-card-shine"></div>
               <div class="proj-card-hover-overlay">
@@ -1327,7 +1331,7 @@
   window._projProjects = [
     {% for i in item %}
     {
-      image: '{{ i.image.url }}',
+      image: '{% if i.image %}{{ i.image.url }}{% else %}{% static "images/portfolio1.png" %}{% endif %}',
       title: '{{ i.heading }}',
       desc: `{{ i.desc|escapejs }}`,
       category: '{{ i.category }}',

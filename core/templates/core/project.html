@@ -66,7 +66,7 @@
                 {% if i.image %}
                 <img class="proj-card-img" src="{{ i.image.url }}" alt="{{ i.heading }}" loading="lazy">
                 {% else %}
-                <img class="proj-card-img" src="{% static 'images/portfolio1.png' %}" alt="{{ i.heading }}" loading="lazy">
+                <img class="proj-card-img" src="{% static 'images/portfolio.png' %}" alt="{{ i.heading }}" loading="lazy">
                 {% endif %}
               </div>
               <div class="proj-card-shine"></div>
@@ -123,7 +123,7 @@
                 {% if d.image_url %}
                 <img class="proj-card-img" src="{{ d.image_url }}" alt="{{ d.heading }}" loading="lazy">
                 {% else %}
-                <img class="proj-card-img" src="{% static 'images/portfolio1.png' %}" alt="{{ d.heading }}" loading="lazy">
+                <img class="proj-card-img" src="{% static 'images/portfolio.png' %}" alt="{{ d.heading }}" loading="lazy">
                 {% endif %}
               </div>
               <div class="proj-card-shine"></div>
@@ -1390,7 +1390,7 @@
   window._projDB = [
     {% for i in item %}
     {
-      image: '{% if i.image %}{{ i.image.url }}{% else %}{% static "images/portfolio1.png" %}{% endif %}',
+      image: '{% if i.image %}{{ i.image.url }}{% else %}{% static "images/portfolio.png" %}{% endif %}',
       title: '{{ i.heading }}',
       desc: `{{ i.desc|escapejs }}`,
       category: '{{ i.category }}',
@@ -1403,7 +1403,7 @@
   window._projDefault = [
     {% for d in default_projects %}
     {
-      image: '{% if d.image_url %}{{ d.image_url }}{% else %}{% static "images/portfolio1.png" %}{% endif %}',
+      image: '{% if d.image_url %}{{ d.image_url }}{% else %}{% static "images/portfolio.png" %}{% endif %}',
       title: '{{ d.heading }}',
       desc: `{{ d.desc|escapejs }}`,
       category: '{{ d.category }}',

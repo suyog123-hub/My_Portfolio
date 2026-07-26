@@ -89,7 +89,7 @@
               </div>
 
               <div class="proj-card-btns">
-                <button class="proj-btn proj-btn-primary magnetic" data-index="{{ forloop.counter0 }}" onclick="projOpenModal(this)">
+                <button class="proj-btn proj-btn-primary magnetic" data-index="{{ forloop.counter0 }}" data-source="db" onclick="projOpenModal(this)">
                   <span class="proj-btn-ripple"></span>
                   <span class="proj-btn-text">View Details</span>
                   <i class="fa-solid fa-arrow-right proj-btn-arrow"></i>
@@ -104,13 +104,72 @@
           </div>
         </div>
       </div>
-      {% empty %}
+      {% endfor %}
+
+      {% for d in default_projects %}
+      <div class="proj-card" data-category="default" data-proj-a="card" data-delay="{{ forloop.counter0 }}">
+        <div class="proj-card-3d" data-tilt>
+          <div class="proj-card-glow-border"></div>
+          <div class="proj-card-glass">
+
+            <div class="proj-card-img-wrap">
+              <div class="proj-card-browser">
+                <div class="proj-card-browser-bar">
+                  <div class="proj-card-browser-dots">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <div class="proj-card-browser-text">project-preview</div>
+                </div>
+                {% if d.image_url %}
+                <img class="proj-card-img" src="{{ d.image_url }}" alt="{{ d.heading }}" loading="lazy">
+                {% else %}
+                <img class="proj-card-img" src="{% static 'images/portfolio1.png' %}" alt="{{ d.heading }}" loading="lazy">
+                {% endif %}
+              </div>
+              <div class="proj-card-shine"></div>
+              <div class="proj-card-hover-overlay">
+                <div class="proj-card-hover-icon">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="proj-card-content">
+              <span class="proj-card-category">{{ d.category }}</span>
+              <h3 class="proj-card-title">{{ d.heading }}</h3>
+              <p class="proj-card-desc">{{ d.desc|truncatechars:150 }}</p>
+
+              <div class="proj-card-tags">
+                {% for tag in d.language_used.split %}
+                <span class="proj-card-tag">{{ tag }}</span>
+                {% endfor %}
+              </div>
+
+              <div class="proj-card-btns">
+                <button class="proj-btn proj-btn-primary magnetic" data-index="{{ forloop.counter0 }}" data-source="default" onclick="projOpenModal(this)">
+                  <span class="proj-btn-ripple"></span>
+                  <span class="proj-btn-text">View Details</span>
+                  <i class="fa-solid fa-arrow-right proj-btn-arrow"></i>
+                </button>
+                <a href="{{ d.url }}" target="_blank" class="proj-btn proj-btn-ghost magnetic">
+                  <span class="proj-btn-ripple"></span>
+                  <span class="proj-btn-text">Live Demo</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square proj-btn-arrow"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+      {% if not item %}
       <div class="proj-empty" data-proj-a="fade">
         <div class="proj-empty-icon"><i class="fa-regular fa-folder-open"></i></div>
         <h3>Projects Coming Soon</h3>
         <p>Stay tuned for upcoming projects.</p>
       </div>
-      {% endfor %}
+      {% endif %}
     </div>
   </div>
 
@@ -1328,7 +1387,7 @@
   /* ================================================================
      MODAL
      ================================================================ */
-  window._projProjects = [
+  window._projDB = [
     {% for i in item %}
     {
       image: '{% if i.image %}{{ i.image.url }}{% else %}{% static "images/portfolio1.png" %}{% endif %}',
@@ -1341,9 +1400,25 @@
     {% endfor %}
   ];
 
+  window._projDefault = [
+    {% for d in default_projects %}
+    {
+      image: '{% if d.image_url %}{{ d.image_url }}{% else %}{% static "images/portfolio1.png" %}{% endif %}',
+      title: '{{ d.heading }}',
+      desc: `{{ d.desc|escapejs }}`,
+      category: '{{ d.category }}',
+      url: '{{ d.url }}',
+      tags: '{{ d.language_used }}'.split(' ')
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ];
+
   window.projOpenModal = function(btn) {
     const idx = parseInt(btn.dataset.index);
-    const p = window._projProjects[idx];
+    const source = btn.dataset.source;
+    const projects = source === 'default' ? window._projDefault : window._projDB;
+    const p = projects[idx];
+    if (!p) return;
     const modal = document.getElementById('projModal');
     document.getElementById('projModalImg').innerHTML = '<img src="' + p.image + '" alt="' + p.title + '">';
     document.getElementById('projModalBody').innerHTML =

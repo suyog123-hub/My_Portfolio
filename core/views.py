@@ -73,9 +73,41 @@ def project(request):
         item=Project_items.objects.filter(category=cateid) 
     else:
         item=Project_items.objects.all()
+
+    default_projects = [
+        {
+            'heading': 'Portfolio Website',
+            'desc': 'A modern, responsive portfolio website built with Django and custom CSS. Features 3D animations, smooth scroll effects, dynamic project showcase, and an integrated contact form with email notifications.',
+            'category': 'Full Stack',
+            'language_used': 'Django HTML CSS JavaScript',
+            'url': 'https://suyogkhadak.onrender.com',
+            'image_url': '',
+            'is_default': True,
+        },
+        {
+            'heading': 'BP Hotel Management',
+            'desc': 'A complete hotel management system with room booking, guest management, payment processing, and admin dashboard. Built with Python and deployed on PythonAnywhere for reliable hosting.',
+            'category': 'Full Stack',
+            'language_used': 'Python Django HTML CSS',
+            'url': 'https://bphotel.pythonanywhere.com',
+            'image_url': '',
+            'is_default': True,
+        },
+        {
+            'heading': 'REST API Backend',
+            'desc': 'A scalable RESTful API backend built with Django REST Framework. Features JWT authentication, CRUD operations, pagination, filtering, and comprehensive API documentation with Swagger.',
+            'category': 'Backend',
+            'language_used': 'Python Django REST DRF PostgreSQL',
+            'url': '#',
+            'image_url': '',
+            'is_default': True,
+        },
+    ]
+
     context={
             'project_headings':project_headings,
             'item':item,
+            'default_projects': default_projects,
     }
     return render(request,'core/project.html',context)
 def skills(request):
@@ -103,8 +135,37 @@ def testinomial(request):
         user.save()
         messages.success(request, f'Hi {name}, your feedback has been submitted!')
         return redirect('testinomial')
+
+    default_testimonials = [
+        {
+            'name': 'Ram Sharma',
+            'role': 'Project Manager',
+            'company': 'TechCorp Nepal',
+            'feedback': 'Suyog delivered an exceptional portfolio website that exceeded all expectations. His attention to detail, clean code, and creative design made our project stand out. Highly recommend his work!',
+            'image_url': '',
+            'is_default': True,
+        },
+        {
+            'name': 'Sita Patel',
+            'role': 'CTO',
+            'company': 'StartupHub',
+            'feedback': 'Working with Suyog was a fantastic experience. He built a robust hotel management system that streamlined our operations. His backend skills and problem-solving abilities are top-notch.',
+            'image_url': '',
+            'is_default': True,
+        },
+        {
+            'name': 'Anil Kumar',
+            'role': 'Client',
+            'company': 'Freelance Project',
+            'feedback': 'Suyog is a talented developer who truly understands full-stack development. He delivered the project on time with clean, maintainable code. The REST API he built was well-structured and thoroughly documented.',
+            'image_url': '',
+            'is_default': True,
+        },
+    ]
+    
     context={
-        'testinomial_items':testinomial_items
+        'testinomial_items':testinomial_items,
+        'default_testimonials': default_testimonials,
     }
     
     return render(request, 'core/testinomial.html',context)

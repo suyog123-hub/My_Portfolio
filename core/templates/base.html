@@ -1192,6 +1192,50 @@
       transition: opacity 0.15s ease, visibility 0.15s ease;
     }
     #pageTransition.active { opacity: 1; visibility: visible; pointer-events: all; }
+
+    /* 3D Perspective Grid Floor */
+    #grid3d {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      height: 45vh; z-index: 0; pointer-events: none;
+      perspective: 600px;
+      overflow: hidden;
+      mask-image: linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 85%);
+      -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 85%);
+    }
+    #grid3d-inner {
+      position: absolute; bottom: -20%; left: -20%; right: -20%;
+      height: 200%;
+      transform: rotateX(65deg);
+      transform-origin: bottom center;
+      background-image:
+        linear-gradient(rgba(79,125,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(79,125,255,0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridScroll 20s linear infinite;
+    }
+    @keyframes gridScroll {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 60px; }
+    }
+    #grid3d-inner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 120% 60% at 50% 0%, transparent 40%, rgba(5,5,7,0.8) 100%),
+        linear-gradient(to top, rgba(79,125,255,0.03) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    #grid3d-inner::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(79,125,255,0.3), rgba(139,92,246,0.2), transparent);
+      box-shadow: 0 0 20px rgba(79,125,255,0.15);
+    }
+
+    /* Mouse Trail Canvas */
+    #mouseTrail {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    }
   </style>
 </head>
 
@@ -1216,6 +1260,12 @@
 
   <!-- Three.js Particle Canvas -->
   <canvas id="three-particles" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+
+  <!-- Mouse Trail Canvas -->
+  <canvas id="mouseTrail"></canvas>
+
+  <!-- 3D Perspective Grid Floor -->
+  <div id="grid3d"><div id="grid3d-inner"></div></div>
 
   <div id="pageTransition"></div>
 
@@ -1471,8 +1521,32 @@
     }
     scene.add(sph);
 
-    let mx=0,my=0,t=0;
+    // Floating wireframe shapes
+    const shapes=new THREE.Group();
+    const wireGeos=[
+      new THREE.OctahedronGeometry(0.18,0),
+      new THREE.TorusGeometry(0.14,0.05,8,16),
+      new THREE.IcosahedronGeometry(0.16,0),
+      new THREE.TetrahedronGeometry(0.17,0),
+      new THREE.OctahedronGeometry(0.12,0),
+      new THREE.TorusGeometry(0.1,0.04,6,12),
+    ];
+    const wireColors=[0x4F7DFF,0x8B5CF6,0x22c55e,0xa855f7,0x3d63ff,0xec4899];
+    const floatingShapes=[];
+    for(let i=0;i<6;i++){
+      const mat=new THREE.MeshBasicMaterial({color:wireColors[i],wireframe:true,transparent:true,opacity:0.18+Math.random()*0.12});
+      const mesh=new THREE.Mesh(wireGeos[i],mat);
+      const spread=3.5;
+      mesh.position.set((Math.random()-0.5)*spread*2,(Math.random()-0.5)*spread*2,(Math.random()-0.5)*3-1);
+      mesh.userData={rx:Math.random()*0.008+0.003,ry:Math.random()*0.012+0.005,bx:mesh.position.x,by:mesh.position.y,bz:mesh.position.z,phase:Math.random()*Math.PI*2,speed:0.3+Math.random()*0.4};
+      shapes.add(mesh);
+      floatingShapes.push(mesh);
+    }
+    scene.add(shapes);
+
+    let mx=0,my=0,t=0,scrollY=0;
     document.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-0.5)*2;my=(e.clientY/window.innerHeight-0.5)*2;});
+    window.addEventListener('scroll',()=>{scrollY=window.scrollY;},{passive:true});
     function animate(){
       requestAnimationFrame(animate);t+=0.002;
       const p=pts.geometry.attributes.position.array;
@@ -1480,6 +1554,17 @@
       pts.geometry.attributes.position.needsUpdate=true;
       pts.rotation.y=t*0.08;pts.rotation.x=my*0.04;
       sph.rotation.y=t*0.25+mx*0.2;sph.rotation.x=t*0.15+my*0.15;
+      // Animate floating wireframe shapes
+      const maxScroll=document.documentElement.scrollHeight-window.innerHeight;
+      const scrollPct=maxScroll>0?scrollY/maxScroll:0;
+      floatingShapes.forEach(s=>{
+        const u=s.userData;
+        s.rotation.x+=u.rx;s.rotation.y+=u.ry;
+        s.position.y=u.by+Math.sin(t*u.speed+u.phase)*0.3;
+        s.position.x=u.bx+Math.cos(t*u.speed*0.7+u.phase)*0.15;
+        s.position.z=u.bz-scrollPct*1.5;
+        s.material.opacity=(0.18+Math.sin(t*0.5+u.phase)*0.08)*(1-scrollPct*0.3);
+      });
       camera.position.x+=(mx*0.2-camera.position.x)*0.015;
       camera.position.y+=(-my*0.2-camera.position.y)*0.015;
       camera.lookAt(0,0,0);
@@ -1875,6 +1960,72 @@
       function loop(){
         ctx.clearRect(0, 0, w, h);
         particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(loop);
+      }
+      loop();
+    })();
+
+    /* ================================================================
+       MOUSE TRAIL — Glowing particle trail
+       ================================================================ */
+    (function(){
+      if(window.innerWidth < 1024) return;
+      const canvas = document.getElementById('mouseTrail');
+      if(!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w, h;
+      function resize(){ w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+      resize();
+      window.addEventListener('resize', resize);
+
+      const trail = [];
+      const MAX = 28;
+      let mx = -100, my = -100;
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+      class Dot {
+        constructor(x, y){
+          this.x = x; this.y = y;
+          this.life = 1;
+          this.decay = 0.025 + Math.random() * 0.015;
+          this.r = Math.random() * 3 + 1.5;
+          this.vx = (Math.random() - 0.5) * 0.8;
+          this.vy = (Math.random() - 0.5) * 0.8;
+          this.hue = 230 + Math.random() * 40;
+        }
+        update(){
+          this.x += this.vx; this.y += this.vy;
+          this.vy += 0.02;
+          this.life -= this.decay;
+          this.r *= 0.98;
+        }
+        draw(){
+          if(this.life <= 0) return;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r * this.life, 0, Math.PI * 2);
+          ctx.fillStyle = `hsla(${this.hue},80%,65%,${this.life * 0.4})`;
+          ctx.fill();
+          // glow
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r * this.life * 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = `hsla(${this.hue},80%,65%,${this.life * 0.06})`;
+          ctx.fill();
+        }
+      }
+
+      let frame = 0;
+      function loop(){
+        ctx.clearRect(0, 0, w, h);
+        frame++;
+        if(frame % 2 === 0 && mx > 0){
+          trail.push(new Dot(mx, my));
+          if(trail.length > MAX) trail.shift();
+        }
+        for(let i = trail.length - 1; i >= 0; i--){
+          trail[i].update();
+          trail[i].draw();
+          if(trail[i].life <= 0) trail.splice(i, 1);
+        }
         requestAnimationFrame(loop);
       }
       loop();

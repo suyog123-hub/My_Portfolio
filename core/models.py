@@ -72,3 +72,4 @@ class Skill_tools(models.Model):
     #     verbose_name = 'ModelName'
     #     verbose_name_plural = 'ModelNames'
     #     unique_together = (('date', 'table'),)
+

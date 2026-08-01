@@ -34,6 +34,10 @@
 
 <style>
 @keyframes blink { 50%{opacity:0} }
+@media (max-width: 480px) {
+  .terminal-body { padding: 28px 16px !important; }
+  .terminal-body .output { font-size: 1.2rem !important; }
+}
 </style>
 
 {% endblock content %}

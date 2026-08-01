@@ -8,18 +8,6 @@ from .models import *
 from datetime import date
 from django.shortcuts import render
 from threading import Thread
-def about(request):
-    birth_date = date(2005, 4, 16) 
-    today = date.today()
-    age = today.year - birth_date.year
-    if (today.month, today.day) < (birth_date.month, birth_date.day):
-        age -= 1
-    context = {
-        'age': age,
-    }
-    
-    return render(request, 'core/about.html', context)
-
 
 
 def contact(request):

@@ -23,9 +23,9 @@
       --border: rgba(255, 255, 255, 0.06);
       --border-light: rgba(255, 255, 255, 0.1);
       --text: #f0f0f5;
-      --text-secondary: #a0a0b8;
-      --text-muted: #555568;
-      --text-eyebrow: #44445a;
+      --text-secondary: #bdbdd4;
+      --text-muted: #8a8aa5;
+      --text-eyebrow: #6a6a85;
       --accent: #3d63ff;
       --accent-light: #9fb4ff;
       --green: #22c55e;
@@ -1242,6 +1242,33 @@
 <body class="index-page">
   <div class="scanlines"></div>
 
+  <!-- AI Background Image -->
+  <div class="site-bg" aria-hidden="true">
+    <div class="site-bg-img"></div>
+    <div class="site-bg-overlay"></div>
+  </div>
+  <style>
+    .site-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+    .site-bg-img {
+      position: absolute; inset: 0;
+      background: url('{% static 'images/aiphoto.png' %}') center / cover no-repeat fixed;
+    }
+    .site-bg-overlay {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 35%, rgba(5,5,7,0.18) 0%, rgba(5,5,7,0.5) 100%),
+        linear-gradient(180deg, rgba(5,5,7,0.55) 0%, rgba(5,5,7,0.38) 45%, rgba(5,5,7,0.85) 100%);
+    }
+    /* Extra scrim behind content so text pops */
+    .content-veil {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      background: rgba(5, 5, 7, 0.2);
+    }
+  </style>
+
+  <!-- Content Scrim -->
+  <div class="content-veil" aria-hidden="true"></div>
+
   <!-- Custom Cursor -->
   <div id="cursor-dot"></div>
   <div id="cursor-ring"></div>
@@ -1292,11 +1319,6 @@
           <li class="nx-nav-item">
             <a href="{% url 'home' %}" class="nx-link">
               <i class="bi bi-house" aria-hidden="true"></i><span>Home</span>
-            </a>
-          </li>
-          <li class="nx-nav-item">
-            <a href="{% url 'about' %}" class="nx-link">
-              <i class="bi bi-person" aria-hidden="true"></i><span>About</span>
             </a>
           </li>
           <li class="nx-nav-item">
@@ -1351,7 +1373,7 @@
         <a href="{% url 'home' %}" class="nx-mobile-link">
           <i class="bi bi-house" aria-hidden="true"></i><span>Home</span>
         </a>
-        <a href="{% url 'about' %}" class="nx-mobile-link">
+        <a href="{% url 'home' %}" class="nx-mobile-link">
           <i class="bi bi-person" aria-hidden="true"></i><span>About</span>
         </a>
         <a href="{% url 'skills' %}" class="nx-mobile-link">
@@ -1434,7 +1456,7 @@
       <!-- Quick Links -->
       <nav class="nx-footer-links" data-nx-reveal aria-label="Footer navigation">
         <a href="{% url 'home' %}" class="nx-footer-link">Home <span class="nx-link-arrow" aria-hidden="true">&rarr;</span></a>
-        <a href="{% url 'about' %}" class="nx-footer-link">About <span class="nx-link-arrow" aria-hidden="true">&rarr;</span></a>
+        <a href="{% url 'home' %}" class="nx-footer-link">About <span class="nx-link-arrow" aria-hidden="true">&rarr;</span></a>
         <a href="{% url 'skills' %}" class="nx-footer-link">Skills <span class="nx-link-arrow" aria-hidden="true">&rarr;</span></a>
         <a href="{% url 'project' %}" class="nx-footer-link">Projects <span class="nx-link-arrow" aria-hidden="true">&rarr;</span></a>
         <a href="{% url 'testinomial' %}" class="nx-footer-link">Testimonials <span class="nx-link-arrow" aria-hidden="true">&rarr;</span></a>

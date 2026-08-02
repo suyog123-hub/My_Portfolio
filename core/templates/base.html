@@ -675,8 +675,9 @@
       position: relative;
       background: #050510;
       border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 80px 0 0;
+      padding: 48px 0 0;
       overflow: hidden;
+      perspective: 1200px;
     }
     .nx-footer::before {
       content: '';
@@ -685,7 +686,7 @@
       background: linear-gradient(90deg, transparent, #4F7DFF, #8B5CF6, transparent);
     }
 
-    /* Floating particles canvas behind footer */
+    /* Floating 3D particles canvas behind footer */
     #footerParticles {
       position: absolute;
       inset: 0;
@@ -693,6 +694,7 @@
       height: 100%;
       pointer-events: none;
       z-index: 0;
+      filter: blur(0.6px);
     }
     .nx-footer > * { position: relative; z-index: 1; }
 
@@ -701,6 +703,12 @@
       margin: 0 auto;
       padding: 0 24px;
       text-align: center;
+      transform-style: preserve-3d;
+      transform: perspective(1200px)
+                 rotateX(calc(var(--my, 0deg) * -12))
+                 rotateY(calc(var(--mx, 0deg) * 12));
+      transition: transform 0.2s ease-out;
+      will-change: transform;
     }
 
     /* --- Logo --- */
@@ -708,11 +716,12 @@
       display: inline-flex;
       align-items: center;
       text-decoration: none;
-      margin-bottom: 20px;
+      margin-bottom: 12px;
+      transform: translateZ(30px);
     }
     .nx-footer-logo-text {
       font-family: var(--font-display);
-      font-size: 1.6rem;
+      font-size: 1.3rem;
       font-weight: 700;
       color: #f0f0f5;
       letter-spacing: -0.5px;
@@ -767,10 +776,11 @@
     /* --- Subtitle --- */
     .nx-footer-subtitle {
       font-family: var(--font-mono);
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: #555568;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       letter-spacing: 0.08em;
+      --fz: 22px;
     }
     .nx-footer-subtitle span {
       color: #4F7DFF;
@@ -779,11 +789,12 @@
     /* --- Description --- */
     .nx-footer-desc {
       font-family: var(--font-body);
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       color: #8888a0;
-      line-height: 1.75;
-      max-width: 520px;
-      margin: 0 auto 40px;
+      line-height: 1.7;
+      max-width: 460px;
+      margin: 0 auto 24px;
+      --fz: 16px;
     }
     .nx-footer-desc strong {
       color: #a0a0b8;
@@ -793,12 +804,13 @@
     /* --- Social Icons --- */
     .nx-footer-socials {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       justify-content: center;
-      margin-bottom: 48px;
+      margin-bottom: 28px;
+      --fz: 30px;
     }
     .nx-footer-social {
-      width: 48px; height: 48px;
+      width: 42px; height: 42px;
       border-radius: 50%;
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
@@ -809,7 +821,7 @@
       justify-content: center;
       color: #8888a0;
       text-decoration: none;
-      font-size: 1.1rem;
+      font-size: 1rem;
       transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
       position: relative;
       overflow: hidden;
@@ -878,10 +890,11 @@
     /* --- Quick Links --- */
     .nx-footer-links {
       display: flex;
-      gap: 32px;
+      gap: 26px;
       justify-content: center;
       flex-wrap: wrap;
-      margin-bottom: 48px;
+      margin-bottom: 28px;
+      --fz: 26px;
     }
     .nx-footer-link {
       color: #8888a0;
@@ -927,10 +940,11 @@
     .nx-footer-divider {
       position: relative;
       height: 1px;
-      margin: 0 auto 32px;
-      max-width: 600px;
+      margin: 0 auto 20px;
+      max-width: 520px;
       background: rgba(255,255,255,0.06);
       overflow: visible;
+      --fz: 12px;
     }
     .nx-footer-divider::before {
       content: '';
@@ -940,7 +954,7 @@
       border-radius: 4px;
       background: linear-gradient(90deg, #4F7DFF, #8B5CF6);
       box-shadow: 0 0 12px rgba(79,125,255,0.5);
-      animation: nxDividerMove 4s ease-in-out infinite;
+      animation: nxDividerMove 3.5s ease-in-out infinite;
     }
     @keyframes nxDividerMove {
       0% { left: -60px; }
@@ -951,9 +965,10 @@
     /* --- Copyright --- */
     .nx-footer-copyright {
       font-family: var(--font-body);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: #555568;
-      padding-bottom: 32px;
+      padding-bottom: 20px;
+      --fz: 10px;
     }
     .nx-footer-copyright strong {
       color: #8888a0;
@@ -979,13 +994,13 @@
     /* --- Scroll Reveal --- */
     .nx-footer [data-nx-reveal] {
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(24px) translateZ(0);
       transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1),
                   transform 0.6s cubic-bezier(0.16,1,0.3,1);
     }
     .nx-footer [data-nx-reveal].revealed {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) translateZ(var(--fz, 0));
     }
     .nx-footer [data-nx-reveal]:nth-child(1) { transition-delay: 0s; }
     .nx-footer [data-nx-reveal]:nth-child(2) { transition-delay: 0.08s; }
@@ -1060,12 +1075,12 @@
     /* --- Responsive --- */
     @media (max-width: 768px) {
       .page-section { padding: 100px 0 60px; }
-      .nx-footer { padding: 60px 0 0; }
-      .nx-footer-logo-text { font-size: 1.3rem; }
-      .nx-footer-subtitle { font-size: 0.75rem; }
-      .nx-footer-desc { font-size: 0.88rem; padding: 0 16px; }
+      .nx-footer { padding: 36px 0 0; }
+      .nx-footer-logo-text { font-size: 1.15rem; }
+      .nx-footer-subtitle { font-size: 0.72rem; }
+      .nx-footer-desc { font-size: 0.82rem; padding: 0 16px; }
       .nx-footer-socials { gap: 10px; }
-      .nx-footer-social { width: 44px; height: 44px; font-size: 1rem; }
+      .nx-footer-social { width: 40px; height: 40px; font-size: 0.95rem; }
       .nx-footer-links { gap: 20px; }
       .nx-footer-link { font-size: 0.85rem; }
       .nx-btt { bottom: 20px; right: 20px; width: 46px; height: 46px; }
@@ -1075,7 +1090,7 @@
       .nx-footer-links { gap: 16px; }
       .nx-footer-link { font-size: 0.82rem; }
       .nx-footer-socials { gap: 8px; }
-      .nx-footer-social { width: 40px; height: 40px; font-size: 0.95rem; }
+      .nx-footer-social { width: 38px; height: 38px; font-size: 0.9rem; }
     }
 
     /* Section Spacing */
@@ -1935,57 +1950,155 @@
     })();
 
     /* ================================================================
-       FOOTER — Floating Particles
+       FOOTER — 3D Background (Three.js)
        ================================================================ */
     (function(){
+      if(typeof THREE === 'undefined') return;
       const canvas = document.getElementById('footerParticles');
       if(!canvas) return;
-      const ctx = canvas.getContext('2d');
-      let w, h;
-      const particles = [];
-      const COUNT = 35;
+      const footer = canvas.parentElement;
+
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1000);
+      camera.position.z = 8;
 
       function resize(){
-        const footer = canvas.parentElement;
-        w = canvas.width = footer.offsetWidth;
-        h = canvas.height = footer.offsetHeight;
+        const w = footer.offsetWidth || window.innerWidth;
+        const h = footer.offsetHeight || window.innerHeight;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
       }
       resize();
       window.addEventListener('resize', resize);
 
-      class P {
-        constructor(){
-          this.x = Math.random() * w;
-          this.y = Math.random() * h;
-          this.r = Math.random() * 2 + 0.5;
-          this.vx = (Math.random() - 0.5) * 0.3;
-          this.vy = (Math.random() - 0.5) * 0.3;
-          this.alpha = Math.random() * 0.25 + 0.05;
-          this.color = Math.random() > 0.5 ? '79,125,255' : '139,92,246';
-        }
-        update(){
-          this.x += this.vx;
-          this.y += this.vy;
-          if(this.x < 0) this.x = w;
-          if(this.x > w) this.x = 0;
-          if(this.y < 0) this.y = h;
-          if(this.y > h) this.y = 0;
-        }
-        draw(){
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${this.color},${this.alpha})`;
-          ctx.fill();
-        }
+      // --- 3D point cloud ---
+      const COUNT = 340;
+      const geo = new THREE.BufferGeometry();
+      const pos = new Float32Array(COUNT * 3);
+      const cols = new Float32Array(COUNT * 3);
+      const palette = [[0.31,0.49,1],[0.55,0.36,0.96],[0.66,0.33,0.97],[0.22,0.77,0.37],[0.6,0.6,0.75]];
+      for(let i=0;i<COUNT;i++){
+        pos[i*3]   = (Math.random()-0.5)*18;
+        pos[i*3+1] = (Math.random()-0.5)*16;
+        pos[i*3+2] = (Math.random()-0.5)*9;
+        const c = palette[Math.floor(Math.random()*palette.length)];
+        cols[i*3]=c[0]; cols[i*3+1]=c[1]; cols[i*3+2]=c[2];
       }
-      for(let i = 0; i < COUNT; i++) particles.push(new P());
+      geo.setAttribute('position', new THREE.BufferAttribute(pos,3));
+      geo.setAttribute('color', new THREE.BufferAttribute(cols,3));
+      const pts = new THREE.Points(geo, new THREE.PointsMaterial({
+        size: 0.05, vertexColors: true, transparent: true, opacity: 0.55,
+        blending: THREE.AdditiveBlending, depthWrite: false
+      }));
+      scene.add(pts);
 
-      function loop(){
-        ctx.clearRect(0, 0, w, h);
-        particles.forEach(p => { p.update(); p.draw(); });
-        requestAnimationFrame(loop);
+      // --- Constellation lines between nearby points ---
+      const LINES = 60;
+      const lp = new Float32Array(LINES * 6);
+      const lgeo = new THREE.BufferGeometry();
+      const pairIdx = [];
+      for(let i=0;i<LINES;i++){
+        const a = Math.floor(Math.random()*COUNT);
+        let b = Math.floor(Math.random()*COUNT);
+        if(b === a) b = (a + 1) % COUNT;
+        pairIdx.push([a,b]);
       }
-      loop();
+      lgeo.setAttribute('position', new THREE.BufferAttribute(lp,3));
+      const lseg = new THREE.LineSegments(lgeo, new THREE.LineBasicMaterial({
+        color: 0x6c63ff, transparent: true, opacity: 0.14,
+        blending: THREE.AdditiveBlending
+      }));
+      scene.add(lseg);
+
+      // --- Floating wireframe shapes ---
+      const shapes = new THREE.Group();
+      const geos = [
+        new THREE.OctahedronGeometry(0.34, 0),
+        new THREE.TorusGeometry(0.28, 0.1, 8, 20),
+        new THREE.IcosahedronGeometry(0.3, 0),
+        new THREE.TetrahedronGeometry(0.32, 0),
+        new THREE.TorusKnotGeometry(0.18, 0.06, 40, 8),
+        new THREE.DodecahedronGeometry(0.22, 0),
+        new THREE.ConeGeometry(0.24, 0.42, 4),
+      ];
+      const wireColors = [0x4F7DFF, 0x8B5CF6, 0x22c55e, 0xa855f7, 0xec4899, 0x3d63ff, 0xf59e0b];
+      const items = [];
+      for(let i=0;i<7;i++){
+        const m = new THREE.Mesh(geos[i], new THREE.MeshBasicMaterial({
+          color: wireColors[i], wireframe: true, transparent: true, opacity: 0.26
+        }));
+        m.position.set((Math.random()-0.5)*8, (Math.random()-0.5)*8, (Math.random()-0.5)*5);
+        m.userData = {
+          rx: Math.random()*0.014+0.005,
+          ry: Math.random()*0.02+0.008,
+          by: m.position.y,
+          bz: m.position.z,
+          phase: Math.random()*Math.PI*2,
+          speed: 0.5+Math.random()*0.6
+        };
+        shapes.add(m);
+        items.push(m);
+      }
+      scene.add(shapes);
+
+      let t = 0;
+      let visible = true;
+      const io = new IntersectionObserver((entries) => {
+        visible = entries[0].isIntersecting;
+      }, { threshold: 0.02 });
+      io.observe(footer);
+
+      function animate(){
+        requestAnimationFrame(animate);
+        if(!visible) return;
+        t += 0.004;
+
+        // undulating point cloud
+        const p = pts.geometry.attributes.position.array;
+        for(let i=0;i<COUNT;i++){
+          p[i*3+1] += Math.sin(t*2 + i*0.08) * 0.001;
+          p[i*3]   += Math.cos(t*1.4 + i*0.05) * 0.0006;
+        }
+        pts.geometry.attributes.position.needsUpdate = true;
+
+        // constellation lines follow the moving points
+        for(let i=0;i<LINES;i++){
+          const a = pairIdx[i][0]*3, b = pairIdx[i][1]*3;
+          lp[i*6]=p[a]; lp[i*6+1]=p[a+1]; lp[i*6+2]=p[a+2];
+          lp[i*6+3]=p[b]; lp[i*6+4]=p[b+1]; lp[i*6+5]=p[b+2];
+        }
+        lseg.geometry.attributes.position.needsUpdate = true;
+
+        // reuse --mx / --my set by the mouse parallax handler
+        const mx = parseFloat(getComputedStyle(footer).getPropertyValue('--mx')) || 0;
+        const my = parseFloat(getComputedStyle(footer).getPropertyValue('--my')) || 0;
+
+        pts.rotation.y = t*0.08 + mx*0.4;
+        pts.rotation.x = t*0.05 + my*0.3;
+        lseg.rotation.copy(pts.rotation);
+        shapes.rotation.y = t*0.18 + mx*0.5;
+        shapes.rotation.x = t*0.12 + my*0.4;
+        items.forEach(s => {
+          const u = s.userData;
+          s.rotation.x += u.rx;
+          s.rotation.y += u.ry;
+          s.position.y = u.by + Math.sin(t*u.speed + u.phase)*0.6;
+          s.position.z = u.bz + Math.cos(t*u.speed*0.8 + u.phase)*0.4;
+          const pulse = 1 + Math.sin(t*2 + u.phase)*0.12;
+          s.scale.setScalar(pulse);
+        });
+
+        camera.position.x += (mx*1.2 - camera.position.x)*0.04;
+        camera.position.y += (-my*1.2 - camera.position.y)*0.04;
+        camera.position.z = 8 + Math.sin(t*0.5)*0.4;
+        camera.lookAt(0,0,0);
+        renderer.render(scene,camera);
+      }
+      animate();
     })();
 
     /* ================================================================

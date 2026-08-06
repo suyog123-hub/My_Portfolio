@@ -90,6 +90,14 @@ def project(request):
             'image_url': '/static/images/weather.png',
             'is_default': True,
         },
+        {
+            'heading': 'Blog Application',
+            'desc': 'A blogging platform that allows users to create, edit, and manage blog posts. Features user authentication, comment system, and responsive design for an optimal reading experience.',
+            'language_used': 'Python Django HTML CSS ',
+            'url': 'https://suyogblog.onrender.com/',
+            'image_url': '/static/images/suyogblog.png',
+            'is_default': True,
+        },
     ]
 
     context={
@@ -98,14 +106,7 @@ def project(request):
             'default_projects': default_projects,
     }
     return render(request,'core/project.html',context)
-def skills(request):
-    skills=Skill.objects.all()
-    skils_tools=Skill_tools.objects.all()
-    context={
-        'skills':skills,
-        'skils_tools':skils_tools
-    }
-    return render(request,'core/skills.html',context)
+
 def main(request):
     return render(request,'core/main.html')
 

@@ -6,7 +6,9 @@
   #grid3d { display: none !important; }
 </style>
 
-<!-- Hero Section -->
+<!-- ============================================================
+     hero section 
+     ============================================================ -->
 <section id="hero" class="page-section" style="min-height:100vh;display:flex;align-items:center;">
   <div class="container">
     <div class="row gy-5 align-items-center">
@@ -142,7 +144,9 @@
   </div>
 </section>
 
-<!-- About Section -->
+<!-- ============================================================
+     About section 
+     ============================================================ -->
 <section class="about-cyber" id="aboutSection">
 
   <!-- Ambient Glow Orbs -->
@@ -259,7 +263,653 @@
   </div>
 </section>
 
-<!-- ===== PHILOSOPHY SECTION ===== -->
+<!-- ============================================================
+     skill section 
+     ============================================================ -->
+<!-- ============================================================
+     GSAP — animation engine
+     ============================================================ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<section id="skills-section" class="sk">
+
+  <!-- ============ BACKGROUND LAYERS ============ -->
+  <div class="sk-bg" aria-hidden="true">
+    <div class="sk-glow sk-glow-tl"></div>
+    <div class="sk-glow sk-glow-br"></div>
+    <div class="sk-grid"></div>
+    <div class="sk-noise"></div>
+    <div class="sk-stars" id="skStars"></div>
+    <div class="sk-floats" aria-hidden="true">
+      <span class="sk-float sk-f1"></span>
+      <span class="sk-float sk-f2"></span>
+      <span class="sk-float sk-f3"></span>
+      <span class="sk-float sk-f4"></span>
+      <span class="sk-float sk-f5"></span>
+      <span class="sk-float sk-f6"></span>
+    </div>
+  </div>
+
+  <div class="sk-inner">
+
+    <!-- ============ HEADER ============ -->
+    <header class="sk-header">
+      <span class="sk-badge"><span class="sk-badge-dot"></span>Tech &amp; Tools</span>
+      <h1 class="sk-title">My <span class="sk-title-accent">Skills</span></h1>
+      <p class="sk-desc">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
+      <div class="sk-actions">
+        <a href="{% url 'contact' %}" class="sk-btn-contact">contact me</a>
+        <a href="{% url 'project' %}" class="sk-link">
+          see more <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+
+    </header>
+
+    <!-- ============ WHEEL (with detail card inside) ============ -->
+    <div class="sk-stage" id="skStage">
+      <div class="sk-wheel" id="skWheel">
+
+        <div class="sk-arc sk-arc-2" id="skArc2" aria-hidden="true"></div>
+        <div class="sk-arc sk-arc-1" id="skArc1" aria-hidden="true"></div>
+
+        <!-- expanded detail card, rendered inside the semicircle -->
+        <div class="sk-card" id="skCard" role="region" aria-live="polite">
+          <div class="sk-card-icon" id="skCardIcon"></div>
+          <div class="sk-card-body">
+            <div class="sk-card-top">
+              <h3 class="sk-card-title" id="skCardTitle"></h3>
+              <span class="sk-card-tag" id="skCardTag"></span>
+            </div>
+            <p class="sk-card-desc" id="skCardDesc"></p>
+            <div class="sk-card-meta" id="skCardMeta"></div>
+          </div>
+          <div class="sk-card-glow" aria-hidden="true"></div>
+        </div>
+
+        <div class="sk-wheel-icons" id="skWheelIcons"></div>
+        <div class="sk-wheel-hint" id="skWheelHint">
+          <i class="bi bi-arrow-left"></i> click a skill or use &larr; &rarr; keys <i class="bi bi-arrow-right"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<style>
+/* ============================================================
+   MY SKILLS — rotating semi-circular skills wheel
+   dark #0b0b0b · neon purple/blue · premium
+   ============================================================ */
+
+#skills-section.sk {
+  position: relative;
+  min-height: 100vh;
+  background: transparent;
+  color: #f2f2f6;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  padding: 96px 0 0;
+}
+
+/* ---------- background ---------- */
+.sk-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.sk-bg::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 2;
+  background: rgba(3, 3, 6, 0.22);
+}
+.sk-glow {
+  position: absolute; border-radius: 50%; filter: blur(120px);
+  opacity: .5; will-change: transform;
+}
+.sk-glow-tl {
+  width: 620px; height: 620px; top: -18%; right: -6%;
+  background: radial-gradient(circle, rgba(109,59,255,.22), transparent 68%);
+  animation: skGlowA 18s ease-in-out infinite alternate;
+}
+.sk-glow-br {
+  width: 520px; height: 520px; bottom: -14%; left: -4%;
+  background: radial-gradient(circle, rgba(45,98,255,.16), transparent 68%);
+  animation: skGlowB 22s ease-in-out infinite alternate;
+}
+@keyframes skGlowA { to { transform: translate(-50px, 40px) scale(1.15); } }
+@keyframes skGlowB { to { transform: translate(60px, -30px) scale(1.12); } }
+
+.sk-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(140,120,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(140,120,255,.045) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: radial-gradient(ellipse 90% 80% at 60% 50%, black 25%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 60% 50%, black 25%, transparent 78%);
+  animation: skGridDrift 26s linear infinite;
+}
+@keyframes skGridDrift { to { background-position: 54px 54px; } }
+
+.sk-noise {
+  position: absolute; inset: 0; opacity: .045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+.sk-stars {
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(1.4px 1.4px at 12% 22%, rgba(200,190,255,.6), transparent 55%),
+    radial-gradient(1px 1px at 24% 68%, rgba(150,140,255,.4), transparent 55%),
+    radial-gradient(1.6px 1.6px at 44% 12%, rgba(255,255,255,.5), transparent 55%),
+    radial-gradient(1px 1px at 60% 42%, rgba(150,140,255,.4), transparent 55%),
+    radial-gradient(1.4px 1.4px at 76% 18%, rgba(200,190,255,.55), transparent 55%),
+    radial-gradient(1px 1px at 90% 58%, rgba(160,150,255,.4), transparent 55%),
+    radial-gradient(1.2px 1.2px at 34% 88%, rgba(200,190,255,.4), transparent 55%),
+    radial-gradient(1px 1px at 82% 84%, rgba(255,255,255,.35), transparent 55%);
+  animation: skStarsTwinkle 6s ease-in-out infinite alternate;
+}
+@keyframes skStarsTwinkle { from { opacity: .55; } to { opacity: 1; } }
+
+.sk-floats { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+.sk-float { position: absolute; opacity: .35; will-change: transform; border-radius: 50%; }
+.sk-f1 { width: 18px; height: 18px; top: 14%; left: 12%; background: radial-gradient(circle, rgba(178,140,255,.65), rgba(148,110,255,.15) 70%); box-shadow: 0 0 12px rgba(148,110,255,.35); animation: skFloat 14s ease-in-out infinite; }
+.sk-f2 { width: 8px; height: 8px; top: 27%; right: 10%; background: rgba(148,110,255,.5); box-shadow: 0 0 8px rgba(148,110,255,.3); animation: skFloatB 18s ease-in-out infinite; }
+.sk-f3 { width: 14px; height: 14px; bottom: 32%; left: 18%; background: radial-gradient(circle, rgba(128,160,255,.6), rgba(79,125,255,.12) 70%); box-shadow: 0 0 10px rgba(79,125,255,.3); animation: skFloat 16s ease-in-out infinite .5s; }
+.sk-f4 { width: 6px; height: 6px; top: 42%; left: 47%; background: rgba(255,255,255,.45); box-shadow: 0 0 6px rgba(255,255,255,.25); animation: skFloatB 20s ease-in-out infinite; }
+.sk-f5 { width: 12px; height: 12px; top: 12%; right: 34%; background: radial-gradient(circle, rgba(178,140,255,.6), rgba(148,110,255,.12) 70%); box-shadow: 0 0 8px rgba(148,110,255,.3); animation: skFloat 15s ease-in-out infinite .3s; }
+.sk-f6 { width: 22px; height: 22px; bottom: 14%; right: 14%; background: radial-gradient(circle, rgba(148,110,255,.5), transparent 70%); border: 1px solid rgba(148,110,255,.35); box-shadow: 0 0 14px rgba(148,110,255,.25), inset 0 0 10px rgba(148,110,255,.2); animation: skFloatB 17s ease-in-out infinite .6s; }
+@keyframes skFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-28px) rotate(180deg); }
+}
+@keyframes skFloatB {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(20px, -24px); }
+}
+
+/* ---------- layout ---------- */
+.sk-inner {
+  position: relative; z-index: 2;
+  max-width: 1080px; margin: 0 auto; padding: 0 32px;
+  display: flex; flex-direction: column; align-items: center;
+}
+
+/* ---------- header ---------- */
+.sk-header { text-align: center; max-width: 640px; }
+.sk-badge {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: .16em; font-weight: 600;
+  color: #b7a4ff; text-transform: uppercase;
+  padding: 7px 15px; border-radius: 999px;
+  border: 1px solid rgba(148,110,255,.3);
+  background: rgba(148,110,255,.08);
+  box-shadow: 0 0 26px rgba(148,110,255,.16);
+  margin-bottom: 22px;
+}
+.sk-badge-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #a855f7; box-shadow: 0 0 10px #a855f7;
+  animation: skDot 2.4s ease-in-out infinite;
+}
+@keyframes skDot {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50%     { opacity: .45; transform: scale(.68); }
+}
+.sk-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800; letter-spacing: -.02em;
+  font-size: clamp(3rem, 7vw, 4.8rem);
+  line-height: 1; margin: 0 0 20px;
+  color: #fff;
+  text-shadow: 0 0 60px rgba(148,110,255,.18);
+}
+.sk-title-accent {
+  background: linear-gradient(135deg, #6c5bff 0%, #a855f7 55%, #4f7dff 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  filter: drop-shadow(0 0 30px rgba(148,110,255,.4));
+  animation: skTitleShift 6s ease infinite;
+  background-size: 200% 200%;
+}
+@keyframes skTitleShift {
+  0%,100% { background-position: 0% 50%; }
+  50%     { background-position: 100% 50%; }
+}
+.sk-desc {
+  font-size: 15px; line-height: 1.75; color: #9a9aaf;
+  max-width: 52ch; margin: 0 auto 30px;
+}
+.sk-actions { display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; }
+
+.sk-btn-contact {
+  position: relative;
+  display: inline-flex; align-items: center;
+  padding: 14px 34px; border-radius: 999px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600; font-size: 15px; letter-spacing: .02em;
+  color: #fff; text-transform: lowercase;
+  background: #3b1d8f;
+  border: 1px solid rgba(168,120,255,.55);
+  box-shadow: 0 0 24px rgba(128,80,255,.35), inset 0 0 14px rgba(168,120,255,.18), 0 10px 34px rgba(0,0,0,.4);
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s, border-color .3s;
+}
+.sk-btn-contact::before {
+  content: ''; position: absolute; top: 0; left: -60%; width: 45%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.28), transparent);
+  transform: skewX(-20deg); transition: left .55s ease;
+}
+.sk-btn-contact:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(128,80,255,.55), inset 0 0 18px rgba(168,120,255,.22), 0 14px 40px rgba(0,0,0,.45); border-color: rgba(180,135,255,.8); }
+.sk-btn-contact:hover::before { left: 120%; }
+
+.sk-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500; font-size: 15px; color: #c9c9de;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,.18);
+  padding-bottom: 3px;
+  transition: color .3s, border-color .3s, gap .3s;
+}
+.sk-link i { transition: transform .3s; font-size: 14px; }
+.sk-link:hover { color: #fff; border-color: rgba(168,120,255,.6); gap: 12px; }
+.sk-link:hover i { transform: translateX(4px); color: #a78bfa; }
+
+/* ---------- stage ---------- */
+.sk-stage {
+  position: relative; width: 100%;
+  margin-top: 44px;
+  display: flex; flex-direction: column; align-items: center;
+}
+
+/* ---------- wheel ---------- */
+.sk-wheel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  touch-action: pan-x;
+}
+
+/* ---------- detail card — floats inside the semicircle ---------- */
+.sk-card {
+  position: absolute;
+  left: 50%;
+  z-index: 20;
+  width: min(540px, 92%);
+  display: flex; align-items: flex-start; gap: 22px;
+  padding: 30px 34px;
+  border-radius: 24px;
+  background: rgba(20,20,32,.8);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(168,120,255,.28);
+  box-shadow: 0 24px 80px rgba(0,0,0,.5), 0 0 55px rgba(148,110,255,.14);
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.sk-card-icon {
+  flex-shrink: 0;
+  width: 72px; height: 72px; border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 34px; color: var(--cc, #a78bfa);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--cc, #a78bfa) 20%, rgba(255,255,255,.05)), rgba(255,255,255,.02));
+  border: 1px solid color-mix(in srgb, var(--cc, #a78bfa) 45%, transparent);
+  box-shadow: 0 0 26px color-mix(in srgb, var(--cc, #a78bfa) .3, transparent);
+}
+.sk-card-body { min-width: 0; }
+.sk-card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+.sk-card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 30px; font-weight: 700; color: #fff; margin: 0;
+}
+.sk-card-tag {
+  font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .12em;
+  color: #a78bfa; text-transform: uppercase;
+  padding: 5px 11px; border-radius: 6px;
+  background: rgba(148,110,255,.1); border: 1px solid rgba(148,110,255,.22);
+}
+.sk-card-desc {
+  font-size: 16px; line-height: 1.7; color: #a9a9c2; margin: 0 0 16px;
+}
+.sk-card-meta { display: flex; gap: 10px; flex-wrap: wrap; }
+.sk-card-meta span {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  padding: 5px 12px; border-radius: 7px;
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); color: #c9c9de;
+}
+.sk-card-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle at 18% 50%, color-mix(in srgb, var(--cc, #a78bfa) 16%, transparent), transparent 55%);
+  opacity: .7;
+}
+
+/* ---------- arcs + icons ---------- */
+.sk-arc {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed rgba(148,110,255,.30);
+  pointer-events: none;
+}
+.sk-arc-2 { border-color: rgba(148,110,255,.14); border-style: dashed; }
+
+.sk-wheel-icons { position: absolute; inset: 0; }
+
+.sk-item {
+  position: absolute;
+  top: 0; left: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  cursor: pointer;
+  will-change: transform, opacity;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+}
+.sk-item-pill {
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(24,24,38,.8);
+  border: 1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  color: var(--cc, #a78bfa);
+  box-shadow: 0 8px 22px rgba(0,0,0,.35);
+  transition: border-color .35s, box-shadow .35s;
+  position: relative;
+}
+.sk-item-pill::before {
+  content: ''; position: absolute; inset: -4px; border-radius: 50%;
+  background: var(--cc, #a78bfa); opacity: 0; filter: blur(16px); z-index: -1;
+  transition: opacity .4s;
+}
+.sk-item-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px; font-weight: 500; letter-spacing: .04em; color: #c4c4da;
+  white-space: nowrap;
+  text-shadow: 0 1px 6px rgba(0,0,0,.7);
+  transition: opacity .35s, color .35s;
+}
+.sk-item:focus-visible { outline: none; }
+.sk-item:focus-visible .sk-item-pill {
+  border-color: #c39bff;
+  box-shadow: 0 0 24px rgba(168,110,255,.5);
+}
+/* active state — glowing purple + enlarged */
+.sk-item.active .sk-item-pill {
+  border-color: #c39bff;
+  box-shadow: 0 0 30px rgba(168,110,255,.65), 0 0 60px rgba(168,110,255,.3), 0 10px 30px rgba(0,0,0,.4);
+}
+.sk-item.active .sk-item-pill::before { opacity: .8; }
+.sk-item.active .sk-item-label { color: #e6dcff; text-shadow: 0 0 12px rgba(168,110,255,.8); }
+.sk-item:hover .sk-item-pill { border-color: color-mix(in srgb, var(--cc, #a78bfa) 60%, transparent); }
+
+.sk-wheel-hint {
+  position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 700;
+  letter-spacing: .08em; color: #d5d5ee;
+  display: flex; align-items: center; gap: 10px; white-space: nowrap;
+  padding: 8px 18px; border-radius: 12px;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(168,120,255,.35);
+  box-shadow: 0 0 24px rgba(148,110,255,.18);
+}
+.sk-wheel-hint i { color: #a78bfa; font-size: 17px; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 760px) {
+  #skills-section.sk { padding-top: 76px; }
+  .sk-inner { padding: 0 18px; }
+  .sk-title { font-size: clamp(2.5rem, 11vw, 3.4rem); }
+  .sk-desc { font-size: 14px; }
+  .sk-actions { gap: 20px; }
+  .sk-btn-contact { padding: 12px 26px; font-size: 14px; }
+  .sk-card { padding: 20px; gap: 16px; }
+  .sk-card-icon { width: 56px; height: 56px; font-size: 26px; border-radius: 16px; }
+  .sk-card-title { font-size: 24px; }
+  .sk-stage { margin-top: 30px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sk-glow, .sk-grid, .sk-stars, .sk-float, .sk-badge-dot, .sk-title-accent { animation: none !important; }
+}
+</style>
+
+<script>
+/* ============================================================
+   MY SKILLS — semi-circular skills wheel
+   ============================================================ */
+(function(){
+  'use strict';
+  if (typeof gsap === 'undefined') return;
+
+  var ICONS = {
+    python:'bi-filetype-py', django:'bi-code-slash', react:'bi-hexagon', next:'bi-triangle-fill',
+    typescript:'bi-braces', javascript:'bi-filetype-js', html:'bi-filetype-html', css:'bi-filetype-css',
+    tailwind:'bi-wind', bootstrap:'bi-bootstrap', threejs:'bi-box', gsap:'bi-graph-up',
+    postgres:'bi-database', docker:'bi-archive', git:'bi-git', rest:'bi-arrow-repeat'
+  };
+  var COLORS = {
+    python:'#3776AB', django:'#44B78B', react:'#61DAFB', next:'#FFFFFF',
+    typescript:'#3178C6', javascript:'#F7DF1E', html:'#E34F26', css:'#1572B6',
+    tailwind:'#38BDF8', bootstrap:'#7952B3', threejs:'#E7E7FF', gsap:'#88CE02',
+    postgres:'#4169E1', docker:'#2496ED', git:'#F05032', rest:'#10B981'
+  };
+
+  var SKILLS = [
+    { key:'python', name:'Python', cat:'Language', years:3, big:true, desc:'My primary language for backend engineering, automation, data pipelines and machine learning. Clean, readable, powerful.' },
+    { key:'django', name:'Django', cat:'Backend', years:3, desc:'Full-stack Django with ORM, auth, signals, caching and production deployment across multiple live projects.' },
+    { key:'react', name:'React', cat:'Frontend', years:1, desc:'Component-driven SPAs built with hooks, state management and smooth, modern user interfaces.' },
+    { key:'next', name:'Next.js', cat:'Frontend', years:1, desc:'React with SSR, static generation and API routes for fast, SEO-friendly applications.' },
+    { key:'typescript', name:'TypeScript', cat:'Language', years:1, big:true, desc:'Typed JavaScript for safer, more maintainable front-end and full-stack codebases.' },
+    { key:'javascript', name:'JavaScript', cat:'Language', years:3, desc:'Vanilla JS, ES modules and DOM mastery — powering every interactive experience on this site.' },
+    { key:'html', name:'HTML5', cat:'Frontend', years:3, big:true, desc:'Semantic, accessible, SEO-ready markup with modern APIs and best-practice structure.' },
+    { key:'css', name:'CSS3', cat:'Frontend', years:3, big:true, desc:'Grid, flexbox, custom properties, glassmorphism and GPU-accelerated animation.' },
+    { key:'tailwind', name:'Tailwind', cat:'Frontend', years:1, desc:'Utility-first styling for rapid, consistent UI development in any framework.' },
+    { key:'bootstrap', name:'Bootstrap', cat:'Frontend', years:3, desc:'Component library and grid system used across many production Django templates.' },
+    { key:'threejs', name:'Three.js', cat:'Creative', years:2, desc:'WebGL scenes, particle systems and 3D interaction for immersive, award-grade experiences.' },
+    { key:'gsap', name:'GSAP', cat:'Creative', years:2, desc:'Frame-perfect scroll, stagger and physics-based motion for buttery-smooth animation.' },
+    { key:'postgres', name:'PostgreSQL', cat:'Database', years:2, desc:'Production-grade relational database — schema design, indexing, migrations and complex queries.' },
+    { key:'docker', name:'Docker', cat:'DevOps', years:1, desc:'Containerising apps for reproducible environments and simplified, reliable deployments.' },
+    { key:'git', name:'Git', cat:'DevOps', years:3, desc:'Version control workflows, branching strategies, rebasing and clean commit history.' },
+    { key:'rest', name:'REST API', cat:'Backend', years:3, desc:'Clean, documented, versioned RESTful APIs consumed by web and mobile clients.' }
+  ];
+
+  SKILLS.forEach(function(s){
+    s.color = COLORS[s.key];
+    s.icon = ICONS[s.key] || 'bi-star';
+  });
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMob = window.innerWidth <= 760;
+  var DATA = isMob ? SKILLS.slice(0, 9) : SKILLS;
+  var N = DATA.length;
+  var STEP = (Math.PI * 2) / N;
+
+  var wheel = document.getElementById('skWheel');
+  var iconsWrap = document.getElementById('skWheelIcons');
+  var arc1 = document.getElementById('skArc1');
+  var arc2 = document.getElementById('skArc2');
+  var card = document.getElementById('skCard');
+
+  var cardIcon = document.getElementById('skCardIcon');
+  var cardTitle = document.getElementById('skCardTitle');
+  var cardTag = document.getElementById('skCardTag');
+  var cardDesc = document.getElementById('skCardDesc');
+  var cardMeta = document.getElementById('skCardMeta');
+
+  var items = [];
+  var R = 0, peakY = 0, cx = 0, cy = 0, W = 0;
+  var SPREAD = 1.42;               // half-arc in radians
+  var rot = 0, targetRot = 0, activeIndex = 0;
+  var proxy = { v: 0 };
+  var tween = null;
+
+  /* ---------- geometry ---------- */
+  function layout(){
+    var rect = wheel.getBoundingClientRect();
+    W = rect.width || 900;
+    R = Math.max(220, Math.min(W * 0.48, isMob ? 290 : 480));
+    peakY = 72;
+    cy = R + peakY;
+    cx = W / 2;
+    wheel.style.height = (peakY + R + 54) + 'px';
+    iconsWrap.style.height = wheel.style.height;
+    setArc(arc1, R);
+    setArc(arc2, R + 34);
+    placeCard();
+  }
+  function placeCard(){
+    card.style.top = (peakY + R * 0.72) + 'px';
+  }
+  function setArc(el, r){
+    el.style.width = (r * 2) + 'px';
+    el.style.height = (r * 2) + 'px';
+    el.style.left = (cx - r) + 'px';
+    el.style.top = (peakY - (r - R)) + 'px';
+  }
+
+  /* ---------- build icons ---------- */
+  DATA.forEach(function(s, i){
+    var it = document.createElement('div');
+    it.className = 'sk-item';
+    it.dataset.i = i;
+    it.style.setProperty('--cc', s.color);
+    it.setAttribute('tabindex', '0');
+    it.setAttribute('role', 'button');
+    it.setAttribute('aria-label', s.name);
+    it.innerHTML =
+      '<div class="sk-item-pill"><i class="bi ' + s.icon + '"></i></div>' +
+      '<span class="sk-item-label">' + s.name + '</span>';
+    it.addEventListener('click', function(){ bringToCenter(i); });
+    it.addEventListener('focus', function(){ bringToCenter(i); });
+    iconsWrap.appendChild(it);
+    items.push(it);
+  });
+
+  /* ---------- placement ---------- */
+  function place(){
+    items.forEach(function(it, i){
+      var a = norm(i * STEP - rot);
+      var abs = Math.abs(a);
+      var visible = abs <= SPREAD + 0.02;
+      if (!visible){
+        it.style.opacity = '0';
+        it.style.pointerEvents = 'none';
+        it.style.transform = 'translate(-50%, -50%) scale(0.4)';
+        it.classList.remove('active');
+        return;
+      }
+      var x = cx + Math.sin(a) * R;
+      var y = cy - Math.cos(a) * R;
+      var depth = Math.cos(a);                          // 1 at peak, 0 at edges
+      var scale = 0.55 + 0.45 * depth;
+      var pillSize = (isMob ? 66 : 96) * scale;
+      it.style.pointerEvents = 'auto';
+      it.style.opacity = String(0.35 + 0.65 * depth);
+      it.style.transform = 'translate(' + x + 'px,' + y + 'px) translate(-50%, -50%) scale(' + scale + ')';
+      it.querySelector('.sk-item-pill').style.width = pillSize + 'px';
+      it.querySelector('.sk-item-pill').style.height = pillSize + 'px';
+      it.querySelector('.sk-item-pill').style.fontSize = (isMob ? 30 : 46) * scale + 'px';
+
+      // active = nearest to peak
+      if (abs <= STEP * 0.5) it.classList.add('active');
+      else it.classList.remove('active');
+    });
+  }
+  function norm(a){
+    while (a > Math.PI) a -= Math.PI * 2;
+    while (a < -Math.PI) a += Math.PI * 2;
+    return a;
+  }
+
+  /* ---------- active card ---------- */
+  function refreshActive(){
+    // nearest icon to peak
+    var best = 0, bd = Infinity;
+    items.forEach(function(it, i){
+      var a = Math.abs(norm(i * STEP - rot));
+      if (a < bd){ bd = a; best = i; }
+    });
+    if (best !== activeIndex){
+      activeIndex = best;
+      updateCard();
+    }
+  }
+  function updateCard(){
+    var s = DATA[activeIndex];
+    card.style.setProperty('--cc', s.color);
+    var t = gsap.timeline();
+    t.to('.sk-card-icon, .sk-card-title, .sk-card-tag, .sk-card-desc, .sk-card-meta', {
+      opacity: 0, y: -6, duration: 0.18, ease: 'power1.out'
+    }, 0)
+     .add(function(){
+        cardIcon.innerHTML = '<i class="bi ' + s.icon + '"></i>';
+        cardTitle.textContent = s.name;
+        cardTag.textContent = s.cat;
+        cardDesc.textContent = s.desc;
+        cardMeta.innerHTML =
+          '<span><i class="bi bi-award"></i> ' + s.years + ' yrs</span>' +
+          '<span><i class="bi bi-lightning-charge-fill"></i> production ready</span>';
+     })
+     .to('.sk-card-icon, .sk-card-title, .sk-card-tag, .sk-card-desc, .sk-card-meta', {
+       opacity: 1, y: 0, duration: 0.35, ease: 'power2.out', stagger: 0.03
+     }, 0.06);
+  }
+
+  /* ---------- rotation ---------- */
+  function animateTo(r){
+    targetRot = r;
+    if (tween) tween.kill();
+    proxy.v = rot;
+    tween = gsap.to(proxy, {
+      v: targetRot, duration: reduce ? 0 : 0.7, ease: 'power2.inOut',
+      onUpdate: function(){ rot = proxy.v; place(); refreshActive(); }
+    });
+  }
+  function bringToCenter(i){
+    var a = norm(i * STEP - rot);
+    animateTo(rot + a);
+  }
+  function move(dir){
+    // dir = +1 (next/right) or -1 (prev/left)
+    var next = (activeIndex + dir + N) % N;
+    bringToCenter(next);
+    var it = items[next];
+    if (it) it.focus({ preventScroll: true });
+  }
+
+  /* ---------- keyboard left / right navigation ---------- */
+  var wheelFocused = false;
+  wheel.addEventListener('focusin', function(){ wheelFocused = true; });
+  wheel.addEventListener('focusout', function(){ wheelFocused = false; });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight'){ move(1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft'){ move(-1); e.preventDefault(); }
+  });
+
+  /* ---------- init ---------- */
+  layout();
+  window.addEventListener('resize', function(){ layout(); place(); refreshActive(); });
+
+  gsap.from('.sk-badge', { y: 20, opacity: 0, duration: 0.7, delay: 0.1, ease: 'power3.out' });
+  gsap.from('.sk-title', { y: 30, opacity: 0, duration: 0.8, delay: 0.2, ease: 'power3.out' });
+  gsap.from('.sk-desc', { y: 24, opacity: 0, duration: 0.8, delay: 0.32, ease: 'power3.out' });
+  gsap.from('.sk-actions', { y: 20, opacity: 0, duration: 0.8, delay: 0.42, ease: 'power3.out' });
+  gsap.from(card, { opacity: 0, duration: 0.8, delay: 0.55, ease: 'power2.out' });
+  gsap.from(items, {
+    opacity: 0, duration: 0.7, stagger: 0.045, delay: 0.7, ease: 'power2.out'
+  });
+  place();
+  refreshActive();
+  updateCard();
+})();
+</script>
+
+
+
+
+<!-- ============================================================
+     philosophy section
+     ============================================================ -->
 <section class="about-philosophy">
   <div class="about-container">
 
@@ -326,7 +976,9 @@
   <div class="about-divider"></div>
 </section>
 
-<!-- ===== TIMELINE SECTION ===== -->
+<!-- ============================================================
+      timeline section
+     ============================================================ -->
 <section class="about-timeline-section">
   <div class="about-container">
 

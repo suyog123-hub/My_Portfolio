@@ -52,6 +52,8 @@
       overflow-x: hidden;
     }
 
+    html { scroll-behavior: smooth; }
+
     a { color: var(--accent-light); text-decoration: none; transition: var(--t); }
     a:hover { color: var(--accent); }
 
@@ -673,7 +675,7 @@
 
     .nx-footer {
       position: relative;
-      background: #050510;
+      background: var(--bg);
       border-top: 1px solid rgba(255,255,255,0.06);
       padding: 48px 0 0;
       overflow: hidden;
@@ -1142,17 +1144,19 @@
       position: fixed; top: 0; left: 0; z-index: 999999;
       width: 8px; height: 8px; border-radius: 50%;
       background: #fff; pointer-events: none;
-      transform: translate(-50%, -50%);
+      transform: translate3d(var(--cx, 0px), var(--cy, 0px), 0) translate(-50%, -50%);
       transition: width 0.15s, height 0.15s, background 0.15s;
       mix-blend-mode: difference;
+      will-change: transform;
     }
     #cursor-ring {
       position: fixed; top: 0; left: 0; z-index: 999998;
       width: 40px; height: 40px; border-radius: 50%;
       border: 1.5px solid rgba(255,255,255,0.5); pointer-events: none;
-      transform: translate(-50%, -50%);
+      transform: translate3d(var(--cx, 0px), var(--cy, 0px), 0) translate(-50%, -50%);
       transition: width 0.25s cubic-bezier(0.16,1,0.3,1), height 0.25s cubic-bezier(0.16,1,0.3,1),
                   border-color 0.25s, background 0.25s;
+      will-change: transform;
     }
     #cursor-ring.hover {
       width: 64px; height: 64px;
@@ -1174,9 +1178,10 @@
       width: 700px; height: 700px; border-radius: 50%;
       background: radial-gradient(circle, rgba(160,165,180,0.10) 0%, rgba(120,130,160,0.05) 35%, transparent 70%);
       pointer-events: none;
-      transform: translate(-50%, -50%);
+      transform: translate3d(var(--cx, 0px), var(--cy, 0px), 0) translate(-50%, -50%);
       transition: opacity 0.4s;
       opacity: 0;
+      will-change: transform;
     }
     #cursor-glow.accent {
       background: radial-gradient(circle, rgba(168,130,255,0.08) 0%, rgba(61,99,255,0.04) 35%, transparent 70%);
@@ -1267,7 +1272,7 @@
     .site-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
     .site-bg-img {
       position: absolute; inset: 0;
-      background: url('{% static 'images/aiphoto.png' %}') center / cover no-repeat fixed;
+      background: url('{% static "images/aiphoto.png" %}') center / cover no-repeat fixed;
     }
     .site-bg-overlay {
       position: absolute; inset: 0;
@@ -1338,11 +1343,6 @@
             </a>
           </li>
           <li class="nx-nav-item">
-            <a href="{% url 'skills' %}" class="nx-link">
-              <i class="bi bi-code-slash" aria-hidden="true"></i><span>Skills</span>
-            </a>
-          </li>
-          <li class="nx-nav-item">
             <a href="{% url 'project' %}" class="nx-link">
               <i class="bi bi-folder" aria-hidden="true"></i><span>Projects</span>
             </a>
@@ -1391,9 +1391,6 @@
         </a>
         <a href="{% url 'home' %}" class="nx-mobile-link">
           <i class="bi bi-person" aria-hidden="true"></i><span>About</span>
-        </a>
-        <a href="{% url 'skills' %}" class="nx-mobile-link">
-          <i class="bi bi-code-slash" aria-hidden="true"></i><span>Skills</span>
         </a>
         <a href="{% url 'project' %}" class="nx-mobile-link">
           <i class="bi bi-folder" aria-hidden="true"></i><span>Projects</span>
@@ -1473,7 +1470,6 @@
       <nav class="nx-footer-links" data-nx-reveal aria-label="Footer navigation">
         <a href="{% url 'home' %}" class="nx-footer-link">Home <span class="nx-link-arrow" aria-hidden="true">&rarr;</span></a>
         <a href="{% url 'home' %}" class="nx-footer-link">About <span class="nx-link-arrow" aria-hidden="true">&rarr;</span></a>
-        <a href="{% url 'skills' %}" class="nx-footer-link">Skills <span class="nx-link-arrow" aria-hidden="true">&rarr;</span></a>
         <a href="{% url 'project' %}" class="nx-footer-link">Projects <span class="nx-link-arrow" aria-hidden="true">&rarr;</span></a>
         <a href="{% url 'testinomial' %}" class="nx-footer-link">Testimonials <span class="nx-link-arrow" aria-hidden="true">&rarr;</span></a>
         <a href="{% url 'contact' %}" class="nx-footer-link">Contact <span class="nx-link-arrow" aria-hidden="true">&rarr;</span></a>
@@ -1519,64 +1515,65 @@
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 5;
+    camera.position.z = 6;
 
-    const COUNT = 200;
+    // --- 3D point cloud ---
+    const COUNT = 320;
     const geo = new THREE.BufferGeometry();
     const pos = new Float32Array(COUNT * 3);
     const cols = new Float32Array(COUNT * 3);
-    const palette = [[0.424,0.388,1],[0.659,0.333,0.969],[0.937,0.451,0.6],[0.6,0.6,0.7]];
+    const palette = [[0.31,0.49,1],[0.55,0.36,0.96],[0.66,0.33,0.97],[0.22,0.77,0.37],[0.6,0.6,0.75]];
     for(let i=0;i<COUNT;i++){
-      pos[i*3]=(Math.random()-0.5)*18;
-      pos[i*3+1]=(Math.random()-0.5)*18;
+      pos[i*3]=(Math.random()-0.5)*20;
+      pos[i*3+1]=(Math.random()-0.5)*20;
       pos[i*3+2]=(Math.random()-0.5)*10;
       const c=palette[Math.floor(Math.random()*palette.length)];
       cols[i*3]=c[0];cols[i*3+1]=c[1];cols[i*3+2]=c[2];
     }
     geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
     geo.setAttribute('color',new THREE.BufferAttribute(cols,3));
-    const mat=new THREE.PointsMaterial({size:0.035,vertexColors:true,transparent:true,opacity:0.45,blending:THREE.AdditiveBlending,depthWrite:false});
-    const pts=new THREE.Points(geo,mat);
+    const pts=new THREE.Points(geo,new THREE.PointsMaterial({
+      size:0.04,vertexColors:true,transparent:true,opacity:0.5,
+      blending:THREE.AdditiveBlending,depthWrite:false
+    }));
     scene.add(pts);
 
-    // Connected sphere nodes
-    const sph=new THREE.Group();
-    const nc=30,rad=2.0,nps=[];
-    const ng=new THREE.SphereGeometry(0.03,8,8);
-    for(let i=0;i<nc;i++){
-      const phi=Math.acos(2*Math.random()-1),theta=2*Math.PI*Math.random();
-      const r=rad*Math.cbrt(Math.random());
-      const x=r*Math.sin(phi)*Math.cos(theta),y=r*Math.sin(phi)*Math.sin(theta),z=r*Math.cos(phi);
-      nps.push([x,y,z]);
-      const m=new THREE.Mesh(ng,new THREE.MeshBasicMaterial({color:0x6c63ff,transparent:true,opacity:0.6}));
-      m.position.set(x,y,z);m.material.color.setHSL(0.7+Math.random()*0.1,0.65,0.55);
-      sph.add(m);
+    // --- Constellation lines between nearby points ---
+    const LINES=70;
+    const lp=new Float32Array(LINES*6);
+    const lgeo=new THREE.BufferGeometry();
+    const pairIdx=[];
+    for(let i=0;i<LINES;i++){
+      const a=Math.floor(Math.random()*COUNT);
+      let b=Math.floor(Math.random()*COUNT);
+      if(b===a)b=(a+1)%COUNT;
+      pairIdx.push([a,b]);
     }
-    const lm=new THREE.LineBasicMaterial({color:0x6c63ff,transparent:true,opacity:0.08});
-    for(let i=0;i<nc;i++)for(let j=i+1;j<nc;j++){
-      const d=Math.sqrt((nps[i][0]-nps[j][0])**2+(nps[i][1]-nps[j][1])**2+(nps[i][2]-nps[j][2])**2);
-      if(d<1.1){sph.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(...nps[i]),new THREE.Vector3(...nps[j])]),lm.clone()));}
-    }
-    scene.add(sph);
+    lgeo.setAttribute('position',new THREE.BufferAttribute(lp,3));
+    const lseg=new THREE.LineSegments(lgeo,new THREE.LineBasicMaterial({
+      color:0x6c63ff,transparent:true,opacity:0.12,blending:THREE.AdditiveBlending
+    }));
+    scene.add(lseg);
 
-    // Floating wireframe shapes
+    // --- Floating wireframe shapes ---
     const shapes=new THREE.Group();
     const wireGeos=[
-      new THREE.OctahedronGeometry(0.18,0),
-      new THREE.TorusGeometry(0.14,0.05,8,16),
-      new THREE.IcosahedronGeometry(0.16,0),
-      new THREE.TetrahedronGeometry(0.17,0),
-      new THREE.OctahedronGeometry(0.12,0),
-      new THREE.TorusGeometry(0.1,0.04,6,12),
+      new THREE.OctahedronGeometry(0.34,0),
+      new THREE.TorusGeometry(0.28,0.1,8,20),
+      new THREE.IcosahedronGeometry(0.3,0),
+      new THREE.TetrahedronGeometry(0.32,0),
+      new THREE.TorusKnotGeometry(0.18,0.06,40,8),
+      new THREE.DodecahedronGeometry(0.22,0),
+      new THREE.ConeGeometry(0.24,0.42,4),
     ];
-    const wireColors=[0x4F7DFF,0x8B5CF6,0x22c55e,0xa855f7,0x3d63ff,0xec4899];
+    const wireColors=[0x4F7DFF,0x8B5CF6,0x22c55e,0xa855f7,0xec4899,0x3d63ff,0xf59e0b];
     const floatingShapes=[];
-    for(let i=0;i<6;i++){
-      const mat=new THREE.MeshBasicMaterial({color:wireColors[i],wireframe:true,transparent:true,opacity:0.18+Math.random()*0.12});
+    for(let i=0;i<7;i++){
+      const mat=new THREE.MeshBasicMaterial({color:wireColors[i],wireframe:true,transparent:true,opacity:0.26});
       const mesh=new THREE.Mesh(wireGeos[i],mat);
-      const spread=3.5;
-      mesh.position.set((Math.random()-0.5)*spread*2,(Math.random()-0.5)*spread*2,(Math.random()-0.5)*3-1);
-      mesh.userData={rx:Math.random()*0.008+0.003,ry:Math.random()*0.012+0.005,bx:mesh.position.x,by:mesh.position.y,bz:mesh.position.z,phase:Math.random()*Math.PI*2,speed:0.3+Math.random()*0.4};
+      const spread=4;
+      mesh.position.set((Math.random()-0.5)*spread*2,(Math.random()-0.5)*spread*2,(Math.random()-0.5)*5-1);
+      mesh.userData={rx:Math.random()*0.014+0.005,ry:Math.random()*0.02+0.008,bx:mesh.position.x,by:mesh.position.y,bz:mesh.position.z,phase:Math.random()*Math.PI*2,speed:0.5+Math.random()*0.6};
       shapes.add(mesh);
       floatingShapes.push(mesh);
     }
@@ -1585,26 +1582,45 @@
     let mx=0,my=0,t=0,scrollY=0;
     document.addEventListener('mousemove',e=>{mx=(e.clientX/window.innerWidth-0.5)*2;my=(e.clientY/window.innerHeight-0.5)*2;});
     window.addEventListener('scroll',()=>{scrollY=window.scrollY;},{passive:true});
+
     function animate(){
-      requestAnimationFrame(animate);t+=0.002;
+      requestAnimationFrame(animate);t+=0.004;
+      // undulating point cloud
       const p=pts.geometry.attributes.position.array;
-      for(let i=0;i<COUNT;i++){p[i*3+1]+=Math.sin(t+i*0.1)*0.0008;p[i*3]+=Math.cos(t+i*0.05)*0.0004;}
+      for(let i=0;i<COUNT;i++){p[i*3+1]+=Math.sin(t*2+i*0.08)*0.001;p[i*3]+=Math.cos(t*1.4+i*0.05)*0.0006;}
       pts.geometry.attributes.position.needsUpdate=true;
-      pts.rotation.y=t*0.08;pts.rotation.x=my*0.04;
-      sph.rotation.y=t*0.25+mx*0.2;sph.rotation.x=t*0.15+my*0.15;
+
+      // constellation lines follow the moving points
+      for(let i=0;i<LINES;i++){
+        const a=pairIdx[i][0]*3,b=pairIdx[i][1]*3;
+        lp[i*6]=p[a];lp[i*6+1]=p[a+1];lp[i*6+2]=p[a+2];
+        lp[i*6+3]=p[b];lp[i*6+4]=p[b+1];lp[i*6+5]=p[b+2];
+      }
+      lseg.geometry.attributes.position.needsUpdate=true;
+
+      pts.rotation.y=t*0.08+mx*0.4;
+      pts.rotation.x=t*0.05+my*0.3;
+      lseg.rotation.copy(pts.rotation);
+      shapes.rotation.y=t*0.18+mx*0.5;
+      shapes.rotation.x=t*0.12+my*0.4;
+
       // Animate floating wireframe shapes
       const maxScroll=document.documentElement.scrollHeight-window.innerHeight;
       const scrollPct=maxScroll>0?scrollY/maxScroll:0;
       floatingShapes.forEach(s=>{
         const u=s.userData;
         s.rotation.x+=u.rx;s.rotation.y+=u.ry;
-        s.position.y=u.by+Math.sin(t*u.speed+u.phase)*0.3;
-        s.position.x=u.bx+Math.cos(t*u.speed*0.7+u.phase)*0.15;
-        s.position.z=u.bz-scrollPct*1.5;
-        s.material.opacity=(0.18+Math.sin(t*0.5+u.phase)*0.08)*(1-scrollPct*0.3);
+        s.position.y=u.by+Math.sin(t*u.speed+u.phase)*0.6;
+        s.position.x=u.bx+Math.cos(t*u.speed*0.7+u.phase)*0.25;
+        s.position.z=u.bz-scrollPct*2;
+        s.material.opacity=(0.26+Math.sin(t*2+u.phase)*0.08)*(1-scrollPct*0.3);
+        const pulse=1+Math.sin(t*2+u.phase)*0.12;
+        s.scale.setScalar(pulse);
       });
-      camera.position.x+=(mx*0.2-camera.position.x)*0.015;
-      camera.position.y+=(-my*0.2-camera.position.y)*0.015;
+
+      camera.position.x+=(mx*1.2-camera.position.x)*0.04;
+      camera.position.y+=(-my*1.2-camera.position.y)*0.04;
+      camera.position.z=6+Math.sin(t*0.5)*0.4;
       camera.lookAt(0,0,0);
       renderer.render(scene,camera);
     }
@@ -2182,16 +2198,19 @@
       document.addEventListener('mouseleave', () => glow.classList.remove('active'));
 
       function animate(){
-        rx += (mx - rx) * 0.15;
-        ry += (my - ry) * 0.15;
-        gx += (mx - gx) * 0.06;
-        gy += (my - gy) * 0.06;
-        dot.style.left = mx + 'px';
-        dot.style.top = my + 'px';
-        ring.style.left = rx + 'px';
-        ring.style.top = ry + 'px';
-        glow.style.left = gx + 'px';
-        glow.style.top = gy + 'px';
+        // dot tracks the mouse with light smoothing
+        rx += (mx - rx) * 0.35;
+        ry += (my - ry) * 0.35;
+        // ring eases a touch slower for a smooth trailing feel
+        gx += (mx - gx) * 0.12;
+        gy += (my - gy) * 0.12;
+
+        dot.style.setProperty('--cx', mx + 'px');
+        dot.style.setProperty('--cy', my + 'px');
+        ring.style.setProperty('--cx', rx + 'px');
+        ring.style.setProperty('--cy', ry + 'px');
+        glow.style.setProperty('--cx', gx + 'px');
+        glow.style.setProperty('--cy', gy + 'px');
         requestAnimationFrame(animate);
       }
       animate();

@@ -682,35 +682,40 @@
   if (typeof gsap === 'undefined') return;
 
   var ICONS = {
-    python:'bi-filetype-py', django:'bi-code-slash', react:'bi-hexagon', next:'bi-triangle-fill',
-    typescript:'bi-braces', javascript:'bi-filetype-js', html:'bi-filetype-html', css:'bi-filetype-css',
-    tailwind:'bi-wind', bootstrap:'bi-bootstrap', threejs:'bi-box', gsap:'bi-graph-up',
-    postgres:'bi-database', docker:'bi-archive', git:'bi-git', rest:'bi-arrow-repeat'
+    python:'bi-filetype-py', django:'bi-code-slash', drf:'bi-code-square', simplejwt:'bi-shield-lock',
+    javascript:'bi-filetype-js', html:'bi-filetype-html', css:'bi-filetype-css', bootstrap:'bi-bootstrap',
+    postgres:'bi-database', mysql:'bi-database-fill', sqlite:'bi-hdd',
+    git:'bi-git', github:'bi-github', docker:'bi-archive', pythonanywhere:'bi-cloud',
+    render:'bi-box-seam', swagger:'bi-file-code', postman:'bi-send', rest:'bi-arrow-repeat',
+    mvt:'bi-layers', orm:'bi-diagram-2', auth:'bi-person-lock', responsive:'bi-phone', mvc:'bi-diagram-3'
   };
   var COLORS = {
-    python:'#3776AB', django:'#44B78B', react:'#61DAFB', next:'#FFFFFF',
-    typescript:'#3178C6', javascript:'#F7DF1E', html:'#E34F26', css:'#1572B6',
-    tailwind:'#38BDF8', bootstrap:'#7952B3', threejs:'#E7E7FF', gsap:'#88CE02',
-    postgres:'#4169E1', docker:'#2496ED', git:'#F05032', rest:'#10B981'
+    python:'#3776AB', django:'#44B78B', drf:'#A30000', simplejwt:'#F5A623',
+    javascript:'#F7DF1E', html:'#E34F26', css:'#1572B6', bootstrap:'#7952B3',
+    postgres:'#4169E1', mysql:'#4479A1', sqlite:'#0F80CC',
+    git:'#F05032', github:'#FFFFFF', docker:'#2496ED', pythonanywhere:'#1D9FD7',
+    render:'#46E3B7', swagger:'#85EA2D', postman:'#FF6C37', rest:'#10B981',
+    mvt:'#8B5CF6', orm:'#34D399', auth:'#F59E0B', responsive:'#EC4899', mvc:'#06B6D4'
   };
 
   var SKILLS = [
-    { key:'python', name:'Python', cat:'Language', years:3, big:true, desc:'My primary language for backend engineering, automation, data pipelines and machine learning. Clean, readable, powerful.' },
-    { key:'django', name:'Django', cat:'Backend', years:3, desc:'Full-stack Django with ORM, auth, signals, caching and production deployment across multiple live projects.' },
-    { key:'react', name:'React', cat:'Frontend', years:1, desc:'Component-driven SPAs built with hooks, state management and smooth, modern user interfaces.' },
-    { key:'next', name:'Next.js', cat:'Frontend', years:1, desc:'React with SSR, static generation and API routes for fast, SEO-friendly applications.' },
-    { key:'typescript', name:'TypeScript', cat:'Language', years:1, big:true, desc:'Typed JavaScript for safer, more maintainable front-end and full-stack codebases.' },
-    { key:'javascript', name:'JavaScript', cat:'Language', years:3, desc:'Vanilla JS, ES modules and DOM mastery — powering every interactive experience on this site.' },
-    { key:'html', name:'HTML5', cat:'Frontend', years:3, big:true, desc:'Semantic, accessible, SEO-ready markup with modern APIs and best-practice structure.' },
-    { key:'css', name:'CSS3', cat:'Frontend', years:3, big:true, desc:'Grid, flexbox, custom properties, glassmorphism and GPU-accelerated animation.' },
-    { key:'tailwind', name:'Tailwind', cat:'Frontend', years:1, desc:'Utility-first styling for rapid, consistent UI development in any framework.' },
-    { key:'bootstrap', name:'Bootstrap', cat:'Frontend', years:3, desc:'Component library and grid system used across many production Django templates.' },
-    { key:'threejs', name:'Three.js', cat:'Creative', years:2, desc:'WebGL scenes, particle systems and 3D interaction for immersive, award-grade experiences.' },
-    { key:'gsap', name:'GSAP', cat:'Creative', years:2, desc:'Frame-perfect scroll, stagger and physics-based motion for buttery-smooth animation.' },
-    { key:'postgres', name:'PostgreSQL', cat:'Database', years:2, desc:'Production-grade relational database — schema design, indexing, migrations and complex queries.' },
-    { key:'docker', name:'Docker', cat:'DevOps', years:1, desc:'Containerising apps for reproducible environments and simplified, reliable deployments.' },
-    { key:'git', name:'Git', cat:'DevOps', years:3, desc:'Version control workflows, branching strategies, rebasing and clean commit history.' },
-    { key:'rest', name:'REST API', cat:'Backend', years:3, desc:'Clean, documented, versioned RESTful APIs consumed by web and mobile clients.' }
+    { key:'python', name:'Python', cat:'Backend', years:'6+ months', big:true, desc:'My primary language for backend engineering, automation and scripting. Clean, readable and powerful.' },
+    { key:'django', name:'Django', cat:'Backend', years:'6+ months', big:true, desc:'Full-stack Django with MVT architecture, ORM, auth and production deployment on live projects.' },
+    { key:'drf', name:'Django REST Framework', cat:'Backend', years:'6+ months', big:true, desc:'Building clean, versioned and well-documented RESTful APIs with serializers, viewsets and permissions.' },
+    { key:'simplejwt', name:'SimpleJWT', cat:'Backend', years:'6+ months', desc:'Token-based authentication and authorization for secure, stateless API endpoints.' },
+    { key:'rest', name:'RESTful API Design', cat:'Backend', years:'6+ months', desc:'Designing scalable, documented RESTful APIs consumed by web and mobile clients.' },
+    { key:'html', name:'HTML5', cat:'Frontend', years:'6+ months', big:true, desc:'Semantic, accessible, SEO-ready markup with modern APIs and best-practice structure.' },
+    { key:'css', name:'CSS3', cat:'Frontend', years:'6+ months', big:true, desc:'Flexbox, grid, responsive layouts, transitions and pixel-perfect styling.' },
+    { key:'bootstrap', name:'Bootstrap', cat:'Frontend', years:'6+ months', desc:'Responsive component library and grid system used across production Django templates.' },
+    { key:'postgres', name:'PostgreSQL', cat:'Database', years:'6+ months', desc:'Production-grade relational database — schema design, indexing, migrations and complex queries.' },
+    { key:'mysql', name:'MySQL', cat:'Database', years:'6+ months', desc:'Relational database design and query optimisation for application data storage.' },
+    { key:'git', name:'Git', cat:'DevOps', years:'6+ months', desc:'Version control workflows, branching strategies, rebasing and clean commit history.' },
+    { key:'github', name:'GitHub', cat:'DevOps', years:'6+ months', desc:'Hosting repositories, collaboration, CI and open-source workflow management.' },
+    { key:'docker', name:'Docker', cat:'DevOps', years:'6+ months', desc:'Containerising apps for reproducible environments and simplified, reliable deployments.' },
+    { key:'pythonanywhere', name:'PythonAnywhere', cat:'DevOps', years:'6+ months', desc:'Deploying and hosting Django applications on PythonAnywhere for reliable uptime.' },
+    { key:'render', name:'Render', cat:'DevOps', years:'6+ months', desc:'Cloud hosting and CI/CD deployment of full-stack applications on Render.' },
+    { key:'swagger', name:'Swagger', cat:'DevOps', years:'6+ months', desc:'Interactive API documentation with OpenAPI/Swagger UI for Django REST Framework.' },
+    { key:'postman', name:'Postman', cat:'DevOps', years:'6+ months', desc:'API testing, collection management and debugging REST endpoints.' },
   ];
 
   SKILLS.forEach(function(s){
@@ -847,7 +852,7 @@
         cardTag.textContent = s.cat;
         cardDesc.textContent = s.desc;
         cardMeta.innerHTML =
-          '<span><i class="bi bi-award"></i> ' + s.years + ' yrs</span>' +
+          '<span><i class="bi bi-award"></i> ' + s.years + '</span>' +
           '<span><i class="bi bi-lightning-charge-fill"></i> production ready</span>';
      })
      .to('.sk-card-icon, .sk-card-title, .sk-card-tag, .sk-card-desc, .sk-card-meta', {

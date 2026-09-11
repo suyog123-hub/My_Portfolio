@@ -7,17 +7,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<canvas id="contactBg"></canvas>
-
+<!-- Base Rojit background used on all pages -->
+<!-- <canvas id="contactBg"></canvas>
 <div class="cst-cursor-dot" id="cstDot"></div>
 <div class="cst-cursor-ring" id="cstRing"></div>
 <div class="cst-cursor-glow" id="cstGlow"></div>
-
 <div class="cst-orb cst-orb-1"></div>
 <div class="cst-orb cst-orb-2"></div>
 <div class="cst-orb cst-orb-3"></div>
-
-<div class="cst-grid"></div>
+<div class="cst-grid"></div> -->
 
 <section class="cst" id="contactSection">
   <div class="cst-wrap">
@@ -729,8 +727,9 @@
   "use strict";
 
   /* ================================================================
-     THREE.JS — PARTICLES + LINES
+     THREE.JS — PARTICLES + LINES (disabled — base Rojit used)
      ================================================================ */
+  if(false){
   const canvas = document.getElementById('contactBg');
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -848,6 +847,7 @@
       el.addEventListener('mouseleave',()=>{dot.classList.remove('hover');ring.classList.remove('hover');glow.classList.remove('hover');});
     });
   }
+  } // end disabled background+cursor
 
   /* ================================================================
      MAGNETIC BUTTONS

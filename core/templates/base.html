@@ -16,19 +16,28 @@
 
   <style>
     :root {
-      --bg: #050507;
-      --bg-mid: #0a0a12;
-      --surface: rgba(15, 15, 25, 0.8);
+      /* Pure black background — just color changed */
+      --bg: #000000;
+      --bg-void: #000000;
+      --bg-mid: #000000;
+      --bg-panel: #000000;
+      --panel-bg: rgba(10, 10, 18, 0.55);   /* keep card contrast */
+      --panel-border: #1a1a2e;
+      --surface: rgba(10, 10, 18, 0.55);
       --surface-solid: #0f0f19;
-      --border: rgba(255, 255, 255, 0.06);
-      --border-light: rgba(255, 255, 255, 0.1);
-      --text: #f0f0f5;
-      --text-secondary: #bdbdd4;
-      --text-muted: #8a8aa5;
-      --text-eyebrow: #6a6a85;
-      --accent: #3d63ff;
-      --accent-light: #9fb4ff;
+      --border: #1a1a2e;
+      --border-light: rgba(255, 255, 255, 0.08);
+      --text: #eceef2;
+      --text-primary: #eceef2;
+      --text-secondary: #9a9fac;
+      --text-muted: #a1a1a1;
+      --text-eyebrow: #8f96a8;
+      --accent: #3d63ff;        /* blue-core */
+      --accent-light: #9fb4ff;  /* blue-light */
+      --blue-core: #3d63ff;
+      --blue-light: #9fb4ff;
       --green: #22c55e;
+      --green-live: #22c55e;
       --purple: #a855f7;
       --gradient: linear-gradient(135deg, #3d63ff, #a855f7);
       --font-display: 'Space Grotesk', sans-serif;
@@ -47,10 +56,13 @@
 
     body {
       color: var(--text-secondary);
-      background: var(--bg);
+      background-color: var(--bg-void);
       font-family: var(--font-body);
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
+    ::selection { color: var(--text-primary); background: rgba(61,99,255,0.3); }
 
     html { scroll-behavior: smooth; }
 
@@ -1138,8 +1150,10 @@
       100% { margin-left: 30px; margin-top: -20px; }
     }
 
-    /* Custom Cursor */
-    * { cursor: none !important; }
+    /* Custom Cursor — fixed: keep native cursor visible so mouse never disappears.
+       Previous `* { cursor: none !important; }` hid the cursor and broke when JS errored.
+       Now native cursor is default; dot/ring are overlay only. */
+    /* * { cursor: none !important; } removed */
     #cursor-dot {
       position: fixed; top: 0; left: 0; z-index: 999999;
       width: 8px; height: 8px; border-radius: 50%;
@@ -1263,57 +1277,224 @@
 <body class="index-page">
   <div class="scanlines"></div>
 
-  <!-- AI Background Image -->
-  <div class="site-bg" aria-hidden="true">
-    <div class="site-bg-img"></div>
-    <div class="site-bg-overlay"></div>
+  <!-- ================================================================
+       ROJIT-STYLE BACKGROUND — exact match to portfolio.rojitpokharel.com.np
+       Minimal dark: vertical gradient (#050507 -> #0a0a12 -> #050507)
+       + subtle radial mesh + dot grid + scanlines (no heavy images)
+       ================================================================ -->
+  <div class="rojit-bg" aria-hidden="true">
+    <div class="rojit-bg-gradient"></div>
+    <div class="rojit-bg-mesh"></div>
+    <div class="rojit-bg-grid"></div>
+  </div>
+
+  <!-- Central wireframe polyhedron + floating dots — exact like Rojit hero screenshot -->
+  <canvas id="hero-wireframe" aria-hidden="true"></canvas>
+  <div class="hero-dots" aria-hidden="true">
+    <span class="hero-dot hd1"></span>
+    <span class="hero-dot hd2"></span>
+    <span class="hero-dot hd3"></span>
+    <span class="hero-dot hd4"></span>
+    <span class="hero-dot hd5"></span>
+    <span class="hero-dot hd6"></span>
   </div>
   <style>
-    .site-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
-    .site-bg-img {
+    .rojit-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; background: #000000; }
+    .rojit-bg-gradient {
       position: absolute; inset: 0;
-      background: url('{% static "images/aiphoto.png" %}') center / cover no-repeat fixed;
+      background: #000000;
     }
-    .site-bg-overlay {
+    .rojit-bg-mesh {
       position: absolute; inset: 0;
+      /* Same as Rojit .gradient-mesh */
       background:
-        radial-gradient(ellipse 80% 60% at 50% 35%, rgba(5,5,7,0.18) 0%, rgba(5,5,7,0.5) 100%),
-        linear-gradient(180deg, rgba(5,5,7,0.55) 0%, rgba(5,5,7,0.38) 45%, rgba(5,5,7,0.85) 100%);
+        radial-gradient(at 20% 20%, rgba(61,99,255,0.08) 0%, transparent 50%),
+        radial-gradient(at 80% 20%, rgba(159,180,255,0.05) 0%, transparent 50%);
     }
-    /* Extra scrim behind content so text pops */
-    .content-veil {
-      position: fixed; inset: 0; z-index: 1; pointer-events: none;
-      background: rgba(5, 5, 7, 0.2);
+    .rojit-bg-grid {
+      position: absolute; inset: 0;
+      /* Same as Rojit .terminal-grid */
+      background-image: radial-gradient(circle, rgba(61,99,255,0.06) 1px, transparent 1px);
+      background-size: 24px 24px;
+      mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 30%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 30%, transparent 75%);
+      opacity: 0.6;
+    }
+    /* Hide all heavy previous background layers — Rojit has none of these */
+    #ambient-bg, #bg3d, #three-particles, #mouseTrail, #grid3d, #cursor-glow, .site-bg, .content-veil, #footerParticles { display: none !important; }
+    /* Keep cursor dot/ring but hide large glow */
+    #cursor-glow { display: none !important; }
+    /* Ensure per-page custom backgrounds don't cover base Rojit background on all pages */
+    #projBg, #contactBg, #testBg,
+    .cst-orb, .cst-orb-1, .cst-orb-2, .cst-orb-3, .cst-grid,
+    .proj-cursor-dot, .proj-cursor-ring, .proj-cursor-glow,
+    .cst-cursor-dot, .cst-cursor-ring, .cst-cursor-glow,
+    .tst-cursor-dot, .tst-cursor-ring, .tst-cursor-glow,
+    #projCursor, #projCursorRing, #projCursorGlow,
+    #cstDot, #cstRing, #cstGlow,
+    #testCursor, #testCursorRing, #testCursorGlow { display: none !important; }
+    /* Make per-page sections transparent so base rojit-bg shows through */
+    .proj, .cst, .tst { background: transparent !important; }
+
+    /* ================================================================
+       ROJIT UTILITIES — card, dividers, meshes (exact copy)
+       ================================================================ */
+    .terminal-divider {
+      background: linear-gradient(90deg, transparent 0%, rgba(61,99,255,0.15) 20%, rgba(61,99,255,0.3) 50%, rgba(61,99,255,0.15) 80%, transparent 100%);
+      height: 1px;
+    }
+    .terminal-grid {
+      background-image: radial-gradient(circle, rgba(61,99,255,0.06) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .gradient-mesh {
+      background: radial-gradient(at 20% 20%, rgba(61,99,255,0.08) 0%, transparent 50%), radial-gradient(at 80% 20%, rgba(159,180,255,0.05) 0%, transparent 50%);
+    }
+    .text-gradient {
+      background: linear-gradient(135deg, #9fb4ff, #3d63ff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .glow-text { text-shadow: 0 0 20px rgba(61,99,255,0.4), 0 0 60px rgba(61,99,255,0.15); }
+    /* Rojit card — panel with subtle border */
+    .card-base {
+      background-color: rgba(10,10,18,0.55) !important;
+      border: 1px solid #1a1a2e !important;
+      border-radius: 12px !important;
+    }
+    .card-base:hover {
+      border-color: rgba(61,99,255,0.2) !important;
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    /* Ensure sections sit above fixed bg like Rojit (z-10) */
+    body > section, body > footer, body > .nx-btt, .page-section { position: relative; z-index: 1; }
+    /* Rojit scrollbar — subtle panel border */
+    ::-webkit-scrollbar-track { background: #050507 !important; }
+    ::-webkit-scrollbar-thumb { background: #1a1a2e !important; border-radius: 3px; }
+    /* Footer — transparent like Rojit, not solid */
+    .nx-footer { background: transparent !important; }
+    /* Ensure scanlines stay behind content but above bg — Rojit z-5 vs content z-10 */
+    .scanlines { z-index: 1 !important; opacity: 0.4 !important; }
+
+    /* ================================================================
+       HERO WIREFRAME — central polyhedron like Rojit screenshot
+       ================================================================ */
+    #hero-wireframe {
+      position: fixed;
+      top: 52%; left: 50%;
+      width: min(78vmin, 820px);
+      height: min(78vmin, 820px);
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.85;
+      display: block;
+    }
+    .hero-dots {
+      position: fixed; inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .hero-dot {
+      position: absolute;
+      border-radius: 50%;
+      background: #6b6f82;
+      opacity: 0.52;
+    }
+    .hero-dot.hd1 { width: 11px; height: 11px; top: 6.2%; left: 42.8%; background: #7a7d90; opacity: 0.48; animation: heroDotFloat 14s ease-in-out infinite; }
+    .hero-dot.hd2 { width: 8px; height: 8px; top: 8.0%; left: 49.4%; background: #4f6dff; opacity: 0.95; box-shadow: 0 0 0 8px rgba(79,109,255,0.08), 0 0 0 1px rgba(79,109,255,0.32); animation: heroDotFloat 12s ease-in-out infinite 0.6s; }
+    .hero-dot.hd3 { width: 10px; height: 10px; top: 49.8%; left: 35.6%; background: #7a7d90; opacity: 0.44; animation: heroDotFloat 16s ease-in-out infinite 0.3s; }
+    .hero-dot.hd4 { width: 17px; height: 17px; bottom: 11.5%; left: 12.6%; background: #7a7d90; opacity: 0.50; animation: heroDotFloat 18s ease-in-out infinite 1s; }
+    .hero-dot.hd5 { width: 30px; height: 30px; bottom: -9px; left: 20.8%; background: #7a7d90; opacity: 0.34; animation: heroDotFloat 20s ease-in-out infinite 0.2s; }
+    .hero-dot.hd6 { width: 6px; height: 6px; bottom: 14%; right: 18%; background: #7a7d90; opacity: 0.30; animation: heroDotFloat 15s ease-in-out infinite 0.9s; }
+    @keyframes heroDotFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+    @media (max-width: 768px) {
+      #hero-wireframe { width: 88vmin; height: 88vmin; opacity: 0.42; top: 58%; }
+      .hero-dot { opacity: 0.32; }
+      .hero-dot.hd1 { top: 4%; left: 38%; }
+      .hero-dot.hd2 { top: 6%; left: 52%; }
     }
   </style>
 
-  <!-- Content Scrim -->
-  <div class="content-veil" aria-hidden="true"></div>
+  <!-- Hero wireframe logic — central polyhedron like Rojit screenshot -->
+  <script>
+  (function(){
+    const canvas = document.getElementById('hero-wireframe');
+    if(!canvas || typeof THREE === 'undefined') return;
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8));
 
-  <!-- Custom Cursor -->
+    const scene = new THREE.Scene();
+    // Camera looking at origin from front
+    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+    camera.position.set(0, 0, 18);
+
+    function resize(){
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      if(canvas.width !== w * renderer.getPixelRatio() || canvas.height !== h * renderer.getPixelRatio()){
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+    }
+
+    // Outer + inner wireframe — matches screenshot (nested icosahedron)
+    const group = new THREE.Group();
+    const outerGeo = new THREE.IcosahedronGeometry(6.2, 2);
+    const innerGeo = new THREE.IcosahedronGeometry(3.1, 2);
+    const outerMat = new THREE.MeshBasicMaterial({ color: 0x4a5080, wireframe: true, transparent: true, opacity: 0.16 });
+    const innerMat = new THREE.MeshBasicMaterial({ color: 0x4a5080, wireframe: true, transparent: true, opacity: 0.11 });
+    const outer = new THREE.Mesh(outerGeo, outerMat);
+    const inner = new THREE.Mesh(innerGeo, innerMat);
+    group.add(outer);
+    group.add(inner);
+    scene.add(group);
+
+    // Slight tilt to match screenshot perspective
+    group.rotation.x = 0.18;
+    group.rotation.y = -0.35;
+    group.rotation.z = 0.08;
+
+    let mx = 0, my = 0, t = 0;
+    window.addEventListener('mousemove', e => {
+      mx = (e.clientX / window.innerWidth - 0.5) * 2;
+      my = (e.clientY / window.innerHeight - 0.5) * 2;
+    }, {passive:true});
+
+    // Handle reduced motion
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function animate(){
+      requestAnimationFrame(animate);
+      resize();
+      if(reduce) { renderer.render(scene, camera); return; }
+      t += 0.0016;
+      // Slow continuous rotation like Rojit (very subtle)
+      group.rotation.y += 0.0009 + mx * 0.0006;
+      group.rotation.x += 0.0004 + my * 0.0004;
+      // Gentle floating
+      group.position.y = Math.sin(t * 0.9) * 0.18;
+      group.position.x = Math.cos(t * 0.7) * 0.12;
+
+      // Parallax based on mouse
+      camera.position.x += (mx * 0.9 - camera.position.x) * 0.02;
+      camera.position.y += (-my * 0.6 - camera.position.y) * 0.02;
+      camera.lookAt(0, 0, 0);
+
+      renderer.render(scene, camera);
+    }
+    // Initial size
+    resize();
+    animate();
+    window.addEventListener('resize', resize);
+  })();
+  </script>
+
+  <!-- Custom Cursor — Rojit style (dot + ring + glow). Glow kept hidden to match Rojit minimal but element restored so JS doesn't error -->
   <div id="cursor-dot"></div>
   <div id="cursor-ring"></div>
   <div id="cursor-glow"></div>
-
-  <!-- Ambient Background Blobs -->
-  <div id="ambient-bg">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-    <div class="blob blob-4"></div>
-  </div>
-
-  <!-- 3D Background Canvas -->
-  <canvas id="bg3d" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
-
-  <!-- Three.js Particle Canvas -->
-  <canvas id="three-particles" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
-
-  <!-- Mouse Trail Canvas -->
-  <canvas id="mouseTrail"></canvas>
-
-  <!-- 3D Perspective Grid Floor -->
-  <div id="grid3d"><div id="grid3d-inner"></div></div>
 
   <div id="pageTransition"></div>
 
@@ -1420,7 +1601,7 @@
 
   <!-- Footer -->
   <footer id="footer" class="nx-footer" role="contentinfo">
-    <canvas id="footerParticles"></canvas>
+    <!-- Rojit has no footer particles — removed to match minimal background -->
     <div class="nx-footer-inner">
 
       <!-- Logo -->
@@ -1503,9 +1684,10 @@
     <i class="bi bi-arrow-up nx-btt-arrow" aria-hidden="true"></i>
   </button>
 
-  <!-- Three.js Particle System (all pages) -->
+  <!-- Three.js Particle System (all pages) — disabled for Rojit minimal background -->
   <script>
   (function(){
+    return; // Rojit has no 3D particle cloud — disabled to match reference
     if(typeof THREE === 'undefined') return;
     const canvas = document.getElementById('three-particles');
     if(!canvas) return;
@@ -1632,10 +1814,12 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    /* 3D Particle Background */
+    /* 3D Particle Background — disabled for Rojit minimal background (no heavy particles) */
     (function(){
       const canvas = document.getElementById('bg3d');
+      if(!canvas) return;
       const ctx = canvas.getContext('2d');
+      if(!ctx) return;
       let w, h, particles = [], mouse = {x: null, y: null};
       const PARTICLE_COUNT = 50;
       const CONNECTION_DIST = 180;
@@ -1966,9 +2150,10 @@
     })();
 
     /* ================================================================
-       FOOTER — 3D Background (Three.js)
+       FOOTER — 3D Background (Three.js) — disabled for Rojit minimal
        ================================================================ */
     (function(){
+      return; // Rojit background has no footer particles — disabled
       if(typeof THREE === 'undefined') return;
       const canvas = document.getElementById('footerParticles');
       if(!canvas) return;
@@ -2183,19 +2368,20 @@
       loop();
     })();
 
-    /* Custom Cursor */
+    /* Custom Cursor — fixed to never hide native cursor */
     (function(){
       if(window.innerWidth < 1024) return;
       const dot = document.getElementById('cursor-dot');
       const ring = document.getElementById('cursor-ring');
       const glow = document.getElementById('cursor-glow');
+      if(!dot || !ring) return;
       let mx = 0, my = 0, rx = 0, ry = 0, gx = 0, gy = 0;
 
       document.addEventListener('mousemove', e => {
         mx = e.clientX; my = e.clientY;
-        glow.classList.add('active');
+        if(glow) glow.classList.add('active');
       });
-      document.addEventListener('mouseleave', () => glow.classList.remove('active'));
+      document.addEventListener('mouseleave', () => { if(glow) glow.classList.remove('active'); });
 
       function animate(){
         // dot tracks the mouse with light smoothing
@@ -2209,15 +2395,17 @@
         dot.style.setProperty('--cy', my + 'px');
         ring.style.setProperty('--cx', rx + 'px');
         ring.style.setProperty('--cy', ry + 'px');
-        glow.style.setProperty('--cx', gx + 'px');
-        glow.style.setProperty('--cy', gy + 'px');
+        if(glow){
+          glow.style.setProperty('--cx', gx + 'px');
+          glow.style.setProperty('--cy', gy + 'px');
+        }
         requestAnimationFrame(animate);
       }
       animate();
 
       document.querySelectorAll('a, button, .card-base, .btn-glow, .btn-ghost, .nx-link, .nx-social, .nx-hamburger, .nx-footer-social, .nx-footer-link, .nx-btt').forEach(el => {
-        el.addEventListener('mouseenter', () => { dot.classList.add('hover'); ring.classList.add('hover'); glow.classList.add('accent'); });
-        el.addEventListener('mouseleave', () => { dot.classList.remove('hover'); ring.classList.remove('hover'); glow.classList.remove('accent'); });
+        el.addEventListener('mouseenter', () => { dot.classList.add('hover'); ring.classList.add('hover'); if(glow) glow.classList.add('accent'); });
+        el.addEventListener('mouseleave', () => { dot.classList.remove('hover'); ring.classList.remove('hover'); if(glow) glow.classList.remove('accent'); });
       });
 
       /* Blob parallax on mouse */

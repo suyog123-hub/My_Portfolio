@@ -7,11 +7,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<canvas id="projBg"></canvas>
-
+<!-- Rojit wireframe from base.html is used on all pages — per-page canvas hidden -->
+<!-- <canvas id="projBg"></canvas>
 <div id="projCursor" class="proj-cursor-dot"></div>
 <div id="projCursorRing" class="proj-cursor-ring"></div>
-<div id="projCursorGlow" class="proj-cursor-glow"></div>
+<div id="projCursorGlow" class="proj-cursor-glow"></div> -->
 
 <section class="proj" id="projSection">
 
@@ -975,8 +975,9 @@
   "use strict";
 
   /* ================================================================
-     THREE.JS — PREMIUM 3D BACKGROUND
+     THREE.JS — PREMIUM 3D BACKGROUND (disabled — base.html Rojit used on all pages)
      ================================================================ */
+  if(false){
   const canvas = document.getElementById('projBg');
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -1188,10 +1189,13 @@
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
+  } // end disabled background
 
   /* ================================================================
-     CUSTOM CURSOR
+     CUSTOM CURSOR (disabled — base cursor used)
      ================================================================ */
+  if(false){
+  /* per-page cursor hidden */
   const cursorDot = document.getElementById('projCursor');
   const cursorRing = document.getElementById('projCursorRing');
   const cursorGlow = document.getElementById('projCursorGlow');
@@ -1231,6 +1235,7 @@
       });
     });
   }
+  } // end disabled per-page cursor
 
   /* ================================================================
      MAGNETIC BUTTONS

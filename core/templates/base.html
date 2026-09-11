@@ -1410,10 +1410,76 @@
     .hero-dot.hd6 { width: 6px; height: 6px; bottom: 14%; right: 18%; background: #7a7d90; opacity: 0.30; animation: heroDotFloat 15s ease-in-out infinite 0.9s; }
     @keyframes heroDotFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
     @media (max-width: 768px) {
-      #hero-wireframe { width: 88vmin; height: 88vmin; opacity: 0.42; top: 58%; }
+      #hero-wireframe { width: 88vmin; height: 88vmin; opacity: 0.22; top: 45%; left: 50%; }
       .hero-dot { opacity: 0.32; }
       .hero-dot.hd1 { top: 4%; left: 38%; }
       .hero-dot.hd2 { top: 6%; left: 52%; }
+      .hero-dots { display: none !important; } /* reduce clutter on mobile */
+    }
+
+    /* ================================================================
+       MOBILE FRIENDLY — comprehensive responsive
+       ================================================================ */
+    html, body { max-width: 100%; overflow-x: hidden; }
+    img { max-width: 100%; height: auto; }
+    @media (max-width: 991px) {
+      #hero { min-height: auto !important; padding: 110px 0 50px !important; }
+      #hero .row { gap: 2rem; }
+    }
+    @media (max-width: 768px) {
+      .container { padding-left: 16px !important; padding-right: 16px !important; }
+      .page-section { padding: 90px 0 40px !important; }
+      #hero h1 { font-size: 36px !important; line-height: 1.2 !important; }
+      #hero h1 span { font-size: 38px !important; }
+      #hero h2 { font-size: 18px !important; }
+      #hero p { font-size: 14px !important; line-height: 1.7 !important; }
+      /* hide floating absolute cards that overflow on mobile */
+      #hero div[style*="position:absolute"] { display: none !important; }
+      #hero > .container > .row > div > div[style*="padding:40px"] { padding: 12px !important; }
+      .terminal-window { max-width: 100% !important; margin: 0 auto; }
+      .terminal-body { font-size: 0.72rem !important; line-height: 1.7 !important; }
+      /* sections */
+      .about-cyber, #skills-section.sk, .about-philosophy, .about-timeline-section { padding: 48px 0 !important; }
+      .about-container, .sk-inner { padding-left: 16px !important; padding-right: 16px !important; }
+      .about-split { flex-direction: column !important; gap: 32px !important; }
+      .about-terminal-wrap, .about-bio { width: 100% !important; }
+      .sk-actions { flex-direction: column; align-items: center; gap: 14px !important; }
+      .sk-wheel { transform: scale(0.92); transform-origin: top center; }
+      .sk-card { width: 96% !important; padding: 16px !important; }
+      .philosophy-grid { grid-template-columns: 1fr 1fr !important; gap: 14px !important; }
+      /* project / contact / testimonial */
+      .proj, .cst, .tst { padding: 90px 0 50px !important; }
+      .proj-wrap, .cst-wrap, .tst-wrap { padding: 0 16px !important; }
+      .proj-grid { grid-template-columns: 1fr !important; gap: 18px !important; }
+      .cst-grid-2 { grid-template-columns: 1fr !important; gap: 20px !important; }
+      .tst-carousel { padding: 0 0 !important; overflow: hidden; }
+      .tst-carousel-track { height: auto !important; min-height: 380px !important; }
+      .tst-slide { width: 100% !important; left: 0 !important; max-width: 100% !important; }
+      .tst-nav { display: none !important; }
+      .proj-hero-title, .cst-hero-title, .tst-hero-title { font-size: clamp(2rem, 8vw, 2.6rem) !important; letter-spacing: -1px !important; }
+      .cst-card-inner, .proj-card-glass, .tst-card-glass { padding: 22px !important; }
+      .nx-footer-inner { padding: 0 16px !important; }
+      /* ensure no horizontal scroll from 100vw canvases */
+      #projBg, #contactBg, #testBg, #hero-wireframe { max-width: 100vw; }
+      /* touch targets */
+      .proj-filter, .cst-submit, .tst-btn, .btn-glow, .btn-ghost { min-height: 44px; }
+    }
+    @media (max-width: 480px) {
+      #hero h1 { font-size: 28px !important; }
+      #hero h1 span { font-size: 30px !important; }
+      #hero h2 { font-size: 16px !important; }
+      .btn-glow, .btn-ghost { width: 100%; justify-content: center; padding: 12px 18px !important; font-size: 0.85rem !important; }
+      .proj-btn, .cst-submit, .tst-btn { width: 100%; justify-content: center; }
+      .nx-header-inner { padding: 8px 14px !important; border-radius: 14px !important; }
+      .philosophy-grid { grid-template-columns: 1fr !important; }
+      #hero-wireframe { opacity: 0.12 !important; }
+      .hero-dot { display: none !important; }
+      .tst-card-feedback { font-size: 0.95rem !important; }
+    }
+    @media (max-width: 360px) {
+      .container { padding-left: 12px !important; padding-right: 12px !important; }
+      #hero h1 { font-size: 24px !important; }
+      #hero h1 span { font-size: 26px !important; }
     }
   </style>
 

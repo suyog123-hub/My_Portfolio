@@ -1,119 +1,127 @@
+<div style="background:#060606; border:1px solid #252525; font-family:'JetBrains Mono', monospace;">
+
+<div style="display:flex; justify-content:space-between; align-items:flex-start; padding:14px 20px; border-bottom:1px solid #252525;">
+  <div>
+    <div style="color:#e5e5e5; font-size:26px; font-weight:300; letter-spacing:0.02em; line-height:1;">Suyog Khadka</div>
+    <div style="color:#c5ff4a; font-size:13px; margin-top:4px;">@suyog123-hub</div>
+  </div>
+  <div style="color:#7a7a7a; font-size:11px; margin-top:6px;">[ @GitAscii ]</div>
+</div>
+
+<div style="display:flex; gap:16px; padding:16px;">
+
+<!-- LEFT ASCII IMAGE -->
+<div style="flex:0 0 42%; background:#0a0a0a; border:1px solid #252525; padding:0; overflow:hidden; display:flex; align-items:center; justify-content:center; min-height:260px;">
+
+<img src="https://avatars.githubusercontent.com/suyog123-hub" width="100%" style="display:block; filter:grayscale(1) contrast(1.4) brightness(0.95); image-rendering:pixelated; opacity:0.92;" alt="Suyog Khadka ASCII" />
+
+</div>
+
+<!-- RIGHT INFO -->
+<div style="flex:1; background:#0a0a0a; border:1px solid #252525; padding:14px 16px; font-size:12px; line-height:1.6;">
+
+<div style="color:#7aa5ff; font-size:11px; border-bottom:1px solid #252525; padding-bottom:6px; margin-bottom:8px;">— <span style="color:#7aa5ff;">suyog123-hub@github</span> <span style="color:#3a3a3a;">————————————————</span></div>
+
+<div style="color:#ffb86a;">· <span style="color:#ffb86a;">Uptime:</span> <span style="color:#e5e5e5; float:right;">2 years, 4 months, 12 days</span></div>
+<div style="color:#ffb86a;">· <span style="color:#ffb86a;">Location:</span> <span style="color:#e5e5e5; float:right;">Lalitpur, Nepal</span></div>
+<div style="color:#ffb86a;">· <span style="color:#ffb86a;">Company:</span> <span style="color:#e5e5e5; float:right;">Freelance</span></div>
+<div style="color:#ffb86a;">· <span style="color:#ffb86a;">Languages:</span> <span style="color:#e5e5e5; float:right;">Python, JavaScript, HTML, CSS</span></div>
+
+<div style="color:#7aa5ff; font-size:11px; border-bottom:1px solid #252525; padding-bottom:6px; margin:12px 0 8px 0;">— <span style="color:#7aa5ff;">Contact</span> <span style="color:#3a3a3a;">————————————————————</span></div>
+
+<div style="color:#ffb86a;">· <span style="color:#ffb86a;">Website:</span> <span style="color:#e5e5e5; float:right;"><a href="https://suyogkhadak.onrender.com" style="color:#e5e5e5; text-decoration:none;">https://suyogkhadak.onrender.com</a></span></div>
+<div style="color:#ffb86a;">· <span style="color:#ffb86a;">GitHub:</span> <span style="color:#e5e5e5; float:right;"><a href="https://github.com/suyog123-hub" style="color:#e5e5e5; text-decoration:none;">github.com/suyog123-hub</a></span></div>
+<div style="color:#ffb86a;">· <span style="color:#ffb86a;">Email:</span> <span style="color:#e5e5e5; float:right;">ksuyog697@gmail.com</span></div>
+
+<div style="color:#7aa5ff; font-size:11px; border-bottom:1px solid #252525; padding-bottom:6px; margin:12px 0 8px 0;">— <span style="color:#7aa5ff;">GitHub Stats</span> <span style="color:#3a3a3a;">———————————————</span></div>
+
+<div style="display:flex; justify-content:space-between; color:#e5e5e5;">
+  <div style="color:#ffb86a;">· Repos: <span style="color:#7aa5ff;">18</span></div>
+  <div style="color:#ffb86a;">· Stars: <span style="color:#7aa5ff;">12</span></div>
+</div>
+<div style="display:flex; justify-content:space-between; color:#e5e5e5; margin-top:2px;">
+  <div style="color:#ffb86a;">· Commits: <span style="color:#7aa5ff;">342</span></div>
+  <div style="color:#ffb86a;">· Followers: <span style="color:#7aa5ff;">14</span></div>
+</div>
+
+</div>
+
+</div>
+
+<!-- BOTTOM -->
+<div style="display:flex; gap:16px; padding:0 16px 16px 16px;">
+
+<!-- TOP LANGUAGES -->
+<div style="flex:1.4; background:#0a0a0a; border:1px solid #252525; padding:12px 14px;">
+  <div style="color:#7a7a7a; font-size:10px; letter-spacing:0.12em; margin-bottom:10px;">[ TOP LANGUAGES ]</div>
+  <div style="height:8px; background:#0d1117; display:flex; border-radius:2px; overflow:hidden; margin-bottom:10px;">
+    <div style="width:48%; background:#3572A5;"></div>
+    <div style="width:22%; background:#f1e05a;"></div>
+    <div style="width:14%; background:#e34c26;"></div>
+    <div style="width:8%; background:#563d7c;"></div>
+    <div style="width:8%; background:#3572A5;"></div>
+  </div>
+  <div style="display:flex; flex-wrap:wrap; gap:8px 18px; font-size:11px; color:#e5e5e5;">
+    <div><span style="display:inline-block; width:8px; height:8px; background:#3572A5; border-radius:50%; margin-right:6px;"></span>Python 48%</div>
+    <div><span style="display:inline-block; width:8px; height:8px; background:#f1e05a; border-radius:50%; margin-right:6px;"></span>JavaScript 22%</div>
+    <div><span style="display:inline-block; width:8px; height:8px; background:#e34c26; border-radius:50%; margin-right:6px;"></span>HTML 14%</div>
+    <div><span style="display:inline-block; width:8px; height:8px; background:#563d7c; border-radius:50%; margin-right:6px;"></span>CSS 8%</div>
+    <div><span style="display:inline-block; width:8px; height:8px; background:#3572A5; border-radius:50%; margin-right:6px;"></span>PHP 8%</div>
+  </div>
+</div>
+
+<!-- TECHNOLOGIES -->
+<div style="flex:0.9; background:#0a0a0a; border:1px solid #252525; padding:12px 14px;">
+  <div style="color:#7a7a7a; font-size:10px; letter-spacing:0.12em; margin-bottom:10px; text-align:right;">[ TECHNOLOGIES & SKILLS ]</div>
+  <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; justify-items:center;">
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="42" height="42" style="background:#f7df1e; border-radius:8px; padding:6px;" alt="JS" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="42" height="42" style="background:#3178c6; border-radius:8px; padding:6px;" alt="TS" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="42" height="42" style="background:#e34c26; border-radius:8px; padding:6px;" alt="HTML5" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="42" height="42" style="background:#1572b6; border-radius:8px; padding:6px;" alt="CSS3" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="42" height="42" style="background:#1e3a5f; border-radius:8px; padding:6px;" alt="Python" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" width="42" height="42" style="background:#092e20; border-radius:8px; padding:6px;" alt="Django" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="42" height="42" style="background:#336791; border-radius:8px; padding:6px;" alt="PostgreSQL" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" width="42" height="42" style="background:#f05032; border-radius:8px; padding:6px;" alt="Git" />
+  </div>
+</div>
+
+</div>
+
+<div style="display:flex; justify-content:space-between; padding:8px 16px; border-top:1px solid #252525; color:#7a7a7a; font-size:10px; letter-spacing:0.08em;">
+  <div>[ GENERATED BY GITASCII ]</div>
+  <div><a href="https://gitascii.com/suyog123-hub" style="color:#c5ff4a; text-decoration:none;">gitascii.com/suyog123-hub</a></div>
+</div>
+
+</div>
+
+<br>
+
 <div align="center">
 
-# Hi 👋, I'm Suyog Khadka
+### 🌐 Connect
 
----
+<a href="https://suyogkhadak.onrender.com"><img src="https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white" /></a>
+<a href="mailto:ksuyog697@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
+<a href="https://www.linkedin.com/in/suyog-khadka-018985323/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
+<a href="https://github.com/suyog123-hub"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
 
-### ⚡ Django Developer | Python, Django & DRF
+</div>
 
-<p>
-  <img src="https://komarev.com/ghpvc/?username=suyog123-hub&label=Profile%20views&color=6c63ff&style=flat-square" alt="Profile views" />
+<div align="center">
+
+### 🚀 Featured Projects
+
+`https://bphotel.pythonanywhere.com` — **BP Hotel** (Hotel Management)
+`https://suyogapi.pythonanywhere.com` — **Suyog API** (DRF Showcase)
+
+<h3>🚀 Let's build something amazing together!</h3>
+
+</div>
+
+<!-- Live GitAscii SVG fallback (auto-updates) -->
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://gitascii.com/suyog123-hub.svg" />
+    <img src="https://gitascii.com/suyog123-hub.svg" alt="Suyog GitAscii" width="800" />
+  </picture>
 </p>
-
-<p>
-  <a href="https://www.linkedin.com/in/suyog-khadka-018985323/" target="_blank">
-    <img src="https://img.shields.io/badge/LINKEDIN-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
-  </a>
-  <a href="mailto:ksuyog697@gmail.com">
-    <img src="https://img.shields.io/badge/GMAIL-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail" />
-  </a>
-  <a href="https://github.com/suyog123-hub" target="_blank">
-    <img src="https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-  </a>
-</p>
-
-</div>
-
----
-
-### 🛠️ Languages & Technologies
-
-#### Backend & Databases
-
-<p>
-  <img src="https://img.shields.io/badge/PYTHON-306998?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
-  <img src="https://img.shields.io/badge/DJANGO-092E20?style=for-the-badge&logo=django&logoColor=white" alt="Django" />
-  <img src="https://img.shields.io/badge/DRF-092E20?style=for-the-badge&logo=django&logoColor=white" alt="DRF" />
-  <img src="https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL" />
-  <img src="https://img.shields.io/badge/MYSQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
-  <img src="https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite" />
-</p>
-
-#### Frontend & Tools
-
-<p>
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" />
-  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3" />
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
-  <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Bootstrap" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind" />
-  <img src="https://img.shields.io/badge/GIT-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git" />
-  <img src="https://img.shields.io/badge/GITHUB-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-  <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" />
-</p>
-
----
-
-### 📊 GitHub Stats
-
-<div align="center">
-
-<img src="https://github-readme-stats.vercel.app/api?username=suyog123-hub&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=ff5083&icon_color=6c63ff&text_color=c9d1d9" alt="Suyog's GitHub Stats" height="165" />
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=suyog123-hub&layout=donut&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=ff5083&text_color=c9d1d9" alt="Top Languages" height="165" />
-
-</div>
-
-<div align="center">
-
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=suyog123-hub&theme=tokyonight&hide_border=true&background=0d1117&stroke=6c63ff&ring=ff5083&fire=ff5083&currStreakLabel=6c63ff" alt="Streak" />
-
-</div>
-
----
-
-<div align="center">
-
-<img src="https://ghchart.rshah.org/0d1117/suyog123-hub" alt="Contribution Graph" width="100%" />
-
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=suyog123-hub&theme=tokyonight" alt="Profile Details" width="100%" />
-
-</div>
-
----
-
-### 🚀 Portfolio Project
-
-> **Django + DRF + PostgreSQL + JavaScript — Modern Portfolio with Rojit-style wireframe background**
-
-This is my personal portfolio built with **Django 6.0**, deployed on **Render**, showcasing projects, skills, testimonials and a Rojit-inspired dark wireframe background (central `IcosahedronGeometry` + floating dots, pure black `#000000` base, mobile-friendly).
-
-#### ✨ Features
-- **Rojit Background** — fixed `linear-gradient(#000000)` + central wireframe polyhedron + `hero-dots`
-- **Responsive** — `991px/768px/480px` breakpoints, hamburger nav, `88vmin` wireframe on mobile
-- **Pages** — Home, Projects, Testimonials, Contact (all share `base.html` background)
-- **Custom Cursor** — native cursor always visible, `dot/ring` overlay guarded (`if(glow)`)
-- **Animations** — AOS + GSAP + ScrollTrigger
-
-#### 🛠️ Run Locally
-```bash
-git clone https://github.com/suyog123-hub/suyog-portfolio.git
-cd portfolio
-python -m venv myenv && source myenv/bin/activate
-pip install -r requriment.txt
-python manage.py migrate
-python manage.py runserver
-```
-
-#### 🌐 Live
-- **Render:** `https://suyogkhadak.onrender.com`
-- **Contact:** `ksuyog697@gmail.com` | [LinkedIn](https://www.linkedin.com/in/suyog-khadka-018985323/) | [GitHub](https://github.com/suyog123-hub)
-
----
-
-<div align="center">
-
-**Made with ❤️ Django + DRF + Three.js**
-
-`Python` • `Django` • `PostgreSQL` • `DRF` • `JavaScript` • `Render`
-
-</div>

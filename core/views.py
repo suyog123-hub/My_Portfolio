@@ -86,6 +86,17 @@ def project(request):
             'is_default': True,
         },
         {
+            'heading': 'Weather Application',
+            'desc': 'A weather forecasting application that provides real-time weather data, forecasts, and visualizations. Built with clean UI design and API integration for accurate weather information.',
+            'category': 'Full Stack',
+            'language_used': 'Python Django HTML CSS API',
+            'status': 'Delivered',
+            'github_url': None,
+            'url': 'https://suyogapi.pythonanywhere.com/',
+            'image_url': '/static/images/weather.png',
+            'is_default': True,
+        },
+        {
             'heading': 'Portfolio Website',
             'desc': 'A modern, responsive portfolio website built with Django and custom CSS. Features 3D animations, smooth scroll effects, dynamic project showcase, and an integrated contact form with email notifications.',
             'category': 'Full Stack',
@@ -107,17 +118,7 @@ def project(request):
             'image_url': '/static/images/bphotel.png',
             'is_default': True,
         },
-        {
-            'heading': 'Weather Application',
-            'desc': 'A weather forecasting application that provides real-time weather data, forecasts, and visualizations. Built with clean UI design and API integration for accurate weather information.',
-            'category': 'Full Stack',
-            'language_used': 'Python Django HTML CSS API',
-            'status': 'Delivered',
-            'github_url': None,
-            'url': 'https://suyogapi.pythonanywhere.com/',
-            'image_url': '/static/images/weather.png',
-            'is_default': True,
-        },
+  
         {
             'heading': 'Blog Application',
             'desc': 'A blogging platform that allows users to create, edit, and manage blog posts. Features user authentication, comment system, and responsive design for an optimal reading experience.',

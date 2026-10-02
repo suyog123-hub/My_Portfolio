@@ -1286,6 +1286,16 @@
     <div class="rojit-bg-gradient"></div>
     <div class="rojit-bg-mesh"></div>
     <div class="rojit-bg-grid"></div>
+    <div class="bg-bubbles" aria-hidden="true">
+      <span class="bubble b1"></span>
+      <span class="bubble b2"></span>
+      <span class="bubble b3"></span>
+      <span class="bubble b4"></span>
+      <span class="bubble b5"></span>
+      <span class="bubble b6"></span>
+      <span class="bubble b7"></span>
+      <span class="bubble b8"></span>
+    </div>
   </div>
 
   <!-- Central wireframe polyhedron + floating dots — exact like Rojit hero screenshot -->
@@ -1319,6 +1329,56 @@
       mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 30%, transparent 75%);
       -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 30%, transparent 75%);
       opacity: 0.6;
+    }
+    /* ================================================================
+       FLOATING WHITE BUBBLES — modern glassy ambient background
+       ================================================================ */
+    .bg-bubbles {
+      position: absolute; inset: 0;
+      overflow: hidden;
+    }
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 32% 30%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.35) 38%, rgba(255,255,255,0.10) 62%, transparent 74%);
+      border: 1px solid rgba(255,255,255,0.30);
+      box-shadow:
+        inset -6px -8px 18px rgba(255,255,255,0.12),
+        inset 4px 6px 14px rgba(255,255,255,0.15),
+        0 0 40px rgba(255,255,255,0.12);
+      animation: bubbleFloat 14s ease-in-out infinite;
+      will-change: transform;
+    }
+    .bubble::after {
+      content: '';
+      position: absolute;
+      top: 14%; left: 16%;
+      width: 26%; height: 26%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, transparent 70%);
+      filter: blur(1px);
+    }
+    .bubble.b1 { width: 90px;  height: 90px;  top: 12%; left: 6%;  opacity: 0.55; animation-duration: 17s; }
+    .bubble.b2 { width: 14px;  height: 14px;  top: 22%; left: 82%; opacity: 0.90; animation-duration: 11s; animation-delay: -3s; }
+    .bubble.b3 { width: 42px;  height: 42px;  top: 58%; left: 88%; opacity: 0.70; animation-duration: 15s; animation-delay: -6s; }
+    .bubble.b4 { width: 10px;  height: 10px;  top: 74%; left: 12%; opacity: 0.95; animation-duration: 9s;  animation-delay: -2s; }
+    .bubble.b5 { width: 60px;  height: 60px;  top: 76%; left: 68%; opacity: 0.50; animation-duration: 19s; animation-delay: -8s; }
+    .bubble.b6 { width: 18px;  height: 18px;  top: 38%; left: 42%; opacity: 0.85; animation-duration: 12s; animation-delay: -5s; }
+    .bubble.b7 { width: 120px; height: 120px; top: -4%; left: 55%; opacity: 0.35; animation-duration: 22s; animation-delay: -10s; }
+    .bubble.b8 { width: 8px;   height: 8px;   top: 48%; left: 24%; opacity: 0.95; animation-duration: 8s;  animation-delay: -1s; }
+    @keyframes bubbleFloat {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      25%      { transform: translate3d(18px, -26px, 0) scale(1.04); }
+      50%      { transform: translate3d(-14px, -48px, 0) scale(0.97); }
+      75%      { transform: translate3d(10px, -22px, 0) scale(1.02); }
+    }
+    @media (max-width: 768px) {
+      .bubble.b1, .bubble.b7 { display: none; }
+      .bubble { opacity: 0.60; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bubble { animation: none; }
     }
     /* Hide all heavy previous background layers — Rojit has none of these */
     #ambient-bg, #bg3d, #three-particles, #mouseTrail, #grid3d, #cursor-glow, .site-bg, .content-veil, #footerParticles { display: none !important; }
@@ -1457,19 +1517,19 @@
       .tst-slide { width: 100% !important; left: 0 !important; max-width: 100% !important; }
       .tst-nav { display: none !important; }
       .proj-hero-title, .cst-hero-title, .tst-hero-title { font-size: clamp(2rem, 8vw, 2.6rem) !important; letter-spacing: -1px !important; }
-      .cst-card-inner, .proj-card-glass, .tst-card-glass { padding: 22px !important; }
+      .cst-card-inner, .pcard, .tst-card-glass { padding: 12px !important; }
       .nx-footer-inner { padding: 0 16px !important; }
       /* ensure no horizontal scroll from 100vw canvases */
       #projBg, #contactBg, #testBg, #hero-wireframe { max-width: 100vw; }
       /* touch targets */
-      .proj-filter, .cst-submit, .tst-btn, .btn-glow, .btn-ghost { min-height: 44px; }
+      .cst-submit, .tst-btn, .btn-glow, .btn-ghost { min-height: 44px; }
     }
     @media (max-width: 480px) {
       #hero h1 { font-size: 28px !important; }
       #hero h1 span { font-size: 30px !important; }
       #hero h2 { font-size: 16px !important; }
       .btn-glow, .btn-ghost { width: 100%; justify-content: center; padding: 12px 18px !important; font-size: 0.85rem !important; }
-      .proj-btn, .cst-submit, .tst-btn { width: 100%; justify-content: center; }
+      .cst-submit, .tst-btn { width: 100%; justify-content: center; }
       .nx-header-inner { padding: 8px 14px !important; border-radius: 14px !important; }
       .philosophy-grid { grid-template-columns: 1fr !important; }
       #hero-wireframe { opacity: 0.12 !important; }

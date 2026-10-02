@@ -18,8 +18,17 @@ class Project_title(models.Model):
     
 class Project_items(models.Model):
 
+    STATUS_CHOICES = [
+        ('DELIVERED', 'Delivered'),
+        ('ONGOING', 'Ongoing'),
+        ('REFINING', 'Refining'),
+        ('LIVE', 'Live'),
+    ]
+
     category=models.ForeignKey(Project_title,on_delete=models.CASCADE,null=True)
     url = models.URLField(max_length=500,help_text="Enter the complete URL (e.g., https://example.com)",null=True)
+    github_url = models.URLField(max_length=500,help_text="GitHub repository URL (optional — hides the Code button when empty)",null=True,blank=True)
+    status = models.CharField(max_length=20,choices=STATUS_CHOICES,default='DELIVERED')
     image=models.ImageField(upload_to="project items",null=True)
     heading=models.CharField(max_length=100,null=True)
     desc=models.TextField(null=True)

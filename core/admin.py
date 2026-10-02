@@ -11,7 +11,7 @@ class ProjectTitleAdmin(admin.ModelAdmin):
 
 @admin.register(Project_items)
 class Project_itemsAdmin(admin.ModelAdmin):
-    list_display = ['id', 'heading', 'category', 'language_used', 'url']
+    list_display = ['id', 'heading', 'category', 'status', 'language_used', 'url', 'github_url']
 
 @admin.register(skill_title)
 class SkillTitleAdmin(admin.ModelAdmin):

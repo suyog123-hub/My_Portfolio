@@ -51,7 +51,12 @@ def contact(request):
     return render(request, 'core/contact.html')
 
 def home(request):
-    return render(request,'core/home.html')
+    birth_date = date(2005, 4, 16)
+    today = date.today()
+    age = today.year - birth_date.year
+    if (today.month, today.day) < (birth_date.month, birth_date.day):
+        age -= 1
+    return render(request, 'core/home.html', {'age': age})
 def project(request):
     project_headings=Project_title.objects.all()
     cateid=request.GET.get("category")

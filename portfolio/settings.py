@@ -24,7 +24,7 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = [
     'suyogkhadak.onrender.com',
-    'https://suyog87.com.np'
+    'suyog87.com.np',
 ]
 
 

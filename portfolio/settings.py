@@ -25,6 +25,8 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = [
     'suyogkhadak.onrender.com',
     'suyog87.com.np',
+    "localhost",
+    '127.0.0.1'
 ]
 
 
@@ -134,7 +136,11 @@ DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
 CSRF_TRUSTED_ORIGINS = [
     'https://suyogkhadak.onrender.com',
-    'http://suyogkhadak.onrender.com',
+    'https://suyog87.com.np',
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "http://localhost",
+    "http://127.0.0.1",
 ]
 
 

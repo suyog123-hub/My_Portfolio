@@ -98,7 +98,7 @@
               <span class="pcard-skel-text">Loading Preview</span>
             </div>
             {% if d.image_url %}
-            <img class="pcard-img" src="{{ d.image_url }}" alt="{{ d.heading }}" loading="lazy" decoding="async" onload="this.closest('.pcard-media').classList.add('is-loaded')" onerror="this.onerror=null;this.src='{% static 'images/portfolio.png' %}'">
+            <img class="pcard-img" src="{% static d.image_url %}" alt="{{ d.heading }}" loading="lazy" decoding="async" onload="this.closest('.pcard-media').classList.add('is-loaded')" onerror="this.onerror=null;this.src='{% static 'images/portfolio.png' %}'">
             {% else %}
             <img class="pcard-img" src="{% static 'images/portfolio.png' %}" alt="{{ d.heading }}" loading="lazy" decoding="async" onload="this.closest('.pcard-media').classList.add('is-loaded')">
             {% endif %}

@@ -21,8 +21,8 @@
       {% cycle 'pg-0' 'pg-1' 'pg-2' 'pg-3' 'pg-4' 'pg-5' as tint silent %}
       <article class="proj-card {{ tint }}{% if forloop.first %} proj-card--featured{% endif %}">
         <div class="pcard">
-          {% with tags=i.language_used.split %}
-          {% with sl=i.status|lower %}
+          {% with tags=i.language_used|default:'' %}
+          {% with sl=i.status|default:"DELIVERED"|lower %}
           <div class="pcard-media">
             <div class="pcard-chrome">
               <div class="pcard-dots">
@@ -53,7 +53,7 @@
               <h3 class="pcard-title">{{ i.heading }}</h3>
               <p class="pcard-desc">{{ i.desc }}</p>
               <div class="pcard-tags">
-                {% for tag in tags|slice:":5" %}
+                {% for tag in tags.split|slice:":5" %}
                 <span class="pcard-tag">{{ tag }}</span>
                 {% endfor %}
               </div>
@@ -81,7 +81,7 @@
       {% cycle 'pg-0' 'pg-1' 'pg-2' 'pg-3' 'pg-4' 'pg-5' as tint silent %}
       <article class="proj-card {{ tint }}{% if not has_db_items and forloop.first %} proj-card--featured{% endif %}">
         <div class="pcard">
-          {% with tags=d.language_used.split %}
+          {% with tags=d.language_used|default:'' %}
           {% with sl=d.status|default:"Delivered"|lower %}
           <div class="pcard-media">
             <div class="pcard-chrome">
@@ -113,7 +113,7 @@
               <h3 class="pcard-title">{{ d.heading }}</h3>
               <p class="pcard-desc">{{ d.desc }}</p>
               <div class="pcard-tags">
-                {% for tag in tags|slice:":5" %}
+                {% for tag in tags.split|slice:":5" %}
                 <span class="pcard-tag">{{ tag }}</span>
                 {% endfor %}
               </div>

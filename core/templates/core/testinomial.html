@@ -119,6 +119,39 @@
           </div>
         </div>
 
+        {% for t in testinomial_items %}
+        <div class="tst-slide" data-index="{{ forloop.counter0|add:3 }}">
+          <div class="tst-card-3d">
+            <div class="tst-card-glow-border"></div>
+            <div class="tst-card-glass">
+              <div class="tst-card-quote"><i class="fa-solid fa-quote-left"></i></div>
+              <div class="tst-card-stars">
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
+                <span class="tst-star"><i class="fa-solid fa-star"></i></span>
+              </div>
+              <p class="tst-card-feedback">"{{ t.feedback|default:'Great work!' }}"</p>
+              <div class="tst-card-author">
+                <div class="tst-card-avatar-wrap">
+                  {% if t.image %}
+                  <img class="tst-card-avatar" src="{{ t.image.url }}" alt="{{ t.name|default:'Reviewer' }}" loading="lazy">
+                  {% else %}
+                  <div class="tst-card-avatar tst-card-avatar-fallback">{{ t.name|default:'A'|slice:':1' }}</div>
+                  {% endif %}
+                  <div class="tst-card-avatar-glow"></div>
+                </div>
+                <div class="tst-card-author-info">
+                  <h4 class="tst-card-name">{{ t.name|default:'Anonymous' }}</h4>
+                  <p class="tst-card-role">{{ t.role|default:'' }}{% if t.role and t.company %}, {% endif %}{{ t.company|default:'' }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
       </div>
 
       <button class="tst-nav tst-nav-prev" id="testPrev" aria-label="Previous">

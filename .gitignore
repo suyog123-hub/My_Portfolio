@@ -1,2 +1,14 @@
 .env
+*.env
 db.sqlite3
+__pycache__/
+*.py[cod]
+*$py.class
+staticfiles/
+/media/
+!.gitkeep
+myenv/
+venv/
+.env/
+*.sqlite3
+.DS_Store

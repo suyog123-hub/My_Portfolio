@@ -1,0 +1,273 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Skills Section -->
+<section id="skills" class="skills-section section" style="padding: 120px 0 80px;">
+  <div class="container">
+
+    <!-- Section Title -->
+    <div class="section-title text-center mb-5" data-aos="fade-up">
+      <div class="about-label">
+        <span></span>My Expertise<span></span>
+      </div>
+      <h2>Skills & <span class="gradient-text">Technologies</span></h2>
+      <p>Technical expertise and tools I've mastered over the years</p>
+    </div>
+
+    <!-- Skills Grid -->
+    <div class="row g-4">
+      {% for i in skills %}
+      <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="skill-card">
+
+          <!-- Icon -->
+          <div class="sc-icon-wrap">
+            <i class="{{ i.icon }}"></i>
+          </div>
+
+          <!-- Name & Desc -->
+          <h3 class="sc-name">{{ i.name }}</h3>
+          <p class="sc-desc">{{ i.desc }}</p>
+
+          <!-- Progress -->
+          <div class="sc-progress-wrap">
+            <div class="sc-progress-label">
+              <span>Proficiency</span>
+              <span class="sc-pct">{{ i.percent }}%</span>
+            </div>
+            <div class="sc-progress-bar">
+              <div class="sc-progress-fill" style="width: {{ i.percent }}%"></div>
+            </div>
+          </div>
+
+          <!-- Certificate Link -->
+          {% if i.certificate %}
+          <a href="{{ i.certificate.url }}" target="_blank" class="sc-cert-btn">
+            <i class="bi bi-patch-check-fill me-1"></i>View Certificate
+          </a>
+          {% endif %}
+
+          <!-- Hover Overlay -->
+          <div class="sc-overlay">
+            <div class="sco-pct">{{ i.percent }}%</div>
+            <div class="sco-label">{{ i.name }}</div>
+            {% if i.certificate %}
+            <a href="{{ i.certificate.url }}" target="_blank" class="sco-link">
+              <i class="bi bi-award"></i>
+            </a>
+            {% endif %}
+          </div>
+
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center">
+        <p style="color:rgba(245,245,245,0.4);">No skills added yet.</p>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Tools & Technologies -->
+    <div class="mt-5 pt-4" data-aos="fade-up" data-aos-delay="100">
+      <div class="text-center mb-5">
+        <div class="about-label">
+          <span></span>Tech Stack<span></span>
+        </div>
+        <h3 class="tools-heading">Tools & <span class="gradient-text">Technologies</span></h3>
+      </div>
+
+      <!-- Infinite Scroll Strip -->
+      <div class="skills-container">
+        <div class="skills-loop-wrapper">
+          {% for i in skils_tools %}
+          <div class="tech-icon-card">
+            <i class="{{ i.icon }}"></i>
+            <span>{{ i.name }}</span>
+          </div>
+          {% endfor %}
+          <!-- Duplicate for seamless loop -->
+          {% for i in skils_tools %}
+          <div class="tech-icon-card">
+            <i class="{{ i.icon }}"></i>
+            <span>{{ i.name }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* ===== Section Label ===== */
+.about-label {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 13px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 2px; color: #f97316; margin-bottom: 12px;
+}
+.about-label span {
+  display: inline-block; width: 30px; height: 2px;
+  background: linear-gradient(90deg, #f97316, #fb923c);
+  border-radius: 2px;
+}
+
+/* ===== Skill Card ===== */
+.skill-card {
+  background: rgba(31,31,31,0.8);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 18px; padding: 24px 20px;
+  text-align: center; position: relative;
+  overflow: hidden; height: 100%;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+  cursor: default;
+}
+.skill-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(249,115,22,0.35);
+  box-shadow: 0 16px 40px rgba(249,115,22,0.15);
+}
+
+/* Icon */
+.sc-icon-wrap {
+  width: 64px; height: 64px; border-radius: 18px;
+  background: linear-gradient(135deg, rgba(249,115,22,0.15), rgba(251,146,60,0.08));
+  border: 1px solid rgba(249,115,22,0.2);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px; font-size: 28px; color: #f97316;
+  transition: all 0.3s;
+}
+.skill-card:hover .sc-icon-wrap {
+  background: linear-gradient(135deg, #f97316, #fb923c);
+  color: #121212; border-color: transparent;
+  box-shadow: 0 8px 20px rgba(249,115,22,0.4);
+}
+
+/* Name & Desc */
+.sc-name {
+  font-size: 16px; font-weight: 700; color: #f5f5f5;
+  margin-bottom: 6px;
+}
+.sc-desc {
+  font-size: 12px; color: rgba(245,245,245,0.45);
+  margin-bottom: 16px; line-height: 1.5;
+}
+
+/* Progress */
+.sc-progress-wrap { margin-bottom: 14px; }
+.sc-progress-label {
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: rgba(245,245,245,0.5);
+  margin-bottom: 7px;
+}
+.sc-pct { color: #f97316; font-weight: 700; }
+.sc-progress-bar {
+  height: 6px; border-radius: 3px;
+  background: rgba(255,255,255,0.08); overflow: hidden;
+}
+.sc-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f97316, #fb923c);
+  border-radius: 3px;
+  transition: width 1s ease;
+}
+
+/* Certificate Button */
+.sc-cert-btn {
+  display: inline-flex; align-items: center;
+  font-size: 11px; font-weight: 600;
+  color: #f97316; text-decoration: none;
+  background: rgba(249,115,22,0.1);
+  border: 1px solid rgba(249,115,22,0.2);
+  padding: 5px 12px; border-radius: 10px;
+  transition: all 0.2s;
+}
+.sc-cert-btn:hover {
+  background: rgba(249,115,22,0.2); color: #fb923c;
+}
+
+/* Hover Overlay */
+.sc-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(249,115,22,0.92), rgba(251,146,60,0.92));
+  border-radius: 18px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 8px; opacity: 0; transition: opacity 0.3s ease;
+}
+.skill-card:hover .sc-overlay { opacity: 1; }
+.sco-pct {
+  font-size: 36px; font-weight: 900; color: #121212;
+  line-height: 1;
+}
+.sco-label {
+  font-size: 16px; font-weight: 700; color: rgba(18,18,18,0.8);
+}
+.sco-link {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(18,18,18,0.2);
+  display: flex; align-items: center; justify-content: center;
+  color: #121212; font-size: 18px; text-decoration: none;
+  transition: all 0.2s; margin-top: 4px;
+}
+.sco-link:hover {
+  background: rgba(18,18,18,0.4); color: #121212;
+}
+
+/* ===== Tools Heading ===== */
+.tools-heading {
+  font-family: 'Raleway', sans-serif;
+  font-size: 28px; font-weight: 800; color: #f5f5f5; margin: 0;
+}
+
+/* ===== Tech Icon Card ===== */
+.tech-icon-card {
+  width: 120px; height: 120px; flex-shrink: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 10px;
+  background: rgba(31,31,31,0.8);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px; margin: 0 8px;
+  transition: all 0.3s ease;
+  cursor: default;
+  backdrop-filter: blur(10px);
+}
+.tech-icon-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(249,115,22,0.35);
+  box-shadow: 0 12px 30px rgba(249,115,22,0.15);
+}
+.tech-icon-card i {
+  font-size: 32px; color: #f97316;
+  transition: all 0.3s;
+}
+.tech-icon-card:hover i {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 8px rgba(249,115,22,0.6));
+}
+.tech-icon-card span {
+  font-size: 12px; font-weight: 600;
+  color: rgba(245,245,245,0.6);
+  text-align: center; padding: 0 8px;
+}
+
+/* ===== Loop Animation ===== */
+.skills-container {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+.skills-loop-wrapper {
+  display: flex; width: max-content;
+  animation: slideLoop 25s linear infinite;
+}
+.skills-loop-wrapper:hover { animation-play-state: paused; }
+@keyframes slideLoop {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+</style>
+
+{% endblock content %}

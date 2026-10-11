@@ -1,0 +1,381 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Hero Section -->
+<section id="hero" class="hero section" style="min-height:100vh; display:flex; align-items:center; padding: 120px 0 80px;">
+  <div class="container">
+    <div class="row gy-5 align-items-center">
+
+      <!-- Left Content -->
+      <div class="col-lg-6 order-2 order-lg-1">
+        <div class="hero-content">
+
+          <!-- Greeting Badge -->
+          <div data-aos="fade-up" data-aos-delay="50">
+            <div class="hero-badge">
+              <span class="hero-badge-dot"></span>
+              <span class="wave-hand">👋</span>
+              Available for work
+            </div>
+          </div>
+
+          <!-- Name -->
+          <h1 data-aos="fade-up" data-aos-delay="100" class="hero-name">
+            Hello, I'm<br>
+            <span class="hero-name-gradient">Suyog Khadka</span>
+          </h1>
+
+          <!-- Role -->
+          <h2 data-aos="fade-up" data-aos-delay="150" class="hero-role">
+            <span class="hero-role-static">Backend</span>
+            <span class="hero-role-accent"> Architect</span>
+          </h2>
+
+          <!-- Description -->
+          <div data-aos="fade-up" data-aos-delay="200" class="hero-desc-wrapper">
+            <div class="hero-desc-line"></div>
+            <p class="hero-desc">
+              Aspiring Django developer with
+              <span class="hero-hl">hands-on experience</span>
+              in building web applications using Django's
+              <span class="hero-hl">MVT architecture</span>.
+              Proficient in
+              <span class="hero-hl">CRUD operations</span>,
+              <span class="hero-hl">DRF APIs</span>, and
+              <span class="hero-hl">database models</span>.
+              Currently expanding into
+              <span class="hero-hl">full-stack development</span>.
+            </p>
+          </div>
+
+          <!-- Stats Row -->
+          <div data-aos="fade-up" data-aos-delay="250" class="hero-stats-row">
+            <div class="hsr-item">
+              <strong>2+</strong>
+              <span>Years Coding</span>
+            </div>
+            <div class="hsr-div"></div>
+            <div class="hsr-item">
+              <strong>10+</strong>
+              <span>Projects</span>
+            </div>
+            <div class="hsr-div"></div>
+            <div class="hsr-item">
+              <strong>5+</strong>
+              <span>Technologies</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div data-aos="fade-up" data-aos-delay="300" class="hero-actions">
+            <a href="{% url 'project' %}" class="hero-btn hero-btn-primary">
+              <i class="bi bi-folder2-open me-2"></i>View My Work
+            </a>
+            <a href="{% url 'contact' %}" class="hero-btn hero-btn-outline">
+              <i class="bi bi-chat-dots me-2"></i>Get In Touch
+            </a>
+            <a href="{% static 'images/resume.jpg' %}" class="hero-btn hero-btn-ghost" target="_blank">
+              <i class="bi bi-download me-2"></i>Download CV
+            </a>
+          </div>
+
+          <!-- Social Links -->
+          <div data-aos="fade-up" data-aos-delay="350" class="hero-socials">
+            <a href="https://github.com/suyog123-hub" target="_blank" class="hs-link" title="GitHub">
+              <i class="bi bi-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/suyog-khadka-018985323/" target="_blank" class="hs-link" title="LinkedIn">
+              <i class="bi bi-linkedin"></i>
+            </a>
+            <a href="mailto:ksuyog697@gmail.com" class="hs-link" title="Email">
+              <i class="bi bi-envelope"></i>
+            </a>
+            <a href="https://www.tiktok.com/@suyogkhadka.py" target="_blank" class="hs-link" title="TikTok">
+              <i class="bi bi-tiktok"></i>
+            </a>
+            <div class="hs-separator"></div>
+            <span class="hs-text">Follow me</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right Image -->
+      <div class="col-lg-6 order-1 order-lg-2">
+        <div class="hero-image-wrap" data-aos="fade-left" data-aos-delay="300" data-aos-duration="1000">
+
+          <!-- Glow -->
+          <div class="hero-glow"></div>
+
+          <!-- Profile Image -->
+          <div class="hero-img-container" data-aos="zoom-in" data-aos-delay="500">
+            <img src="{% static 'images/suyog.jpg' %}" alt="Suyog Khadka" class="hero-profile-img">
+            <div class="hero-img-ring"></div>
+            <div class="hero-img-ring hero-img-ring-2"></div>
+          </div>
+
+          <!-- Floating Cards -->
+          <div class="hero-float hero-float-tl" data-aos="fade-down" data-aos-delay="700">
+            <div class="hf-icon"><i class="bi bi-palette"></i></div>
+            <div class="hf-text">
+              <strong>Design</strong>
+              <span>UI/UX</span>
+            </div>
+          </div>
+
+          <div class="hero-float hero-float-bl" data-aos="fade-up" data-aos-delay="800">
+            <div class="hf-icon"><i class="bi bi-code-slash"></i></div>
+            <div class="hf-text">
+              <strong>Code</strong>
+              <span>Django & Python</span>
+            </div>
+          </div>
+
+          <div class="hero-float hero-float-br" data-aos="fade-left" data-aos-delay="900">
+            <div class="hf-icon"><i class="bi bi-lightbulb"></i></div>
+            <div class="hf-text">
+              <strong>Ideas</strong>
+              <span>Problem Solver</span>
+            </div>
+          </div>
+
+          <!-- Experience Badge -->
+          <div class="hero-exp-badge" data-aos="zoom-in" data-aos-delay="1000">
+            <div class="heb-num">2+</div>
+            <div class="heb-text">Years of<br>Experience</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== Hero Badge ===== */
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(249,115,22,0.1);
+  border: 1px solid rgba(249,115,22,0.25);
+  color: #fb923c; font-size: 13px; font-weight: 600;
+  padding: 7px 16px; border-radius: 20px;
+  margin-bottom: 20px; letter-spacing: 0.3px;
+}
+.hero-badge-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #f97316;
+  box-shadow: 0 0 8px rgba(249,115,22,0.7);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100%{ box-shadow: 0 0 8px rgba(249,115,22,0.7); }
+  50%{ box-shadow: 0 0 16px rgba(249,115,22,1); }
+}
+
+/* ===== Name ===== */
+.hero-name {
+  font-family: 'Raleway', sans-serif;
+  font-size: 52px; font-weight: 800;
+  line-height: 1.15; margin-bottom: 12px;
+  color: rgba(245,245,245,0.7);
+}
+@media (max-width: 768px) { .hero-name { font-size: 36px; } }
+.hero-name-gradient {
+  background: linear-gradient(90deg, #f97316, #fb923c, #fde68a);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  display: block; font-size: 58px; margin-top: 4px;
+}
+@media (max-width: 768px) { .hero-name-gradient { font-size: 40px; } }
+
+/* ===== Role ===== */
+.hero-role {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px; font-weight: 500;
+  margin-bottom: 24px;
+  color: rgba(245,245,245,0.6);
+}
+.hero-role-accent { color: #f97316; font-weight: 700; }
+
+/* ===== Description ===== */
+.hero-desc-wrapper {
+  display: flex; gap: 16px; align-items: flex-start;
+  margin-bottom: 28px;
+}
+.hero-desc-line {
+  width: 3px; border-radius: 2px; flex-shrink: 0;
+  background: linear-gradient(to bottom, #f97316, transparent);
+  min-height: 100%;
+  align-self: stretch;
+}
+.hero-desc {
+  font-size: 15px; line-height: 1.8;
+  color: rgba(245,245,245,0.6); margin: 0;
+}
+.hero-hl { color: #fb923c; font-weight: 600; }
+
+/* ===== Stats Row ===== */
+.hero-stats-row {
+  display: flex; align-items: center; gap: 0;
+  background: rgba(31,31,31,0.6);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px; padding: 16px 24px;
+  margin-bottom: 28px; flex-wrap: wrap; gap: 8px;
+}
+.hsr-item { flex: 1; text-align: center; min-width: 70px; }
+.hsr-item strong { display: block; font-size: 22px; font-weight: 800; color: #f97316; line-height: 1; }
+.hsr-item span   { font-size: 11px; color: rgba(245,245,245,0.45); margin-top: 3px; display: block; }
+.hsr-div { width: 1px; height: 32px; background: rgba(255,255,255,0.1); }
+
+/* ===== Action Buttons ===== */
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+.hero-btn {
+  display: inline-flex; align-items: center;
+  padding: 12px 24px; border-radius: 25px;
+  font-size: 14px; font-weight: 600; text-decoration: none;
+  transition: all 0.3s ease;
+}
+.hero-btn-primary {
+  background: linear-gradient(135deg, #f97316, #fb923c);
+  color: #121212;
+  box-shadow: 0 4px 15px rgba(249,115,22,0.3);
+}
+.hero-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(249,115,22,0.5);
+  color: #121212;
+}
+.hero-btn-outline {
+  background: transparent; color: #f97316;
+  border: 2px solid rgba(249,115,22,0.5);
+}
+.hero-btn-outline:hover {
+  background: rgba(249,115,22,0.1);
+  border-color: #f97316; color: #f97316;
+  transform: translateY(-3px);
+}
+.hero-btn-ghost {
+  background: rgba(255,255,255,0.05); color: rgba(245,245,245,0.7);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.hero-btn-ghost:hover {
+  background: rgba(255,255,255,0.1); color: #f97316;
+  transform: translateY(-3px);
+}
+
+/* ===== Social Links ===== */
+.hero-socials { display: flex; align-items: center; gap: 10px; }
+.hs-link {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(245,245,245,0.6); font-size: 16px;
+  text-decoration: none; transition: all 0.3s;
+}
+.hs-link:hover {
+  background: linear-gradient(135deg, #f97316, #fb923c);
+  border-color: transparent; color: #121212;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(249,115,22,0.35);
+}
+.hs-separator {
+  width: 1px; height: 20px;
+  background: rgba(255,255,255,0.1); margin: 0 4px;
+}
+.hs-text { font-size: 12px; color: rgba(245,245,245,0.35); }
+
+/* ===== Hero Image Wrap ===== */
+.hero-image-wrap {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px;
+}
+
+/* Glow */
+.hero-glow {
+  position: absolute;
+  width: 380px; height: 380px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(249,115,22,0.2) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Profile Image */
+.hero-img-container {
+  position: relative; z-index: 2;
+  width: 280px; height: 280px;
+}
+@media (max-width: 768px) { .hero-img-container { width: 220px; height: 220px; } }
+.hero-profile-img {
+  width: 100%; height: 100%; border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(249,115,22,0.4);
+  box-shadow: 0 0 0 8px rgba(249,115,22,0.08), 0 20px 60px rgba(0,0,0,0.4);
+}
+.hero-img-ring {
+  position: absolute; inset: -14px;
+  border-radius: 50%;
+  border: 2px dashed rgba(249,115,22,0.25);
+  animation: spin 20s linear infinite;
+}
+.hero-img-ring-2 {
+  inset: -28px;
+  border-color: rgba(249,115,22,0.1);
+  animation-direction: reverse; animation-duration: 30s;
+}
+@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+/* Floating Cards */
+.hero-float {
+  position: absolute; z-index: 3;
+  background: rgba(31,31,31,0.9);
+  border: 1px solid rgba(249,115,22,0.2);
+  border-radius: 14px; padding: 12px 16px;
+  display: flex; align-items: center; gap: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  animation: floatUD 4s ease-in-out infinite;
+}
+.hero-float-tl { top: 10%; left: -10%; animation-delay: 0s; }
+.hero-float-bl { bottom: 20%; left: -15%; animation-delay: 1.5s; }
+.hero-float-br { bottom: 15%; right: -8%; animation-delay: 3s; }
+@keyframes floatUD { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.hf-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(135deg, rgba(249,115,22,0.2), rgba(251,146,60,0.1));
+  border: 1px solid rgba(249,115,22,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; color: #f97316; flex-shrink: 0;
+}
+.hf-text strong { display: block; font-size: 13px; font-weight: 700; color: #f5f5f5; line-height: 1.2; }
+.hf-text span   { font-size: 11px; color: rgba(245,245,245,0.45); }
+
+/* Experience Badge */
+.hero-exp-badge {
+  position: absolute; top: 8%; right: -5%; z-index: 3;
+  background: linear-gradient(135deg, #f97316, #fb923c);
+  border-radius: 16px; padding: 14px 18px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(249,115,22,0.4);
+  animation: floatUD 5s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+.heb-num { font-size: 24px; font-weight: 800; color: #121212; line-height: 1; }
+.heb-text { font-size: 10px; font-weight: 600; color: rgba(18,18,18,0.75); margin-top: 2px; }
+
+/* ===== Responsive ===== */
+@media (max-width: 992px) {
+  .hero-float-tl, .hero-float-bl, .hero-float-br, .hero-exp-badge { display: none; }
+  .hero-image-wrap { padding: 20px; }
+}
+@media (max-width: 576px) {
+  .hero-actions { flex-direction: column; }
+  .hero-btn { justify-content: center; }
+  .hsr-div { display: none; }
+}
+</style>
+
+{% endblock content %}

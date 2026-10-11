@@ -1,0 +1,275 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Portfolio Section -->
+<section id="portfolio" class="portfolio section" style="padding: 120px 0 80px;">
+  <div class="container">
+
+    <!-- Section Title -->
+    <div class="section-title text-center mb-5" data-aos="fade-up">
+      <div class="about-label">
+        <span></span>My Work<span></span>
+      </div>
+      <h2>Featured <span class="gradient-text">Projects</span></h2>
+      <p>Showcasing my best work and technical projects</p>
+    </div>
+
+    <!-- Filters -->
+    <div class="portfolio-filters-wrap" data-aos="fade-up" data-aos-delay="100">
+      <ul class="portfolio-filters">
+        <a href="{% url 'project' %}">
+          <li class="{% if not request.GET.category %}filter-active{% endif %}">
+            <i class="bi bi-grid me-1"></i>All
+          </li>
+        </a>
+        {% for i in project_headings %}
+        <a href="?category={{ i.id }}">
+          <li class="{% if request.GET.category == i.id|stringformat:'s' %}filter-active{% endif %}">
+            {{ i.title }}
+          </li>
+        </a>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="row gy-4 mt-2">
+      {% for i in item %}
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="pf-card">
+
+          <!-- Image -->
+          <div class="pf-img-wrap">
+            <img src="{{ i.image.url }}" alt="{{ i.heading }}" class="pf-img">
+            <div class="pf-overlay">
+              <a href="{{ i.url }}" target="_blank" class="pf-link" title="View Project">
+                <i class="bi bi-arrow-up-right"></i>
+              </a>
+            </div>
+            <!-- Category Badge -->
+            <div class="pf-category-badge">
+              <i class="bi bi-folder2 me-1"></i>{{ i.heading }}
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="pf-content">
+            <h4 class="pf-title">{{ i.heading }}</h4>
+            <p class="pf-desc">{{ i.desc|truncatechars:100 }}</p>
+
+            <!-- Tags -->
+            <div class="pf-tags">
+              {% for tag in i.language_used.split %}
+              <span class="pf-tag">{{ tag }}</span>
+              {% endfor %}
+            </div>
+
+            <!-- Footer -->
+            <div class="pf-footer">
+              <a href="{{ i.url }}" target="_blank" class="pf-view-btn">
+                View Project <i class="bi bi-arrow-right ms-1"></i>
+              </a>
+              <div class="pf-dots">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      {% empty %}
+      <!-- Empty State -->
+      <div class="col-12" data-aos="fade-up" data-aos-delay="200">
+        <div class="pf-empty">
+          <div class="pfe-icon">
+            <i class="bi bi-folder2-open"></i>
+          </div>
+          <h4>Projects Coming Soon</h4>
+          <p>Will be deploying soon... Stay tuned!</p>
+          <a href="{% url 'contact' %}" class="hero-btn hero-btn-primary mt-3">
+            <i class="bi bi-chat-dots me-2"></i>Get In Touch
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* ===== Section Label ===== */
+.about-label {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 13px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 2px; color: #f97316; margin-bottom: 12px;
+}
+.about-label span {
+  display: inline-block; width: 30px; height: 2px;
+  background: linear-gradient(90deg, #f97316, #fb923c);
+  border-radius: 2px;
+}
+
+/* ===== Filters ===== */
+.portfolio-filters-wrap { text-align: center; margin-bottom: 8px; }
+.portfolio-filters {
+  display: inline-flex; flex-wrap: wrap; gap: 10px;
+  justify-content: center;
+  list-style: none; padding: 0; margin: 0;
+}
+.portfolio-filters a { text-decoration: none; }
+.portfolio-filters li {
+  padding: 10px 22px; border-radius: 25px;
+  font-size: 14px; font-weight: 600;
+  color: rgba(245,245,245,0.6);
+  background: rgba(31,31,31,0.8);
+  border: 1px solid rgba(255,255,255,0.08);
+  cursor: pointer; transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  display: flex; align-items: center;
+}
+.portfolio-filters li:hover {
+  color: #f97316;
+  border-color: rgba(249,115,22,0.3);
+  background: rgba(249,115,22,0.08);
+}
+.portfolio-filters li.filter-active {
+  background: linear-gradient(135deg, #f97316, #fb923c);
+  color: #121212; border-color: transparent;
+  box-shadow: 0 4px 15px rgba(249,115,22,0.35);
+}
+
+/* ===== Project Card ===== */
+.pf-card {
+  background: rgba(31,31,31,0.8);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px; overflow: hidden;
+  height: 100%; display: flex; flex-direction: column;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+}
+.pf-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(249,115,22,0.3);
+  box-shadow: 0 20px 50px rgba(249,115,22,0.12);
+}
+
+/* Image */
+.pf-img-wrap {
+  position: relative; height: 220px; overflow: hidden;
+}
+.pf-img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.pf-card:hover .pf-img { transform: scale(1.08); }
+.pf-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(249,115,22,0.85), rgba(251,146,60,0.85));
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.pf-card:hover .pf-overlay { opacity: 1; }
+.pf-link {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(18,18,18,0.9);
+  display: flex; align-items: center; justify-content: center;
+  color: #f97316; font-size: 22px; text-decoration: none;
+  transition: all 0.3s; transform: scale(0.8);
+}
+.pf-card:hover .pf-link { transform: scale(1); }
+.pf-link:hover {
+  background: #121212; color: #fb923c;
+  transform: scale(1.1) rotate(45deg) !important;
+}
+.pf-category-badge {
+  position: absolute; top: 14px; left: 14px;
+  background: rgba(18,18,18,0.85);
+  border: 1px solid rgba(249,115,22,0.25);
+  border-radius: 10px; padding: 5px 12px;
+  font-size: 11px; font-weight: 600; color: #f97316;
+  backdrop-filter: blur(8px);
+  display: flex; align-items: center;
+}
+
+/* Content */
+.pf-content { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+.pf-title {
+  font-size: 18px; font-weight: 700; color: #f5f5f5;
+  margin-bottom: 8px;
+}
+.pf-desc {
+  font-size: 13px; color: rgba(245,245,245,0.55);
+  line-height: 1.6; margin-bottom: 14px; flex: 1;
+}
+
+/* Tags */
+.pf-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+.pf-tag {
+  font-size: 11px; font-weight: 600;
+  padding: 4px 12px; border-radius: 12px;
+  background: rgba(249,115,22,0.1);
+  color: #f97316;
+  border: 1px solid rgba(249,115,22,0.2);
+}
+
+/* Footer */
+.pf-footer {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.pf-view-btn {
+  display: inline-flex; align-items: center;
+  font-size: 13px; font-weight: 600;
+  color: #f97316; text-decoration: none;
+  transition: gap 0.2s; gap: 4px;
+}
+.pf-view-btn:hover { color: #fb923c; gap: 8px; }
+.pf-dots { display: flex; gap: 5px; }
+.pf-dots span {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(249,115,22,0.3);
+}
+.pf-dots span:first-child { background: #f97316; }
+
+/* ===== Empty State ===== */
+.pf-empty {
+  text-align: center; padding: 60px 20px;
+  background: rgba(31,31,31,0.6);
+  border: 2px dashed rgba(249,115,22,0.2);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+.pfe-icon {
+  width: 80px; height: 80px; border-radius: 20px;
+  background: linear-gradient(135deg, rgba(249,115,22,0.15), rgba(251,146,60,0.08));
+  border: 1px solid rgba(249,115,22,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px; color: #f97316; margin: 0 auto 20px;
+}
+.pf-empty h4 { font-size: 22px; font-weight: 700; color: #f5f5f5; margin-bottom: 8px; }
+.pf-empty p  { font-size: 15px; color: rgba(245,245,245,0.45); margin: 0; }
+
+/* ===== Buttons ===== */
+.hero-btn {
+  display: inline-flex; align-items: center;
+  padding: 12px 24px; border-radius: 25px;
+  font-size: 14px; font-weight: 600; text-decoration: none;
+  transition: all 0.3s ease;
+}
+.hero-btn-primary {
+  background: linear-gradient(135deg, #f97316, #fb923c);
+  color: #121212;
+  box-shadow: 0 4px 15px rgba(249,115,22,0.3);
+}
+.hero-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(249,115,22,0.5);
+  color: #121212;
+}
+</style>
+
+{% endblock content %}

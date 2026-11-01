@@ -11,16 +11,21 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config
+from decouple import config, Config, RepositoryEnv
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Honour a local .env file explicitly (python-decouple's AutoConfig sometimes
+# searches from the wrong working directory).
+_BASE_ENV = BASE_DIR / '.env'
+if _BASE_ENV.exists():
+    config = Config(RepositoryEnv(_BASE_ENV))
 
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-dev-only-change-me')
 
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default=True, cast=bool) if _BASE_ENV.exists() else config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = [
     'suyogkhadak.onrender.com',
@@ -133,7 +138,7 @@ STORAGES = {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "portfolio.storage.RelaxedManifestStorage",
     },
 }
 

@@ -307,29 +307,21 @@
           see more <i class="bi bi-arrow-right"></i>
         </a>
       </div>
+      <div class="sk-tabs" id="skTabs" role="tablist" aria-label="Skill categories">
+        <button class="sk-tab is-active" type="button" role="tab" aria-selected="true" data-cat="Backend">Backend</button>
+        <button class="sk-tab" type="button" role="tab" aria-selected="false" data-cat="Frontend">Frontend</button>
+        <button class="sk-tab" type="button" role="tab" aria-selected="false" data-cat="DevOps">DevOps</button>
+        <button class="sk-tab" type="button" role="tab" aria-selected="false" data-cat="Cloud">Cloud</button>
+      </div>
 
     </header>
 
-    <!-- ============ WHEEL (with detail card inside) ============ -->
+    <!-- ============ WHEEL ============ -->
     <div class="sk-stage" id="skStage">
       <div class="sk-wheel" id="skWheel">
 
         <div class="sk-arc sk-arc-2" id="skArc2" aria-hidden="true"></div>
         <div class="sk-arc sk-arc-1" id="skArc1" aria-hidden="true"></div>
-
-        <!-- expanded detail card, rendered inside the semicircle -->
-        <div class="sk-card" id="skCard" role="region" aria-live="polite">
-          <div class="sk-card-icon" id="skCardIcon"></div>
-          <div class="sk-card-body">
-            <div class="sk-card-top">
-              <h3 class="sk-card-title" id="skCardTitle"></h3>
-              <span class="sk-card-tag" id="skCardTag"></span>
-            </div>
-            <p class="sk-card-desc" id="skCardDesc"></p>
-            <div class="sk-card-meta" id="skCardMeta"></div>
-          </div>
-          <div class="sk-card-glow" aria-hidden="true"></div>
-        </div>
 
         <div class="sk-wheel-icons" id="skWheelIcons"></div>
         <div class="sk-wheel-hint" id="skWheelHint">
@@ -484,6 +476,35 @@
 }
 .sk-actions { display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; }
 
+/* ---------- category tabs ---------- */
+.sk-tabs {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 6px; margin-top: 30px; padding: 6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(168,120,255,.22);
+  box-shadow: 0 0 30px rgba(148,110,255,.12);
+}
+.sk-tab {
+  appearance: none; -webkit-appearance: none;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px; font-weight: 600; letter-spacing: .02em;
+  color: #a9a9c2;
+  padding: 10px 26px; border-radius: 999px;
+  border: 1px solid transparent; background: transparent;
+  transition: color .3s, background .3s, border-color .3s, box-shadow .3s;
+}
+.sk-tab:hover { color: #e6dcff; }
+.sk-tab:focus-visible { outline: 2px solid rgba(168,120,255,.7); outline-offset: 2px; }
+.sk-tab.is-active {
+  color: #fff;
+  border-color: rgba(168,120,255,.55);
+  background: linear-gradient(135deg, rgba(108,91,255,.38), rgba(168,85,247,.3));
+  box-shadow: 0 0 22px rgba(148,110,255,.35), inset 0 0 12px rgba(168,120,255,.18);
+}
+
+
 .sk-btn-contact {
   position: relative;
   display: inline-flex; align-items: center;
@@ -534,59 +555,6 @@
   touch-action: pan-x;
 }
 
-/* ---------- detail card — floats inside the semicircle ---------- */
-.sk-card {
-  position: absolute;
-  left: 50%;
-  z-index: 20;
-  width: min(540px, 92%);
-  display: flex; align-items: flex-start; gap: 22px;
-  padding: 30px 34px;
-  border-radius: 24px;
-  background: rgba(20,20,32,.8);
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(168,120,255,.28);
-  box-shadow: 0 24px 80px rgba(0,0,0,.5), 0 0 55px rgba(148,110,255,.14);
-  overflow: hidden;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-.sk-card-icon {
-  flex-shrink: 0;
-  width: 72px; height: 72px; border-radius: 20px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 34px; color: var(--cc, #a78bfa);
-  background: linear-gradient(145deg, color-mix(in srgb, var(--cc, #a78bfa) 20%, rgba(255,255,255,.05)), rgba(255,255,255,.02));
-  border: 1px solid color-mix(in srgb, var(--cc, #a78bfa) 45%, transparent);
-  box-shadow: 0 0 26px color-mix(in srgb, var(--cc, #a78bfa) .3, transparent);
-}
-.sk-card-body { min-width: 0; }
-.sk-card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
-.sk-card-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 30px; font-weight: 700; color: #fff; margin: 0;
-}
-.sk-card-tag {
-  font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .12em;
-  color: #a78bfa; text-transform: uppercase;
-  padding: 5px 11px; border-radius: 6px;
-  background: rgba(148,110,255,.1); border: 1px solid rgba(148,110,255,.22);
-}
-.sk-card-desc {
-  font-size: 16px; line-height: 1.7; color: #a9a9c2; margin: 0 0 16px;
-}
-.sk-card-meta { display: flex; gap: 10px; flex-wrap: wrap; }
-.sk-card-meta span {
-  font-family: 'JetBrains Mono', monospace; font-size: 12px;
-  padding: 5px 12px; border-radius: 7px;
-  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); color: #c9c9de;
-}
-.sk-card-glow {
-  position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(circle at 18% 50%, color-mix(in srgb, var(--cc, #a78bfa) 16%, transparent), transparent 55%);
-  opacity: .7;
-}
-
 /* ---------- arcs + icons ---------- */
 .sk-arc {
   position: absolute;
@@ -622,6 +590,10 @@
   content: ''; position: absolute; inset: -4px; border-radius: 50%;
   background: var(--cc, #a78bfa); opacity: 0; filter: blur(16px); z-index: -1;
   transition: opacity .4s;
+}
+.sk-item-img {
+  width: 60%; height: 60%; object-fit: contain;
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--cc, #a78bfa) 45%, transparent));
 }
 .sk-item-label {
   font-family: 'JetBrains Mono', monospace;
@@ -662,10 +634,9 @@
   .sk-title { font-size: clamp(2.5rem, 11vw, 3.4rem); }
   .sk-desc { font-size: 14px; }
   .sk-actions { gap: 20px; }
+  .sk-tabs { margin-top: 24px; gap: 4px; padding: 5px; }
+  .sk-tab { padding: 9px 18px; font-size: 13px; }
   .sk-btn-contact { padding: 12px 26px; font-size: 14px; }
-  .sk-card { padding: 20px; gap: 16px; }
-  .sk-card-icon { width: 56px; height: 56px; font-size: 26px; border-radius: 16px; }
-  .sk-card-title { font-size: 24px; }
   .sk-stage { margin-top: 30px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -682,19 +653,42 @@
   if (typeof gsap === 'undefined') return;
 
   var ICONS = {
-    python:'bi-filetype-py', django:'bi-code-slash', drf:'bi-code-square', simplejwt:'bi-shield-lock',
-    javascript:'bi-filetype-js', html:'bi-filetype-html', css:'bi-filetype-css', bootstrap:'bi-bootstrap',
-    postgres:'bi-database', mysql:'bi-database-fill', sqlite:'bi-hdd',
-    git:'bi-git', github:'bi-github', docker:'bi-archive', pythonanywhere:'bi-cloud',
-    render:'bi-box-seam', swagger:'bi-file-code', postman:'bi-send', rest:'bi-arrow-repeat',
+    python:'img:{% static "images/skills/python.svg" %}',
+    django:'img:{% static "images/skills/django.svg" %}',
+    drf:'img:{% static "images/skills/drf.png" %}',
+    simplejwt:'img:{% static "images/skills/simplejwt.svg" %}',
+    javascript:'img:{% static "images/skills/javascript.svg" %}',
+    react:'img:{% static "images/skills/react.svg" %}',
+    html:'img:{% static "images/skills/html.svg" %}',
+    css:'img:{% static "images/skills/css.svg" %}',
+    bootstrap:'img:{% static "images/skills/bootstrap.svg" %}',
+    postgres:'img:{% static "images/skills/postgresql.svg" %}',
+    mysql:'img:{% static "images/skills/mysql.svg" %}',
+    sqlite:'img:{% static "images/skills/sqlite.svg" %}',
+    git:'img:{% static "images/skills/git.svg" %}',
+    github:'img:{% static "images/skills/github.svg" %}',
+    gitlab:'img:{% static "images/skills/gitlab.svg" %}',
+    jenkins:'img:{% static "images/skills/jenkins.svg" %}',
+    docker:'img:{% static "images/skills/docker.svg" %}',
+    linux:'img:{% static "images/skills/linux.svg" %}',
+    nginx:'img:{% static "images/skills/nginx.svg" %}',
+    pythonanywhere:'img:{% static "images/skills/pythonanywhere.svg" %}',
+    render:'img:{% static "images/skills/render.svg" %}',
+    swagger:'img:{% static "images/skills/swagger.svg" %}',
+    postman:'img:{% static "images/skills/postman.svg" %}',
+    rest:'img:{% static "images/skills/rest.svg" %}',
+    aws:'img:{% static "images/skills/aws.svg" %}',
+    tencent:'img:{% static "images/skills/tencentcloud.svg" %}',
     mvt:'bi-layers', orm:'bi-diagram-2', auth:'bi-person-lock', responsive:'bi-phone', mvc:'bi-diagram-3'
   };
   var COLORS = {
     python:'#3776AB', django:'#44B78B', drf:'#A30000', simplejwt:'#F5A623',
-    javascript:'#F7DF1E', html:'#E34F26', css:'#1572B6', bootstrap:'#7952B3',
+    javascript:'#F7DF1E', react:'#61DAFB', html:'#E34F26', css:'#1572B6', bootstrap:'#7952B3',
     postgres:'#4169E1', mysql:'#4479A1', sqlite:'#0F80CC',
-    git:'#F05032', github:'#FFFFFF', docker:'#2496ED', pythonanywhere:'#1D9FD7',
+    git:'#F05032', github:'#FFFFFF', gitlab:'#FC6D26', jenkins:'#D24939',
+    docker:'#2496ED', linux:'#FCC624', nginx:'#009639', pythonanywhere:'#1D9FD7',
     render:'#46E3B7', swagger:'#85EA2D', postman:'#FF6C37', rest:'#10B981',
+    aws:'#FF9900', tencent:'#006EFF',
     mvt:'#8B5CF6', orm:'#34D399', auth:'#F59E0B', responsive:'#EC4899', mvc:'#06B6D4'
   };
 
@@ -706,6 +700,7 @@
     { key:'rest', name:'RESTful API Design', cat:'Backend', years:'6+ months', desc:'Designing scalable, documented RESTful APIs consumed by web and mobile clients.' },
     { key:'html', name:'HTML5', cat:'Frontend', years:'6+ months', big:true, desc:'Semantic, accessible, SEO-ready markup with modern APIs and best-practice structure.' },
     { key:'css', name:'CSS3', cat:'Frontend', years:'6+ months', big:true, desc:'Flexbox, grid, responsive layouts, transitions and pixel-perfect styling.' },
+    { key:'react', name:'React.js', cat:'Frontend', years:'6+ months', desc:'Component-driven UI development with hooks, state management and reusable, composable front-end architecture.' },
     { key:'bootstrap', name:'Bootstrap', cat:'Frontend', years:'6+ months', desc:'Responsive component library and grid system used across production Django templates.' },
     { key:'javascript', name:'JavaScript', cat:'Frontend', years:'6+ months', desc:'Vanilla JS, ES modules and DOM manipulation powering every interactive element on this site.' },
     { key:'postgres', name:'PostgreSQL', cat:'Database', years:'6+ months', desc:'Production-grade relational database — schema design, indexing, migrations and complex queries.' },
@@ -714,6 +709,12 @@
     { key:'git', name:'Git', cat:'DevOps', years:'6+ months', desc:'Version control workflows, branching strategies, rebasing and clean commit history.' },
     { key:'github', name:'GitHub', cat:'DevOps', years:'6+ months', desc:'Hosting repositories, collaboration, CI and open-source workflow management.' },
     { key:'docker', name:'Docker', cat:'DevOps', years:'6+ months', desc:'Containerising apps for reproducible environments and simplified, reliable deployments.' },
+    { key:'aws', name:'AWS', cat:'Cloud', years:'6+ months', desc:'Cloud infrastructure and managed services on Amazon Web Services.' },
+    { key:'tencent', name:'Tencent Cloud', cat:'Cloud', years:'6+ months', desc:'Cloud computing, storage and CDN services on Tencent Cloud.' },
+    { key:'gitlab', name:'GitLab', cat:'DevOps', years:'6+ months', desc:'Repository hosting, merge requests and built-in CI pipelines for team-based delivery.' },
+    { key:'jenkins', name:'Jenkins', cat:'DevOps', years:'6+ months', desc:'Automating build, test and deployment pipelines with declarative CI/CD jobs.' },
+    { key:'nginx', name:'Nginx', cat:'DevOps', years:'6+ months', desc:'Reverse proxy, static file serving and TLS termination in front of Django applications.' },
+    { key:'linux', name:'Linux', cat:'DevOps', years:'6+ months', desc:'Shell scripting, server administration and process management on Debian/Ubuntu servers.' },
     { key:'pythonanywhere', name:'PythonAnywhere', cat:'DevOps', years:'6+ months', desc:'Deploying and hosting Django applications on PythonAnywhere for reliable uptime.' },
     { key:'render', name:'Render', cat:'DevOps', years:'6+ months', desc:'Cloud hosting and CI/CD deployment of full-stack applications on Render.' },
     { key:'swagger', name:'Swagger', cat:'DevOps', years:'6+ months', desc:'Interactive API documentation with OpenAPI/Swagger UI for Django REST Framework.' },
@@ -730,27 +731,32 @@
     s.icon = ICONS[s.key] || 'bi-star';
   });
 
+  // warm the browser cache so real logos never flash blank on tab switches
+  Object.keys(ICONS).forEach(function(k){
+    if (ICONS[k].indexOf('img:') === 0) new Image().src = ICONS[k].slice(4);
+  });
+
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isMob = window.innerWidth <= 760;
-  var DATA = isMob ? SKILLS.slice(0, 9) : SKILLS;
-  var N = DATA.length;
-  var STEP = (Math.PI * 2) / N;
+  var CATS = {
+    Backend: ['Backend', 'Database', 'Other'],
+    Frontend: ['Frontend'],
+    DevOps: ['DevOps'],
+    Cloud: ['Cloud']
+  };
+  var DATA = [];
+  var N = 0;
+  var STEP = Math.PI * 2;
 
   var wheel = document.getElementById('skWheel');
   var iconsWrap = document.getElementById('skWheelIcons');
   var arc1 = document.getElementById('skArc1');
   var arc2 = document.getElementById('skArc2');
-  var card = document.getElementById('skCard');
-
-  var cardIcon = document.getElementById('skCardIcon');
-  var cardTitle = document.getElementById('skCardTitle');
-  var cardTag = document.getElementById('skCardTag');
-  var cardDesc = document.getElementById('skCardDesc');
-  var cardMeta = document.getElementById('skCardMeta');
 
   var items = [];
   var R = 0, peakY = 0, cx = 0, cy = 0, W = 0;
   var SPREAD = 1.42;               // half-arc in radians
+  var pinned = false, stepEff = 0; // "fit all icons in view" mode (few skills)
   var rot = 0, targetRot = 0, activeIndex = 0;
   var proxy = { v: 0 };
   var tween = null;
@@ -759,7 +765,7 @@
   function layout(){
     var rect = wheel.getBoundingClientRect();
     W = rect.width || 900;
-    R = Math.max(220, Math.min(W * 0.48, isMob ? 290 : 480));
+    R = Math.max(210, Math.min(W * 0.38, isMob ? 260 : 360));
     peakY = 72;
     cy = R + peakY;
     cx = W / 2;
@@ -767,10 +773,13 @@
     iconsWrap.style.height = wheel.style.height;
     setArc(arc1, R);
     setArc(arc2, R + 34);
-    placeCard();
-  }
-  function placeCard(){
-    card.style.top = (peakY + R * 0.72) + 'px';
+
+    // Few skills? Fit them all inside the visible arc at a fixed pixel gap.
+    var gapPx = isMob ? 92 : 150;
+    var maxAngle = Math.asin(Math.min(1, Math.max(0.3, (W / 2 - 70) / R)));
+    var fit = Math.min(2 * SPREAD, 2 * maxAngle) / Math.max(N - 1, 1);
+    pinned = (gapPx / R) <= fit;
+    stepEff = pinned ? (gapPx / R) : STEP;
   }
   function setArc(el, r){
     el.style.width = (r * 2) + 'px';
@@ -780,27 +789,52 @@
   }
 
   /* ---------- build icons ---------- */
-  DATA.forEach(function(s, i){
-    var it = document.createElement('div');
-    it.className = 'sk-item';
-    it.dataset.i = i;
-    it.style.setProperty('--cc', s.color);
-    it.setAttribute('tabindex', '0');
-    it.setAttribute('role', 'button');
-    it.setAttribute('aria-label', s.name);
-    it.innerHTML =
-      '<div class="sk-item-pill"><i class="bi ' + s.icon + '"></i></div>' +
-      '<span class="sk-item-label">' + s.name + '</span>';
-    it.addEventListener('click', function(){ bringToCenter(i); });
-    it.addEventListener('focus', function(){ bringToCenter(i); });
-    iconsWrap.appendChild(it);
-    items.push(it);
-  });
+  function buildWheel(cat){
+    var allowed = CATS[cat] || null;
+    DATA = SKILLS.filter(function(s){
+      return !allowed || allowed.indexOf(s.cat) !== -1;
+    });
+    if (isMob) DATA = DATA.slice(0, 9);
+    N = DATA.length;
+    STEP = (Math.PI * 2) / Math.max(N, 1);
+
+    iconsWrap.innerHTML = '';
+    items = [];
+
+    DATA.forEach(function(s, i){
+      var it = document.createElement('div');
+      it.className = 'sk-item';
+      it.dataset.i = i;
+      it.style.setProperty('--cc', s.color);
+      it.setAttribute('tabindex', '0');
+      it.setAttribute('role', 'button');
+      it.setAttribute('aria-label', s.name);
+      var iconHTML = s.icon.indexOf('img:') === 0
+        ? '<img class="sk-item-img" src="' + s.icon.slice(4) + '" alt="">'
+        : '<i class="bi ' + s.icon + '"></i>';
+      it.innerHTML =
+        '<div class="sk-item-pill">' + iconHTML + '</div>' +
+        '<span class="sk-item-label">' + s.name + '</span>';
+      it.addEventListener('click', function(){ bringToCenter(i); });
+      it.addEventListener('focus', function(){ bringToCenter(i); });
+      iconsWrap.appendChild(it);
+      items.push(it);
+    });
+
+    rot = 0; targetRot = 0;
+    if (tween) tween.kill();
+    layout();
+    activeIndex = pinned ? Math.floor((N - 1) / 2) : 0;
+    place();
+    refreshActive();
+  }
 
   /* ---------- placement ---------- */
   function place(){
     items.forEach(function(it, i){
-      var a = norm(i * STEP - rot);
+      var a = pinned
+        ? (i - (N - 1) / 2) * stepEff
+        : norm(i * STEP - rot);
       var abs = Math.abs(a);
       var visible = abs <= SPREAD + 0.02;
       if (!visible){
@@ -822,8 +856,8 @@
       it.querySelector('.sk-item-pill').style.height = pillSize + 'px';
       it.querySelector('.sk-item-pill').style.fontSize = (isMob ? 30 : 46) * scale + 'px';
 
-      // active = nearest to peak
-      if (abs <= STEP * 0.5) it.classList.add('active');
+      // active = nearest to peak (or the explicitly picked icon when pinned)
+      if (pinned ? i === activeIndex : abs <= STEP * 0.5) it.classList.add('active');
       else it.classList.remove('active');
     });
   }
@@ -833,38 +867,16 @@
     return a;
   }
 
-  /* ---------- active card ---------- */
+  /* ---------- active index ---------- */
   function refreshActive(){
+    if (pinned) return;            // all icons on screen — selection is explicit
     // nearest icon to peak
     var best = 0, bd = Infinity;
     items.forEach(function(it, i){
       var a = Math.abs(norm(i * STEP - rot));
       if (a < bd){ bd = a; best = i; }
     });
-    if (best !== activeIndex){
-      activeIndex = best;
-      updateCard();
-    }
-  }
-  function updateCard(){
-    var s = DATA[activeIndex];
-    card.style.setProperty('--cc', s.color);
-    var t = gsap.timeline();
-    t.to('.sk-card-icon, .sk-card-title, .sk-card-tag, .sk-card-desc, .sk-card-meta', {
-      opacity: 0, y: -6, duration: 0.18, ease: 'power1.out'
-    }, 0)
-     .add(function(){
-        cardIcon.innerHTML = '<i class="bi ' + s.icon + '"></i>';
-        cardTitle.textContent = s.name;
-        cardTag.textContent = s.cat;
-        cardDesc.textContent = s.desc;
-        cardMeta.innerHTML =
-          '<span><i class="bi bi-award"></i> ' + s.years + '</span>' +
-          '<span><i class="bi bi-lightning-charge-fill"></i> production ready</span>';
-     })
-     .to('.sk-card-icon, .sk-card-title, .sk-card-tag, .sk-card-desc, .sk-card-meta', {
-       opacity: 1, y: 0, duration: 0.35, ease: 'power2.out', stagger: 0.03
-     }, 0.06);
+    activeIndex = best;
   }
 
   /* ---------- rotation ---------- */
@@ -878,13 +890,23 @@
     });
   }
   function bringToCenter(i){
+    if (pinned){
+      activeIndex = i;
+      place();
+      return;
+    }
     var a = norm(i * STEP - rot);
     animateTo(rot + a);
   }
   function move(dir){
     // dir = +1 (next/right) or -1 (prev/left)
     var next = (activeIndex + dir + N) % N;
-    bringToCenter(next);
+    if (pinned){
+      activeIndex = next;
+      place();
+    } else {
+      bringToCenter(next);
+    }
     var it = items[next];
     if (it) it.focus({ preventScroll: true });
   }
@@ -898,21 +920,41 @@
     else if (e.key === 'ArrowLeft'){ move(-1); e.preventDefault(); }
   });
 
+  /* ---------- category tabs ---------- */
+  var tabsWrap = document.getElementById('skTabs');
+  var tabBtns = tabsWrap ? [].slice.call(tabsWrap.querySelectorAll('.sk-tab')) : [];
+  var currentCat = 'Backend';
+
+  tabBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if (btn.dataset.cat === currentCat) return;
+      currentCat = btn.dataset.cat;
+      tabBtns.forEach(function(b){
+        var on = b === btn;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      buildWheel(currentCat);
+      if (!reduce) {
+        gsap.fromTo(iconsWrap, { opacity: 0 }, { opacity: 1, duration: 0.45, ease: 'power1.out' });
+      }
+    });
+  });
+
   /* ---------- init ---------- */
-  layout();
   window.addEventListener('resize', function(){ layout(); place(); refreshActive(); });
 
   gsap.from('.sk-badge', { y: 20, opacity: 0, duration: 0.7, delay: 0.1, ease: 'power3.out' });
   gsap.from('.sk-title', { y: 30, opacity: 0, duration: 0.8, delay: 0.2, ease: 'power3.out' });
   gsap.from('.sk-desc', { y: 24, opacity: 0, duration: 0.8, delay: 0.32, ease: 'power3.out' });
   gsap.from('.sk-actions', { y: 20, opacity: 0, duration: 0.8, delay: 0.42, ease: 'power3.out' });
-  gsap.from(card, { opacity: 0, duration: 0.8, delay: 0.55, ease: 'power2.out' });
+  gsap.from('.sk-tabs', { y: 16, opacity: 0, duration: 0.7, delay: 0.5, ease: 'power3.out' });
+
+  buildWheel(currentCat);
+
   gsap.from(items, {
     opacity: 0, duration: 0.7, stagger: 0.045, delay: 0.7, ease: 'power2.out'
   });
-  place();
-  refreshActive();
-  updateCard();
 })();
 </script>
 
